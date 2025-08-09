@@ -1,0 +1,27 @@
+name: Deploy to Dev
+run-name: Deploy to Dev on ${{ github.ref_name }} by @${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    environment: Dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.6
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.KINSTA_SERVER_IP }}
+          username: ${{ secrets.KINSTA_USERNAME }}
+          password: ${{ secrets.KINSTA_PASSWORD }}
+          port: ${{ secrets.KINSTA_PORT }}
+          script: |
+            cd /www/growtherapytest_480/public
+            git fetch origin dev
+            git reset --hard origin/dev
