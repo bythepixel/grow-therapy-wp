@@ -1,0 +1,18 @@
+{
+    "name": "grow-therapy-wp",
+    "description": "Grow Therapy WordPress site",
+    "require": {
+        "wpackagist-plugin/wp-graphql": "^1.15"
+    },
+    "extra": {
+        "installer-paths": {
+            "wp-content/plugins/{$name}/": ["type:wordpress-plugin"]
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ]
+}

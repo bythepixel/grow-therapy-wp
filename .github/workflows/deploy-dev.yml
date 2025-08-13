@@ -25,3 +25,16 @@ jobs:
             cd /www/growtherapy_429/public
             git fetch origin dev
             git reset --hard origin/dev
+            
+            # Check if Composer is available
+            if command -v composer &> /dev/null; then
+              echo "Composer found, installing dependencies..."
+              # Install Composer dependencies (including WPGraphQL)
+              composer install --no-dev --optimize-autoloader --no-interaction
+              
+              # Activate WPGraphQL plugin if not already active
+              wp plugin activate wp-graphql --allow-root || echo "WPGraphQL already active or not found"
+            else
+              echo "Composer not found, skipping plugin installation"
+              echo "Please contact Kinsta support if Composer is needed"
+            fi
