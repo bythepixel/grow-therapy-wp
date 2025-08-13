@@ -15423,7 +15423,7 @@
         "acss_import_hidden-accessible",
         "acss_import_clickable-parent"
     ],
-    "bricks_global_classes_timestamp": "1755122264",
+    "bricks_global_classes_timestamp": "1755128919",
     "bricks_global_classes_trash": [],
     "bricks_global_classes_user": "2",
     "bricks_global_settings": {
@@ -15484,31 +15484,22 @@
                 "conditions": {
                     "conditions": [
                         {
-                            "id": "mgwzao",
+                            "id": "ghudpl",
                             "main": "any"
                         }
                     ]
                 },
                 "typography": {
-                    "typographyHtml:mobile_portrait": "var(--root-font-size)",
-                    "typographyBody:mobile_portrait": {
-                        "font-family": "custom_font_14"
-                    },
+                    "typographyHtml": "var(--root-font-size)",
                     "typographyBody": {
                         "font-family": "custom_font_14"
                     },
                     "typographyHeadings": {
-                        "color": {
-                            "hex": "#ff0000"
-                        }
+                        "font-family": "custom_font_14"
                     }
                 },
                 "container": {
-                    "width:mobile_portrait": "var(--content-width)",
-                    "padding": {
-                        "top": "var(--section-space-m)",
-                        "bottom": "var(--section-space-m)"
-                    }
+                    "width": "var(--content-width)"
                 },
                 "code": {
                     "prettify": "tomorrow-night"
