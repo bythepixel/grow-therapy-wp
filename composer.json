@@ -3,7 +3,7 @@
     "description": "Grow Therapy WordPress site",
     "type": "project",
     "require": {
-        "wpackagist-plugin/wp-graphql": "^1.15"
+        "wpackagist-plugin/wp-graphql": "^2.3.3"
     },
     "extra": {
         "installer-paths": {
