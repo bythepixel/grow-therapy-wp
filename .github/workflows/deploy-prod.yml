@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    environment: Prod
+    environment: Prod (Live)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,6 +22,6 @@ jobs:
           password: ${{ secrets.KINSTA_PASSWORD }}
           port: ${{ secrets.KINSTA_PORT }}
           script: |
-            cd /www/growtherapytest_480/public
+            cd /www/growtherapy_429/public
             git fetch origin main
             git reset --hard origin/main
