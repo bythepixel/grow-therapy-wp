@@ -25,3 +25,40 @@ jobs:
             cd /www/growtherapy_429/public
             git fetch origin dev
             git reset --hard origin/dev
+            
+            echo "=== Starting plugin deployment ==="
+            
+            # Check if Composer is available
+            if command -v composer &> /dev/null; then
+              echo "✓ Composer found, version: $(composer --version | head -n1)"
+              
+              # Install dependencies
+              echo "Installing Composer dependencies..."
+              COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --optimize-autoloader --no-interaction --quiet 2>/dev/null || {
+                echo "Composer install failed, trying with verbose output..."
+                composer install --no-dev --optimize-autoloader --no-interaction
+              }
+              
+              echo "✓ Composer dependencies installed"
+              
+              # List installed plugins
+              echo "Installed plugins:"
+              ls -la wp-content/plugins/ | grep -E "^d" | awk '{print $9}' | grep -v "^\.$" | grep -v "^\.\.$" | grep -v "^index\.php$"
+              
+              # Check and activate WPGraphQL
+              if [ -d "wp-content/plugins/wp-graphql" ]; then
+                echo "✓ WPGraphQL plugin found"
+                echo "Activating WPGraphQL..."
+                wp plugin activate wp-graphql --allow-root && echo "✓ WPGraphQL activated successfully" || echo "⚠ WPGraphQL activation failed"
+              else
+                echo "❌ WPGraphQL plugin not found after Composer install"
+                echo "Plugin directory contents:"
+                ls -la wp-content/plugins/
+              fi
+              
+            else
+              echo "❌ Composer not found, skipping plugin installation"
+              echo "Please contact Kinsta support if Composer is needed"
+            fi
+            
+            echo "=== Plugin deployment complete ==="

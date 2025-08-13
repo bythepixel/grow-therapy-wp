@@ -6,3 +6,7 @@ wp-content/plugins/*
 wp-content/cache/
 wp-content/upgrade/
 wp-content/uploads/
+
+# Composer files
+composer.lock
+vendor/
