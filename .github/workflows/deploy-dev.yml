@@ -29,11 +29,21 @@ jobs:
             # Check if Composer is available
             if command -v composer &> /dev/null; then
               echo "Composer found, installing dependencies..."
-              # Install Composer dependencies (including WPGraphQL)
-              composer install --no-dev --optimize-autoloader --no-interaction
               
-              # Activate WPGraphQL plugin if not already active
-              wp plugin activate wp-graphql --allow-root || echo "WPGraphQL already active or not found"
+              # Suppress deprecation warnings and install dependencies
+              COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --optimize-autoloader --no-interaction --quiet 2>/dev/null || {
+                echo "Composer install failed, trying with verbose output..."
+                composer install --no-dev --optimize-autoloader --no-interaction
+              }
+              
+              # Check if WPGraphQL was installed
+              if [ -d "wp-content/plugins/wp-graphql" ]; then
+                echo "WPGraphQL plugin found, activating..."
+                wp plugin activate wp-graphql --allow-root || echo "WPGraphQL activation failed"
+              else
+                echo "WPGraphQL plugin not found after Composer install"
+                ls -la wp-content/plugins/
+              fi
             else
               echo "Composer not found, skipping plugin installation"
               echo "Please contact Kinsta support if Composer is needed"
