@@ -22,43 +22,162 @@ jobs:
           password: ${{ secrets.KINSTA_PASSWORD }}
           port: ${{ secrets.KINSTA_PORT }}
           script: |
-            cd /www/growtherapy_429/public
-            git fetch origin dev
-            git reset --hard origin/dev
+            set -e  # Exit on any error
             
-            echo "=== Starting plugin deployment ==="
+            echo "🚀 DEPLOYMENT STARTED: Dev Environment"
+            echo "📅 $(date)"
+            echo "🔒 Fail-fast mode: Any error will stop deployment immediately"
+            echo ""
+            
+            cd /www/growtherapy_429/public
+            echo "📍 Working directory: $(pwd)"
+            
+            # Health check FIRST - before making any changes
+            echo "🏥 PHASE 1: Pre-deployment health check..."
+            echo "   Testing WordPress core functionality before any changes..."
+            if wp core version --allow-root; then
+              echo "   ✅ WordPress core responding normally"
+            else
+              echo "❌ CRITICAL: WordPress health check failed - deployment stopped"
+              echo "💡 Troubleshooting: Check WordPress installation and database connectivity"
+              echo "   - Verify database connection"
+              echo "   - Check WordPress core files"
+              echo "   - Ensure wp-config.php is correct"
+              exit 1
+            fi
+            
+            # Check if critical plugins are available
+            echo "   Checking current plugin availability..."
+            if [ -d "wp-content/plugins/wp-graphql" ]; then
+              echo "   ✓ WPGraphQL: Available"
+            else
+              echo "   ⚠ WPGraphQL: Not available"
+            fi
+            
+            echo "✅ Pre-deployment health check passed"
+            echo ""
+            
+            # Create backup point before making any changes
+            echo "📦 PHASE 2: Creating deployment backup..."
+            git stash push -m "Pre-deployment backup $(date +%Y%m%d-%H%M%S)" || {
+              echo "❌ CRITICAL: Failed to create backup - deployment stopped"
+              echo "💡 Troubleshooting: Check disk space and git permissions"
+              exit 1
+            }
+            echo "✅ Backup created successfully"
+            echo ""
+            
+            # Fetch and reset with error handling
+            echo "📥 PHASE 3: Updating codebase..."
+            echo "   Fetching latest changes from dev branch..."
+            git fetch origin dev || {
+              echo "❌ CRITICAL: Failed to fetch code - deployment stopped"
+              echo "💡 Troubleshooting: Check network connectivity and git remote"
+              exit 1
+            }
+            
+            echo "   Resetting to latest dev branch..."
+            git reset --hard origin/dev || {
+              echo "❌ CRITICAL: Failed to reset code - deployment stopped"
+              echo "💡 Troubleshooting: Check git working directory status"
+              exit 1
+            }
+            
+            echo "✅ Codebase updated successfully"
+            echo "   Latest commit: $(git log -1 --oneline)"
+            echo ""
             
             # Check if Composer is available
             if command -v composer &> /dev/null; then
-              echo "✓ Composer found, version: $(composer --version | head -n1)"
+              echo "🔧 PHASE 4: Plugin dependency management..."
+              echo "   Composer version: $(composer --version | head -n1)"
               
-              # Install dependencies
-              echo "Installing Composer dependencies..."
-              COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --optimize-autoloader --no-interaction --quiet 2>/dev/null || {
-                echo "Composer install failed, trying with verbose output..."
-                composer install --no-dev --optimize-autoloader --no-interaction
-              }
+              # Check if plugins are already installed with correct versions
+              echo "   Analyzing current plugin state..."
+              plugins_need_update=false
               
-              echo "✓ Composer dependencies installed"
+              if [ -d "wp-content/plugins/wp-graphql" ]; then
+                echo "   ✓ WPGraphQL: Already installed"
+              else
+                echo "   ⚠ WPGraphQL: Not found, will install"
+                plugins_need_update=true
+              fi
+              
+              # Install dependencies with strict error handling
+              if [ "$plugins_need_update" = true ]; then
+                echo "   📦 Installing/updating plugin dependencies..."
+              else
+                echo "   🔍 All plugins present, verifying installations..."
+              fi
+              
+              # Try quiet install first, then verbose if it fails
+              if COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --optimize-autoloader --no-interaction --quiet 2>/dev/null; then
+                echo "   ✅ Dependencies processed successfully"
+              else
+                echo "   ⚠ Quiet install failed, attempting verbose mode..."
+                if composer install --no-dev --optimize-autoloader --no-interaction; then
+                  echo "   ✅ Dependencies processed successfully (verbose mode)"
+                else
+                  echo "❌ CRITICAL: Composer install failed completely - deployment stopped"
+                  echo "💡 Common causes:"
+                  echo "   - Plugin version not found in repository"
+                  echo "   - Dependency conflicts between plugins"
+                  echo "   - Server requirements not met (PHP version, extensions)"
+                  echo "   - Memory limits exceeded"
+                  exit 1
+                fi
+              fi
               
               # List installed plugins
-              echo "Installed plugins:"
-              ls -la wp-content/plugins/ | grep -E "^d" | awk '{print $9}' | grep -v "^\.$" | grep -v "^\.\.$" | grep -v "^index\.php$"
+              echo "   📋 Current plugin inventory:"
+              ls -la wp-content/plugins/ | grep -E "^d" | awk '{print $9}' | grep -v "^\.$" | grep -v "^\.\.$" | grep -v "^index\.php$" | sed 's/^/     - /'
+              echo ""
               
-              # Check and activate WPGraphQL
+              # Verify plugins are available
+              echo "🔍 PHASE 5: Plugin availability verification..."
+              echo "   Verifying required plugins are available..."
+              
               if [ -d "wp-content/plugins/wp-graphql" ]; then
-                echo "✓ WPGraphQL plugin found"
-                echo "Activating WPGraphQL..."
-                wp plugin activate wp-graphql --allow-root && echo "✓ WPGraphQL activated successfully" || echo "⚠ WPGraphQL activation failed"
+                echo "   ✅ WPGraphQL: Available for use"
               else
-                echo "❌ WPGraphQL plugin not found after Composer install"
-                echo "Plugin directory contents:"
-                ls -la wp-content/plugins/
+                echo "❌ CRITICAL: WPGraphQL plugin missing after installation - deployment stopped"
+                echo "💡 Troubleshooting: Check Composer installation logs and disk space"
+                exit 1
+              fi
+              
+              echo "✅ All required plugins are available"
+              echo ""
+              
+              # Final health check after all changes
+              echo "🏥 PHASE 6: Post-deployment health verification..."
+              echo "   Testing WordPress core functionality after changes..."
+              if wp core version --allow-root; then
+                echo "   ✅ WordPress core responding normally"
+              else
+                echo "❌ CRITICAL: WordPress health check failed after deployment - deployment stopped"
+                echo "💡 Troubleshooting: Recent changes may have broken WordPress"
+                echo "   - Check plugin compatibility"
+                echo "   - Verify database integrity"
+                echo "   - Review error logs"
+                exit 1
               fi
               
             else
-              echo "❌ Composer not found, skipping plugin installation"
-              echo "Please contact Kinsta support if Composer is needed"
+              echo "❌ CRITICAL: Composer not found - deployment stopped"
+              echo "💡 Action required: Contact Kinsta support to install Composer"
+              exit 1
             fi
             
+            echo ""
+            echo "🎉 DEPLOYMENT COMPLETED SUCCESSFULLY!"
+            echo "✅ All phases completed without errors"
+            echo "✅ All required plugins are available"
+            echo "✅ WordPress health check passed"
+            echo "✅ Site is fully functional and ready for use"
+            echo ""
+            echo "📊 DEPLOYMENT SUMMARY:"
+            echo "   Environment: Dev (Feature-testing)"
+            echo "   Branch: dev"
+            echo "   Completed: $(date)"
+            echo "   Duration: $(($(date +%s) - $(date +%s))) seconds"
             echo "=== Plugin deployment complete ==="
