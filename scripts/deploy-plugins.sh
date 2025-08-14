@@ -1,16 +1,9 @@
 #!/bin/bash
 
-# Plugin Deployment Script
-# Usage: ./scripts/deploy-plugins.sh [environment]
-# Example: ./scripts/deploy-plugins.sh dev
+# WordPress Plugin Deployment Script
+# This script handles Composer-based plugin installation and verification
 
-set -e  # Exit on any error
-
-# Configuration
-ENVIRONMENT=${1:-"unknown"}
-COMPOSER_MEMORY_LIMIT="-1"
-
-# Colors for output
+# Color codes for logging
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -19,7 +12,7 @@ NC='\033[0m' # No Color
 
 # Logging functions
 log_info() {
-    echo -e "${BLUE}ℹ️  $1${NC}"
+    echo -e "${BLUE}ℹ $1${NC}"
 }
 
 log_success() {
@@ -153,7 +146,7 @@ deploy_plugins() {
 
 # Run plugin deployment if script is executed directly
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    log_info "Starting plugin deployment for environment: $ENVIRONMENT"
+    log_info "Starting plugin deployment"
     deploy_plugins
     log_success "Plugin deployment completed successfully!"
 fi

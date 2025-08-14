@@ -8,13 +8,18 @@ on:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/deploy.yml
-    with:
-      environment: "Dev (Sandbox)"
-      branch: "dev-sandbox"
-      environment_name: "Dev (Sandbox)"
-    secrets:
-      KINSTA_SERVER_IP: ${{ secrets.KINSTA_SERVER_IP }}
-      KINSTA_USERNAME: ${{ secrets.KINSTA_USERNAME }}
-      KINSTA_PASSWORD: ${{ secrets.KINSTA_PASSWORD }}
-      KINSTA_PORT: ${{ secrets.KINSTA_PORT }}
+    runs-on: ubuntu-latest
+    environment: "Dev (Sandbox)"
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Deploy to Dev (Sandbox)
+        uses: ./.github/actions/deploy
+        with:
+          branch: "dev-sandbox"
+          server_ip: ${{ secrets.KINSTA_SERVER_IP }}
+          username: ${{ secrets.KINSTA_USERNAME }}
+          password: ${{ secrets.KINSTA_PASSWORD }}
+          port: ${{ secrets.KINSTA_PORT }}

@@ -8,13 +8,18 @@ on:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/deploy.yml
-    with:
-      environment: "Dev (Feature-testing)"
-      branch: "dev"
-      environment_name: "Dev (Feature-testing)"
-    secrets:
-      KINSTA_SERVER_IP: ${{ secrets.KINSTA_SERVER_IP }}
-      KINSTA_USERNAME: ${{ secrets.KINSTA_USERNAME }}
-      KINSTA_PASSWORD: ${{ secrets.KINSTA_PASSWORD }}
-      KINSTA_PORT: ${{ secrets.KINSTA_PORT }}
+    runs-on: ubuntu-latest
+    environment: "Dev (Feature-testing)"
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Deploy to Dev (Feature-testing)
+        uses: ./.github/actions/deploy
+        with:
+          branch: "dev"
+          server_ip: ${{ secrets.KINSTA_SERVER_IP }}
+          username: ${{ secrets.KINSTA_USERNAME }}
+          password: ${{ secrets.KINSTA_PASSWORD }}
+          port: ${{ secrets.KINSTA_PORT }}
