@@ -8,119 +8,13 @@ on:
 
 jobs:
   deploy:
-    environment: Dev (Feature-testing)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.6
-
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.KINSTA_SERVER_IP }}
-          username: ${{ secrets.KINSTA_USERNAME }}
-          password: ${{ secrets.KINSTA_PASSWORD }}
-          port: ${{ secrets.KINSTA_PORT }}
-          script: |
-            set -e  # Exit on any error
-            
-            echo "🚀 DEPLOYMENT STARTED: Dev Environment"
-            echo "📅 $(date)"
-            echo "🔒 Fail-fast mode: Any error will stop deployment immediately"
-            echo ""
-            
-            cd /www/growtherapy_429/public
-            echo "📍 Working directory: $(pwd)"
-            
-            # Health check FIRST - before making any changes
-            echo "🏥 PHASE 1: Pre-deployment health check..."
-            echo "   Testing WordPress core functionality before any changes..."
-            if wp core version --allow-root; then
-              echo "   ✅ WordPress core responding normally"
-            else
-              echo "❌ CRITICAL: WordPress health check failed - deployment stopped"
-              echo "💡 Troubleshooting: Check WordPress installation and database connectivity"
-              echo "   - Verify database connection"
-              echo "   - Check WordPress core files"
-              echo "   - Ensure wp-config.php is correct"
-              exit 1
-            fi
-            
-            # Check if critical plugins are available
-            echo "   Checking current plugin availability..."
-            if [ -d "wp-content/plugins/wp-graphql" ]; then
-              echo "   ✓ WPGraphQL: Available"
-            else
-              echo "   ⚠ WPGraphQL: Not available"
-            fi
-            
-            echo "✅ Pre-deployment health check passed"
-            echo ""
-            
-            # Create backup point before making any changes
-            echo "📦 PHASE 2: Creating deployment backup..."
-            git stash push -m "Pre-deployment backup $(date +%Y%m%d-%H%M%S)" || {
-              echo "❌ CRITICAL: Failed to create backup - deployment stopped"
-              echo "💡 Troubleshooting: Check disk space and git permissions"
-              exit 1
-            }
-            echo "✅ Backup created successfully"
-            echo ""
-            
-            # Fetch and reset with error handling
-            echo "📥 PHASE 3: Updating codebase..."
-            echo "   Fetching latest changes from dev branch..."
-            git fetch origin dev || {
-              echo "❌ CRITICAL: Failed to fetch code - deployment stopped"
-              echo "💡 Troubleshooting: Check network connectivity and git remote"
-              exit 1
-            }
-            
-            echo "   Resetting to latest dev branch..."
-            git reset --hard origin/dev || {
-              echo "❌ CRITICAL: Failed to reset code - deployment stopped"
-              echo "💡 Troubleshooting: Check git working directory status"
-              exit 1
-            }
-            
-            echo "✅ Codebase updated successfully"
-            echo "   Latest commit: $(git log -1 --oneline)"
-            echo ""
-            
-            echo "🔧 PHASE 4: Plugin deployment..."
-            if [ -f "scripts/deploy-plugins.sh" ]; then
-              chmod +x scripts/deploy-plugins.sh
-              ./scripts/deploy-plugins.sh dev
-            else
-              echo "❌ CRITICAL: Plugin deployment script not found - deployment stopped"
-              echo "💡 Troubleshooting: Check if scripts/deploy-plugins.sh exists"
-              exit 1
-            fi
-            
-            # Final health check after all changes
-            echo "🏥 PHASE 5: Post-deployment health verification..."
-            echo "   Testing WordPress core functionality after changes..."
-            if wp core version --allow-root; then
-              echo "   ✅ WordPress core responding normally"
-            else
-              echo "❌ CRITICAL: WordPress health check failed after deployment - deployment stopped"
-              echo "💡 Troubleshooting: Recent changes may have broken WordPress"
-              echo "   - Check plugin compatibility"
-              echo "   - Verify database integrity"
-              echo "   - Review error logs"
-              exit 1
-            fi
-            
-            echo ""
-            echo "🎉 DEPLOYMENT COMPLETED SUCCESSFULLY!"
-            echo "✅ All phases completed without errors"
-            echo "✅ All required plugins are available"
-            echo "✅ WordPress health check passed"
-            echo "✅ Site is fully functional and ready for use"
-            echo ""
-            echo "📊 DEPLOYMENT SUMMARY:"
-            echo "   Environment: Dev (Feature-testing)"
-            echo "   Branch: dev"
-            echo "   Completed: $(date)"
-            echo "   Duration: $(($(date +%s) - $(date +%s))) seconds"
-            echo "=== Plugin deployment complete ==="
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: "Dev (Feature-testing)"
+      branch: "dev"
+      environment_name: "Dev (Feature-testing)"
+    secrets:
+      KINSTA_SERVER_IP: ${{ secrets.KINSTA_SERVER_IP }}
+      KINSTA_USERNAME: ${{ secrets.KINSTA_USERNAME }}
+      KINSTA_PASSWORD: ${{ secrets.KINSTA_PASSWORD }}
+      KINSTA_PORT: ${{ secrets.KINSTA_PORT }}

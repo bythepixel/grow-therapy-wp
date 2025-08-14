@@ -23,19 +23,19 @@ log_info() {
 }
 
 log_success() {
-    echo -e "${GREEN}✅ $1${NC}"
+    echo -e "${GREEN}✓ $1${NC}"
 }
 
 log_warning() {
-    echo -e "${YELLOW}⚠️  $1${NC}"
+    echo -e "${YELLOW}⚠ $1${NC}"
 }
 
 log_error() {
-    echo -e "${RED}❌ $1${NC}"
+    echo -e "${RED}✗ $1${NC}"
 }
 
 log_phase() {
-    echo -e "${BLUE}🔧 PHASE $1: $2${NC}"
+    echo -e "${BLUE}PHASE $1: $2${NC}"
 }
 
 # Check if Composer is available
