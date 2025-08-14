@@ -49,13 +49,52 @@ analyze_plugin_state() {
     
     local plugins_need_update=false
     
-    # Check WPGraphQL
-    if [ -d "wp-content/plugins/wp-graphql" ]; then
-        log_success "WPGraphQL: Already installed"
-    else
-        log_warning "WPGraphQL: Not found, will install"
-        plugins_need_update=true
-    fi
+    # Check all required plugins from composer.json
+    local required_plugins=(
+        "admin-columns-pro"
+        "advanced-custom-fields-pro"
+        "automaticcss-plugin"
+        "brickssync"
+        "easy-table-of-contents"
+        "enable-media-replace"
+        "gravityforms"
+        "gravityformssurvey"
+        "gravityformswebhooks"
+        "happyfiles-pro"
+        "perfmatters"
+        "revisionary-pro"
+        "seo-by-rank-math"
+        "seo-by-rank-math-pro"
+        "redirection"
+        "simple-page-ordering"
+        "trustpilot-reviews"
+        "user-role-editor"
+        "visual-web-optimizer"
+        "wp-all-export-pro"
+        "wpae-acf-add-on"
+        "wpae-gravity-forms-export-addon"
+        "wpae-user-add-on-pro"
+        "wp-all-import-pro"
+        "wpai-acf-add-on"
+        "wpai-gravity-forms-import-addon"
+        "wpai-user-add-on"
+        "yoast-seo-settings-xml-csv-import"
+        "wp-migrate-db-pro"
+        "wp-graphql"
+        "wpgraphql-acf"
+        "wpgraphql-smart-cache"
+        "wordpress-seo"
+        "wordpress-seo-premium"
+    )
+    
+    for plugin in "${required_plugins[@]}"; do
+        if [ -d "wp-content/plugins/$plugin" ]; then
+            log_success "$plugin: Already installed"
+        else
+            log_warning "$plugin: Not found, will install"
+            plugins_need_update=true
+        fi
+    done
     
     echo "$plugins_need_update"
 }
@@ -103,14 +142,53 @@ verify_plugins() {
     
     local all_available=true
     
-    # Check WPGraphQL
-    if [ -d "wp-content/plugins/wp-graphql" ]; then
-        log_success "WPGraphQL: Available for use"
-    else
-        log_error "WPGraphQL plugin missing after installation - deployment stopped"
-        log_info "Troubleshooting: Check Composer installation logs and disk space"
-        all_available=false
-    fi
+    # Check all required plugins from composer.json
+    local required_plugins=(
+        "admin-columns-pro"
+        "advanced-custom-fields-pro"
+        "automaticcss-plugin"
+        "brickssync"
+        "easy-table-of-contents"
+        "enable-media-replace"
+        "gravityforms"
+        "gravityformssurvey"
+        "gravityformswebhooks"
+        "happyfiles-pro"
+        "perfmatters"
+        "revisionary-pro"
+        "seo-by-rank-math"
+        "seo-by-rank-math-pro"
+        "redirection"
+        "simple-page-ordering"
+        "trustpilot-reviews"
+        "user-role-editor"
+        "visual-web-optimizer"
+        "wp-all-export-pro"
+        "wpae-acf-add-on"
+        "wpae-gravity-forms-export-addon"
+        "wpae-user-add-on-pro"
+        "wp-all-import-pro"
+        "wpai-acf-add-on"
+        "wpai-gravity-forms-import-addon"
+        "wpai-user-add-on"
+        "yoast-seo-settings-xml-csv-import"
+        "wp-migrate-db-pro"
+        "wp-graphql"
+        "wpgraphql-acf"
+        "wpgraphql-smart-cache"
+        "wordpress-seo"
+        "wordpress-seo-premium"
+    )
+    
+    for plugin in "${required_plugins[@]}"; do
+        if [ -d "wp-content/plugins/$plugin" ]; then
+            log_success "$plugin: Available for use"
+        else
+            log_error "$plugin plugin missing after installation - deployment stopped"
+            log_info "Troubleshooting: Check Composer installation logs and disk space"
+            all_available=false
+        fi
+    done
     
     if [ "$all_available" = true ]; then
         log_success "All required plugins are available"
