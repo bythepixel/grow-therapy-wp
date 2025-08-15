@@ -13,7 +13,6 @@ NC='\033[0m' # No Color
 # All required plugins
 REQUIRED_PLUGINS=(
     "admin-columns-pro"
-    "advanced-custom-fields"
     "advanced-custom-fields-pro"
     "automaticcss-plugin"
     "brickssync"
