@@ -81,84 +81,45 @@ check_composer() {
     fi
 }
 
-# Analyze current plugin state
-analyze_plugin_state() {
-    log_info "Analyzing current plugin state..."
+# Check which plugins need to be installed
+check_missing_plugins() {
+    log_info "Checking plugin availability..."
     
-    local plugins_need_update=false
+    local missing_plugins=()
     
     for plugin in "${REQUIRED_PLUGINS[@]}"; do
         if [ -d "wp-content/plugins/$plugin" ]; then
             log_success "$plugin: Available"
         else
-            log_warning "$plugin: Not found, will install"
-            plugins_need_update=true
+            log_warning "$plugin: Missing"
+            missing_plugins+=("$plugin")
         fi
     done
     
-    echo "$plugins_need_update"
+    echo "${#missing_plugins[@]}"
 }
 
-# Install Composer dependencies
+# Install Composer dependencies if needed
 install_dependencies() {
-    local plugins_need_update="$1"
+    local missing_count="$1"
     
-    if [ "$plugins_need_update" = true ]; then
-        log_info "Installing/updating plugin dependencies..."
-    else
-        log_info "All plugins present, verifying installations..."
-    fi
-    
-    # Try quiet install first, then verbose if it fails
-    if COMPOSER_MEMORY_LIMIT="-1" composer install --no-dev --optimize-autoloader --no-interaction --quiet 2>/dev/null; then
-        log_success "Composer dependencies processed successfully"
-    else
-        log_warning "Quiet install failed, attempting verbose mode..."
+    if [ "$missing_count" -gt 0 ]; then
+        log_info "Installing $missing_count missing plugins via Composer..."
+        
         if COMPOSER_MEMORY_LIMIT="-1" composer install --no-dev --optimize-autoloader --no-interaction; then
-            log_success "Composer dependencies processed successfully (verbose mode)"
+            log_success "Composer dependencies installed successfully"
         else
-            log_error "Composer install failed completely - deployment stopped"
+            log_error "Composer install failed - deployment stopped"
             log_info "Common causes:"
-            log_info "  - Plugin version not found in repository"
+            log_info "  - Plugin not found in repository"
             log_info "  - Dependency conflicts between plugins"
             log_info "  - Server requirements not met (PHP version, extensions)"
             log_info "  - Memory limits exceeded"
             exit 1
         fi
-    fi
-}
-
-# List installed plugins
-list_plugins() {
-    log_info "Current plugin inventory:"
-    ls -la wp-content/plugins/ | grep -E "^d" | awk '{print $9}' | grep -v "^\.$" | grep -v "^\.\.$" | grep -v "^index\.php$" | sed 's/^/     - /'
-    echo ""
-}
-
-# Verify plugin availability
-verify_plugins() {
-    log_phase "5" "Plugin availability verification"
-    log_info "Verifying all required plugins are available..."
-    
-    local all_available=true
-    
-    for plugin in "${REQUIRED_PLUGINS[@]}"; do
-        if [ -d "wp-content/plugins/$plugin" ]; then
-            log_success "$plugin: Available ✓"
-        else
-            log_warning "$plugin: Not available (premium plugin - manual installation required)"
-            # Don't fail deployment for missing premium plugins
-            # as they need to be installed manually
-        fi
-    done
-    
-    if [ "$all_available" = true ]; then
-        log_success "All required plugins are available"
     else
-        exit 1
+        log_success "All plugins are already available"
     fi
-    
-    echo ""
 }
 
 # Main plugin deployment function
@@ -170,23 +131,18 @@ deploy_plugins() {
         exit 1
     fi
     
-    # Analyze current state
-    local plugins_need_update
-    plugins_need_update=$(analyze_plugin_state)
+    # Check which plugins are missing
+    local missing_count
+    missing_count=$(check_missing_plugins)
     
-    # Install dependencies
-    install_dependencies "$plugins_need_update"
+    # Install dependencies if needed
+    install_dependencies "$missing_count"
     
-    # List plugins
-    list_plugins
-    
-    # Verify availability
-    verify_plugins
+    log_success "Plugin deployment completed successfully!"
 }
 
 # Run plugin deployment if script is executed directly
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     log_info "Starting plugin deployment"
     deploy_plugins
-    log_success "Plugin deployment completed successfully!"
 fi
