@@ -2,6 +2,38 @@
 - **Hosting**: Kinsta
 - **CMS**: WordPress
 
+## Local Development
+
+### Prerequisites
+- **Docker** - For containerized local environment
+
+### Setup Instructions
+
+> **Note**: This is a work-in-progress and may change as we build out the new site.
+
+1. **Start Local Environment**
+   ```bash
+   docker-compose up -d
+   ```
+
+2. **Access WordPress**
+   - Visit [http://localhost:8000](http://localhost:8000)
+   - Complete initial WordPress setup
+
+3. **Install WP Migrate DB Pro**
+   - Check 1Password for plugin credentials and installation file
+   - Install and activate the plugin
+
+4. **Sync Database from Dev**
+   - Use WP Migrate DB Pro to pull database from `Dev-Feature` Kinsta server
+   - This ensures your local environment matches the latest development state
+   - All plugins and their configurations will be synced automatically
+
+5. **Configure Plugin Licenses**
+   - Plugin licenses and credentials available in this [Google Doc](https://docs.google.com/document/d/1XPgaV8K26F3jLI_km0CU2TrEo91ouPvT5nHhD7y-Mo8/edit?usp=sharing)
+   - Activate licenses for premium plugins as needed
+   - **Note**: All plugins are pulled from the dev environment, no local Composer installation required
+
 ## Deployment Workflow & Environments
 
 This repository uses GitHub Actions for automated deployment to different environments in Kinsta. The workflow ensures that new features and content are reviewed, tested, and approved before going live, while giving both teams the ability to work safely without overwriting each other's changes.
@@ -74,3 +106,45 @@ The workflows require the following GitHub repository secrets to be configured, 
 - `KINSTA_USERNAME`: SSH username for server access
 - `KINSTA_PASSWORD`: SSH password for server authentication
 - `KINSTA_PORT`: SSH port number
+
+## Plugin Management & Versioning
+
+This repository uses a hybrid approach to manage WordPress plugins, combining Composer dependency management with Git tracking for optimal efficiency and control.
+
+### Plugin Categories
+
+#### 🆓 Composer-Managed Plugins (11 plugins)
+These free plugins are automatically installed and updated via Composer with exact version pinning:
+
+- **Advanced Custom Fields**
+- **Easy Table of Contents**
+- **Enable Media Replace**
+- **Redirection**
+- **SEO by Rank Math**
+- **Simple Page Ordering**
+- **User Role Editor**
+- **WP GraphQL**
+- **WPGraphQL ACF**
+- **WPGraphQL Smart Cache**
+- **WordPress SEO**
+
+#### 💎 Premium Plugins (25 plugins)
+These premium/paid plugins are tracked in Git and require manual installation:
+
+- **Admin Columns Pro** - Advanced table management
+- **Advanced Custom Fields Pro** - Enhanced custom fields
+- **Gravity Forms Suite** - Form management and add-ons
+- **WP All Import/Export Pro** - Data import/export tools
+- **Rank Math Pro** - Advanced SEO features
+- **Yoast SEO Premium** - Enhanced SEO capabilities
+- **WP Migrate DB Pro** - Database migration tools
+- **Performance & Security** - Various optimization plugins
+
+### Benefits
+
+✅ **Minimal Repository Bloat** - Only premium plugins in Git  
+✅ **Exact Version Control** - Free plugins pinned to specific versions  
+✅ **Automatic Updates** - Composer handles dependency resolution  
+✅ **Deployment Safety** - Fail-fast strategy with comprehensive verification  
+✅ **Environment Consistency** - Same plugin versions across all environments  
+✅ **Easy Maintenance** - Single source of truth for plugin requirements
