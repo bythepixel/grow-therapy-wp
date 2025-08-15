@@ -8,20 +8,18 @@ on:
 
 jobs:
   deploy:
-    environment: Dev (Sandbox)
     runs-on: ubuntu-latest
+    environment: "Dev (Sandbox)"
+    
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.6
-
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
+        uses: actions/checkout@v4
+        
+      - name: Deploy to Dev (Sandbox)
+        uses: ./.github/actions/deploy
         with:
-          host: ${{ secrets.KINSTA_SERVER_IP }}
+          branch: "dev-sandbox"
+          server_ip: ${{ secrets.KINSTA_SERVER_IP }}
           username: ${{ secrets.KINSTA_USERNAME }}
           password: ${{ secrets.KINSTA_PASSWORD }}
           port: ${{ secrets.KINSTA_PORT }}
-          script: |
-            cd /www/growtherapy_429/public
-            git fetch origin dev-sandbox
-            git reset --hard origin/dev-sandbox

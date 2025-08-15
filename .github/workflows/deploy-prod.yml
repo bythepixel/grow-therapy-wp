@@ -1,5 +1,5 @@
-name: Deploy to Prod
-run-name: Deploy to Prod on ${{ github.ref_name }} by @${{ github.actor }}
+name: Deploy to Production (Live)
+run-name: Deploy to Production (Live) on ${{ github.ref_name }} by @${{ github.actor }}
 
 on:
   push:
@@ -8,20 +8,18 @@ on:
 
 jobs:
   deploy:
-    environment: Prod (Live)
     runs-on: ubuntu-latest
+    environment: "Production (Live)"
+    
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.6
-
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
+        uses: actions/checkout@v4
+        
+      - name: Deploy to Production (Live)
+        uses: ./.github/actions/deploy
         with:
-          host: ${{ secrets.KINSTA_SERVER_IP }}
+          branch: "main"
+          server_ip: ${{ secrets.KINSTA_SERVER_IP }}
           username: ${{ secrets.KINSTA_USERNAME }}
           password: ${{ secrets.KINSTA_PASSWORD }}
           port: ${{ secrets.KINSTA_PORT }}
-          script: |
-            cd /www/growtherapy_429/public
-            git fetch origin main
-            git reset --hard origin/main

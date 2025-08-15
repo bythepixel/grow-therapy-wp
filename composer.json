@@ -1,0 +1,33 @@
+{
+    "name": "grow-therapy/wp-site",
+    "description": "Grow Therapy WordPress site",
+    "type": "project",
+    "require": {
+        "wpackagist-plugin/easy-table-of-contents": "2.0.75",
+        "wpackagist-plugin/enable-media-replace": "4.1.6",
+        "wpackagist-plugin/redirection": "5.5.2",
+        "wpackagist-plugin/seo-by-rank-math": "1.0.251",
+        "wpackagist-plugin/simple-page-ordering": "2.7.4",
+        "wpackagist-plugin/user-role-editor": "4.64.5",
+        "wpackagist-plugin/wp-graphql": "2.3.3",
+        "wpackagist-plugin/wpgraphql-acf": "2.4.1",
+        "wpackagist-plugin/wpgraphql-smart-cache": "2.0.0",
+        "wpackagist-plugin/wordpress-seo": "25.7"
+    },
+    "extra": {
+        "installer-paths": {
+            "wp-content/plugins/{$name}/": ["type:wordpress-plugin"]
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}

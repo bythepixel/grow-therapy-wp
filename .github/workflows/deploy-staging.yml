@@ -1,5 +1,5 @@
-name: Deploy to Staging
-run-name: Deploy to Staging on ${{ github.ref_name }} by @${{ github.actor }}
+name: Deploy to Staging (Pre-production)
+run-name: Deploy to Staging (Pre-production) on ${{ github.ref_name }} by @${{ github.actor }}
 
 on:
   push:
@@ -8,20 +8,18 @@ on:
 
 jobs:
   deploy:
-    environment: Staging (Pre-prod)
     runs-on: ubuntu-latest
+    environment: "Staging (Pre-prod)"
+    
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.6
-
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
+        uses: actions/checkout@v4
+        
+      - name: Deploy to Staging (Pre-production)
+        uses: ./.github/actions/deploy
         with:
-          host: ${{ secrets.KINSTA_SERVER_IP }}
+          branch: "staging"
+          server_ip: ${{ secrets.KINSTA_SERVER_IP }}
           username: ${{ secrets.KINSTA_USERNAME }}
           password: ${{ secrets.KINSTA_PASSWORD }}
           port: ${{ secrets.KINSTA_PORT }}
-          script: |
-            cd /www/growtherapy_429/public
-            git fetch origin staging
-            git reset --hard origin/staging
