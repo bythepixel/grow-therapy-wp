@@ -35,4 +35,4 @@ wp-content/uploads/
 
 # Composer files
 composer.lock
-vendor/
+/vendor/
