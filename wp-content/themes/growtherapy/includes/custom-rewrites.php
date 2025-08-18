@@ -11,6 +11,8 @@ if (!defined('ABSPATH')) {
 define('GROW_THERAPY_GUIDE_BASE', 'therapy-basics');
 define('GROW_THERAPY_POST_TYPE', 'guide');
 define('GROW_THERAPY_TAXONOMY', 'guide-topic');
+define('GROW_THERAPY_LANDING_POST_TYPE', 'landing-page');
+define('GROW_THERAPY_LANDING_TAXONOMY', 'landing-page-type');
 
 /**
  * Register custom rewrite rules for the therapy guides system
@@ -198,16 +200,22 @@ function flush_guide_rewrites() {
 add_action('after_switch_theme', 'flush_guide_rewrites');
 
 /**
- * Custom Rewrite Rules for Landing Pages
+ * Add rewrite rules for ACF landing pages
+ * 
+ * Business requirement: Client prefers to use taxonomies for managing hierarchical urls
+ * to enable URLs like /start/find-therapist-nb/
  */
-
-// Add rewrite rules for ACF landing pages
 function acf_landing_pages_rewrite_rules() {
-    // Get all terms for the landing-page-type taxonomy
-    $terms = get_terms(array(
-        'taxonomy' => 'landing-page-type',
-        'hide_empty' => false,
-    ));
+    $terms = get_transient('landing_page_terms');
+    
+    if (false === $terms) {
+        $terms = get_terms(array(
+            'taxonomy' => GROW_THERAPY_LANDING_TAXONOMY,
+            'hide_empty' => false,
+        ));
+        
+        set_transient('landing_page_terms', $terms, HOUR_IN_SECONDS);
+    }
 
     if (!is_wp_error($terms) && !empty($terms)) {
         foreach ($terms as $term) {
@@ -221,85 +229,97 @@ function acf_landing_pages_rewrite_rules() {
 }
 add_action('init', 'acf_landing_pages_rewrite_rules', 20);
 
-// Add custom query vars
 function acf_landing_pages_query_vars($vars) {
-    $vars[] = 'landing_page_slug';
-    $vars[] = 'landing_page_type_slug';
-    return $vars;
+    return array_merge($vars, ['landing_page_slug', 'landing_page_type_slug']);
 }
 add_filter('query_vars', 'acf_landing_pages_query_vars');
 
-// Handle the template redirect for ACF landing pages
+/**
+ * Handle template redirect for CPT landing pages
+ * 
+ * Routes landing page requests to the appropriate template
+ * and validates that the page belongs to the specified type
+ */
 function acf_landing_pages_template_redirect() {
     global $wp_query;
     
     $page_slug = get_query_var('landing_page_slug');
     $type_slug = get_query_var('landing_page_type_slug');
     
-    if ($page_slug && $type_slug) {
-        // Find the post using ACF post type and taxonomy
-        $posts = get_posts(array(
-            'name' => $page_slug,
-            'post_type' => 'landing-page', // ACF post type key
-            'post_status' => 'publish',
-            'numberposts' => 1,
-            'tax_query' => array(
-                array(
-                    'taxonomy' => 'landing-page-type', // ACF taxonomy key
-                    'field' => 'slug',
-                    'terms' => $type_slug,
-                ),
+    if (!$page_slug || !$type_slug) {
+        return;
+    }
+    
+    $posts = get_posts(array(
+        'name' => $page_slug,
+        'post_type' => GROW_THERAPY_LANDING_POST_TYPE,
+        'post_status' => 'publish',
+        'numberposts' => 1,
+        'tax_query' => array(
+            array(
+                'taxonomy' => GROW_THERAPY_LANDING_TAXONOMY,
+                'field' => 'slug',
+                'terms' => $type_slug,
             ),
+        ),
+        'no_found_rows' => true,
+        'update_post_term_cache' => false,
+        'update_post_meta_cache' => false,
+    ));
+    
+    if (!empty($posts)) {
+        $post = $posts[0];
+        
+        global $wp_query, $post;
+        $wp_query = new WP_Query(array(
+            'p' => $post->ID,
+            'post_type' => GROW_THERAPY_LANDING_POST_TYPE
         ));
         
-        if (!empty($posts)) {
-            $post = $posts[0];
-            
-            // Set up the global post data
-            global $wp_query, $post;
-            $wp_query = new WP_Query(array(
-                'p' => $post->ID,
-                'post_type' => 'landing-page'
-            ));
-            
-            // Set up post data
-            $wp_query->is_single = true;
-            $wp_query->is_singular = true;
-            $wp_query->is_404 = false;
-            
-            // Load the template
-            include(get_query_template('single'));
-            exit;
-        } else {
-            // Post not found, show 404
-            global $wp_query;
-            $wp_query->set_404();
-            status_header(404);
-            get_template_part(404);
-            exit;
-        }
+        $wp_query->is_single = true;
+        $wp_query->is_singular = true;
+        $wp_query->is_404 = false;
+        
+        include(get_query_template('single'));
+        exit;
+    } else {
+        error_log("Landing page not found: {$page_slug} for type: {$type_slug}");
+        
+        global $wp_query;
+        $wp_query->set_404();
+        status_header(404);
+        get_template_part(404);
+        exit;
     }
 }
 add_action('template_redirect', 'acf_landing_pages_template_redirect', 1);
 
-// Modify the permalink structure for ACF landing pages
 function acf_landing_pages_permalink($post_link, $post) {
-    if ($post->post_type === 'landing-page') { // ACF post type key
-        $terms = wp_get_object_terms($post->ID, 'landing-page-type'); // ACF taxonomy key
-        
-        if (!is_wp_error($terms) && !empty($terms)) {
-            $term_slug = $terms[0]->slug;
-            $post_link = home_url('/' . $term_slug . '/' . $post->post_name . '/');
-        }
+    if ($post->post_type !== GROW_THERAPY_LANDING_POST_TYPE) {
+        return $post_link;
+    }
+    
+    static $term_cache = [];
+    $post_id = $post->ID;
+    
+    if (!isset($term_cache[$post_id])) {
+        $terms = wp_get_post_terms($post_id, GROW_THERAPY_LANDING_TAXONOMY, ['fields' => 'slugs']);
+        $term_cache[$post_id] = !empty($terms) && !is_wp_error($terms) ? $terms[0] : '';
+    }
+    
+    $term_slug = $term_cache[$post_id];
+    
+    if ($term_slug) {
+        return home_url('/' . $term_slug . '/' . $post->post_name . '/');
     }
     
     return $post_link;
 }
 add_filter('post_type_link', 'acf_landing_pages_permalink', 10, 2);
 
-// Flush rewrite rules when taxonomy terms change
 function acf_landing_pages_flush_rules($term_id, $tt_id, $taxonomy) {
-    if ($taxonomy === 'landing-page-type') { // ACF taxonomy key
+    if ($taxonomy === GROW_THERAPY_LANDING_TAXONOMY) {
+        delete_transient('landing_page_terms');
         delete_option('rewrite_rules');
     }
 }
@@ -307,16 +327,6 @@ add_action('created_term', 'acf_landing_pages_flush_rules', 10, 3);
 add_action('edited_term', 'acf_landing_pages_flush_rules', 10, 3);
 add_action('delete_term', 'acf_landing_pages_flush_rules', 10, 3);
 
-// Manual flush function (call once after adding this code)
-function acf_landing_pages_manual_flush() {
-    if (!get_option('acf_landing_pages_flushed')) {
-        flush_rewrite_rules();
-        update_option('acf_landing_pages_flushed', true);
-    }
-}
-add_action('init', 'acf_landing_pages_manual_flush', 99);
-
-// Optional: Add admin notice for flushing permalinks
 function acf_landing_pages_admin_notice() {
     if (isset($_GET['acf_landing_activated']) && current_user_can('manage_options')) {
         echo '<div class="notice notice-success is-dismissible">';
