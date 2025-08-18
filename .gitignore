@@ -1,3 +1,12 @@
+# WordPress core
+wp-admin/
+wp-includes/
+index.php
+license.txt
+readme.html
+wp-*.php
+xmlrpc.php
+
 # Third-party plugins out of git by default
 wp-content/plugins/*
 !wp-content/plugins/index.php
@@ -28,13 +37,25 @@ wp-content/plugins/*
 !wp-content/plugins/wp-migrate-db-pro/
 !wp-content/plugins/wordpress-seo-premium/
 
-# Never commit uploads, caches, or upgrade artifacts
+# WordPress uploads, caches, languages, or upgrade artifacts
 wp-content/cache/
-wp-content/upgrade/
+wp-content/languages/
+wp-content/upgrade*/
 wp-content/uploads/
+
+# Default WordPress themes
+wp-content/themes/twentytwenty*/
 
 # Composer files
 composer.lock
 /vendor/
 
-.DS_STORE
+# System and IDE files
+.DS_Store
+.htaccess
+.vscode/
+conf/
+logs/
+local-*.php
+*.log
+*.sql
