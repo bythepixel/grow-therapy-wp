@@ -3,33 +3,35 @@
         {
             "base": true,
             "key": "desktop",
-            "label": "Desktop",
+            "label": "XXL",
             "width": 1279,
             "icon": "desktop",
             "edited": true
         },
         {
             "key": "tablet_portrait",
-            "label": "Tablet portrait",
+            "label": "XL",
             "width": 991,
-            "icon": "tablet-portrait"
+            "icon": "tablet-portrait",
+            "edited": true
         },
         {
             "key": "desktop_nav_cutoff",
-            "label": "Desktop Nav Cutoff",
+            "label": "L",
             "width": 869,
             "icon": "laptop",
             "custom": true
         },
         {
             "key": "mobile_landscape",
-            "label": "Mobile landscape",
+            "label": "M",
             "width": 767,
-            "icon": "phone-landscape"
+            "icon": "phone-landscape",
+            "edited": true
         },
         {
             "key": "mobile_portrait",
-            "label": "Mobile portrait",
+            "label": "S",
             "width": 480,
             "icon": "phone-portrait",
             "edited": true
@@ -214,135 +216,9 @@
     "bricks_code_signatures_admin_notice": "1",
     "bricks_color_palette": [
         {
-            "id": "acss_import_global",
-            "name": "ACSS Global",
-            "colors": [
-                {
-                    "id": "acss_import_primary",
-                    "name": "primary",
-                    "raw": "var(--primary)"
-                },
-                {
-                    "id": "acss_import_base",
-                    "name": "base",
-                    "raw": "var(--base)"
-                },
-                {
-                    "id": "acss_import_neutral",
-                    "name": "neutral",
-                    "raw": "var(--neutral)"
-                },
-                {
-                    "id": "acss_import_black",
-                    "name": "black",
-                    "raw": "var(--black)"
-                },
-                {
-                    "id": "acss_import_white",
-                    "name": "white",
-                    "raw": "var(--white)"
-                },
-                {
-                    "id": "acss_import_transparent",
-                    "name": "transparent",
-                    "raw": "transparent"
-                }
-            ]
-        },
-        {
             "id": "acss_import_primary",
             "name": "ACSS Primary",
             "colors": [
-                {
-                    "id": "acss_import_primary",
-                    "name": "primary",
-                    "raw": "var(--primary)"
-                },
-                {
-                    "id": "acss_import_primary-ultra-dark",
-                    "name": "primary-ultra-dark",
-                    "raw": "var(--primary-ultra-dark)"
-                },
-                {
-                    "id": "acss_import_primary-dark",
-                    "name": "primary-dark",
-                    "raw": "var(--primary-dark)"
-                },
-                {
-                    "id": "acss_import_primary-semi-dark",
-                    "name": "primary-semi-dark",
-                    "raw": "var(--primary-semi-dark)"
-                },
-                {
-                    "id": "acss_import_primary-semi-light",
-                    "name": "primary-semi-light",
-                    "raw": "var(--primary-semi-light)"
-                },
-                {
-                    "id": "acss_import_primary-light",
-                    "name": "primary-light",
-                    "raw": "var(--primary-light)"
-                },
-                {
-                    "id": "acss_import_primary-ultra-light",
-                    "name": "primary-ultra-light",
-                    "raw": "var(--primary-ultra-light)"
-                },
-                {
-                    "id": "acss_import_primary-comp",
-                    "name": "primary-comp",
-                    "raw": "var(--primary-comp)"
-                },
-                {
-                    "id": "acss_import_primary-hover",
-                    "name": "primary-hover",
-                    "raw": "var(--primary-hover)"
-                },
-                {
-                    "id": "acss_import_primary-trans-90",
-                    "name": "primary-trans-90",
-                    "raw": "var(--primary-trans-90)"
-                },
-                {
-                    "id": "acss_import_primary-trans-80",
-                    "name": "primary-trans-80",
-                    "raw": "var(--primary-trans-80)"
-                },
-                {
-                    "id": "acss_import_primary-trans-70",
-                    "name": "primary-trans-70",
-                    "raw": "var(--primary-trans-70)"
-                },
-                {
-                    "id": "acss_import_primary-trans-60",
-                    "name": "primary-trans-60",
-                    "raw": "var(--primary-trans-60)"
-                },
-                {
-                    "id": "acss_import_primary-trans-40",
-                    "name": "primary-trans-40",
-                    "raw": "var(--primary-trans-40)"
-                },
-                {
-                    "id": "acss_import_primary-trans-50",
-                    "name": "primary-trans-50",
-                    "raw": "var(--primary-trans-50)"
-                },
-                {
-                    "id": "acss_import_primary-trans-30",
-                    "name": "primary-trans-30",
-                    "raw": "var(--primary-trans-30)"
-                },
-                {
-                    "id": "acss_import_primary-trans-20",
-                    "name": "primary-trans-20",
-                    "raw": "var(--primary-trans-20)"
-                },
-                {
-                    "id": "acss_import_primary-trans-10",
-                    "name": "primary-trans-10",
-                    "raw": "var(--primary-trans-10)"
-                },
                 {
                     "id": "acss_import_primary-ultra-dark-trans-90",
                     "name": "primary-ultra-dark-trans-90",
@@ -477,6 +353,789 @@
                     "id": "acss_import_primary-light-trans-10",
                     "name": "primary-light-trans-10",
                     "raw": "var(--primary-light-trans-10)"
+                },
+                {
+                    "id": "acss_import_primary",
+                    "name": "primary",
+                    "raw": "var(--primary)"
+                },
+                {
+                    "id": "acss_import_primary-ultra-dark",
+                    "name": "primary-ultra-dark",
+                    "raw": "var(--primary-ultra-dark)"
+                },
+                {
+                    "id": "acss_import_primary-dark",
+                    "name": "primary-dark",
+                    "raw": "var(--primary-dark)"
+                },
+                {
+                    "id": "acss_import_primary-semi-dark",
+                    "name": "primary-semi-dark",
+                    "raw": "var(--primary-semi-dark)"
+                },
+                {
+                    "id": "acss_import_primary-semi-light",
+                    "name": "primary-semi-light",
+                    "raw": "var(--primary-semi-light)"
+                },
+                {
+                    "id": "acss_import_primary-light",
+                    "name": "primary-light",
+                    "raw": "var(--primary-light)"
+                },
+                {
+                    "id": "acss_import_primary-ultra-light",
+                    "name": "primary-ultra-light",
+                    "raw": "var(--primary-ultra-light)"
+                },
+                {
+                    "id": "acss_import_primary-comp",
+                    "name": "primary-comp",
+                    "raw": "var(--primary-comp)"
+                },
+                {
+                    "id": "acss_import_primary-hover",
+                    "name": "primary-hover",
+                    "raw": "var(--primary-hover)"
+                },
+                {
+                    "id": "acss_import_primary-trans-90",
+                    "name": "primary-trans-90",
+                    "raw": "var(--primary-trans-90)"
+                },
+                {
+                    "id": "acss_import_primary-trans-80",
+                    "name": "primary-trans-80",
+                    "raw": "var(--primary-trans-80)"
+                },
+                {
+                    "id": "acss_import_primary-trans-70",
+                    "name": "primary-trans-70",
+                    "raw": "var(--primary-trans-70)"
+                },
+                {
+                    "id": "acss_import_primary-trans-60",
+                    "name": "primary-trans-60",
+                    "raw": "var(--primary-trans-60)"
+                },
+                {
+                    "id": "acss_import_primary-trans-40",
+                    "name": "primary-trans-40",
+                    "raw": "var(--primary-trans-40)"
+                },
+                {
+                    "id": "acss_import_primary-trans-50",
+                    "name": "primary-trans-50",
+                    "raw": "var(--primary-trans-50)"
+                },
+                {
+                    "id": "acss_import_primary-trans-30",
+                    "name": "primary-trans-30",
+                    "raw": "var(--primary-trans-30)"
+                },
+                {
+                    "id": "acss_import_primary-trans-20",
+                    "name": "primary-trans-20",
+                    "raw": "var(--primary-trans-20)"
+                },
+                {
+                    "id": "acss_import_primary-trans-10",
+                    "name": "primary-trans-10",
+                    "raw": "var(--primary-trans-10)"
+                }
+            ]
+        },
+        {
+            "id": "acss_import_secondary",
+            "name": "ACSS Secondary",
+            "colors": [
+                {
+                    "id": "acss_import_secondary-ultra-dark-trans-90",
+                    "name": "secondary-ultra-dark-trans-90",
+                    "raw": "var(--secondary-ultra-dark-trans-90)"
+                },
+                {
+                    "id": "acss_import_secondary-ultra-dark-trans-80",
+                    "name": "secondary-ultra-dark-trans-80",
+                    "raw": "var(--secondary-ultra-dark-trans-80)"
+                },
+                {
+                    "id": "acss_import_secondary-ultra-dark-trans-70",
+                    "name": "secondary-ultra-dark-trans-70",
+                    "raw": "var(--secondary-ultra-dark-trans-70)"
+                },
+                {
+                    "id": "acss_import_secondary-ultra-dark-trans-60",
+                    "name": "secondary-ultra-dark-trans-60",
+                    "raw": "var(--secondary-ultra-dark-trans-60)"
+                },
+                {
+                    "id": "acss_import_secondary-ultra-dark-trans-50",
+                    "name": "secondary-ultra-dark-trans-50",
+                    "raw": "var(--secondary-ultra-dark-trans-50)"
+                },
+                {
+                    "id": "acss_import_secondary-ultra-dark-trans-40",
+                    "name": "secondary-ultra-dark-trans-40",
+                    "raw": "var(--secondary-ultra-dark-trans-40)"
+                },
+                {
+                    "id": "acss_import_secondary-ultra-dark-trans-30",
+                    "name": "secondary-ultra-dark-trans-30",
+                    "raw": "var(--secondary-ultra-dark-trans-30)"
+                },
+                {
+                    "id": "acss_import_secondary-ultra-dark-trans-20",
+                    "name": "secondary-ultra-dark-trans-20",
+                    "raw": "var(--secondary-ultra-dark-trans-20)"
+                },
+                {
+                    "id": "acss_import_secondary-ultra-dark-trans-10",
+                    "name": "secondary-ultra-dark-trans-10",
+                    "raw": "var(--secondary-ultra-dark-trans-10)"
+                },
+                {
+                    "id": "acss_import_secondary-light-trans-90",
+                    "name": "secondary-light-trans-90",
+                    "raw": "var(--secondary-light-trans-90)"
+                },
+                {
+                    "id": "acss_import_secondary-light-trans-80",
+                    "name": "secondary-light-trans-80",
+                    "raw": "var(--secondary-light-trans-80)"
+                },
+                {
+                    "id": "acss_import_secondary-light-trans-70",
+                    "name": "secondary-light-trans-70",
+                    "raw": "var(--secondary-light-trans-70)"
+                },
+                {
+                    "id": "acss_import_secondary-light-trans-60",
+                    "name": "secondary-light-trans-60",
+                    "raw": "var(--secondary-light-trans-60)"
+                },
+                {
+                    "id": "acss_import_secondary-light-trans-50",
+                    "name": "secondary-light-trans-50",
+                    "raw": "var(--secondary-light-trans-50)"
+                },
+                {
+                    "id": "acss_import_secondary-light-trans-40",
+                    "name": "secondary-light-trans-40",
+                    "raw": "var(--secondary-light-trans-40)"
+                },
+                {
+                    "id": "acss_import_secondary-light-trans-30",
+                    "name": "secondary-light-trans-30",
+                    "raw": "var(--secondary-light-trans-30)"
+                },
+                {
+                    "id": "acss_import_secondary-light-trans-20",
+                    "name": "secondary-light-trans-20",
+                    "raw": "var(--secondary-light-trans-20)"
+                },
+                {
+                    "id": "acss_import_secondary-light-trans-10",
+                    "name": "secondary-light-trans-10",
+                    "raw": "var(--secondary-light-trans-10)"
+                },
+                {
+                    "id": "acss_import_secondary",
+                    "name": "secondary",
+                    "raw": "var(--secondary)"
+                },
+                {
+                    "id": "acss_import_secondary-ultra-dark",
+                    "name": "secondary-ultra-dark",
+                    "raw": "var(--secondary-ultra-dark)"
+                },
+                {
+                    "id": "acss_import_secondary-dark",
+                    "name": "secondary-dark",
+                    "raw": "var(--secondary-dark)"
+                },
+                {
+                    "id": "acss_import_secondary-semi-dark",
+                    "name": "secondary-semi-dark",
+                    "raw": "var(--secondary-semi-dark)"
+                },
+                {
+                    "id": "acss_import_secondary-semi-light",
+                    "name": "secondary-semi-light",
+                    "raw": "var(--secondary-semi-light)"
+                },
+                {
+                    "id": "acss_import_secondary-light",
+                    "name": "secondary-light",
+                    "raw": "var(--secondary-light)"
+                },
+                {
+                    "id": "acss_import_secondary-ultra-light",
+                    "name": "secondary-ultra-light",
+                    "raw": "var(--secondary-ultra-light)"
+                },
+                {
+                    "id": "acss_import_secondary-comp",
+                    "name": "secondary-comp",
+                    "raw": "var(--secondary-comp)"
+                },
+                {
+                    "id": "acss_import_secondary-hover",
+                    "name": "secondary-hover",
+                    "raw": "var(--secondary-hover)"
+                },
+                {
+                    "id": "acss_import_secondary-trans-90",
+                    "name": "secondary-trans-90",
+                    "raw": "var(--secondary-trans-90)"
+                },
+                {
+                    "id": "acss_import_secondary-trans-80",
+                    "name": "secondary-trans-80",
+                    "raw": "var(--secondary-trans-80)"
+                },
+                {
+                    "id": "acss_import_secondary-trans-70",
+                    "name": "secondary-trans-70",
+                    "raw": "var(--secondary-trans-70)"
+                },
+                {
+                    "id": "acss_import_secondary-trans-60",
+                    "name": "secondary-trans-60",
+                    "raw": "var(--secondary-trans-60)"
+                },
+                {
+                    "id": "acss_import_secondary-trans-40",
+                    "name": "secondary-trans-40",
+                    "raw": "var(--secondary-trans-40)"
+                },
+                {
+                    "id": "acss_import_secondary-trans-50",
+                    "name": "secondary-trans-50",
+                    "raw": "var(--secondary-trans-50)"
+                },
+                {
+                    "id": "acss_import_secondary-trans-30",
+                    "name": "secondary-trans-30",
+                    "raw": "var(--secondary-trans-30)"
+                },
+                {
+                    "id": "acss_import_secondary-trans-20",
+                    "name": "secondary-trans-20",
+                    "raw": "var(--secondary-trans-20)"
+                },
+                {
+                    "id": "acss_import_secondary-trans-10",
+                    "name": "secondary-trans-10",
+                    "raw": "var(--secondary-trans-10)"
+                },
+                {
+                    "id": "acss_import_secondary-dark-trans-90",
+                    "name": "secondary-dark-trans-90",
+                    "raw": "var(--secondary-dark-trans-90)"
+                },
+                {
+                    "id": "acss_import_secondary-dark-trans-80",
+                    "name": "secondary-dark-trans-80",
+                    "raw": "var(--secondary-dark-trans-80)"
+                },
+                {
+                    "id": "acss_import_secondary-dark-trans-70",
+                    "name": "secondary-dark-trans-70",
+                    "raw": "var(--secondary-dark-trans-70)"
+                },
+                {
+                    "id": "acss_import_secondary-dark-trans-60",
+                    "name": "secondary-dark-trans-60",
+                    "raw": "var(--secondary-dark-trans-60)"
+                },
+                {
+                    "id": "acss_import_secondary-dark-trans-50",
+                    "name": "secondary-dark-trans-50",
+                    "raw": "var(--secondary-dark-trans-50)"
+                },
+                {
+                    "id": "acss_import_secondary-dark-trans-40",
+                    "name": "secondary-dark-trans-40",
+                    "raw": "var(--secondary-dark-trans-40)"
+                },
+                {
+                    "id": "acss_import_secondary-dark-trans-30",
+                    "name": "secondary-dark-trans-30",
+                    "raw": "var(--secondary-dark-trans-30)"
+                },
+                {
+                    "id": "acss_import_secondary-dark-trans-20",
+                    "name": "secondary-dark-trans-20",
+                    "raw": "var(--secondary-dark-trans-20)"
+                },
+                {
+                    "id": "acss_import_secondary-dark-trans-10",
+                    "name": "secondary-dark-trans-10",
+                    "raw": "var(--secondary-dark-trans-10)"
+                }
+            ]
+        },
+        {
+            "id": "acss_import_tertiary",
+            "name": "ACSS Tertiary",
+            "colors": [
+                {
+                    "id": "acss_import_tertiary-ultra-dark-trans-90",
+                    "name": "tertiary-ultra-dark-trans-90",
+                    "raw": "var(--tertiary-ultra-dark-trans-90)"
+                },
+                {
+                    "id": "acss_import_tertiary-ultra-dark-trans-80",
+                    "name": "tertiary-ultra-dark-trans-80",
+                    "raw": "var(--tertiary-ultra-dark-trans-80)"
+                },
+                {
+                    "id": "acss_import_tertiary-ultra-dark-trans-70",
+                    "name": "tertiary-ultra-dark-trans-70",
+                    "raw": "var(--tertiary-ultra-dark-trans-70)"
+                },
+                {
+                    "id": "acss_import_tertiary-ultra-dark-trans-60",
+                    "name": "tertiary-ultra-dark-trans-60",
+                    "raw": "var(--tertiary-ultra-dark-trans-60)"
+                },
+                {
+                    "id": "acss_import_tertiary-ultra-dark-trans-50",
+                    "name": "tertiary-ultra-dark-trans-50",
+                    "raw": "var(--tertiary-ultra-dark-trans-50)"
+                },
+                {
+                    "id": "acss_import_tertiary-ultra-dark-trans-40",
+                    "name": "tertiary-ultra-dark-trans-40",
+                    "raw": "var(--tertiary-ultra-dark-trans-40)"
+                },
+                {
+                    "id": "acss_import_tertiary-ultra-dark-trans-30",
+                    "name": "tertiary-ultra-dark-trans-30",
+                    "raw": "var(--tertiary-ultra-dark-trans-30)"
+                },
+                {
+                    "id": "acss_import_tertiary-ultra-dark-trans-20",
+                    "name": "tertiary-ultra-dark-trans-20",
+                    "raw": "var(--tertiary-ultra-dark-trans-20)"
+                },
+                {
+                    "id": "acss_import_tertiary-ultra-dark-trans-10",
+                    "name": "tertiary-ultra-dark-trans-10",
+                    "raw": "var(--tertiary-ultra-dark-trans-10)"
+                },
+                {
+                    "id": "acss_import_tertiary-light-trans-90",
+                    "name": "tertiary-light-trans-90",
+                    "raw": "var(--tertiary-light-trans-90)"
+                },
+                {
+                    "id": "acss_import_tertiary-light-trans-80",
+                    "name": "tertiary-light-trans-80",
+                    "raw": "var(--tertiary-light-trans-80)"
+                },
+                {
+                    "id": "acss_import_tertiary-light-trans-70",
+                    "name": "tertiary-light-trans-70",
+                    "raw": "var(--tertiary-light-trans-70)"
+                },
+                {
+                    "id": "acss_import_tertiary-light-trans-60",
+                    "name": "tertiary-light-trans-60",
+                    "raw": "var(--tertiary-light-trans-60)"
+                },
+                {
+                    "id": "acss_import_tertiary-light-trans-50",
+                    "name": "tertiary-light-trans-50",
+                    "raw": "var(--tertiary-light-trans-50)"
+                },
+                {
+                    "id": "acss_import_tertiary-light-trans-40",
+                    "name": "tertiary-light-trans-40",
+                    "raw": "var(--tertiary-light-trans-40)"
+                },
+                {
+                    "id": "acss_import_tertiary-light-trans-30",
+                    "name": "tertiary-light-trans-30",
+                    "raw": "var(--tertiary-light-trans-30)"
+                },
+                {
+                    "id": "acss_import_tertiary-light-trans-20",
+                    "name": "tertiary-light-trans-20",
+                    "raw": "var(--tertiary-light-trans-20)"
+                },
+                {
+                    "id": "acss_import_tertiary-light-trans-10",
+                    "name": "tertiary-light-trans-10",
+                    "raw": "var(--tertiary-light-trans-10)"
+                },
+                {
+                    "id": "acss_import_tertiary",
+                    "name": "tertiary",
+                    "raw": "var(--tertiary)"
+                },
+                {
+                    "id": "acss_import_tertiary-ultra-dark",
+                    "name": "tertiary-ultra-dark",
+                    "raw": "var(--tertiary-ultra-dark)"
+                },
+                {
+                    "id": "acss_import_tertiary-dark",
+                    "name": "tertiary-dark",
+                    "raw": "var(--tertiary-dark)"
+                },
+                {
+                    "id": "acss_import_tertiary-semi-dark",
+                    "name": "tertiary-semi-dark",
+                    "raw": "var(--tertiary-semi-dark)"
+                },
+                {
+                    "id": "acss_import_tertiary-semi-light",
+                    "name": "tertiary-semi-light",
+                    "raw": "var(--tertiary-semi-light)"
+                },
+                {
+                    "id": "acss_import_tertiary-light",
+                    "name": "tertiary-light",
+                    "raw": "var(--tertiary-light)"
+                },
+                {
+                    "id": "acss_import_tertiary-ultra-light",
+                    "name": "tertiary-ultra-light",
+                    "raw": "var(--tertiary-ultra-light)"
+                },
+                {
+                    "id": "acss_import_tertiary-comp",
+                    "name": "tertiary-comp",
+                    "raw": "var(--tertiary-comp)"
+                },
+                {
+                    "id": "acss_import_tertiary-hover",
+                    "name": "tertiary-hover",
+                    "raw": "var(--tertiary-hover)"
+                },
+                {
+                    "id": "acss_import_tertiary-trans-90",
+                    "name": "tertiary-trans-90",
+                    "raw": "var(--tertiary-trans-90)"
+                },
+                {
+                    "id": "acss_import_tertiary-trans-80",
+                    "name": "tertiary-trans-80",
+                    "raw": "var(--tertiary-trans-80)"
+                },
+                {
+                    "id": "acss_import_tertiary-trans-70",
+                    "name": "tertiary-trans-70",
+                    "raw": "var(--tertiary-trans-70)"
+                },
+                {
+                    "id": "acss_import_tertiary-trans-60",
+                    "name": "tertiary-trans-60",
+                    "raw": "var(--tertiary-trans-60)"
+                },
+                {
+                    "id": "acss_import_tertiary-trans-40",
+                    "name": "tertiary-trans-40",
+                    "raw": "var(--tertiary-trans-40)"
+                },
+                {
+                    "id": "acss_import_tertiary-trans-50",
+                    "name": "tertiary-trans-50",
+                    "raw": "var(--tertiary-trans-50)"
+                },
+                {
+                    "id": "acss_import_tertiary-trans-30",
+                    "name": "tertiary-trans-30",
+                    "raw": "var(--tertiary-trans-30)"
+                },
+                {
+                    "id": "acss_import_tertiary-trans-20",
+                    "name": "tertiary-trans-20",
+                    "raw": "var(--tertiary-trans-20)"
+                },
+                {
+                    "id": "acss_import_tertiary-trans-10",
+                    "name": "tertiary-trans-10",
+                    "raw": "var(--tertiary-trans-10)"
+                },
+                {
+                    "id": "acss_import_tertiary-dark-trans-90",
+                    "name": "tertiary-dark-trans-90",
+                    "raw": "var(--tertiary-dark-trans-90)"
+                },
+                {
+                    "id": "acss_import_tertiary-dark-trans-80",
+                    "name": "tertiary-dark-trans-80",
+                    "raw": "var(--tertiary-dark-trans-80)"
+                },
+                {
+                    "id": "acss_import_tertiary-dark-trans-70",
+                    "name": "tertiary-dark-trans-70",
+                    "raw": "var(--tertiary-dark-trans-70)"
+                },
+                {
+                    "id": "acss_import_tertiary-dark-trans-60",
+                    "name": "tertiary-dark-trans-60",
+                    "raw": "var(--tertiary-dark-trans-60)"
+                },
+                {
+                    "id": "acss_import_tertiary-dark-trans-50",
+                    "name": "tertiary-dark-trans-50",
+                    "raw": "var(--tertiary-dark-trans-50)"
+                },
+                {
+                    "id": "acss_import_tertiary-dark-trans-40",
+                    "name": "tertiary-dark-trans-40",
+                    "raw": "var(--tertiary-dark-trans-40)"
+                },
+                {
+                    "id": "acss_import_tertiary-dark-trans-30",
+                    "name": "tertiary-dark-trans-30",
+                    "raw": "var(--tertiary-dark-trans-30)"
+                },
+                {
+                    "id": "acss_import_tertiary-dark-trans-20",
+                    "name": "tertiary-dark-trans-20",
+                    "raw": "var(--tertiary-dark-trans-20)"
+                },
+                {
+                    "id": "acss_import_tertiary-dark-trans-10",
+                    "name": "tertiary-dark-trans-10",
+                    "raw": "var(--tertiary-dark-trans-10)"
+                }
+            ]
+        },
+        {
+            "id": "acss_import_accent",
+            "name": "ACSS Accent",
+            "colors": [
+                {
+                    "id": "acss_import_accent-ultra-dark-trans-90",
+                    "name": "accent-ultra-dark-trans-90",
+                    "raw": "var(--accent-ultra-dark-trans-90)"
+                },
+                {
+                    "id": "acss_import_accent-ultra-dark-trans-80",
+                    "name": "accent-ultra-dark-trans-80",
+                    "raw": "var(--accent-ultra-dark-trans-80)"
+                },
+                {
+                    "id": "acss_import_accent-ultra-dark-trans-70",
+                    "name": "accent-ultra-dark-trans-70",
+                    "raw": "var(--accent-ultra-dark-trans-70)"
+                },
+                {
+                    "id": "acss_import_accent-ultra-dark-trans-60",
+                    "name": "accent-ultra-dark-trans-60",
+                    "raw": "var(--accent-ultra-dark-trans-60)"
+                },
+                {
+                    "id": "acss_import_accent-ultra-dark-trans-50",
+                    "name": "accent-ultra-dark-trans-50",
+                    "raw": "var(--accent-ultra-dark-trans-50)"
+                },
+                {
+                    "id": "acss_import_accent-ultra-dark-trans-40",
+                    "name": "accent-ultra-dark-trans-40",
+                    "raw": "var(--accent-ultra-dark-trans-40)"
+                },
+                {
+                    "id": "acss_import_accent-ultra-dark-trans-30",
+                    "name": "accent-ultra-dark-trans-30",
+                    "raw": "var(--accent-ultra-dark-trans-30)"
+                },
+                {
+                    "id": "acss_import_accent-ultra-dark-trans-20",
+                    "name": "accent-ultra-dark-trans-20",
+                    "raw": "var(--accent-ultra-dark-trans-20)"
+                },
+                {
+                    "id": "acss_import_accent-ultra-dark-trans-10",
+                    "name": "accent-ultra-dark-trans-10",
+                    "raw": "var(--accent-ultra-dark-trans-10)"
+                },
+                {
+                    "id": "acss_import_accent-light-trans-90",
+                    "name": "accent-light-trans-90",
+                    "raw": "var(--accent-light-trans-90)"
+                },
+                {
+                    "id": "acss_import_accent-light-trans-80",
+                    "name": "accent-light-trans-80",
+                    "raw": "var(--accent-light-trans-80)"
+                },
+                {
+                    "id": "acss_import_accent-light-trans-70",
+                    "name": "accent-light-trans-70",
+                    "raw": "var(--accent-light-trans-70)"
+                },
+                {
+                    "id": "acss_import_accent-light-trans-60",
+                    "name": "accent-light-trans-60",
+                    "raw": "var(--accent-light-trans-60)"
+                },
+                {
+                    "id": "acss_import_accent-light-trans-50",
+                    "name": "accent-light-trans-50",
+                    "raw": "var(--accent-light-trans-50)"
+                },
+                {
+                    "id": "acss_import_accent-light-trans-40",
+                    "name": "accent-light-trans-40",
+                    "raw": "var(--accent-light-trans-40)"
+                },
+                {
+                    "id": "acss_import_accent-light-trans-30",
+                    "name": "accent-light-trans-30",
+                    "raw": "var(--accent-light-trans-30)"
+                },
+                {
+                    "id": "acss_import_accent-light-trans-20",
+                    "name": "accent-light-trans-20",
+                    "raw": "var(--accent-light-trans-20)"
+                },
+                {
+                    "id": "acss_import_accent-light-trans-10",
+                    "name": "accent-light-trans-10",
+                    "raw": "var(--accent-light-trans-10)"
+                },
+                {
+                    "id": "acss_import_accent",
+                    "name": "accent",
+                    "raw": "var(--accent)"
+                },
+                {
+                    "id": "acss_import_accent-ultra-dark",
+                    "name": "accent-ultra-dark",
+                    "raw": "var(--accent-ultra-dark)"
+                },
+                {
+                    "id": "acss_import_accent-dark",
+                    "name": "accent-dark",
+                    "raw": "var(--accent-dark)"
+                },
+                {
+                    "id": "acss_import_accent-semi-dark",
+                    "name": "accent-semi-dark",
+                    "raw": "var(--accent-semi-dark)"
+                },
+                {
+                    "id": "acss_import_accent-semi-light",
+                    "name": "accent-semi-light",
+                    "raw": "var(--accent-semi-light)"
+                },
+                {
+                    "id": "acss_import_accent-light",
+                    "name": "accent-light",
+                    "raw": "var(--accent-light)"
+                },
+                {
+                    "id": "acss_import_accent-ultra-light",
+                    "name": "accent-ultra-light",
+                    "raw": "var(--accent-ultra-light)"
+                },
+                {
+                    "id": "acss_import_accent-comp",
+                    "name": "accent-comp",
+                    "raw": "var(--accent-comp)"
+                },
+                {
+                    "id": "acss_import_accent-hover",
+                    "name": "accent-hover",
+                    "raw": "var(--accent-hover)"
+                },
+                {
+                    "id": "acss_import_accent-trans-90",
+                    "name": "accent-trans-90",
+                    "raw": "var(--accent-trans-90)"
+                },
+                {
+                    "id": "acss_import_accent-trans-80",
+                    "name": "accent-trans-80",
+                    "raw": "var(--accent-trans-80)"
+                },
+                {
+                    "id": "acss_import_accent-trans-70",
+                    "name": "accent-trans-70",
+                    "raw": "var(--accent-trans-70)"
+                },
+                {
+                    "id": "acss_import_accent-trans-60",
+                    "name": "accent-trans-60",
+                    "raw": "var(--accent-trans-60)"
+                },
+                {
+                    "id": "acss_import_accent-trans-40",
+                    "name": "accent-trans-40",
+                    "raw": "var(--accent-trans-40)"
+                },
+                {
+                    "id": "acss_import_accent-trans-50",
+                    "name": "accent-trans-50",
+                    "raw": "var(--accent-trans-50)"
+                },
+                {
+                    "id": "acss_import_accent-trans-30",
+                    "name": "accent-trans-30",
+                    "raw": "var(--accent-trans-30)"
+                },
+                {
+                    "id": "acss_import_accent-trans-20",
+                    "name": "accent-trans-20",
+                    "raw": "var(--accent-trans-20)"
+                },
+                {
+                    "id": "acss_import_accent-trans-10",
+                    "name": "accent-trans-10",
+                    "raw": "var(--accent-trans-10)"
+                },
+                {
+                    "id": "acss_import_accent-dark-trans-90",
+                    "name": "accent-dark-trans-90",
+                    "raw": "var(--accent-dark-trans-90)"
+                },
+                {
+                    "id": "acss_import_accent-dark-trans-80",
+                    "name": "accent-dark-trans-80",
+                    "raw": "var(--accent-dark-trans-80)"
+                },
+                {
+                    "id": "acss_import_accent-dark-trans-70",
+                    "name": "accent-dark-trans-70",
+                    "raw": "var(--accent-dark-trans-70)"
+                },
+                {
+                    "id": "acss_import_accent-dark-trans-60",
+                    "name": "accent-dark-trans-60",
+                    "raw": "var(--accent-dark-trans-60)"
+                },
+                {
+                    "id": "acss_import_accent-dark-trans-50",
+                    "name": "accent-dark-trans-50",
+                    "raw": "var(--accent-dark-trans-50)"
+                },
+                {
+                    "id": "acss_import_accent-dark-trans-40",
+                    "name": "accent-dark-trans-40",
+                    "raw": "var(--accent-dark-trans-40)"
+                },
+                {
+                    "id": "acss_import_accent-dark-trans-30",
+                    "name": "accent-dark-trans-30",
+                    "raw": "var(--accent-dark-trans-30)"
+                },
+                {
+                    "id": "acss_import_accent-dark-trans-20",
+                    "name": "accent-dark-trans-20",
+                    "raw": "var(--accent-dark-trans-20)"
+                },
+                {
+                    "id": "acss_import_accent-dark-trans-10",
+                    "name": "accent-dark-trans-10",
+                    "raw": "var(--accent-dark-trans-10)"
                 }
             ]
         },
@@ -484,96 +1143,6 @@
             "id": "acss_import_base",
             "name": "ACSS Base",
             "colors": [
-                {
-                    "id": "acss_import_base",
-                    "name": "base",
-                    "raw": "var(--base)"
-                },
-                {
-                    "id": "acss_import_base-ultra-dark",
-                    "name": "base-ultra-dark",
-                    "raw": "var(--base-ultra-dark)"
-                },
-                {
-                    "id": "acss_import_base-dark",
-                    "name": "base-dark",
-                    "raw": "var(--base-dark)"
-                },
-                {
-                    "id": "acss_import_base-semi-dark",
-                    "name": "base-semi-dark",
-                    "raw": "var(--base-semi-dark)"
-                },
-                {
-                    "id": "acss_import_base-semi-light",
-                    "name": "base-semi-light",
-                    "raw": "var(--base-semi-light)"
-                },
-                {
-                    "id": "acss_import_base-light",
-                    "name": "base-light",
-                    "raw": "var(--base-light)"
-                },
-                {
-                    "id": "acss_import_base-ultra-light",
-                    "name": "base-ultra-light",
-                    "raw": "var(--base-ultra-light)"
-                },
-                {
-                    "id": "acss_import_base-comp",
-                    "name": "base-comp",
-                    "raw": "var(--base-comp)"
-                },
-                {
-                    "id": "acss_import_base-hover",
-                    "name": "base-hover",
-                    "raw": "var(--base-hover)"
-                },
-                {
-                    "id": "acss_import_base-trans-90",
-                    "name": "base-trans-90",
-                    "raw": "var(--base-trans-90)"
-                },
-                {
-                    "id": "acss_import_base-trans-80",
-                    "name": "base-trans-80",
-                    "raw": "var(--base-trans-80)"
-                },
-                {
-                    "id": "acss_import_base-trans-70",
-                    "name": "base-trans-70",
-                    "raw": "var(--base-trans-70)"
-                },
-                {
-                    "id": "acss_import_base-trans-60",
-                    "name": "base-trans-60",
-                    "raw": "var(--base-trans-60)"
-                },
-                {
-                    "id": "acss_import_base-trans-40",
-                    "name": "base-trans-40",
-                    "raw": "var(--base-trans-40)"
-                },
-                {
-                    "id": "acss_import_base-trans-50",
-                    "name": "base-trans-50",
-                    "raw": "var(--base-trans-50)"
-                },
-                {
-                    "id": "acss_import_base-trans-30",
-                    "name": "base-trans-30",
-                    "raw": "var(--base-trans-30)"
-                },
-                {
-                    "id": "acss_import_base-trans-20",
-                    "name": "base-trans-20",
-                    "raw": "var(--base-trans-20)"
-                },
-                {
-                    "id": "acss_import_base-trans-10",
-                    "name": "base-trans-10",
-                    "raw": "var(--base-trans-10)"
-                },
                 {
                     "id": "acss_import_base-ultra-dark-trans-90",
                     "name": "base-ultra-dark-trans-90",
@@ -708,6 +1277,96 @@
                     "id": "acss_import_base-light-trans-10",
                     "name": "base-light-trans-10",
                     "raw": "var(--base-light-trans-10)"
+                },
+                {
+                    "id": "acss_import_base",
+                    "name": "base",
+                    "raw": "var(--base)"
+                },
+                {
+                    "id": "acss_import_base-ultra-dark",
+                    "name": "base-ultra-dark",
+                    "raw": "var(--base-ultra-dark)"
+                },
+                {
+                    "id": "acss_import_base-dark",
+                    "name": "base-dark",
+                    "raw": "var(--base-dark)"
+                },
+                {
+                    "id": "acss_import_base-semi-dark",
+                    "name": "base-semi-dark",
+                    "raw": "var(--base-semi-dark)"
+                },
+                {
+                    "id": "acss_import_base-semi-light",
+                    "name": "base-semi-light",
+                    "raw": "var(--base-semi-light)"
+                },
+                {
+                    "id": "acss_import_base-light",
+                    "name": "base-light",
+                    "raw": "var(--base-light)"
+                },
+                {
+                    "id": "acss_import_base-ultra-light",
+                    "name": "base-ultra-light",
+                    "raw": "var(--base-ultra-light)"
+                },
+                {
+                    "id": "acss_import_base-comp",
+                    "name": "base-comp",
+                    "raw": "var(--base-comp)"
+                },
+                {
+                    "id": "acss_import_base-hover",
+                    "name": "base-hover",
+                    "raw": "var(--base-hover)"
+                },
+                {
+                    "id": "acss_import_base-trans-90",
+                    "name": "base-trans-90",
+                    "raw": "var(--base-trans-90)"
+                },
+                {
+                    "id": "acss_import_base-trans-80",
+                    "name": "base-trans-80",
+                    "raw": "var(--base-trans-80)"
+                },
+                {
+                    "id": "acss_import_base-trans-70",
+                    "name": "base-trans-70",
+                    "raw": "var(--base-trans-70)"
+                },
+                {
+                    "id": "acss_import_base-trans-60",
+                    "name": "base-trans-60",
+                    "raw": "var(--base-trans-60)"
+                },
+                {
+                    "id": "acss_import_base-trans-40",
+                    "name": "base-trans-40",
+                    "raw": "var(--base-trans-40)"
+                },
+                {
+                    "id": "acss_import_base-trans-50",
+                    "name": "base-trans-50",
+                    "raw": "var(--base-trans-50)"
+                },
+                {
+                    "id": "acss_import_base-trans-30",
+                    "name": "base-trans-30",
+                    "raw": "var(--base-trans-30)"
+                },
+                {
+                    "id": "acss_import_base-trans-20",
+                    "name": "base-trans-20",
+                    "raw": "var(--base-trans-20)"
+                },
+                {
+                    "id": "acss_import_base-trans-10",
+                    "name": "base-trans-10",
+                    "raw": "var(--base-trans-10)"
                 }
             ]
         },
@@ -715,51 +1374,6 @@
             "id": "acss_import_neutral",
             "name": "ACSS Neutral",
             "colors": [
-                {
-                    "id": "acss_import_neutral",
-                    "name": "neutral",
-                    "raw": "var(--neutral)"
-                },
-                {
-                    "id": "acss_import_neutral-ultra-dark",
-                    "name": "neutral-ultra-dark",
-                    "raw": "var(--neutral-ultra-dark)"
-                },
-                {
-                    "id": "acss_import_neutral-dark",
-                    "name": "neutral-dark",
-                    "raw": "var(--neutral-dark)"
-                },
-                {
-                    "id": "acss_import_neutral-semi-dark",
-                    "name": "neutral-semi-dark",
-                    "raw": "var(--neutral-semi-dark)"
-                },
-                {
-                    "id": "acss_import_neutral-semi-light",
-                    "name": "neutral-semi-light",
-                    "raw": "var(--neutral-semi-light)"
-                },
-                {
-                    "id": "acss_import_neutral-light",
-                    "name": "neutral-light",
-                    "raw": "var(--neutral-light)"
-                },
-                {
-                    "id": "acss_import_neutral-ultra-light",
-                    "name": "neutral-ultra-light",
-                    "raw": "var(--neutral-ultra-light)"
-                },
-                {
-                    "id": "acss_import_neutral-comp",
-                    "name": "neutral-comp",
-                    "raw": "var(--neutral-comp)"
-                },
-                {
-                    "id": "acss_import_neutral-hover",
-                    "name": "neutral-hover",
-                    "raw": "var(--neutral-hover)"
-                },
                 {
                     "id": "acss_import_neutral-trans-90",
                     "name": "neutral-trans-90",
@@ -851,6 +1465,51 @@
                     "raw": "var(--neutral-ultra-dark-trans-10)"
                 },
                 {
+                    "id": "acss_import_neutral",
+                    "name": "neutral",
+                    "raw": "var(--neutral)"
+                },
+                {
+                    "id": "acss_import_neutral-ultra-dark",
+                    "name": "neutral-ultra-dark",
+                    "raw": "var(--neutral-ultra-dark)"
+                },
+                {
+                    "id": "acss_import_neutral-dark",
+                    "name": "neutral-dark",
+                    "raw": "var(--neutral-dark)"
+                },
+                {
+                    "id": "acss_import_neutral-semi-dark",
+                    "name": "neutral-semi-dark",
+                    "raw": "var(--neutral-semi-dark)"
+                },
+                {
+                    "id": "acss_import_neutral-semi-light",
+                    "name": "neutral-semi-light",
+                    "raw": "var(--neutral-semi-light)"
+                },
+                {
+                    "id": "acss_import_neutral-light",
+                    "name": "neutral-light",
+                    "raw": "var(--neutral-light)"
+                },
+                {
+                    "id": "acss_import_neutral-ultra-light",
+                    "name": "neutral-ultra-light",
+                    "raw": "var(--neutral-ultra-light)"
+                },
+                {
+                    "id": "acss_import_neutral-comp",
+                    "name": "neutral-comp",
+                    "raw": "var(--neutral-comp)"
+                },
+                {
+                    "id": "acss_import_neutral-hover",
+                    "name": "neutral-hover",
+                    "raw": "var(--neutral-hover)"
+                },
+                {
                     "id": "acss_import_neutral-dark-trans-90",
                     "name": "neutral-dark-trans-90",
                     "raw": "var(--neutral-dark-trans-90)"
@@ -939,6 +1598,293 @@
                     "id": "acss_import_neutral-light-trans-10",
                     "name": "neutral-light-trans-10",
                     "raw": "var(--neutral-light-trans-10)"
+                }
+            ]
+        },
+        {
+            "id": "acss_import_danger",
+            "name": "ACSS Danger",
+            "colors": [
+                {
+                    "id": "acss_import_danger-ultra-dark-trans-90",
+                    "name": "danger-ultra-dark-trans-90",
+                    "raw": "var(--danger-ultra-dark-trans-90)"
+                },
+                {
+                    "id": "acss_import_danger-ultra-dark-trans-80",
+                    "name": "danger-ultra-dark-trans-80",
+                    "raw": "var(--danger-ultra-dark-trans-80)"
+                },
+                {
+                    "id": "acss_import_danger-ultra-dark-trans-70",
+                    "name": "danger-ultra-dark-trans-70",
+                    "raw": "var(--danger-ultra-dark-trans-70)"
+                },
+                {
+                    "id": "acss_import_danger-ultra-dark-trans-60",
+                    "name": "danger-ultra-dark-trans-60",
+                    "raw": "var(--danger-ultra-dark-trans-60)"
+                },
+                {
+                    "id": "acss_import_danger-ultra-dark-trans-50",
+                    "name": "danger-ultra-dark-trans-50",
+                    "raw": "var(--danger-ultra-dark-trans-50)"
+                },
+                {
+                    "id": "acss_import_danger-ultra-dark-trans-40",
+                    "name": "danger-ultra-dark-trans-40",
+                    "raw": "var(--danger-ultra-dark-trans-40)"
+                },
+                {
+                    "id": "acss_import_danger-ultra-dark-trans-30",
+                    "name": "danger-ultra-dark-trans-30",
+                    "raw": "var(--danger-ultra-dark-trans-30)"
+                },
+                {
+                    "id": "acss_import_danger-ultra-dark-trans-20",
+                    "name": "danger-ultra-dark-trans-20",
+                    "raw": "var(--danger-ultra-dark-trans-20)"
+                },
+                {
+                    "id": "acss_import_danger-ultra-dark-trans-10",
+                    "name": "danger-ultra-dark-trans-10",
+                    "raw": "var(--danger-ultra-dark-trans-10)"
+                },
+                {
+                    "id": "acss_import_danger-dark-trans-90",
+                    "name": "danger-dark-trans-90",
+                    "raw": "var(--danger-dark-trans-90)"
+                },
+                {
+                    "id": "acss_import_danger-dark-trans-80",
+                    "name": "danger-dark-trans-80",
+                    "raw": "var(--danger-dark-trans-80)"
+                },
+                {
+                    "id": "acss_import_danger-dark-trans-70",
+                    "name": "danger-dark-trans-70",
+                    "raw": "var(--danger-dark-trans-70)"
+                },
+                {
+                    "id": "acss_import_danger-dark-trans-60",
+                    "name": "danger-dark-trans-60",
+                    "raw": "var(--danger-dark-trans-60)"
+                },
+                {
+                    "id": "acss_import_danger-dark-trans-50",
+                    "name": "danger-dark-trans-50",
+                    "raw": "var(--danger-dark-trans-50)"
+                },
+                {
+                    "id": "acss_import_danger-dark-trans-40",
+                    "name": "danger-dark-trans-40",
+                    "raw": "var(--danger-dark-trans-40)"
+                },
+                {
+                    "id": "acss_import_danger-dark-trans-30",
+                    "name": "danger-dark-trans-30",
+                    "raw": "var(--danger-dark-trans-30)"
+                },
+                {
+                    "id": "acss_import_danger-dark-trans-20",
+                    "name": "danger-dark-trans-20",
+                    "raw": "var(--danger-dark-trans-20)"
+                },
+                {
+                    "id": "acss_import_danger-dark-trans-10",
+                    "name": "danger-dark-trans-10",
+                    "raw": "var(--danger-dark-trans-10)"
+                },
+                {
+                    "id": "acss_import_danger-light-trans-90",
+                    "name": "danger-light-trans-90",
+                    "raw": "var(--danger-light-trans-90)"
+                },
+                {
+                    "id": "acss_import_danger-light-trans-80",
+                    "name": "danger-light-trans-80",
+                    "raw": "var(--danger-light-trans-80)"
+                },
+                {
+                    "id": "acss_import_danger-light-trans-70",
+                    "name": "danger-light-trans-70",
+                    "raw": "var(--danger-light-trans-70)"
+                },
+                {
+                    "id": "acss_import_danger-light-trans-60",
+                    "name": "danger-light-trans-60",
+                    "raw": "var(--danger-light-trans-60)"
+                },
+                {
+                    "id": "acss_import_danger-light-trans-50",
+                    "name": "danger-light-trans-50",
+                    "raw": "var(--danger-light-trans-50)"
+                },
+                {
+                    "id": "acss_import_danger-light-trans-40",
+                    "name": "danger-light-trans-40",
+                    "raw": "var(--danger-light-trans-40)"
+                },
+                {
+                    "id": "acss_import_danger-light-trans-30",
+                    "name": "danger-light-trans-30",
+                    "raw": "var(--danger-light-trans-30)"
+                },
+                {
+                    "id": "acss_import_danger-light-trans-20",
+                    "name": "danger-light-trans-20",
+                    "raw": "var(--danger-light-trans-20)"
+                },
+                {
+                    "id": "acss_import_danger-light-trans-10",
+                    "name": "danger-light-trans-10",
+                    "raw": "var(--danger-light-trans-10)"
+                },
+                {
+                    "id": "acss_import_danger",
+                    "name": "danger",
+                    "raw": "var(--danger)"
+                },
+                {
+                    "id": "acss_import_danger-ultra-dark",
+                    "name": "danger-ultra-dark",
+                    "raw": "var(--danger-ultra-dark)"
+                },
+                {
+                    "id": "acss_import_danger-dark",
+                    "name": "danger-dark",
+                    "raw": "var(--danger-dark)"
+                },
+                {
+                    "id": "acss_import_danger-semi-dark",
+                    "name": "danger-semi-dark",
+                    "raw": "var(--danger-semi-dark)"
+                },
+                {
+                    "id": "acss_import_danger-semi-light",
+                    "name": "danger-semi-light",
+                    "raw": "var(--danger-semi-light)"
+                },
+                {
+                    "id": "acss_import_danger-light",
+                    "name": "danger-light",
+                    "raw": "var(--danger-light)"
+                },
+                {
+                    "id": "acss_import_danger-ultra-light",
+                    "name": "danger-ultra-light",
+                    "raw": "var(--danger-ultra-light)"
+                },
+                {
+                    "id": "acss_import_danger-comp",
+                    "name": "danger-comp",
+                    "raw": "var(--danger-comp)"
+                },
+                {
+                    "id": "acss_import_danger-hover",
+                    "name": "danger-hover",
+                    "raw": "var(--danger-hover)"
+                },
+                {
+                    "id": "acss_import_danger-trans-90",
+                    "name": "danger-trans-90",
+                    "raw": "var(--danger-trans-90)"
+                },
+                {
+                    "id": "acss_import_danger-trans-80",
+                    "name": "danger-trans-80",
+                    "raw": "var(--danger-trans-80)"
+                },
+                {
+                    "id": "acss_import_danger-trans-70",
+                    "name": "danger-trans-70",
+                    "raw": "var(--danger-trans-70)"
+                },
+                {
+                    "id": "acss_import_danger-trans-60",
+                    "name": "danger-trans-60",
+                    "raw": "var(--danger-trans-60)"
+                },
+                {
+                    "id": "acss_import_danger-trans-40",
+                    "name": "danger-trans-40",
+                    "raw": "var(--danger-trans-40)"
+                },
+                {
+                    "id": "acss_import_danger-trans-50",
+                    "name": "danger-trans-50",
+                    "raw": "var(--danger-trans-50)"
+                },
+                {
+                    "id": "acss_import_danger-trans-30",
+                    "name": "danger-trans-30",
+                    "raw": "var(--danger-trans-30)"
+                },
+                {
+                    "id": "acss_import_danger-trans-20",
+                    "name": "danger-trans-20",
+                    "raw": "var(--danger-trans-20)"
+                },
+                {
+                    "id": "acss_import_danger-trans-10",
+                    "name": "danger-trans-10",
+                    "raw": "var(--danger-trans-10)"
+                }
+            ]
+        },
+        {
+            "id": "acss_import_global",
+            "name": "ACSS Global",
+            "colors": [
+                {
+                    "id": "acss_import_primary",
+                    "name": "primary",
+                    "raw": "var(--primary)"
+                },
+                {
+                    "id": "acss_import_secondary",
+                    "name": "secondary",
+                    "raw": "var(--secondary)"
+                },
+                {
+                    "id": "acss_import_tertiary",
+                    "name": "tertiary",
+                    "raw": "var(--tertiary)"
+                },
+                {
+                    "id": "acss_import_accent",
+                    "name": "accent",
+                    "raw": "var(--accent)"
+                },
+                {
+                    "id": "acss_import_base",
+                    "name": "base",
+                    "raw": "var(--base)"
+                },
+                {
+                    "id": "acss_import_neutral",
+                    "name": "neutral",
+                    "raw": "var(--neutral)"
+                },
+                {
+                    "id": "acss_import_black",
+                    "name": "black",
+                    "raw": "var(--black)"
+                },
+                {
+                    "id": "acss_import_white",
+                    "name": "white",
+                    "raw": "var(--white)"
+                },
+                {
+                    "id": "acss_import_danger",
+                    "name": "danger",
+                    "raw": "var(--danger)"
+                },
+                {
+                    "id": "acss_import_transparent",
+                    "name": "transparent",
+                    "raw": "transparent"
                 }
             ]
         },
@@ -1050,11 +1996,11 @@
         }
     ],
     "bricks_css_files_last_generated": "2.0.1",
-    "bricks_css_files_last_generated_timestamp": "1755022195",
+    "bricks_css_files_last_generated_timestamp": "1755216808",
     "bricks_filters_element_db_version": "1.1",
     "bricks_filters_index_db_version": "1.0",
     "bricks_filters_index_job_db_version": "1.0",
-    "bricks_font_face_rules": "@font-face{font-family:\"Atak\";font-weight:500;font-display:swap;src:url(http://growtherapy-dev.local/wp-content/uploads/2025/08/atak_medium-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:600;font-display:swap;src:url(http://growtherapy-dev.local/wp-content/uploads/2025/08/atak_semibold-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:400;font-display:swap;src:url(http://growtherapy-dev.local/wp-content/uploads/2025/08/atak_regular-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:700;font-display:swap;src:url(http://growtherapy-dev.local/wp-content/uploads/2025/08/atak_bold-webfont.woff2) format(\"woff2\");}\n",
+    "bricks_font_face_rules": "@font-face{font-family:\"Atak\";font-weight:500;font-display:swap;src:url(https://growtherapy-dev.local/wp-content/uploads/2025/08/atak_medium-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:600;font-display:swap;src:url(https://growtherapy-dev.local/wp-content/uploads/2025/08/atak_semibold-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:700;font-display:swap;src:url(https://growtherapy-dev.local/wp-content/uploads/2025/08/atak_bold-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:400;font-style:normal;font-display:swap;src:url(https://growtherapy-dev.local/wp-content/uploads/2025/08/atak_regular-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:300;font-display:swap;src:url(https://growtherapy-dev.local/wp-content/uploads/2025/08/atak_light-webfont.woff2) format(\"woff2\");}\n",
     "bricks_font_favorites": [
         "custom_font_14"
     ],
@@ -13242,6 +14188,57 @@
             "name": "clickable-parent",
             "settings": [],
             "category": "acss"
+        },
+        {
+            "id": "drvitc",
+            "name": "bg--secondary",
+            "settings": []
+        },
+        {
+            "id": "voohta",
+            "name": "bg--secondary-dark",
+            "settings": []
+        },
+        {
+            "id": "zifxtp",
+            "name": "bg--accent-dark",
+            "settings": []
+        },
+        {
+            "id": "hzxigq",
+            "name": "bg--accent",
+            "settings": []
+        },
+        {
+            "id": "ufgnuk",
+            "name": "bg--tertiary-dark",
+            "settings": []
+        },
+        {
+            "id": "tsvtay",
+            "name": "bg--tertiary",
+            "settings": []
+        },
+        {
+            "id": "wypdox",
+            "name": "card-purple",
+            "settings": {
+                "_background": {
+                    "color": {
+                        "raw": "var(--primary)"
+                    }
+                }
+            }
+        },
+        {
+            "id": "lalums",
+            "name": "radius--3xl",
+            "settings": []
+        },
+        {
+            "id": "shmnzl",
+            "name": "radius--4xl",
+            "settings": []
         }
     ],
     "bricks_global_classes_categories": [
@@ -13252,147 +14249,261 @@
     ],
     "bricks_global_classes_changes": [
         {
-            "timestamp": 1754955475,
-            "referer": "http://growtherapy-dev.local/wp-admin/update.php?action=upload-plugin",
-            "action": "",
-            "post_id": "",
-            "user_id": 2,
-            "old_count": 0,
-            "new_count": 2029,
-            "trash_count": 0
-        },
-        {
-            "timestamp": 1755012867,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
+            "timestamp": 1755539463,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
             "action": "automaticcss_save_settings_new",
             "post_id": "",
             "user_id": 2,
-            "old_count": 2029,
-            "new_count": 0,
-            "trash_count": 0
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
         },
         {
-            "timestamp": 1755012867,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
+            "timestamp": 1755539688,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
             "action": "automaticcss_save_settings_new",
             "post_id": "",
             "user_id": 2,
-            "old_count": 0,
-            "new_count": 2029,
-            "trash_count": 0
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
         },
         {
-            "timestamp": 1755012911,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
+            "timestamp": 1755539688,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
             "action": "automaticcss_save_settings_new",
             "post_id": "",
             "user_id": 2,
-            "old_count": 2029,
-            "new_count": 0,
-            "trash_count": 0
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
         },
         {
-            "timestamp": 1755012911,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
+            "timestamp": 1755539757,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
             "action": "automaticcss_save_settings_new",
             "post_id": "",
             "user_id": 2,
-            "old_count": 0,
-            "new_count": 2029,
-            "trash_count": 0
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
         },
         {
-            "timestamp": 1755012980,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
+            "timestamp": 1755539757,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
             "action": "automaticcss_save_settings_new",
             "post_id": "",
             "user_id": 2,
-            "old_count": 2029,
-            "new_count": 0,
-            "trash_count": 0
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
         },
         {
-            "timestamp": 1755012980,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
+            "timestamp": 1755539772,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
             "action": "automaticcss_save_settings_new",
             "post_id": "",
             "user_id": 2,
-            "old_count": 0,
-            "new_count": 2029,
-            "trash_count": 0
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
         },
         {
-            "timestamp": 1755013953,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
+            "timestamp": 1755539772,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
             "action": "automaticcss_save_settings_new",
             "post_id": "",
             "user_id": 2,
-            "old_count": 2029,
-            "new_count": 0,
-            "trash_count": 0
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
         },
         {
-            "timestamp": 1755013953,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
-            "action": "automaticcss_save_settings_new",
-            "post_id": "",
-            "user_id": 2,
-            "old_count": 0,
-            "new_count": 2029,
-            "trash_count": 0
-        },
-        {
-            "timestamp": 1755021722,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
+            "timestamp": 1755539852,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
             "action": "bricks_save_post",
-            "post_id": 2,
+            "post_id": 56,
             "user_id": 2,
-            "old_count": 2029,
-            "new_count": 2031,
-            "trash_count": 0
+            "old_count": 2401,
+            "new_count": 2038,
+            "trash_count": 2
         },
         {
-            "timestamp": 1755110818,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
+            "timestamp": 1755540444,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
             "action": "automaticcss_save_settings_new",
             "post_id": "",
             "user_id": 2,
-            "old_count": 2031,
-            "new_count": 2,
-            "trash_count": 0
+            "old_count": 2038,
+            "new_count": 9,
+            "trash_count": 2
         },
         {
-            "timestamp": 1755110818,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
+            "timestamp": 1755540444,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
             "action": "automaticcss_save_settings_new",
             "post_id": "",
             "user_id": 2,
-            "old_count": 2,
-            "new_count": 2031,
-            "trash_count": 0
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
         },
         {
-            "timestamp": 1755111066,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
+            "timestamp": 1755540511,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
             "action": "automaticcss_save_settings_new",
             "post_id": "",
             "user_id": 2,
-            "old_count": 2031,
-            "new_count": 2,
-            "trash_count": 0
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
         },
         {
-            "timestamp": 1755111067,
-            "referer": "http://growtherapy-dev.local/sample-page/?bricks=run",
+            "timestamp": 1755540511,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
             "action": "automaticcss_save_settings_new",
             "post_id": "",
             "user_id": 2,
-            "old_count": 2,
-            "new_count": 2031,
-            "trash_count": 0
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755540988,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755540988,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755541391,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755541391,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755541493,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755541493,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755541574,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 56,
+            "user_id": 2,
+            "old_count": 2401,
+            "new_count": 2038,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755541919,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 56,
+            "user_id": 2,
+            "old_count": 2038,
+            "new_count": 2040,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755542002,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 2040,
+            "new_count": 11,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755542002,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 11,
+            "new_count": 2403,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755542100,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 2403,
+            "new_count": 11,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755542100,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 11,
+            "new_count": 2403,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755542134,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 56,
+            "user_id": 2,
+            "old_count": 2403,
+            "new_count": 2040,
+            "trash_count": 2
         }
     ],
     "bricks_global_classes_locked": [
+        "acss_import_bg--secondary-dark",
+        "acss_import_bg--secondary",
+        "acss_import_bg--accent-dark",
+        "acss_import_bg--accent",
         "acss_import_variable-grid",
         "acss_import_content-grid",
         "acss_import_content--feature",
@@ -14662,6 +15773,26 @@
         "acss_import_text--primary-ultra-light",
         "acss_import_text--primary-comp",
         "acss_import_text--primary-hover",
+        "acss_import_text--secondary-ultra-dark",
+        "acss_import_text--secondary-dark",
+        "acss_import_text--secondary-semi-dark",
+        "acss_import_text--secondary-medium",
+        "acss_import_text--secondary",
+        "acss_import_text--secondary-semi-light",
+        "acss_import_text--secondary-light",
+        "acss_import_text--secondary-ultra-light",
+        "acss_import_text--secondary-comp",
+        "acss_import_text--secondary-hover",
+        "acss_import_text--accent-ultra-dark",
+        "acss_import_text--accent-dark",
+        "acss_import_text--accent-semi-dark",
+        "acss_import_text--accent-medium",
+        "acss_import_text--accent",
+        "acss_import_text--accent-semi-light",
+        "acss_import_text--accent-light",
+        "acss_import_text--accent-ultra-light",
+        "acss_import_text--accent-comp",
+        "acss_import_text--accent-hover",
         "acss_import_text--base-ultra-dark",
         "acss_import_text--base-dark",
         "acss_import_text--base-semi-dark",
@@ -14684,6 +15815,16 @@
         "acss_import_text--neutral-hover",
         "acss_import_text--black",
         "acss_import_text--white",
+        "acss_import_text--danger-ultra-dark",
+        "acss_import_text--danger-dark",
+        "acss_import_text--danger-semi-dark",
+        "acss_import_text--danger-medium",
+        "acss_import_text--danger",
+        "acss_import_text--danger-semi-light",
+        "acss_import_text--danger-light",
+        "acss_import_text--danger-ultra-light",
+        "acss_import_text--danger-comp",
+        "acss_import_text--danger-hover",
         "acss_import_text--xs",
         "acss_import_text--s",
         "acss_import_text--m",
@@ -14783,6 +15924,94 @@
         "acss_import_bg--primary-ultra-light",
         "acss_import_bg--primary-comp",
         "acss_import_bg--primary-hover",
+        "acss_import_bg--secondary-ultra-dark",
+        "acss_import_bg--secondary-ultra-dark-trans-90",
+        "acss_import_bg--secondary-ultra-dark-trans-80",
+        "acss_import_bg--secondary-ultra-dark-trans-70",
+        "acss_import_bg--secondary-ultra-dark-trans-60",
+        "acss_import_bg--secondary-ultra-dark-trans-50",
+        "acss_import_bg--secondary-ultra-dark-trans-40",
+        "acss_import_bg--secondary-ultra-dark-trans-30",
+        "acss_import_bg--secondary-ultra-dark-trans-20",
+        "acss_import_bg--secondary-ultra-dark-trans-10",
+        "acss_import_bg--secondary-dark-trans-90",
+        "acss_import_bg--secondary-dark-trans-80",
+        "acss_import_bg--secondary-dark-trans-70",
+        "acss_import_bg--secondary-dark-trans-60",
+        "acss_import_bg--secondary-dark-trans-50",
+        "acss_import_bg--secondary-dark-trans-40",
+        "acss_import_bg--secondary-dark-trans-30",
+        "acss_import_bg--secondary-dark-trans-20",
+        "acss_import_bg--secondary-dark-trans-10",
+        "acss_import_bg--secondary-semi-dark",
+        "acss_import_bg--secondary-medium",
+        "acss_import_bg--secondary-trans-90",
+        "acss_import_bg--secondary-trans-80",
+        "acss_import_bg--secondary-trans-70",
+        "acss_import_bg--secondary-trans-60",
+        "acss_import_bg--secondary-trans-50",
+        "acss_import_bg--secondary-trans-40",
+        "acss_import_bg--secondary-trans-30",
+        "acss_import_bg--secondary-trans-20",
+        "acss_import_bg--secondary-trans-10",
+        "acss_import_bg--secondary-semi-light",
+        "acss_import_bg--secondary-light",
+        "acss_import_bg--secondary-light-trans-90",
+        "acss_import_bg--secondary-light-trans-80",
+        "acss_import_bg--secondary-light-trans-70",
+        "acss_import_bg--secondary-light-trans-60",
+        "acss_import_bg--secondary-light-trans-50",
+        "acss_import_bg--secondary-light-trans-40",
+        "acss_import_bg--secondary-light-trans-30",
+        "acss_import_bg--secondary-light-trans-20",
+        "acss_import_bg--secondary-light-trans-10",
+        "acss_import_bg--secondary-ultra-light",
+        "acss_import_bg--secondary-comp",
+        "acss_import_bg--secondary-hover",
+        "acss_import_bg--accent-ultra-dark",
+        "acss_import_bg--accent-ultra-dark-trans-90",
+        "acss_import_bg--accent-ultra-dark-trans-80",
+        "acss_import_bg--accent-ultra-dark-trans-70",
+        "acss_import_bg--accent-ultra-dark-trans-60",
+        "acss_import_bg--accent-ultra-dark-trans-50",
+        "acss_import_bg--accent-ultra-dark-trans-40",
+        "acss_import_bg--accent-ultra-dark-trans-30",
+        "acss_import_bg--accent-ultra-dark-trans-20",
+        "acss_import_bg--accent-ultra-dark-trans-10",
+        "acss_import_bg--accent-dark-trans-90",
+        "acss_import_bg--accent-dark-trans-80",
+        "acss_import_bg--accent-dark-trans-70",
+        "acss_import_bg--accent-dark-trans-60",
+        "acss_import_bg--accent-dark-trans-50",
+        "acss_import_bg--accent-dark-trans-40",
+        "acss_import_bg--accent-dark-trans-30",
+        "acss_import_bg--accent-dark-trans-20",
+        "acss_import_bg--accent-dark-trans-10",
+        "acss_import_bg--accent-semi-dark",
+        "acss_import_bg--accent-medium",
+        "acss_import_bg--accent-trans-90",
+        "acss_import_bg--accent-trans-80",
+        "acss_import_bg--accent-trans-70",
+        "acss_import_bg--accent-trans-60",
+        "acss_import_bg--accent-trans-50",
+        "acss_import_bg--accent-trans-40",
+        "acss_import_bg--accent-trans-30",
+        "acss_import_bg--accent-trans-20",
+        "acss_import_bg--accent-trans-10",
+        "acss_import_bg--accent-semi-light",
+        "acss_import_bg--accent-light",
+        "acss_import_bg--accent-light-trans-90",
+        "acss_import_bg--accent-light-trans-80",
+        "acss_import_bg--accent-light-trans-70",
+        "acss_import_bg--accent-light-trans-60",
+        "acss_import_bg--accent-light-trans-50",
+        "acss_import_bg--accent-light-trans-40",
+        "acss_import_bg--accent-light-trans-30",
+        "acss_import_bg--accent-light-trans-20",
+        "acss_import_bg--accent-light-trans-10",
+        "acss_import_bg--accent-ultra-light",
+        "acss_import_bg--accent-comp",
+        "acss_import_bg--accent-hover",
         "acss_import_bg--base-ultra-dark",
         "acss_import_bg--base-ultra-dark-trans-90",
         "acss_import_bg--base-ultra-dark-trans-80",
@@ -14895,6 +16124,52 @@
         "acss_import_bg--white-trans-30",
         "acss_import_bg--white-trans-20",
         "acss_import_bg--white-trans-10",
+        "acss_import_bg--danger-ultra-dark",
+        "acss_import_bg--danger-ultra-dark-trans-90",
+        "acss_import_bg--danger-ultra-dark-trans-80",
+        "acss_import_bg--danger-ultra-dark-trans-70",
+        "acss_import_bg--danger-ultra-dark-trans-60",
+        "acss_import_bg--danger-ultra-dark-trans-50",
+        "acss_import_bg--danger-ultra-dark-trans-40",
+        "acss_import_bg--danger-ultra-dark-trans-30",
+        "acss_import_bg--danger-ultra-dark-trans-20",
+        "acss_import_bg--danger-ultra-dark-trans-10",
+        "acss_import_bg--danger-dark",
+        "acss_import_bg--danger-dark-trans-90",
+        "acss_import_bg--danger-dark-trans-80",
+        "acss_import_bg--danger-dark-trans-70",
+        "acss_import_bg--danger-dark-trans-60",
+        "acss_import_bg--danger-dark-trans-50",
+        "acss_import_bg--danger-dark-trans-40",
+        "acss_import_bg--danger-dark-trans-30",
+        "acss_import_bg--danger-dark-trans-20",
+        "acss_import_bg--danger-dark-trans-10",
+        "acss_import_bg--danger-semi-dark",
+        "acss_import_bg--danger-medium",
+        "acss_import_bg--danger",
+        "acss_import_bg--danger-trans-90",
+        "acss_import_bg--danger-trans-80",
+        "acss_import_bg--danger-trans-70",
+        "acss_import_bg--danger-trans-60",
+        "acss_import_bg--danger-trans-50",
+        "acss_import_bg--danger-trans-40",
+        "acss_import_bg--danger-trans-30",
+        "acss_import_bg--danger-trans-20",
+        "acss_import_bg--danger-trans-10",
+        "acss_import_bg--danger-semi-light",
+        "acss_import_bg--danger-light",
+        "acss_import_bg--danger-light-trans-90",
+        "acss_import_bg--danger-light-trans-80",
+        "acss_import_bg--danger-light-trans-70",
+        "acss_import_bg--danger-light-trans-60",
+        "acss_import_bg--danger-light-trans-50",
+        "acss_import_bg--danger-light-trans-40",
+        "acss_import_bg--danger-light-trans-30",
+        "acss_import_bg--danger-light-trans-20",
+        "acss_import_bg--danger-light-trans-10",
+        "acss_import_bg--danger-ultra-light",
+        "acss_import_bg--danger-comp",
+        "acss_import_bg--danger-hover",
         "acss_import_overlay--primary-ultra-dark-trans-90",
         "acss_import_overlay--primary-ultra-dark-trans-80",
         "acss_import_overlay--primary-ultra-dark-trans-70",
@@ -14931,6 +16206,78 @@
         "acss_import_overlay--primary-light-trans-30",
         "acss_import_overlay--primary-light-trans-20",
         "acss_import_overlay--primary-light-trans-10",
+        "acss_import_overlay--secondary-ultra-dark-trans-90",
+        "acss_import_overlay--secondary-ultra-dark-trans-80",
+        "acss_import_overlay--secondary-ultra-dark-trans-70",
+        "acss_import_overlay--secondary-ultra-dark-trans-60",
+        "acss_import_overlay--secondary-ultra-dark-trans-50",
+        "acss_import_overlay--secondary-ultra-dark-trans-40",
+        "acss_import_overlay--secondary-ultra-dark-trans-30",
+        "acss_import_overlay--secondary-ultra-dark-trans-20",
+        "acss_import_overlay--secondary-ultra-dark-trans-10",
+        "acss_import_overlay--secondary-dark-trans-90",
+        "acss_import_overlay--secondary-dark-trans-80",
+        "acss_import_overlay--secondary-dark-trans-60",
+        "acss_import_overlay--secondary-dark-trans-30",
+        "acss_import_overlay--secondary-dark-trans-50",
+        "acss_import_overlay--secondary-dark-trans-40",
+        "acss_import_overlay--secondary-dark-trans-70",
+        "acss_import_overlay--secondary-dark-trans-20",
+        "acss_import_overlay--secondary-dark-trans-10",
+        "acss_import_overlay--secondary-trans-90",
+        "acss_import_overlay--secondary-trans-80",
+        "acss_import_overlay--secondary-trans-70",
+        "acss_import_overlay--secondary-trans-60",
+        "acss_import_overlay--secondary-trans-50",
+        "acss_import_overlay--secondary-trans-40",
+        "acss_import_overlay--secondary-trans-30",
+        "acss_import_overlay--secondary-trans-20",
+        "acss_import_overlay--secondary-trans-10",
+        "acss_import_overlay--secondary-light-trans-90",
+        "acss_import_overlay--secondary-light-trans-80",
+        "acss_import_overlay--secondary-light-trans-70",
+        "acss_import_overlay--secondary-light-trans-60",
+        "acss_import_overlay--secondary-light-trans-50",
+        "acss_import_overlay--secondary-light-trans-40",
+        "acss_import_overlay--secondary-light-trans-30",
+        "acss_import_overlay--secondary-light-trans-20",
+        "acss_import_overlay--secondary-light-trans-10",
+        "acss_import_overlay--accent-ultra-dark-trans-90",
+        "acss_import_overlay--accent-ultra-dark-trans-80",
+        "acss_import_overlay--accent-ultra-dark-trans-70",
+        "acss_import_overlay--accent-ultra-dark-trans-60",
+        "acss_import_overlay--accent-ultra-dark-trans-50",
+        "acss_import_overlay--accent-ultra-dark-trans-40",
+        "acss_import_overlay--accent-ultra-dark-trans-30",
+        "acss_import_overlay--accent-ultra-dark-trans-20",
+        "acss_import_overlay--accent-ultra-dark-trans-10",
+        "acss_import_overlay--accent-dark-trans-90",
+        "acss_import_overlay--accent-dark-trans-80",
+        "acss_import_overlay--accent-dark-trans-60",
+        "acss_import_overlay--accent-dark-trans-30",
+        "acss_import_overlay--accent-dark-trans-50",
+        "acss_import_overlay--accent-dark-trans-40",
+        "acss_import_overlay--accent-dark-trans-70",
+        "acss_import_overlay--accent-dark-trans-20",
+        "acss_import_overlay--accent-dark-trans-10",
+        "acss_import_overlay--accent-trans-90",
+        "acss_import_overlay--accent-trans-80",
+        "acss_import_overlay--accent-trans-70",
+        "acss_import_overlay--accent-trans-60",
+        "acss_import_overlay--accent-trans-50",
+        "acss_import_overlay--accent-trans-40",
+        "acss_import_overlay--accent-trans-30",
+        "acss_import_overlay--accent-trans-20",
+        "acss_import_overlay--accent-trans-10",
+        "acss_import_overlay--accent-light-trans-90",
+        "acss_import_overlay--accent-light-trans-80",
+        "acss_import_overlay--accent-light-trans-70",
+        "acss_import_overlay--accent-light-trans-60",
+        "acss_import_overlay--accent-light-trans-50",
+        "acss_import_overlay--accent-light-trans-40",
+        "acss_import_overlay--accent-light-trans-30",
+        "acss_import_overlay--accent-light-trans-20",
+        "acss_import_overlay--accent-light-trans-10",
         "acss_import_overlay--base-ultra-dark-trans-90",
         "acss_import_overlay--base-ultra-dark-trans-80",
         "acss_import_overlay--base-ultra-dark-trans-70",
@@ -15027,6 +16374,15 @@
         "acss_import_btn--primary",
         "acss_import_btn--primary-light",
         "acss_import_btn--primary-dark",
+        "acss_import_btn--secondary",
+        "acss_import_btn--secondary-light",
+        "acss_import_btn--secondary-dark",
+        "acss_import_btn--tertiary",
+        "acss_import_btn--tertiary-light",
+        "acss_import_btn--tertiary-dark",
+        "acss_import_btn--accent",
+        "acss_import_btn--accent-light",
+        "acss_import_btn--accent-dark",
         "acss_import_btn--base",
         "acss_import_btn--base-light",
         "acss_import_btn--base-dark",
@@ -15053,6 +16409,26 @@
         "acss_import_link--primary-ultra-light",
         "acss_import_link--primary-comp",
         "acss_import_link--primary-hover",
+        "acss_import_link--secondary-ultra-dark",
+        "acss_import_link--secondary-dark",
+        "acss_import_link--secondary-semi-dark",
+        "acss_import_link--secondary-medium",
+        "acss_import_link--secondary",
+        "acss_import_link--secondary-semi-light",
+        "acss_import_link--secondary-light",
+        "acss_import_link--secondary-ultra-light",
+        "acss_import_link--secondary-comp",
+        "acss_import_link--secondary-hover",
+        "acss_import_link--accent-ultra-dark",
+        "acss_import_link--accent-dark",
+        "acss_import_link--accent-semi-dark",
+        "acss_import_link--accent-medium",
+        "acss_import_link--accent",
+        "acss_import_link--accent-semi-light",
+        "acss_import_link--accent-light",
+        "acss_import_link--accent-ultra-light",
+        "acss_import_link--accent-comp",
+        "acss_import_link--accent-hover",
         "acss_import_link--base-ultra-dark",
         "acss_import_link--base-dark",
         "acss_import_link--base-semi-dark",
@@ -15075,6 +16451,16 @@
         "acss_import_link--neutral-hover",
         "acss_import_link--black",
         "acss_import_link--white",
+        "acss_import_link--danger-ultra-dark",
+        "acss_import_link--danger-dark",
+        "acss_import_link--danger-semi-dark",
+        "acss_import_link--danger-medium",
+        "acss_import_link--danger",
+        "acss_import_link--danger-semi-light",
+        "acss_import_link--danger-light",
+        "acss_import_link--danger-ultra-light",
+        "acss_import_link--danger-comp",
+        "acss_import_link--danger-hover",
         "acss_import_link-hover--primary-ultra-dark",
         "acss_import_link-hover--primary-dark",
         "acss_import_link-hover--primary-semi-dark",
@@ -15085,6 +16471,26 @@
         "acss_import_link-hover--primary-ultra-light",
         "acss_import_link-hover--primary-comp",
         "acss_import_link-hover--primary-hover",
+        "acss_import_link-hover--secondary-ultra-dark",
+        "acss_import_link-hover--secondary-dark",
+        "acss_import_link-hover--secondary-semi-dark",
+        "acss_import_link-hover--secondary-medium",
+        "acss_import_link-hover--secondary",
+        "acss_import_link-hover--secondary-semi-light",
+        "acss_import_link-hover--secondary-light",
+        "acss_import_link-hover--secondary-ultra-light",
+        "acss_import_link-hover--secondary-comp",
+        "acss_import_link-hover--secondary-hover",
+        "acss_import_link-hover--accent-ultra-dark",
+        "acss_import_link-hover--accent-dark",
+        "acss_import_link-hover--accent-semi-dark",
+        "acss_import_link-hover--accent-medium",
+        "acss_import_link-hover--accent",
+        "acss_import_link-hover--accent-semi-light",
+        "acss_import_link-hover--accent-light",
+        "acss_import_link-hover--accent-ultra-light",
+        "acss_import_link-hover--accent-comp",
+        "acss_import_link-hover--accent-hover",
         "acss_import_link-hover--base-ultra-dark",
         "acss_import_link-hover--base-dark",
         "acss_import_link-hover--base-semi-dark",
@@ -15107,6 +16513,16 @@
         "acss_import_link-hover--neutral-hover",
         "acss_import_link-hover--black",
         "acss_import_link-hover--white",
+        "acss_import_link-hover--danger-ultra-dark",
+        "acss_import_link-hover--danger-dark",
+        "acss_import_link-hover--danger-semi-dark",
+        "acss_import_link-hover--danger-medium",
+        "acss_import_link-hover--danger",
+        "acss_import_link-hover--danger-semi-light",
+        "acss_import_link-hover--danger-light",
+        "acss_import_link-hover--danger-ultra-light",
+        "acss_import_link-hover--danger-comp",
+        "acss_import_link-hover--danger-hover",
         "acss_import_line-clamp--1",
         "acss_import_line-clamp--2",
         "acss_import_line-clamp--3",
@@ -15215,7 +16631,9 @@
         "acss_import_opacity--90",
         "acss_import_opacity--95",
         "acss_import_box-shadow--m",
+        "acss_import_box-shadow--header",
         "acss_import_box-shadow--l",
+        "acss_import_box-shadow--filters",
         "acss_import_box-shadow--xl",
         "acss_import_color-scheme--alt",
         "acss_import_color-scheme--main",
@@ -15271,6 +16689,26 @@
         "acss_import_marker--primary-dark",
         "acss_import_marker--primary-ultra-dark",
         "acss_import_marker--primary-comp",
+        "acss_import_marker--secondary",
+        "acss_import_marker--secondary-hover",
+        "acss_import_marker--secondary-ultra-light",
+        "acss_import_marker--secondary-light",
+        "acss_import_marker--secondary-semi-light",
+        "acss_import_marker--secondary-medium",
+        "acss_import_marker--secondary-semi-dark",
+        "acss_import_marker--secondary-dark",
+        "acss_import_marker--secondary-ultra-dark",
+        "acss_import_marker--secondary-comp",
+        "acss_import_marker--accent",
+        "acss_import_marker--accent-hover",
+        "acss_import_marker--accent-ultra-light",
+        "acss_import_marker--accent-light",
+        "acss_import_marker--accent-semi-light",
+        "acss_import_marker--accent-medium",
+        "acss_import_marker--accent-semi-dark",
+        "acss_import_marker--accent-dark",
+        "acss_import_marker--accent-ultra-dark",
+        "acss_import_marker--accent-comp",
         "acss_import_marker--base",
         "acss_import_marker--base-hover",
         "acss_import_marker--base-ultra-light",
@@ -15355,6 +16793,26 @@
         "acss_import_col-rule--primary-ultra-light",
         "acss_import_col-rule--primary-comp",
         "acss_import_col-rule--primary-hover",
+        "acss_import_col-rule--secondary-ultra-dark",
+        "acss_import_col-rule--secondary-dark",
+        "acss_import_col-rule--secondary-semi-dark",
+        "acss_import_col-rule--secondary-medium",
+        "acss_import_col-rule--secondary",
+        "acss_import_col-rule--secondary-semi-light",
+        "acss_import_col-rule--secondary-light",
+        "acss_import_col-rule--secondary-ultra-light",
+        "acss_import_col-rule--secondary-comp",
+        "acss_import_col-rule--secondary-hover",
+        "acss_import_col-rule--accent-ultra-dark",
+        "acss_import_col-rule--accent-dark",
+        "acss_import_col-rule--accent-semi-dark",
+        "acss_import_col-rule--accent-medium",
+        "acss_import_col-rule--accent",
+        "acss_import_col-rule--accent-semi-light",
+        "acss_import_col-rule--accent-light",
+        "acss_import_col-rule--accent-ultra-light",
+        "acss_import_col-rule--accent-comp",
+        "acss_import_col-rule--accent-hover",
         "acss_import_col-rule--base-ultra-dark",
         "acss_import_col-rule--base-dark",
         "acss_import_col-rule--base-semi-dark",
@@ -15399,6 +16857,22 @@
         "acss_import_focus--primary-semi-light",
         "acss_import_focus--primary-light",
         "acss_import_focus--primary-ultra-light",
+        "acss_import_focus--secondary-ultra-dark",
+        "acss_import_focus--secondary-dark",
+        "acss_import_focus--secondary-semi-dark",
+        "acss_import_focus--secondary-medium",
+        "acss_import_focus--secondary",
+        "acss_import_focus--secondary-semi-light",
+        "acss_import_focus--secondary-light",
+        "acss_import_focus--secondary-ultra-light",
+        "acss_import_focus--accent-ultra-dark",
+        "acss_import_focus--accent-dark",
+        "acss_import_focus--accent-semi-dark",
+        "acss_import_focus--accent-medium",
+        "acss_import_focus--accent",
+        "acss_import_focus--accent-semi-light",
+        "acss_import_focus--accent-light",
+        "acss_import_focus--accent-ultra-light",
         "acss_import_focus--base-ultra-dark",
         "acss_import_focus--base-dark",
         "acss_import_focus--base-semi-dark",
@@ -15423,8 +16897,25 @@
         "acss_import_hidden-accessible",
         "acss_import_clickable-parent"
     ],
-    "bricks_global_classes_timestamp": "1755128919",
-    "bricks_global_classes_trash": [],
+    "bricks_global_classes_timestamp": "1755543903",
+    "bricks_global_classes_trash": [
+        {
+            "id": "fycluy",
+            "name": "text-xl",
+            "settings": [],
+            "deletedAt": 1755222595774,
+            "user_id": 2,
+            "originalIndex": 2031
+        },
+        {
+            "id": "hdsajm",
+            "name": "text-neutral-light",
+            "settings": [],
+            "deletedAt": 1755533836688,
+            "user_id": 2,
+            "originalIndex": 2038
+        }
+    ],
     "bricks_global_classes_user": "2",
     "bricks_global_settings": {
         "postTypes": [
