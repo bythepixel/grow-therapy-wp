@@ -36,3 +36,5 @@ wp-content/uploads/
 # Composer files
 composer.lock
 /vendor/
+
+.DS_STORE
