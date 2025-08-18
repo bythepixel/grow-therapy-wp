@@ -153,7 +153,10 @@ function custom_guide_handle_single_guide_query($wp, $query_vars) {
             $wp->query_vars['error'] = '404';
         }
     } else {
-        error_log("Guide not found: {$guide_slug} for topic: {$topic_slug}");
+        grow_therapy_log_rewrite_error("Guide not found: {$guide_slug} for topic: {$topic_slug}", [
+            'guide_slug' => $guide_slug,
+            'topic_slug' => $topic_slug
+        ]);
         $wp->query_vars['error'] = '404';
     }
 }
@@ -175,24 +178,26 @@ function custom_guide_handle_topic_archive_query($wp, $query_vars) {
         $wp->query_vars['term'] = $topic_slug;
         unset($wp->query_vars[GROW_THERAPY_TAXONOMY]);
     } else {
-        error_log("Topic not found: {$topic_slug}");
+        grow_therapy_log_rewrite_error("Topic not found: {$topic_slug}", [
+            'topic_slug' => $topic_slug,
+            'taxonomy' => GROW_THERAPY_TAXONOMY
+        ]);
         $wp->query_vars['error'] = '404';
     }
 }
 add_action('parse_request', 'custom_guide_parse_request');
 
 /**
- * Flush rewrite rules on theme activation
+ * Flush rewrite rules when taxonomy terms change
  * 
- * Only flushes when necessary to avoid performance impact. WordPress
- * rewrite rules are expensive to regenerate, so we only do it when
- * the theme is first activated or when explicitly needed.
+ * Automatically clears rewrite cache when guide topics
+ * are created, edited, or deleted
  */
-function flush_guide_rewrites() {
-    if (get_option('grow_therapy_rewrites_flushed') !== 'done') {
-        custom_guide_rewrites();
-        flush_rewrite_rules();
-        update_option('grow_therapy_rewrites_flushed', 'done');
+function custom_guide_flush_rules($term_id, $tt_id, $taxonomy) {
+    if ($taxonomy === GROW_THERAPY_TAXONOMY) {
+        grow_therapy_cleanup_rewrite_transients([], $taxonomy);
     }
 }
-add_action('after_switch_theme', 'flush_guide_rewrites');
+add_action('created_term', 'custom_guide_flush_rules', 10, 3);
+add_action('edited_term', 'custom_guide_flush_rules', 10, 3);
+add_action('delete_term', 'custom_guide_flush_rules', 10, 3);

@@ -95,7 +95,10 @@ function acf_landing_pages_template_redirect() {
         include(get_query_template('single'));
         exit;
     } else {
-        error_log("Landing page not found: {$page_slug} for type: {$type_slug}");
+        grow_therapy_log_rewrite_error("Landing page not found: {$page_slug} for type: {$type_slug}", [
+            'page_slug' => $page_slug,
+            'type_slug' => $type_slug
+        ]);
         
         global $wp_query;
         $wp_query->set_404();
@@ -129,15 +132,34 @@ function acf_landing_pages_permalink($post_link, $post) {
 }
 add_filter('post_type_link', 'acf_landing_pages_permalink', 10, 2);
 
+/**
+ * Flush rewrite rules when taxonomy terms change
+ * 
+ * Automatically clears rewrite cache when landing page types
+ * are created, edited, or deleted
+ */
 function acf_landing_pages_flush_rules($term_id, $tt_id, $taxonomy) {
     if ($taxonomy === GROW_THERAPY_LANDING_TAXONOMY) {
-        delete_transient('landing_page_terms');
-        delete_option('rewrite_rules');
+        grow_therapy_cleanup_rewrite_transients(['landing_page_terms'], $taxonomy);
     }
 }
 add_action('created_term', 'acf_landing_pages_flush_rules', 10, 3);
 add_action('edited_term', 'acf_landing_pages_flush_rules', 10, 3);
 add_action('delete_term', 'acf_landing_pages_flush_rules', 10, 3);
+
+/**
+ * Manual flush function for initial setup
+ * 
+ * Only runs once after adding this code to ensure
+ * rewrite rules are properly registered
+ */
+function acf_landing_pages_manual_flush() {
+    if (!get_option('acf_landing_pages_flushed')) {
+        flush_rewrite_rules();
+        update_option('acf_landing_pages_flushed', true);
+    }
+}
+add_action('init', 'acf_landing_pages_manual_flush', 99);
 
 function acf_landing_pages_admin_notice() {
     if (isset($_GET['acf_landing_activated']) && current_user_can('manage_options')) {
