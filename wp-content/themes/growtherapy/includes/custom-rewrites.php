@@ -196,3 +196,132 @@ function flush_guide_rewrites() {
     }
 }
 add_action('after_switch_theme', 'flush_guide_rewrites');
+
+/**
+ * Custom Rewrite Rules for Landing Pages
+ */
+
+// Add rewrite rules for ACF landing pages
+function acf_landing_pages_rewrite_rules() {
+    // Get all terms for the landing-page-type taxonomy
+    $terms = get_terms(array(
+        'taxonomy' => 'landing-page-type',
+        'hide_empty' => false,
+    ));
+
+    if (!is_wp_error($terms) && !empty($terms)) {
+        foreach ($terms as $term) {
+            add_rewrite_rule(
+                '^' . $term->slug . '/([^/]+)/?$',
+                'index.php?landing_page_slug=$matches[1]&landing_page_type_slug=' . $term->slug,
+                'top'
+            );
+        }
+    }
+}
+add_action('init', 'acf_landing_pages_rewrite_rules', 20);
+
+// Add custom query vars
+function acf_landing_pages_query_vars($vars) {
+    $vars[] = 'landing_page_slug';
+    $vars[] = 'landing_page_type_slug';
+    return $vars;
+}
+add_filter('query_vars', 'acf_landing_pages_query_vars');
+
+// Handle the template redirect for ACF landing pages
+function acf_landing_pages_template_redirect() {
+    global $wp_query;
+    
+    $page_slug = get_query_var('landing_page_slug');
+    $type_slug = get_query_var('landing_page_type_slug');
+    
+    if ($page_slug && $type_slug) {
+        // Find the post using ACF post type and taxonomy
+        $posts = get_posts(array(
+            'name' => $page_slug,
+            'post_type' => 'landing-page', // ACF post type key
+            'post_status' => 'publish',
+            'numberposts' => 1,
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'landing-page-type', // ACF taxonomy key
+                    'field' => 'slug',
+                    'terms' => $type_slug,
+                ),
+            ),
+        ));
+        
+        if (!empty($posts)) {
+            $post = $posts[0];
+            
+            // Set up the global post data
+            global $wp_query, $post;
+            $wp_query = new WP_Query(array(
+                'p' => $post->ID,
+                'post_type' => 'landing-page'
+            ));
+            
+            // Set up post data
+            $wp_query->is_single = true;
+            $wp_query->is_singular = true;
+            $wp_query->is_404 = false;
+            
+            // Load the template
+            include(get_query_template('single'));
+            exit;
+        } else {
+            // Post not found, show 404
+            global $wp_query;
+            $wp_query->set_404();
+            status_header(404);
+            get_template_part(404);
+            exit;
+        }
+    }
+}
+add_action('template_redirect', 'acf_landing_pages_template_redirect', 1);
+
+// Modify the permalink structure for ACF landing pages
+function acf_landing_pages_permalink($post_link, $post) {
+    if ($post->post_type === 'landing-page') { // ACF post type key
+        $terms = wp_get_object_terms($post->ID, 'landing-page-type'); // ACF taxonomy key
+        
+        if (!is_wp_error($terms) && !empty($terms)) {
+            $term_slug = $terms[0]->slug;
+            $post_link = home_url('/' . $term_slug . '/' . $post->post_name . '/');
+        }
+    }
+    
+    return $post_link;
+}
+add_filter('post_type_link', 'acf_landing_pages_permalink', 10, 2);
+
+// Flush rewrite rules when taxonomy terms change
+function acf_landing_pages_flush_rules($term_id, $tt_id, $taxonomy) {
+    if ($taxonomy === 'landing-page-type') { // ACF taxonomy key
+        delete_option('rewrite_rules');
+    }
+}
+add_action('created_term', 'acf_landing_pages_flush_rules', 10, 3);
+add_action('edited_term', 'acf_landing_pages_flush_rules', 10, 3);
+add_action('delete_term', 'acf_landing_pages_flush_rules', 10, 3);
+
+// Manual flush function (call once after adding this code)
+function acf_landing_pages_manual_flush() {
+    if (!get_option('acf_landing_pages_flushed')) {
+        flush_rewrite_rules();
+        update_option('acf_landing_pages_flushed', true);
+    }
+}
+add_action('init', 'acf_landing_pages_manual_flush', 99);
+
+// Optional: Add admin notice for flushing permalinks
+function acf_landing_pages_admin_notice() {
+    if (isset($_GET['acf_landing_activated']) && current_user_can('manage_options')) {
+        echo '<div class="notice notice-success is-dismissible">';
+        echo '<p>ACF Landing Pages rewrite rules activated! Please go to <a href="' . admin_url('options-permalink.php') . '">Settings > Permalinks</a> and click "Save Changes" to flush the rewrite rules.</p>';
+        echo '</div>';
+    }
+}
+add_action('admin_notices', 'acf_landing_pages_admin_notice');
