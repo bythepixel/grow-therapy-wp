@@ -45,7 +45,7 @@ add_action('init', 'custom_guide_rewrites');
 /**
  * Generate custom permalinks for guide posts
  * 
- * Creates URLs like /therapy-basics/anxiety/breathing-techniques/
+ * Creates URLs like /therapy-basics/getting-therapy/breathing-techniques/
  * instead of default WordPress structure.
  */
 function custom_guide_permalink($permalink, $post) {
@@ -163,7 +163,7 @@ function custom_guide_handle_single_guide_query($wp, $query_vars) {
  * 
  * Routes requests for topic archives to the appropriate taxonomy template
  * while maintaining our custom URL structure. This ensures that when someone
- * visits /therapy-basics/anxiety/, they see all guides related to anxiety.
+ * visits /therapy-basics/getting-therapy/, they see all guides related to getting therapy.
  */
 function custom_guide_handle_topic_archive_query($wp, $query_vars) {
     $topic_slug = $query_vars[GROW_THERAPY_TAXONOMY];
