@@ -1,0 +1,1 @@
+<textarea name="pmgi[fields][<?php echo $field->id;?>]" class="widefat rad4"><?php echo esc_attr( $current_field );?></textarea>

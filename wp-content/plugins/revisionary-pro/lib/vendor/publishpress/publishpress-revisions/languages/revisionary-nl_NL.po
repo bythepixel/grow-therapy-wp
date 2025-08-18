@@ -1,0 +1,1930 @@
+# Translation of Plugins - PublishPress Revisions: Duplicate Posts, Submit, Approve and Schedule Content Changes - Stable (latest release) in Dutch
+# This file is distributed under the same license as the Plugins - PublishPress Revisions: Duplicate Posts, Submit, Approve and Schedule Content Changes - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2024-09-26 15:56:25+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: nl\n"
+"Project-Id-Version: Plugins - PublishPress Revisions: Duplicate Posts, Submit, Approve and Schedule Content Changes - Stable (latest release)\n"
+
+#: admin/options.php:540
+msgid "Work around cache plugin conflicts by requerying for revisions before suppressing the New Revision link."
+msgstr ""
+
+#: admin/options.php:129
+msgid "Refresh \"Has Revision\" flag before suppressing New Revision"
+msgstr ""
+
+#: rvy_init-functions.php:343
+msgid "Submitted <span class=\"count\">(%s)</span>"
+msgid_plural "Submitted <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/options.php:556
+msgid "If disabled, revision by a user who does not have the unfiltered_html capability will cause all custom html tags to be stripped out."
+msgstr ""
+
+#: admin/options.php:130
+msgid "If post contains custom html, require unfiltered_html capability"
+msgstr ""
+
+#: rvy_init-functions.php:766
+msgid "The unfiltered_html capability is required to create a revision of this post."
+msgstr ""
+
+#: rvy_init-functions.php:326
+msgid "Not Submitted <span class=\"count\">(%s)</span>"
+msgid_plural "Not Submitted <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/revisions.php:61
+msgid "Revision of this post is not allowed."
+msgstr ""
+
+#: admin/options.php:490
+msgid "If checked, the edit_others_drafts capability will be required for users lacking site-wide publishing capabilities"
+msgstr ""
+
+#. translators: Hidden accessibility text.
+#: admin/edit-revision-classic-ui_rvy.php:207
+msgid "Date and time"
+msgstr ""
+
+#. translators: Hidden accessibility text.
+#: admin/edit-revision-classic-ui_rvy.php:199
+msgid "Edit date and time"
+msgstr ""
+
+#. translators: Publish box time format, see
+#. https://www.php.net/manual/datetime.format.php
+#: admin/edit-revision-classic-ui_rvy.php:157
+msgctxt "publish box time format"
+msgid "H:i"
+msgstr ""
+
+#. translators: Publish box date format, see
+#. https://www.php.net/manual/datetime.format.php
+#: admin/edit-revision-classic-ui_rvy.php:155
+msgctxt "publish box date format"
+msgid "M j, Y"
+msgstr ""
+
+#. translators: Publish box date string. 1: Date, 2: Time. See
+#. https://www.php.net/manual/datetime.format.php
+#: admin/edit-revision-classic-ui_rvy.php:153
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: admin/admin-posts_rvy.php:77 rvy_init-functions.php:753
+msgid "The post already has a revision in process."
+msgstr ""
+
+#: admin/admin-posts_rvy.php:72
+msgid "The unfiltered_html capability is required to create a revision of this post. See %sdocumentation%s."
+msgstr ""
+
+#: includes/CoreAdmin.php:13
+msgid "You're using PublishPress Revisions Free. The Pro version has more features and support. %sUpgrade to Pro%s"
+msgstr "Je gebruikt PublishPress Revisions Free. De Pro versie heeft meer functies en ondersteuning. %sUpgrade naar Pro%s"
+
+#: admin/revision-archive_rvy.php:91
+msgid "Search Revisions"
+msgstr "Revisies zoeken"
+
+#: admin/options.php:824
+msgid "Non-Administrators cannot restore a revision without the restore_revisions capability"
+msgstr "Niet beheerders kunnen een revisie niet terugzetten zonder de restore_revisions rechten"
+
+#: admin/options.php:737
+msgid "Some themes may require this setting for correct revision preview display."
+msgstr "Sommige thema's kunnen deze instelling vereisen voor correcte revisie voorbeeld tonen."
+
+#: admin/options.php:168
+msgid "Revision Restore: Non-Administrators need capability"
+msgstr "Revisie terugzetten: niet beheerders hebben de rechten nodig"
+
+#: admin/options.php:160
+msgid "Theme Compat: For front page revision preview, set home flag"
+msgstr "Thema compatibiliteit: voor voorpagina revisie voorbeeld, stel home vlag in"
+
+#: admin/options.php:159
+msgid "Extra preview button in Gutenberg Editor top bar"
+msgstr "Extra voorbeeldknop in de bovenbalk van de Gutenberg editor"
+
+#: admin/class-list-table_rvy.php:1432
+msgctxt "revisions"
+msgid "Decline"
+msgstr "Weigeren"
+
+#: admin/RevisionEditSubmitMetabox.php:124
+msgid "Preview revision in progress"
+msgstr "Voorbeeld van revisie in uitvoering"
+
+#: admin/post-edit_rvy.php:155
+msgid "View Saved Revision"
+msgstr "Bekijk opgeslagen revisie"
+
+#: admin/post-edit_rvy.php:119
+msgid "View revision in progress"
+msgstr "Bekijk revisie in uitvoering"
+
+#: admin/options.php:728
+msgid "Adjust preview links to use \"rv_preview\" argument instead of \"preview\". Experiment to see which works best with your theme."
+msgstr "Pas de voorbeeldlinks aan om het \"rv_preview\" argument te gebruiken in plaats van \"preview\". Experimenteer om te zien welke het beste werkt met je thema."
+
+#: admin/options.php:721
+msgid "The revision preview argument is configured by constant definition: %s"
+msgstr "Het revisie voorbeeldargument wordt geconfigureerd door constante definitie: %s"
+
+#: admin/options.php:158
+msgid "Modify preview link for better theme compatibility"
+msgstr "Pas de voorbeeldlink aan voor een betere themacompatibiliteit"
+
+#: admin/options.php:277
+msgid "These are the default settings for options which can be adjusted per-site."
+msgstr "Dit zijn de standaardinstellingen voor opties die per site kunnen worden aangepast."
+
+#: admin/admin_rvy.php:214
+msgctxt "groups per page (screen options)"
+msgid "Revisions"
+msgstr "Revisies"
+
+#: admin/options.php:167
+msgid "Enable deletion in Revision Archive"
+msgstr "Verwijderen inschakelen in revisie archief"
+
+#: admin/class-list-table-archive.php:786
+msgid "Delete Past Revision"
+msgstr "Verwijder vorige revisie"
+
+#: admin/class-list-table_rvy.php:1380
+msgid "Discard"
+msgstr "Verwerpen"
+
+#. translators: %s: post title
+#: admin/class-list-table_rvy.php:1109 admin/class-list-table_rvy.php:1379
+#: admin/class-list-table_rvy.php:1383 admin/post-edit-block-ui_rvy.php:98
+#: admin/post-edit_rvy.php:52 admin/RevisionEditSubmitMetabox.php:62
+msgid "Discard Revision"
+msgstr "Revisie verwerpen"
+
+#: admin/revision-archive_rvy.php:11
+msgid "Revision for:"
+msgstr "Revisie voor:"
+
+#: admin/options.php:411
+msgid "Enable revision submission for these Post Types:"
+msgstr "Schakel revisie indiening in voor deze berichttypen:"
+
+#: admin/class-list-table-archive.php:874
+msgid "No revisions found."
+msgstr "Geen revisies gevonden."
+
+#: admin/class-list-table-archive.php:773
+msgid "List Revisions of this Post"
+msgstr "Lijst revisies van dit bericht"
+
+#: admin/class-list-table-archive.php:740
+msgid "Compare Changes in %s"
+msgstr "Vergelijk wijzigingen in %s"
+
+#: admin/class-list-table-archive.php:692
+msgid "My Revisions"
+msgstr "Mijn revisies"
+
+#: admin/class-list-table-archive.php:678
+msgid "All"
+msgstr "Alle"
+
+#: admin/class-list-table-archive.php:627
+msgid "All post types"
+msgstr "Alle berichttypen"
+
+#: admin/class-list-table-archive.php:646
+msgid "Reset Filters"
+msgstr "Filters resetten"
+
+#: admin/class-list-table-archive.php:574
+msgid "Direct Edit"
+msgstr "Direct bewerken"
+
+#: admin/class-list-table-archive.php:567
+#: admin/class-list-table-archive.php:572
+msgid "Submitted Rev."
+msgstr "Ingediende revisie."
+
+#: admin/class-list-table-archive.php:562
+msgid "Scheduled Rev."
+msgstr "Geplande revisie."
+
+#: admin/class-list-table-archive.php:512
+msgid "Revisions are disabled for %s post type"
+msgstr "Revisies zijn uitgeschakeld voor berichttype %s"
+
+#: admin/class-list-table-archive.php:475
+msgid "%s hours ago"
+msgstr "%s uur geleden"
+
+#: admin/class-list-table-archive.php:470
+msgid "%s minutes ago"
+msgstr "%s minuten geleden"
+
+#: admin/class-list-table-archive.php:467
+msgid "just now"
+msgstr "zojuist"
+
+#: admin/class-list-table-archive.php:444
+msgid "Published Author"
+msgstr "Gepubliceerde auteur"
+
+#: admin/class-list-table-archive.php:442
+msgid "Approved By"
+msgstr "Goedgekeurd door"
+
+#: admin/class-list-table-archive.php:441
+msgid "Method"
+msgstr "Methode"
+
+#: admin/class-list-table-archive.php:437
+msgid "Count"
+msgstr "Aantal"
+
+#: admin/class-list-table-archive.php:190
+msgid "Post Author: %s"
+msgstr "Berichtauteur: %s"
+
+#: admin/class-list-table-archive.php:171
+msgid "Revision Author: %s"
+msgstr "Auteur revisie: %s"
+
+#: admin/admin_rvy.php:299 admin/admin_rvy.php:300
+#: admin/revision-archive_rvy.php:82
+msgid "Revision Archive"
+msgstr "Revisiearchief"
+
+#: admin/options.php:128
+msgid "Limit to one active revision per post"
+msgstr "Beperk tot één actieve revisie per bericht"
+
+#: admin/options.php:166
+msgid "Enable deletion queue"
+msgstr "Schakel verwijderingswachtrij in"
+
+#: admin/post-edit-block-ui_rvy.php:161 admin/post-edit_rvy.php:271
+msgid "Author"
+msgstr "Auteur"
+
+#: admin/options.php:640
+msgid "The WP-Cron trigger is disabled, but scheduled tasks are still excecuted using a custom trigger."
+msgstr "De WP cron trigger is uitgeschakeld, maar geplande taken worden nog steeds uitgevoerd met een aangepaste trigger."
+
+#: admin/options.php:141
+msgid "Site uses a custom trigger for WP-Cron tasks"
+msgstr "De site gebruikt een aangepaste trigger voor WP cron taken"
+
+#: admin/admin_rvy.php:123
+msgid "Scheduled Revisions are not available because WP-Cron is disabled on this site. See %sRevisions > Settings > Scheduled Revisions%s."
+msgstr "Geplande revisies zijn niet beschikbaar omdat WP cron is uitgeschakeld op deze site. Zie %sRevisies > Instellingen > Geplande revisies%s."
+
+#: includes/CoreAdmin.php:118
+msgid "View Knowledge Base"
+msgstr "Bekijk de kennisbank"
+
+#: includes/CoreAdmin.php:116
+msgid "Detailed documentation is also available on the plugin website."
+msgstr "Gedetailleerde documentatie is ook beschikbaar op de site van de plugin."
+
+#: includes/CoreAdmin.php:107
+msgid "Request Support"
+msgstr "Vraag ondersteuning aan"
+
+#: includes/CoreAdmin.php:105
+msgid "If you need help or have a new feature request, let us know."
+msgstr "Als je hulp nodig hebt of een nieuw functieverzoek hebt, laat het ons weten."
+
+#: includes/CoreAdmin.php:100
+msgid "Need PublishPress Revisions Support?"
+msgstr "Heb je ondersteuning nodig voor PublishPress Revisions?"
+
+#: includes/CoreAdmin.php:89
+msgid "plugin integration details..."
+msgstr "plugin integratie details..."
+
+#: includes/CoreAdmin.php:87
+msgid "WPML"
+msgstr "WPML"
+
+#: includes/CoreAdmin.php:86
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: includes/CoreAdmin.php:85
+msgid "Pods"
+msgstr "Pods"
+
+#: includes/CoreAdmin.php:84
+msgid "Advanced Custom Fields"
+msgstr "Geavanceerde aangepaste velden"
+
+#: includes/CoreAdmin.php:83
+msgid "Beaver Builder"
+msgstr "Beaver Builder"
+
+#: includes/CoreAdmin.php:82
+msgid "Divi Builder"
+msgstr "Divi Builder"
+
+#: includes/CoreAdmin.php:81
+msgid "Elementor"
+msgstr "Elementor"
+
+#: includes/CoreAdmin.php:78
+msgid "Upgrade to PublishPress Revisions Pro for integration with key features of these plugins:"
+msgstr "Upgrade naar PublishPress Revisions Pro voor integratie met belangrijke functies van deze plugins:"
+
+#: includes/CoreAdmin.php:73
+msgid "Upgrade to PublishPress Revisions Pro"
+msgstr "Upgrade naar PublishPress Revisions Pro"
+
+#: admin/options.php:631
+msgid "Publish scheduled revisions using the WP-Cron mechanism. On some sites, publication will fail if this setting is disabled."
+msgstr "Publiceer geplande revisies met behulp van het WP cron mechanisme. Op sommige sites mislukt publicatie als deze instelling is uitgeschakeld."
+
+#: admin/options.php:471
+msgid "Note: Third party code may cause some post types to be incompatible with PublishPress Revisions."
+msgstr "Opmerking: code van derden kan ervoor zorgen dat sommige berichttypen niet compatibel zijn met PublishPress Revisions."
+
+#: admin/options.php:457
+msgid "%s capabilities"
+msgstr "%s rechten"
+
+#: admin/options.php:165
+msgid "On Revision publication, delete Editorial Comments"
+msgstr "Bij publicatie van revisie, verwijder redactionele reacties"
+
+#: admin/options.php:102
+msgid "Post Types"
+msgstr "Berichttypen"
+
+#: rvy_init-functions.php:352
+msgid "The Revision is Scheduled"
+msgstr "De revisie is gepland"
+
+#: rvy_init-functions.php:335
+msgid "The Revision is Submitted"
+msgstr "De revisie is ingediend"
+
+#: rvy_init-functions.php:318
+msgid "The Revision is ready to edit."
+msgstr "De revisie is gereed om te bewerken."
+
+#: admin/revision-queue_rvy.php:50
+msgid "%s revision declined."
+msgid_plural "%s revisions declined."
+msgstr[0] "%s revisie geweigerd."
+msgstr[1] "%s revisies geweigerd."
+
+#: admin/post-editor-workflow-ui_rvy.php:115
+msgid "Approving the Revision..."
+msgstr "De revisie goedkeuren..."
+
+#: admin/post-editor-workflow-ui_rvy.php:53
+#: admin/post-editor-workflow-ui_rvy.php:103
+msgid "Preview this Revision"
+msgstr "Bekijk deze revisie voorvertoning"
+
+#: admin/class-list-table_rvy.php:1368 rvy_init-functions.php:259
+msgid "Copy"
+msgstr "Kopiëren"
+
+#: admin/class-list-table_rvy.php:1101 front_rvy.php:565
+msgid "Decline"
+msgstr "Afwijzen"
+
+#: admin/admin-init_rvy.php:281
+msgid "Sorry, you are not allowed to decline this revision."
+msgstr "Je hebt geen toestemming om deze revisie te weigeren."
+
+#: admin/revisions.php:253
+msgid "%1$s %2$s (%3$s)%4$s"
+msgstr "%1$s %2$s (%3$s)%4$s"
+
+#: admin/RevisionEditSubmitMetabox.php:191
+msgid "Publish %son approval%s"
+msgstr "Publiceer %s bij goedkeuring%s"
+
+#: admin/class-list-table-archive.php:211 admin/revision-queue_rvy.php:133
+msgid "Search results for \"%s\""
+msgstr "Zoekresultaten voor \"%s\""
+
+#: admin/options.php:1100
+msgctxt "opentag option_tabname closetag (explanatory note)"
+msgid "%1$s%2$s%3$s (%4$s)"
+msgstr "%1$s%2$s%3$s (%4$s)"
+
+#: admin/options.php:771
+msgid "For compatibility with Advanced Custom Fields, Beaver Builder and WPML, upgrade to %sPublishPress Revisions Pro%s."
+msgstr "Voor compatibiliteit met Advanced Custom Fields, Beaver Builder en WPML, upgrade naar %sPublishPress Revisions Pro%s."
+
+#: admin/options.php:140
+msgid "Use WP-Cron scheduling"
+msgstr "Gebruik WP cron planning"
+
+#: admin/options.php:131
+msgid "Auto-submit revisions created by a user with publishing capability"
+msgstr "Automatisch revisies indienen die zijn gemaakt door een gebruiker met publicatie rechten"
+
+#: admin/history_rvy.php:207
+msgid "Return to editor"
+msgstr "Terug naar editor"
+
+#: admin/history_rvy.php:198
+msgid "Compare %s of \"%s\""
+msgstr "Vergelijk %s van \"%s\""
+
+#: admin/class-list-table_rvy.php:827
+msgid "Show more details"
+msgstr "Meer details tonen"
+
+#: admin/options.php:528
+msgid "To enable a role, add the manage_unsubmitted_revisions capability"
+msgstr "Om een rol in te schakelen, voeg de rechten tot het beheren van niet-ingevoerde revisies toe"
+
+#: admin/options.php:124
+msgid "Additional role capability required to manage %s"
+msgstr "Extra rol rechten vereist om %s te beheren"
+
+#: rvy_init-functions.php:306
+msgid "Scheduled <span class=\"count\">(%d)</span>"
+msgid_plural "Scheduled <span class=\"count\">(%d)</span>"
+msgstr[0] "Gepland <span class=\"count\">(%d)</span>"
+msgstr[1] "Gepland <span class=\"count\">(%d)</span>"
+
+#: admin/class-list-table-archive.php:440 rvy_init-functions.php:462
+msgid "Revision Date"
+msgstr "Revisiedatum"
+
+#: rvy_init-functions.php:458
+msgid "%sRevisions to My Posts%s(%s)</span>"
+msgid_plural "%sRevisions to My Posts%s(%s)"
+msgstr[0] "%sRevisies voor mijn berichten%s(%s)</span>"
+msgstr[1] "%sRevisies voor mijn berichten%s(%s)"
+
+#: rvy_init-functions.php:456
+msgid "%sMy Revisions%s(%s)</span>"
+msgid_plural "%sMy Revisions%s(%s)</span>"
+msgstr[0] "%sMijn revisies%s(%s)</span>"
+msgstr[1] "%sMijn revisies%s(%s)</span>"
+
+#: rvy_init-functions.php:455
+msgid "%sMy Copies & Changes%s(%s)</span>"
+msgid_plural "%sMy Copies & Changes%s(%s)</span>"
+msgstr[0] "%sMijn kopieën & wijzigingen%s(%s)</span>"
+msgstr[1] "%sMijn Kopieën & Wijzigingen%s(%s)</span>"
+
+#: rvy_init-functions.php:352
+msgid "Revision Scheduled"
+msgstr "Revisie gepland"
+
+#: rvy_init-functions.php:351
+msgid "Scheduling Revision..."
+msgstr "Revisie aan het plannen..."
+
+#: rvy_init-functions.php:341
+msgid "Submitted Revisions"
+msgstr "Ingediende revisies"
+
+#: rvy_init-functions.php:335
+msgid "Revision Submitted"
+msgstr "Revisie Ingediend"
+
+#: rvy_init-functions.php:334
+msgid "Submitting Revision..."
+msgstr "Revisie indienen..."
+
+#: rvy_init-functions.php:331
+msgid "Submitted Revision"
+msgstr "Ingediende revisie"
+
+#: rvy_init-functions.php:325
+msgid "Not Submitted"
+msgstr "Niet ingediend"
+
+#: rvy_init-functions.php:324
+msgid "Unsubmitted Revisions"
+msgstr "Niet ingediende revisies"
+
+#: rvy_init-functions.php:318
+msgid "Revision ready to edit."
+msgstr "Revisie klaar om te bewerken."
+
+#: rvy_init-functions.php:317
+msgid "Creating Revision..."
+msgstr "Revisie aanmaken..."
+
+#: rvy_init-functions.php:315 rvy_init-functions.php:316
+msgid "New Revision"
+msgstr "Nieuwe revisie"
+
+#: rvy_init-functions.php:314
+msgid "Unsubmitted Revision"
+msgstr "Niet ingediende revisie"
+
+#: rvy_init-functions.php:304
+msgid "Scheduled Changes"
+msgstr "Geplande wijzigingen"
+
+#: rvy_init-functions.php:298
+msgid "Changes are Scheduled."
+msgstr "Wijzigingen zijn gepland."
+
+#: rvy_init-functions.php:297
+msgid "Scheduling Changes..."
+msgstr "Wijzigingen aan het plannen..."
+
+#: rvy_init-functions.php:295 rvy_init-functions.php:296
+#: rvy_init-functions.php:299 rvy_init-functions.php:300
+msgid "Schedule Changes"
+msgstr "Wijzigingen plannen"
+
+#: rvy_init-functions.php:294 rvy_init-functions.php:305
+msgid "Scheduled Change"
+msgstr "Geplande wijziging"
+
+#: rvy_init-functions.php:289
+msgid "Enable Change Requests"
+msgstr "Wijzigingsverzoeken inschakelen"
+
+#: rvy_init-functions.php:288
+msgid "Change Requests <span class=\"count\">(%d)</span>"
+msgid_plural "Change Requests <span class=\"count\">(%d)</span>"
+msgstr[0] "Wijzigingsverzoeken <span class=\"count\">(%d)</span>"
+msgstr[1] "Wijzigingsverzoeken <span class=\"count\">(%d)</span>"
+
+#: rvy_init-functions.php:286
+msgid "Change Requests"
+msgstr "Wijziging aanvraag"
+
+#: rvy_init-functions.php:279
+msgid "Changes Submitted"
+msgstr "Wijzigingen ingediend"
+
+#: rvy_init-functions.php:278
+msgid "Submitting Changes..."
+msgstr "Wijzigingen indienen..."
+
+#: rvy_init-functions.php:469
+msgid "Submit Changes"
+msgstr "Wijzigingen indienen"
+
+#: rvy_init-functions.php:276
+msgid "Submit Change Request"
+msgstr "Wijzigingsverzoek indienen"
+
+#: rvy_init-functions.php:275 rvy_init-functions.php:287
+msgid "Change Request"
+msgstr "Wijzigingsverzoek"
+
+#: rvy_init-functions.php:270
+msgid "Working Copies <span class=\"count\">(%d)</span>"
+msgid_plural "Working Copies <span class=\"count\">(%d)</span>"
+msgstr[0] "Werkkopieën <span class=\"count\">(%d)</span>"
+msgstr[1] "Werkkopieën <span class=\"count\">(%d)</span>"
+
+#: rvy_init-functions.php:268
+msgid "Working Copies"
+msgstr "Werkkopieën"
+
+#: rvy_init-functions.php:265 rvy_init-functions.php:283
+#: rvy_init-functions.php:301
+msgid "Publish Changes"
+msgstr "Wijzigingen publiceren"
+
+#: rvy_init-functions.php:264 rvy_init-functions.php:282
+msgid "Approving Changes..."
+msgstr "Wijzigingen goedkeuren..."
+
+#: rvy_init-functions.php:262 rvy_init-functions.php:280
+msgid "Approve Changes"
+msgstr "Wijzigingen goedkeuren"
+
+#: rvy_init-functions.php:261
+msgid "Working Copy ready"
+msgstr "Werkkopie gereed"
+
+#: rvy_init-functions.php:260
+msgid "Creating Working Copy..."
+msgstr "Werkkopie aan het maken..."
+
+#: rvy_init-functions.php:258
+msgid "Create Working Copy"
+msgstr "Werkkopie maken"
+
+#: rvy_init-functions.php:257 rvy_init-functions.php:269
+msgid "Working Copy"
+msgstr "Werkkopie"
+
+#: revision-workflow_rvy.php:176
+msgid "Edit %s: "
+msgstr "Bewerk %s: "
+
+#: revision-workflow_rvy.php:163
+msgid "%1$s submitted changes to the %2$s \"%3$s\". You can review the changes for possible publication:"
+msgstr "%1$s heeft wijzigingen ingediend voor de %2$s \"%3$s\". Je kunt de wijzigingen beoordelen voor mogelijke publicatie:"
+
+#: revision-workflow_rvy.php:161
+msgid "[%s] %s"
+msgstr "[%s] %s"
+
+#: revision-workflow_rvy.php:159
+msgid "%1$s updated a %2$s of the %3$s \"%4$s\"."
+msgstr "%1$s heeft %2$s geüpdatet van de %3$s \"%4$s\"."
+
+#: revision-workflow_rvy.php:157
+msgid "[%s] %s Updated"
+msgstr "[%s] %s Geüpdatet"
+
+#: front_rvy.php:601 front_rvy.php:603
+msgid "This is a %s (for publication on %s). %s %s %s"
+msgstr "Dit is een %s (voor publicatie op %s). %s %s %s"
+
+#: front_rvy.php:575 front_rvy.php:577
+msgid "This is a %s (requested publish date: %s). %s %s %s"
+msgstr "Dit is een %s (verzochte publicatiedatum: %s). %s %s %s"
+
+#: front_rvy.php:551 front_rvy.php:553 front_rvy.php:586 front_rvy.php:588
+msgid "This is a %s. %s %s %s"
+msgstr "Dit is een %s. %s %s %s"
+
+#: front_rvy.php:479
+msgid "%sView Published Post%s"
+msgstr "%sBekijk gepubliceerd bericht%s"
+
+#: front_rvy.php:465
+msgid "%sCompare%s%sView Published Post%s"
+msgstr "%sVergelijk%s%sBekijk gepubliceerd bericht%s"
+
+#: front_rvy.php:456
+msgid "%sView Queue%s"
+msgstr "%sBekijk wachtrij%s"
+
+#: admin/revision-queue_rvy.php:49
+msgid "%s revision submitted."
+msgid_plural "%s revisions submitted."
+msgstr[0] "%s revisie ingediend."
+msgstr[1] "%s revisies ingediend."
+
+#: admin/revision-queue_rvy.php:13
+msgid "%s and %s are both disabled. See Revisions > Settings."
+msgstr "%s en %s zijn beide uitgeschakeld. Zie Revisies > Instellingen."
+
+#: admin/revision-action_rvy.php:1470
+msgid "[%s] %s Publication"
+msgstr "[%s] %s publicatie"
+
+#: admin/revision-action_rvy.php:1387 admin/revision-action_rvy.php:1409
+msgid "[%s] %s Publication Notice"
+msgstr "[%s] %s publicatie bericht"
+
+#: admin/post-editor-workflow-ui_rvy.php:231
+msgid "For custom field changes, edit a scheduled %s."
+msgstr "Voor wijzigingen in aangepast veld, bewerk een geplande %s."
+
+#: admin/post-editor-workflow-ui_rvy.php:215
+msgid "Error Creating Revision"
+msgstr "Fout bij maken revisie"
+
+#: admin/post-editor-workflow-ui_rvy.php:208
+msgid "Update post before creating %s."
+msgstr "Bericht updaten voordat je %s maakt."
+
+#: admin/post-editor-workflow-ui_rvy.php:83
+msgid "%s%s Revision Edit"
+msgid_plural "%s%s Revision Edits"
+msgstr[0] "%s%s revisie bewerken"
+msgstr[1] "%s%s revisie bewerkingen"
+
+#: admin/post-editor-workflow-ui_rvy.php:70
+msgid "View / Submit saved revision"
+msgstr "Bekijk/dien opgeslagen revisie in"
+
+#: admin/post-editor-workflow-ui_rvy.php:64
+msgid "View / Submit"
+msgstr "Bekijk/indienen"
+
+#: admin/post-editor-workflow-ui_rvy.php:64
+msgid "Preview / Submit"
+msgstr "Voorbeeld/indienen"
+
+#: admin/post-editor-workflow-ui_rvy.php:62
+msgid "View / Moderate saved revision"
+msgstr "Bekijk/modereer opgeslagen revisie"
+
+#: admin/post-editor-workflow-ui_rvy.php:35
+msgid "(on approval)"
+msgstr "(bij goedkeuring)"
+
+#: admin/options.php:1163
+msgid "Save Changes"
+msgstr "Wijzigingen opslaan"
+
+#: admin/options.php:663
+msgid "Bypass the above restrictions for others' revisions to logged in user's own posts."
+msgstr "Negeer bovenstaande beperkingen voor revisies van anderen voor posts van de ingelogde gebruiker."
+
+#: admin/options.php:602 admin/options.php:626
+msgid "When a %s is published, update post modified date to current time."
+msgstr "Wanneer een %s wordt gepubliceerd, update de gewijzigde datum van het bericht naar de huidige tijd."
+
+#: admin/options.php:599 admin/options.php:623
+msgid "When a %s is published, update post publish date to current time."
+msgstr "Wanneer een %s wordt gepubliceerd, update publicatiedatum van bericht naar huidige tijd."
+
+#: admin/options.php:596
+msgid "This restriction applies to users who are not full editors for the post type. To enable a role, add capabilities: revise_posts, revise_others_pages, etc."
+msgstr "Deze beperking geldt voor gebruikers die geen volledige redacteur zijn voor het berichttype. Om een rol in te schakelen, voeg je de rechten toe: revise_posts, revise_others_pages, etc."
+
+#: admin/options.php:590
+msgid "Enable published content to be copied, edited, submitted for approval and managed in %sRevision Queue%s."
+msgstr "Sta gepubliceerde inhoud toe om te worden gekopieerd, bewerkt, ingediend ter goedkeuring en beheerd in %sRevisie wachtrij%s."
+
+#: admin/options.php:568
+msgid "If the user does not have a regular Edit link, recaption the %s link as \"Edit\""
+msgstr "Als de gebruiker geen normale bewerkingslink heeft, hernoem de %s-link als \"Bewerken\""
+
+#: admin/options.php:524
+msgid "To expand the Posts / Pages listing for non-Editors, add capabilities: list_others_pages, list_published_posts, etc."
+msgstr "Om de lijst met berichten/pagina's uit te breiden voor niet-redacteuren, voeg rechten toe: list_others_pages, list_published_berichten, enz."
+
+#: admin/options.php:519
+msgid "This restriction applies to users who are not full editors for the post type. To enable a role, add capabilities: copy_posts, copy_others_pages, etc."
+msgstr "Deze beperking geldt voor gebruikers die geen volledige redacteur zijn voor het berichttype. Om een rol in te schakelen, voeg je de rechten toe: copy_posts, copy_others_pages, etc."
+
+#: admin/options.php:505
+msgid "Default labels are \"Not Submitted for Approval\", \"Submitted for Approval\", \"Scheduled Revision\""
+msgstr "Standaardlabels zijn \"Niet ingediend voor goedkeuring\", \"Ingediend voor goedkeuring\", \"Geplande revisie\""
+
+#: admin/options.php:358
+msgid "License"
+msgstr "Licentie"
+
+#: admin/options.php:180
+msgid "Email Editors and Administrators when a %s is approved"
+msgstr "E-mail redacteuren en beheerders wanneer een %s wordt toegestaan"
+
+#: admin/options.php:179
+msgid "Email Editors and Administrators when a %s is published"
+msgstr "E-mail redacteuren en beheerders wanneer een %s wordt gepubliceerd"
+
+#: admin/options.php:178
+msgid "Email Editors and Administrators when a %s is submitted"
+msgstr "E-mail redacteuren en beheerders wanneer een %s wordt ingediend"
+
+#: admin/options.php:176
+msgid "Email designated Publishers when a %s is approved"
+msgstr "E-mail aangewezen uitgevers wanneer een %s wordt goedgekeurd"
+
+#: admin/options.php:175
+msgid "Email designated Publishers when a %s is published"
+msgstr "E-mail aangewezen uitgevers wanneer een %s wordt gepubliceerd"
+
+#: admin/options.php:174
+msgid "Email designated Publishers when a %s is submitted"
+msgstr "E-mail aangewezen uitgevers wanneer een %s wordt ingediend"
+
+#: admin/options.php:164
+msgid "Include %s in My Activity, Revisions to My Posts views"
+msgstr "Voeg %s toe aan Mijn activiteit, revisies aan Mijn berichten weergaven"
+
+#: admin/options.php:151
+msgid "Email the Revisor when a %s is published"
+msgstr "E-mail de revisor wanneer een %s wordt gepubliceerd"
+
+#: admin/options.php:150
+msgid "Email the original Author when a %s is published"
+msgstr "Email de oorspronkelijke auteur wanneer een %s wordt gepubliceerd"
+
+#: admin/options.php:149
+msgid "Email the Revisor when a %s is approved"
+msgstr "E-mail de revisor wanneer een %s wordt goedgekeurd"
+
+#: admin/options.php:148
+msgid "Email the original Author when a %s is approved"
+msgstr "Email de oorspronkelijke auteur wanneer een %s wordt goedgekeurd"
+
+#: admin/options.php:147
+msgid "Email original Author when a %s is submitted"
+msgstr "Email de oorspronkelijke auteur wanneer een %s wordt ingediend"
+
+#: admin/options.php:136
+msgid "Users can always administer revisions to their own editable posts"
+msgstr "Gebruikers kunnen altijd revisies beheren van hun eigen bewerkbare berichten"
+
+#: admin/options.php:133
+msgid "Additional role capability required to submit a revision"
+msgstr "Aanvullende rol rechten vereist om een revisie in te dienen"
+
+#: admin/options.php:133
+msgid "Additional role capability required to submit a Change Request"
+msgstr "Aanvullende rechten vereist om een wijzigingsverzoek in te dienen"
+
+#: admin/options.php:127 admin/options.php:132
+msgid "Enable %s"
+msgstr "Inschakelen %s"
+
+#: admin/options.php:126
+msgid "Posts / Pages list: Use \"Edit\" caption for %s link"
+msgstr "Berichten/pagina's lijst: gebruik \"bewerken\" als bijschrijft voor %s link"
+
+#: admin/options.php:125
+msgid "Additional role capability required to create a new revision"
+msgstr "Aanvullende rechten vereist om een nieuwe revisie te maken"
+
+#: admin/options.php:125
+msgid "Additional role capability required to create a Working Copy"
+msgstr "Aanvullende rol rechten vereist om een werkende kopie te maken"
+
+#: admin/options.php:123
+msgid "Use alternate labeling: \"Working Copy\" > \"Change Request\" > \"Scheduled Change\""
+msgstr "Gebruik alternatieve labeling: \"werkende kopie\" > \"wijzigingsverzoek\" > \"geplande wijziging\""
+
+#: admin/options.php:111
+msgid "Notifications"
+msgstr "Meldingen"
+
+#: admin/options.php:110
+msgid "Options"
+msgstr "Opties"
+
+#: admin/options.php:108
+msgid "Queue"
+msgstr "Wachtrij"
+
+#: admin/options.php:106 admin/options.php:117
+msgid "Revision Submission"
+msgstr "Revisie indiening"
+
+#: admin/options.php:105
+msgid "Revision Creation"
+msgstr "Revisie aanmaak"
+
+#: admin/options.php:104
+msgid "Statuses"
+msgstr "Statussen"
+
+#: admin/options.php:103
+msgid "Revisors"
+msgstr "Revisoren"
+
+#: admin/history_rvy.php:1084
+msgid "Preview / Approve"
+msgstr "Voorbeeld/goedkeuren"
+
+#: admin/history_rvy.php:936
+msgid "Modified "
+msgstr "Gewijzigd "
+
+#: admin/edit-revision-classic-ui_rvy.php:90
+msgid "Publish <b>on approval</b>"
+msgstr "Publiceer <b>bij goedkeuring</b>"
+
+#: admin/class-list-table_rvy.php:1097 front_rvy.php:539
+#: rvy_init-functions.php:277 rvy_init-functions.php:333
+msgid "Submit"
+msgstr "Indienen"
+
+#: admin/class-list-table_rvy.php:1064
+msgid "My Activity"
+msgstr "Mijn activiteit"
+
+#: admin/admin-init_rvy.php:243
+msgid "Sorry, you are not allowed to submit this revision."
+msgstr "Je hebt geen toestemming om deze revisie in te dienen."
+
+#: admin/options.php:1052
+msgid "Set \"Needs Update\" for any post with translations which was updated (possibly by revision approval) more recently than its translations."
+msgstr "Stel \"Update nodig\" in voor elk bericht met vertalingen dat recentelijker is geüpdatet (mogelijk door revisie goedkeuring) dan de vertalingen."
+
+#: admin/options.php:1048
+msgid "Sync \"Needs Update\" flags"
+msgstr "Synchroniseer de vlaggen \"Update nodig\""
+
+#: admin/options.php:1041 includes/CoreAdmin.php:88
+msgid "WPML Translation Management"
+msgstr "WPML vertaalbeheer"
+
+#: admin/options.php:138
+msgid "Revision Publication: API actions to mimic Post Update"
+msgstr "Revisiepublicatie: API-acties om bericht update na te bootsen"
+
+#: admin/options.php:137
+msgid "Also notify on Revision Update"
+msgstr "Ook melden bij revisie update"
+
+#: admin/options.php:139
+msgid "Hide html tags on Compare Revisions screen"
+msgstr "HTML tags verbergen op het scherm voor het vergelijken van revisies"
+
+#: admin/options.php:145 admin/options.php:146
+msgid "Update Modified Date"
+msgstr "Update wijzigingsdatum"
+
+#: admin/options.php:800
+msgid "Modification Date"
+msgstr "Wijzigingsdatum"
+
+#: admin/options.php:163
+msgid "Compare Past Revisions ordering:"
+msgstr "Sortering voor het vergelijken van eerdere revisies:"
+
+#: admin/options.php:135
+msgid "Listing others' revisions requires role capability"
+msgstr "Het vermelden van revisies van anderen vereist rol rechten"
+
+#: admin/options.php:134
+msgid "Editing others' revisions requires role capability"
+msgstr "Bewerken van revisies van anderen vereist rol rechten"
+
+#: admin/options.php:672
+msgid "Regenerate \"post has revision\" flags"
+msgstr "Vlaggen \"bericht heeft revisie\" opnieuw genereren"
+
+#: admin/options.php:162
+msgid "Copy revision comments to published post"
+msgstr "Kopieer revisie reacties naar gepubliceerd bericht"
+
+#: admin/admin-posts_rvy.php:176
+msgid "Has Revision"
+msgstr "Heeft revisie"
+
+#: admin/revision-queue_rvy.php:52
+msgid "%s revision unscheduled."
+msgid_plural "%s revisions unscheduled."
+msgstr[0] "%s revisie niet ingepland."
+msgstr[1] "%s revisies niet ingepland."
+
+#: admin/edit-revision-block-ui_rvy.php:20
+msgid "Enable public preview"
+msgstr "Openbare voorvertoning inschakelen"
+
+#: admin/admin_rvy.php:322 admin/admin_rvy.php:323 includes/CoreAdmin.php:93
+msgid "Upgrade to Pro"
+msgstr "Upgrade naar Pro"
+
+#: admin/options.php:781
+msgid "This may improve compatibility with some plugins."
+msgstr "Dit kan de compatibiliteit met sommige plugins verbeteren."
+
+#: admin/options.php:687
+msgid "For themes that block revision preview, hide preview links from non-Administrators."
+msgstr "Voor thema's die de voorbeeldweergave van revisies blokkeren, verberg voorbeeldkoppelingen voor niet-beheerders."
+
+#: admin/options.php:156
+msgid "Show Preview Links"
+msgstr "Voorbeeld links weergeven"
+
+#: admin/edit-revision-classic-ui_rvy.php:136
+msgid "Revision updated."
+msgstr "Revisie geüpdatet."
+
+#: admin/revision-queue_rvy.php:124
+msgctxt "PublishedPostName (other filter captions)"
+msgid "Revision Queue for \"%s\"%s"
+msgstr "Revisie wachtrij voor \"%s\"%s"
+
+#: admin/revision-queue_rvy.php:109
+msgctxt "Posts / Pages / etc."
+msgid "of %s"
+msgstr "van %s"
+
+#: admin/revision-queue_rvy.php:96
+msgctxt "Author Name"
+msgid "%s: "
+msgstr "%s: "
+
+#. translators: Post date information. %s: Date on which the post is to be
+#. published.
+#: admin/edit-revision-classic-ui_rvy.php:173
+#: admin/RevisionEditSubmitMetabox.php:188
+msgid "Publish on: %s"
+msgstr "Publiceren op: %s"
+
+#. translators: Post date information. %s: Date on which the post is to be
+#. published.
+#: admin/edit-revision-classic-ui_rvy.php:170
+msgid "Schedule for: %s"
+msgstr ""
+
+#. translators: Post date information. %s: Date on which the post was
+#. published.
+#: admin/edit-revision-classic-ui_rvy.php:165
+msgid "Published on: %s"
+msgstr ""
+
+#. translators: Post date information. %s: Date on which the post is currently
+#. scheduled to be published.
+#: admin/edit-revision-classic-ui_rvy.php:162
+#: admin/RevisionEditSubmitMetabox.php:185
+msgid "Scheduled for: %s"
+msgstr "Gepland voor: %s"
+
+#. translators: %s: post title
+#: admin/class-list-table_rvy.php:798
+msgid "Compare Past Revisions"
+msgstr "Eerdere revisies vergelijken"
+
+#. translators: %s: post title
+#: admin/class-list-table_rvy.php:752
+msgid "View only revisions of %s"
+msgstr "Alleen revisies van %s bekijken"
+
+#: rvy_init-functions.php:685
+msgctxt "User role"
+msgid "Revisor"
+msgstr "Revisor"
+
+#: rvy_init-functions.php:348
+msgid "Scheduled Revision"
+msgstr "Geplande revisie"
+
+#: admin/edit-revision-classic-ui_rvy.php:134
+msgid "Revision updated. %sView Preview%s"
+msgstr "Revisie geüpdatet. %sBekijk voorbeeld%s"
+
+#: admin/admin-init_rvy.php:202 admin/admin-init_rvy.php:316
+msgid "Sorry, you are not allowed to approve this revision."
+msgstr "Je hebt geen toestemming om deze revisie goed te keuren."
+
+#: admin/class-list-table_rvy.php:1102
+msgid "Publish"
+msgstr "Publiceren"
+
+#: admin/options.php:1030
+msgid "Show with message content"
+msgstr "Weergeven met berichtinhoud"
+
+#: admin/options.php:1028
+msgid "Show Notification Log / Buffer"
+msgstr "Melding log/buffer weergeven"
+
+#: admin/options.php:1017
+msgid "Seconds until next buffer processing time: %d"
+msgstr "Seconden tot de volgende buffer verwerkingstijd: %d"
+
+#: admin/options.php:1010
+msgid "Sent in last day: %d / %d"
+msgstr "Verzonden in laatste dag: %d / %d"
+
+#: admin/options.php:1009
+msgid "Sent in last hour: %d / %d"
+msgstr "Verzonden in het laatste uur: %d / %d"
+
+#: admin/options.php:1008
+msgid "Sent in last minute: %d / %d"
+msgstr "Verzonden in de laatste minuut: %d / %d"
+
+#: admin/options.php:1002
+msgid "Truncate Notification Log"
+msgstr "Melding log afkappen"
+
+#: admin/options.php:996
+msgid "Purge Notification Buffer"
+msgstr "Meldingsbuffer opschonen"
+
+#: admin/options.php:967
+msgid "Notification Log"
+msgstr "Melding log"
+
+#: admin/options.php:939
+msgid "Notification Buffer"
+msgstr "Meldingsbuffer"
+
+#: admin/options.php:918
+msgid "To avoid notification failures, buffer emails for delayed sending once minute, hour or day limits are exceeded"
+msgstr "Om meldingsfouten te voorkomen, buffer e-mails voor vertraagde verzending zodra de limieten van een minuut, uur of dag worden overschreden"
+
+#: admin/options.php:660
+msgid "This restriction applies to users who are not full editors for the post type. To enable a role, give it the list_others_revisions capability."
+msgstr "Deze beperking geldt voor gebruikers die geen volledige redacteuren zijn voor het berichttype. Geef een rol de list_others_revisions vaardigheid om deze in te schakelen."
+
+#: admin/options.php:657
+msgid "This restriction applies to users who are not full editors for the post type. To enable a role, give it the edit_others_revisions capability."
+msgstr "Deze beperking geldt voor gebruikers die geen volledige redacteuren zijn voor het berichttype. Geef een rol de edit_others_revisions vaardigheid om deze in te schakelen."
+
+#: admin/options.php:743
+msgid "If disabled, Compare screen links to Revision Preview for approval."
+msgstr "Als dit is uitgeschakeld, worden er geen links naar de revisie voorbeeldpagina weergegeven op het vergelijkingsscherm voor goedkeuring."
+
+#: admin/options.php:710
+msgid "Some themes or plugins may require Revision Slug or Revision ID link type for proper template loading and field display."
+msgstr "Sommige thema's of plugins vereisen mogelijk de revisie slug of revisie ID link type voor het correct laden van template en het weergeven van velden."
+
+#: admin/options.php:699
+msgid "Revision ID only"
+msgstr "Alleen revisie ID"
+
+#: admin/options.php:699
+msgid "Revision Slug"
+msgstr "Revisie slug"
+
+#: admin/options.php:699
+msgid "Published Post Slug"
+msgstr "Gepubliceerd bericht"
+
+#: admin/options.php:161
+msgid "Approve Button on Compare Revisions screen"
+msgstr "Knop Goedkeuren op het scherm voor het vergelijken van revisies"
+
+#: admin/options.php:157
+msgid "Preview Link Type"
+msgstr "Voorbeeld link type"
+
+#: admin/options.php:152
+msgid "Enable notification buffer"
+msgstr "Meldingsbuffer inschakelen"
+
+#: admin/revision-archive_rvy.php:28 admin/revision-queue_rvy.php:54
+msgid "%s revision permanently deleted."
+msgid_plural "%s revisions permanently deleted."
+msgstr[0] "%s revisie permanent verwijderd."
+msgstr[1] "%s revisies permanent verwijderd."
+
+#: admin/revision-queue_rvy.php:53
+msgid "%s revision published."
+msgid_plural "%s revisions published."
+msgstr[0] "%s revisie gepubliceerd."
+msgstr[1] "%s revisies gepubliceerd."
+
+#: admin/revision-queue_rvy.php:51
+msgid "%s revision approved."
+msgid_plural "%s revisions approved."
+msgstr[0] "%s revisie goedgekeurd."
+msgstr[1] "%s revisies goedgekeurd."
+
+#: admin/edit-revision-classic-ui_rvy.php:121
+msgid "Compare this revision to published copy, or to other revisions"
+msgstr "Vergelijk deze revisie met het gepubliceerde exemplaar of met andere revisies"
+
+#: rvy_init-functions.php:319 rvy_init-functions.php:336
+#: rvy_init-functions.php:353
+msgid "Approve Revision"
+msgstr "Revisie goedkeuren"
+
+#: rvy_init-functions.php:77
+msgid "Every 2 Minutes"
+msgstr "Elke 2 minuten"
+
+#: front_rvy.php:618 front_rvy.php:620
+msgid "This is the Current Revision. %s"
+msgstr "Dit is de huidige revisie. %s"
+
+#: front_rvy.php:636 front_rvy.php:638
+msgid "This is a Past Revision (from %s). %s %s"
+msgstr "Dit is een eerdere revisie (vanaf %s). %s %s"
+
+#: front_rvy.php:632
+msgid "Restore"
+msgstr "Terugzetten"
+
+#: admin/class-list-table_rvy.php:1100 admin/history_rvy.php:1084
+#: front_rvy.php:536 front_rvy.php:561 rvy_init-functions.php:263
+#: rvy_init-functions.php:281 rvy_init-functions.php:320
+#: rvy_init-functions.php:337 rvy_init-functions.php:354
+msgid "Approve"
+msgstr "Goedkeuren"
+
+#: admin/post-editor-workflow-ui_rvy.php:79
+msgid "View unsaved changes"
+msgstr "Niet-opgeslagen wijzigingen bekijken"
+
+#. translators: %s: post title
+#: admin/class-list-table_rvy.php:1423
+msgid "Compare Changes"
+msgstr "Wijzigingen vergelijken"
+
+#. translators: %s: post title
+#: admin/class-list-table-archive.php:759 admin/class-list-table_rvy.php:1408
+#: admin/post-editor-workflow-ui_rvy.php:201
+msgid "Preview Revision"
+msgstr "Voorbeeld van revisie"
+
+#: admin/class-list-table-archive.php:396 admin/class-list-table_rvy.php:1109
+#: admin/class-list-table_rvy.php:1383 admin/post-edit-block-ui_rvy.php:98
+#: admin/post-edit_rvy.php:52 admin/RevisionEditSubmitMetabox.php:62
+msgid "Delete Revision"
+msgstr "Revisie verwijderen"
+
+#. translators: %s: post title
+#: admin/class-list-table_rvy.php:1275
+msgid "&#8220;%s&#8221; (Edit)"
+msgstr "&#8220;%s&#8221; (Bewerken)"
+
+#: admin/class-list-table_rvy.php:1185
+msgid "Select All"
+msgstr "Alles selecteren"
+
+#: admin/class-list-table_rvy.php:1130
+msgid "Filter by category"
+msgstr "Filteren op categorie"
+
+#: admin/class-list-table_rvy.php:1073
+msgid "All %s"
+msgstr "Alle %s"
+
+#: admin/class-list-table_rvy.php:799
+msgid "History"
+msgstr "Geschiedenis"
+
+#. translators: %s: post title
+#: admin/class-list-table_rvy.php:764 admin/class-list-table_rvy.php:772
+msgid "View published post"
+msgstr "Gepubliceerd bericht bekijken"
+
+#: admin/class-list-table-archive.php:640
+#: admin/class-list-table-archive.php:774 admin/class-list-table_rvy.php:753
+msgid "Filter"
+msgstr "Filter"
+
+#: admin/class-list-table_rvy.php:661
+msgid "Missed schedule"
+msgstr "Gemiste planning"
+
+#: admin/class-list-table_rvy.php:657
+msgid "Requested publication: %s"
+msgstr "Verzochte publicatie: %s"
+
+#: admin/class-list-table_rvy.php:654
+msgid "Scheduled publication: %s"
+msgstr "Geplande publicatie: %s"
+
+#: admin/class-list-table_rvy.php:647 admin/class-list-table_rvy.php:1295
+msgid "Y/m/d g:i a"
+msgstr "j M Y, G:i"
+
+#: admin/class-list-table_rvy.php:637 admin/class-list-table_rvy.php:1287
+msgid "Y/m/d g:i:s a"
+msgstr "j M Y, G:i:s"
+
+#: rvy_init-functions.php:463
+msgid "Post Author"
+msgstr "Bericht auteur"
+
+#: rvy_init-functions.php:464
+msgid "Published Post"
+msgstr "Gepubliceerd bericht"
+
+#: admin/class-list-table_rvy.php:594
+msgid "Schedule"
+msgstr "Schema"
+
+#: admin/class-list-table-archive.php:439 rvy_init-functions.php:461
+msgid "Revised By"
+msgstr "Herzien door"
+
+#: admin/class-list-table-archive.php:438 admin/class-list-table_rvy.php:582
+msgid "Post Type"
+msgstr "Berichttype"
+
+#: admin/class-list-table_rvy.php:581 admin/post-editor-workflow-ui_rvy.php:31
+msgid "Status"
+msgstr "Status"
+
+#: admin/admin-posts_rvy.php:159 admin/class-list-table-archive.php:436
+#: rvy_init-functions.php:460
+msgid "Revision"
+msgstr "Revisie"
+
+#. translators: Publish box date formt, see http://php.net/date
+#: admin/RevisionEditSubmitMetabox.php:180
+msgid "M j, Y @ G:i"
+msgstr "j M Y @ G:i"
+
+#: admin/RevisionEditSubmitMetabox.php:147
+msgid "Status:"
+msgstr "Status:"
+
+#: admin/RevisionEditSubmitMetabox.php:64
+msgid "Move to Trash"
+msgstr "Verplaats naar prullenbak"
+
+#: admin/revision-archive_rvy.php:59 admin/revision-queue_rvy.php:164
+msgid "Undo"
+msgstr "Ongedaan maken"
+
+#: admin/revision-queue_rvy.php:126
+msgid "Revision Queue %s"
+msgstr "Revisie wachtrij %s"
+
+#: admin/revision-queue_rvy.php:116 admin/revision-queue_rvy.php:117
+msgid "%sPost Author: %s"
+msgstr "%sBericht auteur: %s"
+
+#: admin/admin-init_rvy.php:114 admin/admin-init_rvy.php:359
+msgid "Error in deleting."
+msgstr "Fout bij het verwijderen."
+
+#: admin/admin-init_rvy.php:110 admin/admin-init_rvy.php:345
+msgid "Sorry, you are not allowed to delete this revision."
+msgstr "Je hebt geen toestemming om deze revisie te verwijderen."
+
+#: admin/revision-queue_rvy.php:9
+msgid "You are not allowed to manage revisions."
+msgstr "Je hebt geen toestemming om revisies te beheren."
+
+#: admin/revision-ui_rvy.php:370
+msgid "Modified Date"
+msgstr "Gewijzigde datum"
+
+#: admin/revision-ui_rvy.php:92
+msgid "%1$s (Current)"
+msgstr "%1$s (Huidige)"
+
+#: admin/revisions.php:135
+msgid "Revisions of %s"
+msgstr "Revisies van %s"
+
+#: admin/revision-action_rvy.php:460 admin/revision-action_rvy.php:542
+msgid "Editor: "
+msgstr "Redacteur: "
+
+#: admin/history_rvy.php:1188
+msgid "List"
+msgstr "Lijst"
+
+#: admin/history_rvy.php:1187
+msgid "Manage"
+msgstr "Beheren"
+
+#: admin/history_rvy.php:1180
+msgid "Preview / Restore"
+msgstr "Voorbeeld/terugzetten"
+
+#: admin/options.php:109
+msgid "Preview / Approval"
+msgstr "Voorbeeld/goedkeuring"
+
+#: admin/class-list-table_rvy.php:645 admin/class-list-table_rvy.php:1292
+#: admin/history_rvy.php:999
+msgid "%s ago"
+msgstr "%s geleden"
+
+#: admin/history_rvy.php:998
+msgctxt "revision date short format"
+msgid "j M @ H:i"
+msgstr "j M @ H:i"
+
+#: admin/history_rvy.php:997
+msgid "M j, Y @ H:i"
+msgstr "j M Y @ G:i"
+
+#: admin/history_rvy.php:953
+msgctxt "revision date short format"
+msgid "j M @ g:i a"
+msgstr "j M @ g:i a"
+
+#: admin/history_rvy.php:941
+msgid "%s%s from now"
+msgstr "Over %s%s"
+
+#: admin/history_rvy.php:941
+msgid "%s%s ago"
+msgstr "%s%s geleden"
+
+#: rvy_init-functions.php:342
+msgid "Submitted"
+msgstr "Ingediend"
+
+#: admin/history_rvy.php:931
+msgid "Requested for "
+msgstr "Aangevraagd voor "
+
+#: admin/class-list-table_rvy.php:703 admin/history_rvy.php:796
+msgid "No author"
+msgstr "Geen auteur"
+
+#: admin/history_rvy.php:692
+msgid "Beaver Builder Settings"
+msgstr "Beaver Builder instellingen"
+
+#: admin/history_rvy.php:691
+msgid "Beaver Builder Data"
+msgstr "Beaver Builder gegevens"
+
+#: admin/history_rvy.php:687
+msgid "Featured Image"
+msgstr "Uitgelichte afbeelding"
+
+#: admin/history_rvy.php:684
+msgid "Page Template"
+msgstr "Pagina template"
+
+#: admin/history_rvy.php:549
+msgid "Ping Status"
+msgstr "Ping status"
+
+#: admin/history_rvy.php:548
+msgid "Comment Status"
+msgstr "Reactiestatus"
+
+#: admin/history_rvy.php:547
+msgid "Menu Order"
+msgstr "Menuvolgorde"
+
+#: admin/history_rvy.php:546
+msgid "Post Parent"
+msgstr "Hoofd van bericht"
+
+#: admin/history_rvy.php:545 admin/options.php:800
+msgid "Post Date"
+msgstr "Berichtdatum"
+
+#: admin/history_rvy.php:445 admin/history_rvy.php:448
+msgid "(no title)"
+msgstr "(geen titel)"
+
+#: admin/admin_lib-mu_rvy.php:21
+msgid "Network Defaults"
+msgstr "Netwerkstandaarden"
+
+#: admin/admin_lib-mu_rvy.php:10
+msgid "Network Settings"
+msgstr "Netwerkinstellingen"
+
+#: admin/class-list-table-archive.php:744 admin/class-list-table_rvy.php:1424
+#: admin/edit-revision-classic-ui_rvy.php:120 admin/post-edit_rvy.php:186
+#: admin/post-edit_rvy.php:200
+msgctxt "revisions"
+msgid "Compare"
+msgstr "Vergelijken"
+
+#: admin/post-editor-workflow-ui_rvy.php:59
+#: admin/post-editor-workflow-ui_rvy.php:67 admin/post-edit_rvy.php:161
+msgid "View saved revision"
+msgstr "Opgeslagen revisie bekijken"
+
+#: admin/post-edit_rvy.php:158
+msgid "View / moderate saved revision"
+msgstr "Bekijken/modereren opgeslagen revisie"
+
+#: admin/class-list-table_rvy.php:765
+msgid "View"
+msgstr "Bekijken"
+
+#: admin/post-editor-workflow-ui_rvy.php:55
+msgid "View / Approve"
+msgstr "Bekijken/goedkeuren"
+
+#: admin/post-editor-workflow-ui_rvy.php:55
+msgid "View / Publish"
+msgstr "Bekijken/publiceren"
+
+#: admin/options.php:810
+msgid "Show descriptive captions for PublishPress Revisions settings"
+msgstr "Beschrijvende bijschriften weergeven voor PublishPress Revisions instellingen"
+
+#: admin/options.php:485
+msgid "The user role \"Revisor\" role is now available. Include capabilities for all custom post types in this role?"
+msgstr "De gebruikersrol 'Revisor' is nu beschikbaar. Rechten voor alle aangepaste berichttypen in deze rol opnemen?"
+
+#: admin/options.php:247
+msgid "PublishPress Revisions Site Settings"
+msgstr "PublishPress Revisions site instellingen"
+
+#: admin/admin_lib-mu_rvy.php:21 admin/options.php:245
+msgid "PublishPress Revisions Network Defaults"
+msgstr "PublishPress Revisions netwerkstandaarden"
+
+#: admin/admin_lib-mu_rvy.php:10 admin/options.php:243
+msgid "PublishPress Revisions Network Settings"
+msgstr "PublishPress Revisions netwerkinstellingen"
+
+#: admin/options.php:153
+msgid "All custom post types available to Revisors"
+msgstr "Alle aangepaste berichttypen beschikbaar voor revisoren"
+
+#: admin/admin_rvy.php:415
+msgid "Contact"
+msgstr "Contact"
+
+#: admin/admin_rvy.php:413
+msgid "Documentation"
+msgstr "Documentatie"
+
+#: admin/admin_rvy.php:411
+msgid "About"
+msgstr "Over"
+
+#: admin/admin_rvy.php:400
+msgid "If you like %s, please leave us a %s rating. Thank you!"
+msgstr "Als je %s leuk vindt, laat ons dan een %s waardering achter. Bedankt!"
+
+#: admin/admin_rvy.php:315 admin/options.php:249
+msgid "PublishPress Revisions Settings"
+msgstr "PublishPress Revisions instellingen"
+
+#: admin/admin-posts_rvy.php:191 admin/admin_rvy.php:290
+msgid "Revision Queue"
+msgstr "Revisie wachtrij"
+
+#: revision-creation_rvy.php:194
+msgid "Could not insert revision into the database"
+msgstr "Kon revisie niet in de database invoeren"
+
+#: admin/post-editor-workflow-ui_rvy.php:94
+msgid "Revision Submission Error"
+msgstr "Fout bij indienen van revisie"
+
+#: admin/post-editor-workflow-ui_rvy.php:202
+msgid "Edit Revision"
+msgstr "Revisie bewerken"
+
+#: revision-workflow_rvy.php:174
+msgid "Revision Queue: "
+msgstr "Revisie wachtrij: "
+
+#: rvy_init-functions.php:359
+msgid "Scheduled"
+msgstr "Gepland"
+
+#: rvy_init-functions.php:360
+msgid "Scheduled <span class=\"count\">(%s)</span>"
+msgid_plural "Scheduled <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: rvy_init-functions.php:266 rvy_init-functions.php:284
+#: rvy_init-functions.php:302 rvy_init-functions.php:322
+#: rvy_init-functions.php:339 rvy_init-functions.php:356
+msgid "Save Revision"
+msgstr "Revisie opslaan"
+
+#: rvy_init-functions.php:321 rvy_init-functions.php:338
+#: rvy_init-functions.php:355
+msgid "Publish Revision"
+msgstr "Revisie publiceren"
+
+#: revisionary.php:120
+msgid "<strong>This plugin can be deleted.</strong>"
+msgstr "<strong>Deze plugin kan worden verwijderd.</strong>"
+
+#. Description of the plugin
+#: revisionary.php
+msgid "Maintain published content with teamwork and precision using the Revisions model to submit, approve and schedule changes."
+msgstr "Onderhoud gepubliceerde inhoud met teamwork en precisie met behulp van het revisies model om wijzigingen in te dienen, goed te keuren en te plannen."
+
+#. Plugin URI of the plugin
+#: revisionary.php
+msgid "https://publishpress.com/revisionary/"
+msgstr "https://publishpress.com/revisionary/"
+
+#. Plugin Name of the plugin
+#: revisionary.php
+msgid "PublishPress Revisions"
+msgstr "PublishPress Revisions"
+
+#: lib/debug.php:117
+msgid "%1$s queries in %2$s seconds. %3$s MB used."
+msgstr "%1$s queries in %2$s seconden. %3$s MB gebruikt."
+
+#: revision-workflow_rvy.php:171
+msgid "Preview and Approval: "
+msgstr "Voorbeeld en goedkeuring: "
+
+#: admin/history_rvy.php:926
+msgid "Scheduled for "
+msgstr "Gepland voor "
+
+#: admin/revision-ui_rvy.php:392
+msgid "Bulk Actions"
+msgstr "Bulkacties"
+
+#: admin/revision-ui_rvy.php:374
+msgid "Actions"
+msgstr "Acties"
+
+#: admin/class-list-table-archive.php:443
+msgid "Published Date"
+msgstr "Publicatiedatum"
+
+#: admin/class-list-table_rvy.php:1105 admin/revision-ui_rvy.php:271
+msgid "Unschedule"
+msgstr "Uit schema halen"
+
+#: admin/revision-ui_rvy.php:277
+msgid "The revision will be deleted. Are you sure?"
+msgstr "De revisie wordt verwijderd. Weet je het zeker?"
+
+#. translators: post revision: 1: when, 2: author name
+#: admin/revision-ui_rvy.php:333
+msgctxt "post revision"
+msgid "%1$s by %2$s"
+msgstr "%1$s door %2$s"
+
+#: admin/revision-ui_rvy.php:108
+msgid "%1$s <span class=\"rvy-revision-pubish-date\">(Publish date: %2$s)</span>"
+msgstr "%1$s <span class=\"rvy-revision-pubish-date\">(Publicatiedatum: %2$s)</span>"
+
+#: admin/revision-ui_rvy.php:106
+msgid "%1$s <span class=\"rvy-revision-pubish-date\">(Requested publication: %2$s)</span>"
+msgstr "%1$s <span class=\"rvy-revision-pubish-date\">(Gevraagde publicatie: %2$s)</span>"
+
+#: admin/revision-ui_rvy.php:102
+msgctxt "revision schedule date format"
+msgid "j F, Y, g:i a"
+msgstr "j F, Y, g:i a"
+
+#: admin/revision-ui_rvy.php:96
+msgid "%1$s (Autosave)"
+msgstr "%1$s (Automatisch opgeslagen)"
+
+#. translators: revision date format, see http://php.net/date
+#: admin/revision-ui_rvy.php:73
+msgctxt "revision date format"
+msgid "j F, Y @ g:i a"
+msgstr "j F, Y @ g:i a"
+
+#: admin/revision-ui_rvy.php:42
+msgid "No email notifications will be sent."
+msgstr "Er worden geen e-mailmeldingen verzonden."
+
+#: admin/revision-ui_rvy.php:40
+msgid "Publishers will be notified (but cannot be selected here)."
+msgstr "Uitgevers worden op de hoogte gebracht (maar kunnen hier niet worden geselecteerd)."
+
+#: admin/revision-action_rvy.php:1472
+msgid "A scheduled revision to the %1$s \"%2$s\" has been published."
+msgstr "Een geplande revisie van de %1$s \"%2$s\" is gepubliceerd."
+
+#: admin/revision-action_rvy.php:1413 admin/revision-action_rvy.php:1475
+msgid "It was submitted by %1$s."
+msgstr "Het is ingediend door %1$s."
+
+#: admin/revision-action_rvy.php:1410
+msgid "A scheduled revision to your %1$s \"%2$s\" has been published."
+msgstr "Een geplande revisie van je %1$s \"%2$s\" is gepubliceerd."
+
+#: admin/revision-action_rvy.php:1388
+msgid "The scheduled revision you submitted for the %1$s \"%2$s\" has been published."
+msgstr "De geplande revisie die je hebt ingediend voor de %1$s \"%2$s\" is gepubliceerd."
+
+#: admin/revision-action_rvy.php:531
+msgid "The revision you submitted for the %1$s \"%2$s\" has been approved."
+msgstr "De revisie die je hebt ingediend voor de %1$s \"%2$s\" is goedgekeurd."
+
+#: admin/revision-action_rvy.php:462 admin/revision-action_rvy.php:544
+#: admin/revision-action_rvy.php:1391 admin/revision-action_rvy.php:1416
+#: admin/revision-action_rvy.php:1478
+msgid "View it online: "
+msgstr "Bekijk het online: "
+
+#: admin/revision-action_rvy.php:457 admin/revision-action_rvy.php:539
+msgid "Preview it here: "
+msgstr "Bekijk hier een voorbeeld: "
+
+#: admin/revision-action_rvy.php:453 admin/revision-action_rvy.php:535
+msgid "It will be published on %s"
+msgstr "Het wordt gepubliceerd op %s"
+
+#: admin/revision-action_rvy.php:449
+msgid "The submitter was %1$s."
+msgstr "De indiener was %1$s."
+
+#: admin/revision-action_rvy.php:445
+msgid "A revision to the %1$s \"%2$s\" has been approved."
+msgstr "Een revisie van de %1$s \"%2$s\" is goedgekeurd."
+
+#: admin/revision-action_rvy.php:444 admin/revision-action_rvy.php:530
+msgid "[%s] Revision Approval Notice"
+msgstr "[%s] revisie goedkeuringsbericht"
+
+#: admin/options.php:1164
+msgid "Revert to Defaults"
+msgstr "Terug naar standaardinstellingen"
+
+#: admin/options.php:1166
+msgid "All settings in this form (including those on unselected tabs) will be reset to DEFAULTS.  Are you sure?"
+msgstr "Alle instellingen in dit formulier (inclusief die op niet-geselecteerde tabs) worden teruggezet naar de standaardinstellingen. Weet je het zeker?"
+
+#: admin/options.php:1090
+msgid "Specify which PublishPress Revisions Settings to control network-wide. Unselected settings are controlled separately on each site."
+msgstr "Specificeer welke PublishPress Revisions instellingen netwerkbreed moeten worden beheerd. Niet-geselecteerde instellingen worden afzonderlijk op elke site beheerd."
+
+#: admin/options.php:1136
+msgid "network-wide control of \"%s\""
+msgstr "netwerk brede controle van \"%s\""
+
+#: admin/options.php:846 admin/options.php:868
+msgid "Always"
+msgstr "Altijd"
+
+#: admin/options.php:846 admin/options.php:868
+msgid "By default"
+msgstr "Standaard"
+
+#: admin/options.php:846 admin/options.php:868
+msgid "Never"
+msgstr "Nooit"
+
+#: admin/options.php:857 admin/options.php:904
+msgid "select recipients"
+msgstr "ontvangers selecteren"
+
+#: admin/options.php:635
+msgid "Publish scheduled revisions asynchronously, via a secondary http request from the server.  This is usually best since it eliminates delay, but some servers may not support it."
+msgstr "Publiceer geplande revisies asynchroon, via een secundair HTTP aanvraag van de server. Dit is meestal het beste omdat het vertraging elimineert, maar sommige servers ondersteunen dit mogelijk niet."
+
+#: admin/options.php:620
+msgid "If a currently published post or page is edited and a future date set, the change will not be applied until the selected date."
+msgstr "Als een momenteel gepubliceerd bericht of pagina wordt bewerkt en een toekomstige datum wordt ingesteld, wordt de wijziging pas toegepast op de geselecteerde datum."
+
+#: admin/options.php:331 admin/options.php:333
+msgid "Note that %1$s network-wide settings%2$s may also be available."
+msgstr "Houd er rekening mee dat %1$s netwerkbrede instellingen%2$s mogelijk ook beschikbaar zijn."
+
+#: admin/options.php:321
+msgid "Here you can change the default value for settings which are controlled separately on each site."
+msgstr "Hier kun je de standaardwaarde wijzigen voor instellingen die afzonderlijk op elke site worden beheerd."
+
+#: admin/options.php:315
+msgid "Use this tab to make NETWORK-WIDE changes to PublishPress Revisions settings. %s"
+msgstr "Gebruik deze tab om NETWERKBREDE wijzigingen aan te brengen in de PublishPress Revisions instellingen. %s"
+
+#: admin/options.php:318
+msgid "You can also specify %1$sdefaults for site-specific settings%2$s."
+msgstr "Je kunt ook %1$sstandaardwaarden voor site-specifieke instellingen%2$s opgeven."
+
+#: admin/options.php:155
+msgid "Display Hints"
+msgstr "Hints weergeven"
+
+#: admin/options.php:154
+msgid "Prevent Revisors from editing other user's drafts"
+msgstr "Voorkom dat revisors andermans concepten bewerken"
+
+#: admin/options.php:143 admin/options.php:144
+msgid "Update Publish Date"
+msgstr "Publicatiedatum updaten"
+
+#: admin/options.php:142
+msgid "Asynchronous Publishing"
+msgstr "Asynchrone publicatie"
+
+#: admin/options.php:98
+msgid "Setting Scope"
+msgstr "Instellingsbereik"
+
+#: admin/admin_rvy.php:315 admin/options.php:98
+msgid "Settings"
+msgstr "Instellingen"
+
+#: admin/agents_checklist_rvy.php:111
+msgid "unselect"
+msgstr "deselecteren"
+
+#: admin/agents_checklist_rvy.php:103
+msgid "select"
+msgstr "selecteren"
+
+#: admin/agents_checklist_rvy.php:87
+msgid "filter:"
+msgstr "filter:"
+
+#: admin/agents_checklist_rvy.php:78
+msgid "show eligible users (%d)"
+msgstr "toon in aanmerking komende gebruikers (%d)"
+
+#: admin/agents_checklist_rvy.php:76
+msgid "show current users (%d)"
+msgstr "toon huidige gebruikers (%d)"
+
+#: admin/revisions.php:274
+msgid "no %s revisions available."
+msgstr "geen %s revisies beschikbaar."
+
+#: admin/revisions.php:237
+msgid "Past Revisions"
+msgstr "Eerdere revisies"
+
+#: admin/post-editor-workflow-ui_rvy.php:142 rvy_init-functions.php:267
+#: rvy_init-functions.php:285 rvy_init-functions.php:303
+#: rvy_init-functions.php:323 rvy_init-functions.php:340
+#: rvy_init-functions.php:357 rvy_init-functions.php:465
+msgid "Update Revision"
+msgstr "Update revisie"
+
+#: admin/revisions.php:165
+msgid "The requested revision does not exist."
+msgstr "De gevraagde revisie bestaat niet."
+
+#: admin/revisions.php:72
+msgid "Past"
+msgstr "Verleden"
+
+#: admin/revisions.php:64
+msgid "No revision specified."
+msgstr "Geen revisie opgegeven."
+
+#: admin/revisions.php:20
+msgid "<strong>Note:</strong> For visual display of revisions, add the following code to foliopress-wysiwyg.php:<br />&nbsp;&nbsp;if ( strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=rvy-revisions' ) ) return;"
+msgstr "<strong>Opmerking:</strong> Voeg de volgende code toe aan foliopress-wysiwyg.php voor visuele weergave van revisies:<br />&nbsp;&nbsp;if ( strpos( $_SERVER['REQUEST_URI'], 'admin.php?page=rvy-revisions' ) ) return;"
+
+#: rvy_init-functions.php:358
+msgid "Scheduled Revisions"
+msgstr "Geplande revisies"
+
+#: rvy_init-functions.php:332 rvy_init-functions.php:468
+msgid "Submit Revision"
+msgstr "Revisie indienen"
+
+#: admin/post-editor-workflow-ui_rvy.php:217
+#: admin/post-editor-workflow-ui_rvy.php:237
+msgid "Update"
+msgstr "Update"
+
+#: rvy_init-functions.php:349 rvy_init-functions.php:350
+msgid "Schedule Revision"
+msgstr "Revisie inplannen"
+
+#: admin/class-list-table-archive.php:787 admin/class-list-table_rvy.php:1390
+#: admin/revision-ui_rvy.php:393
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: admin/admin_rvy.php:254 admin/admin_rvy.php:278
+msgid "Revisions"
+msgstr "Revisies"
+
+#: admin/post-edit_rvy.php:27 admin/post-edit_rvy.php:93
+msgid "Current Time"
+msgstr "Huidige Tijd"
+
+#: admin/admin-posts_rvy.php:215 admin/class-list-table_rvy.php:740
+#: admin/class-list-table_rvy.php:1357
+#: admin/edit-revision-classic-ui_rvy.php:195
+#: admin/post-editor-workflow-ui_rvy.php:108
+#: admin/post-editor-workflow-ui_rvy.php:202
+#: admin/RevisionEditSubmitMetabox.php:196 front_rvy.php:490
+msgid "Edit"
+msgstr "Bewerken"
+
+#: admin/edit-revision-classic-ui_rvy.php:167
+#: admin/edit-revision-classic-ui_rvy.php:181
+msgid "Publish <b>immediately</b>"
+msgstr ""
+
+#: admin/history_rvy.php:952
+msgid "M j, Y @ g:i a"
+msgstr "j M, Y @ g:i a"
+
+#: admin/class-list-table-archive.php:760 admin/class-list-table_rvy.php:773
+#: admin/class-list-table_rvy.php:1409 admin/history_rvy.php:1086
+#: admin/history_rvy.php:1181 admin/post-editor-workflow-ui_rvy.php:53
+#: admin/post-editor-workflow-ui_rvy.php:103
+#: admin/post-editor-workflow-ui_rvy.php:201 admin/post-edit_rvy.php:107
+#: admin/revision-ui_rvy.php:261 admin/RevisionEditSubmitMetabox.php:123
+msgid "Preview"
+msgstr "Voorbeeld"
+
+#: admin/revision-ui_rvy.php:261
+msgid "Preview &#8220;%s&#8221;"
+msgstr "Voorbeeld &#8220;%s&#8221;"
+
+#: admin/admin-posts_rvy.php:67
+msgid "The revision was published."
+msgstr "De revisie is gepubliceerd."
+
+#: admin/admin-posts_rvy.php:62
+msgid "The revision was scheduled for publication."
+msgstr "De revisie is gepland voor publicatie."
+
+#: admin/admin-posts_rvy.php:57
+msgid "The revision was restored."
+msgstr "De revisie is teruggezet."
+
+#: front_rvy.php:546 front_rvy.php:582 front_rvy.php:598
+msgid "Publish now"
+msgstr "Nu publiceren"
+
+#: rvy_init-functions.php:1210
+msgid "Revision Workflow"
+msgstr "Revisie workflow"
+
+#: rvy_init-functions.php:673
+msgid "Revisor"
+msgstr "Revisor"
+
+#. Author URI of the plugin
+#: revisionary.php
+msgid "https://publishpress.com"
+msgstr "https://publishpress.com"
+
+#. Author of the plugin
+#: revisionary.php
+msgid "PublishPress"
+msgstr "PublishPress"
