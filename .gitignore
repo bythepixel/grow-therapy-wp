@@ -48,7 +48,7 @@ wp-content/themes/twentytwenty*/
 
 # Composer files
 composer.lock
-vendor/
+/vendor/
 
 # System and IDE files
 .DS_Store
