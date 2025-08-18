@@ -1,0 +1,25 @@
+name: Deploy to Dev (Sandbox)
+run-name: Deploy to Dev (Sandbox) on ${{ github.ref_name }} by @${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - dev-sandbox
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: "Dev (Sandbox)"
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Deploy to Dev (Sandbox)
+        uses: ./.github/actions/deploy
+        with:
+          branch: "dev-sandbox"
+          server_ip: ${{ secrets.KINSTA_SERVER_IP }}
+          username: ${{ secrets.KINSTA_USERNAME }}
+          password: ${{ secrets.KINSTA_PASSWORD }}
+          port: ${{ secrets.KINSTA_PORT }}
