@@ -33,4 +33,4 @@ add_filter( 'bricks/builder/i18n', function( $i18n ) {
 } );
 
 // Include custom rewrites
-require_once __DIR__ . '/includes/custom-rewrites.php';
+require_once __DIR__ . '/includes/custom-rewrites/rewrites-loader.php';
