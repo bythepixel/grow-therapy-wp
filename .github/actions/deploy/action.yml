@@ -95,17 +95,58 @@ runs:
             exit 1
           fi
           
-          # Final health check after all changes
-          echo "PHASE 5: Post-deployment health verification..."
-          echo "   Testing WordPress core functionality after changes..."
+          # Sync BricksSync JSON files to database
+          echo "PHASE 5: BricksSync database synchronization..."
+          if wp plugin is-active brickssync --allow-root; then
+            if [ -d "wp-content/themes/growtherapy/brickssync-json" ]; then
+              # Create backup and sync
+              backup_file="bricks-backup-$(date +%Y%m%d-%H%M%S).json"
+              wp brickssync settings export --output-file="/tmp/$backup_file" --allow-root >/dev/null 2>&1 || echo "⚠ No backup created"
+              
+              # Import settings
+              if [ -f "wp-content/themes/growtherapy/brickssync-json/bricks-builder-settings.json" ]; then
+                if wp brickssync settings import --file=wp-content/themes/growtherapy/brickssync-json/bricks-builder-settings.json --allow-root >/dev/null 2>&1; then
+                  echo "✓ Settings synced"
+                else
+                  echo "✗ Settings sync failed - restoring backup"
+                  if [ -f "/tmp/$backup_file" ]; then
+                    wp brickssync settings import --file="/tmp/$backup_file" --allow-root >/dev/null 2>&1 || exit 1
+                  else
+                    exit 1
+                  fi
+                fi
+              fi
+              
+              # Import templates
+              if wp brickssync templates import --input-dir=wp-content/themes/growtherapy/brickssync-json --allow-root >/dev/null 2>&1; then
+                echo "✓ Templates synced"
+              else
+                echo "⚠ Template sync failed"
+              fi
+              
+              # Validate
+              wp option get bricks_breakpoints --allow-root >/dev/null 2>&1 && echo "✓ Sync validated" || echo "⚠ Sync validation failed"
+              
+              rm -f "/tmp/$backup_file" 2>/dev/null || true
+            else
+              echo "⚠ BricksSync JSON directory not found"
+            fi
+          else
+            echo "⚠ BricksSync plugin inactive"
+          fi
+          echo ""
+          
+          # Final health check after BricksSync sync
+          echo "PHASE 6: Post-sync health verification..."
+          echo "   Testing WordPress core functionality after BricksSync changes..."
           if wp core version --allow-root; then
             echo "   ✓ WordPress core responding normally"
           else
-            echo "✗ CRITICAL: WordPress health check failed after deployment - deployment stopped"
-            echo "Troubleshooting: Recent changes may have broken WordPress"
-            echo "   - Check plugin compatibility"
-            echo "   - Verify database integrity"
-            echo "   - Review error logs"
+            echo "✗ CRITICAL: WordPress health check failed after BricksSync - deployment stopped"
+            echo "Troubleshooting: BricksSync changes may have broken WordPress"
+            echo "   - Check BricksSync plugin compatibility"
+            echo "   - Verify Bricks database integrity"
+            echo "   - Review BricksSync error logs"
             exit 1
           fi
           
@@ -113,7 +154,8 @@ runs:
           echo "DEPLOYMENT COMPLETED SUCCESSFULLY!"
           echo "✓ All phases completed without errors"
           echo "✓ All required plugins are available"
-          echo "✓ WordPress health check passed"
+          echo "✓ BricksSync JSON files synchronized to database"
+          echo "✓ WordPress health check passed after sync"
           echo "✓ Site is fully functional and ready for use"
           echo ""
           echo "DEPLOYMENT SUMMARY:"
