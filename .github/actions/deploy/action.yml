@@ -136,17 +136,17 @@ runs:
           fi
           echo ""
           
-          # Final health check after all changes
-          echo "PHASE 6: Post-deployment health verification..."
-          echo "   Testing WordPress core functionality after changes..."
+          # Final health check after BricksSync sync
+          echo "PHASE 6: Post-sync health verification..."
+          echo "   Testing WordPress core functionality after BricksSync changes..."
           if wp core version --allow-root; then
             echo "   ✓ WordPress core responding normally"
           else
-            echo "✗ CRITICAL: WordPress health check failed after deployment - deployment stopped"
-            echo "Troubleshooting: Recent changes may have broken WordPress"
-            echo "   - Check plugin compatibility"
-            echo "   - Verify database integrity"
-            echo "   - Review error logs"
+            echo "✗ CRITICAL: WordPress health check failed after BricksSync - deployment stopped"
+            echo "Troubleshooting: BricksSync changes may have broken WordPress"
+            echo "   - Check BricksSync plugin compatibility"
+            echo "   - Verify Bricks database integrity"
+            echo "   - Review BricksSync error logs"
             exit 1
           fi
           
@@ -155,7 +155,7 @@ runs:
           echo "✓ All phases completed without errors"
           echo "✓ All required plugins are available"
           echo "✓ BricksSync JSON files synchronized to database"
-          echo "✓ WordPress health check passed"
+          echo "✓ WordPress health check passed after sync"
           echo "✓ Site is fully functional and ready for use"
           echo ""
           echo "DEPLOYMENT SUMMARY:"
