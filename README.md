@@ -32,6 +32,7 @@
 ## 🎨 Bricks Builder
 - **Local**: Auto-updates JSON files when making changes
 - **Version Control**: All settings tracked in Git
+- **Client-Driven Workflow**: Global settings, existing components, and template modifications should be made on production to avoid overwriting local development work
 
 ## 📦 Plugin Management
 - **Composer**: 11 free plugins (version controlled)
