@@ -197,13 +197,14 @@ if ( ! function_exists( 'grow_data_parse_token' ) ) {
 	}
 }
 
-/** Fetch ACF value for a field/post, with group subfield fallback and static cache. */
+/** Fetch ACF value for a field/post, with group subfield fallback and caching */
 if ( ! function_exists( 'grow_data_get_value' ) ) {
 	function grow_data_get_value( $field_name, $post_id ) {
-		static $cache = [];
-		$key = $post_id . '|' . $field_name;
-		if ( array_key_exists( $key, $cache ) ) {
-			return $cache[ $key ];
+		$cache_key = "grow_field_{$post_id}_{$field_name}";
+		$cached = wp_cache_get($cache_key);
+		
+		if ($cached !== false) {
+			return $cached;
 		}
 
 		$value = function_exists( 'get_field' ) ? get_field( $field_name, $post_id ) : null;
@@ -228,7 +229,7 @@ if ( ! function_exists( 'grow_data_get_value' ) ) {
 			}
 		}
 
-		$cache[ $key ] = $value;
+		wp_cache_set($cache_key, $value, '', 15 * MINUTE_IN_SECONDS);
 		return $value;
 	}
 }
@@ -277,26 +278,41 @@ if ( ! function_exists( 'grow_data_build_registry' ) ) {
 	 * ]
 	 */
 	function grow_data_build_registry( $force = false ) {
-		$cached = get_transient( GROW_DATA_TRANSIENT );
-		if ( $cached && ! $force ) {
-			return $cached;
-		}
+		try {
+			$cached = get_transient( GROW_DATA_TRANSIENT );
+			if ( $cached && ! $force ) {
+				return $cached;
+			}
 
-		$registry   = [];
-		$post_types = grow_data_get_supported_post_types();
+			$registry   = [];
+			$post_types = grow_data_get_supported_post_types();
+
+			if (count($post_types) > 10) {
+				grow_data_log('Too many post types detected, limiting to first 10');
+				$post_types = array_slice($post_types, 0, 10);
+			}
 
 		$args = apply_filters( 'grow_data_query_args', [
 			'post_type'      => $post_types,
 			'post_status'    => 'publish',
-			'posts_per_page' => -1,
-			'no_found_rows'  => true,
+			'posts_per_page' => 100,
+			'no_found_rows'  => false,
 			'fields'         => 'ids',
 			'orderby'        => 'date',
 			'order'          => 'DESC',
 		] );
 
-		$post_ids = get_posts( $args );
-		grow_data_log( 'Found posts: ' . count( $post_ids ) );
+		$page = 1;
+		do {
+			$args['paged'] = $page;
+			$query = new WP_Query($args);
+			$post_ids = $query->posts;
+			
+			if (empty($post_ids)) {
+				break;
+			}
+
+			grow_data_log( 'Processing page ' . $page . ' with ' . count( $post_ids ) . ' posts' );
 
 		foreach ( $post_ids as $post_id ) {
 			$title      = get_the_title( $post_id );
@@ -366,6 +382,9 @@ if ( ! function_exists( 'grow_data_build_registry' ) ) {
 			grow_data_log( "Post {$post_id} collected fields: " . count( $fields_out ) );
 		}
 
+		$page++;
+	} while ($query->max_num_pages >= $page);
+
 		// Hide entries without fields unless INCLUDE_EMPTY
 		$registry = array_filter( $registry, function( $entry ) {
 			return GROW_DATA_INCLUDE_EMPTY ? true : ! empty( $entry['fields'] );
@@ -374,6 +393,11 @@ if ( ! function_exists( 'grow_data_build_registry' ) ) {
 		grow_data_log( 'Registry posts after filter: ' . count( $registry ) );
 		set_transient( GROW_DATA_TRANSIENT, $registry, GROW_DATA_CACHE_TTL );
 		return $registry;
+		
+		} catch (Exception $e) {
+			grow_data_log('Error building registry: ' . $e->getMessage());
+			return [];
+		}
 	}
 }
 
