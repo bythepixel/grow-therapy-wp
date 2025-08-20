@@ -26,13 +26,27 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 // Config & Feature Flags
 // ============================================================================
 // Constants are guarded so site owners can override via wp-config.php if desired.
-if ( ! defined( 'GROW_DATA_TAG_PREFIX' ) )       define( 'GROW_DATA_TAG_PREFIX', 'grow_data_' );
-if ( ! defined( 'GROW_DATA_TOKEN_DELIM' ) )      define( 'GROW_DATA_TOKEN_DELIM', '_grow_data_' );
-if ( ! defined( 'GROW_DATA_TAG_GROUP_DEFAULT' ) )define( 'GROW_DATA_TAG_GROUP_DEFAULT', 'Global Data' );
-if ( ! defined( 'GROW_DATA_TRANSIENT' ) )        define( 'GROW_DATA_TRANSIENT',  'grow_global_data_registry_v1' );
-if ( ! defined( 'GROW_DATA_CACHE_TTL' ) )        define( 'GROW_DATA_CACHE_TTL',  5 * MINUTE_IN_SECONDS );
-if ( ! defined( 'GROW_DATA_DEBUG' ) )            define( 'GROW_DATA_DEBUG',      defined('WP_DEBUG') && WP_DEBUG );
-if ( ! defined( 'GROW_DATA_INCLUDE_EMPTY' ) )    define( 'GROW_DATA_INCLUDE_EMPTY', false );
+if ( ! defined( 'GROW_DATA_TAG_PREFIX' ) ) {
+	define( 'GROW_DATA_TAG_PREFIX', 'grow_data_' );
+}
+if ( ! defined( 'GROW_DATA_TOKEN_DELIM' ) ) {
+	define( 'GROW_DATA_TOKEN_DELIM', '_grow_data_' );
+}
+if ( ! defined( 'GROW_DATA_TAG_GROUP_DEFAULT' ) ) {
+	define( 'GROW_DATA_TAG_GROUP_DEFAULT', 'Global Data' );
+}
+if ( ! defined( 'GROW_DATA_TRANSIENT' ) ) {
+	define( 'GROW_DATA_TRANSIENT', 'grow_global_data_registry_v1' );
+}
+if ( ! defined( 'GROW_DATA_CACHE_TTL' ) ) {
+	define( 'GROW_DATA_CACHE_TTL', 5 * MINUTE_IN_SECONDS );
+}
+if ( ! defined( 'GROW_DATA_DEBUG' ) ) {
+	define( 'GROW_DATA_DEBUG', defined( 'WP_DEBUG' ) && WP_DEBUG );
+}
+if ( ! defined( 'GROW_DATA_INCLUDE_EMPTY' ) ) {
+	define( 'GROW_DATA_INCLUDE_EMPTY', false );
+}
 
 // ============================================================================
 // Utilities
@@ -56,8 +70,12 @@ if ( ! function_exists( 'grow_data_is_effectively_empty' ) ) {
 		if ( is_object( $value ) ) {
 			return empty( (array) $value );
 		}
-		if ( is_null( $value ) ) return true;
-		if ( $value === 0 || $value === '0' ) return false;
+		if ( is_null( $value ) ) {
+			return true;
+		}
+		if ( $value === 0 || $value === '0' ) {
+			return false;
+		}
 		return trim( (string) $value ) === '';
 	}
 }
@@ -85,11 +103,14 @@ if ( ! function_exists( 'grow_data_sanitize_output' ) ) {
 		}
 		$value = (string) $value;
 		switch ( $context ) {
-			case 'url':  return esc_url( $value );
-			case 'attr': return esc_attr( $value );
+			case 'url':
+				return esc_url( $value );
+			case 'attr':
+				return esc_attr( $value );
 			case 'html':
 			case 'text':
-			default:     return wp_kses_post( $value );
+			default:
+				return wp_kses_post( $value );
 		}
 	}
 }
@@ -304,8 +325,8 @@ if ( ! function_exists( 'grow_data_build_registry' ) ) {
 								if ( ! $field_name ) { continue; }
 								$value = ( is_array( $group_val ) && array_key_exists( $field_name, $group_val ) ) ? $group_val[ $field_name ] : null;
 								if ( ! GROW_DATA_INCLUDE_EMPTY && grow_data_is_effectively_empty( $value ) ) {
-                                    continue;
-                                }
+									continue;
+								}
 								$tax_slug = grow_data_first_taxonomy_slug( $post_id );
 								$token    = grow_data_build_token( $field_name, $slug, $tax_slug, $post_id );
 
@@ -348,7 +369,7 @@ if ( ! function_exists( 'grow_data_build_registry' ) ) {
 		// Hide entries without fields unless INCLUDE_EMPTY
 		$registry = array_filter( $registry, function( $entry ) {
 			return GROW_DATA_INCLUDE_EMPTY ? true : ! empty( $entry['fields'] );
-		} );
+		});
 
 		grow_data_log( 'Registry posts after filter: ' . count( $registry ) );
 		set_transient( GROW_DATA_TRANSIENT, $registry, GROW_DATA_CACHE_TTL );
@@ -380,9 +401,9 @@ add_filter( 'bricks/dynamic_tags_list', function( $tags ) {
 			$display_label = sprintf( __( '%1$s: %2$s', 'grow-global-data-tags' ), $post_title, $meta['label'] );
 
 			$tags[] = [
-				'name'  => $meta['token'],   // inserted token
-				'label' => $display_label,   // shown in Bricks UI
-				'group' => $group_lbl,       // post type group
+				'name'  => $meta['token'],
+				'label' => $display_label,
+				'group' => $group_lbl,
 			];
 		}
 	}
@@ -416,7 +437,7 @@ add_filter( 'bricks/dynamic_data/render_content', function( $content, $post, $co
  * Render any tokens that still exist inside a content string on the frontend.
  */
 add_filter( 'bricks/frontend/render_data', function( $content, $post_id = null ) {
-	$context = 'text'; // Bricks doesn't pass a context here
+	$context = 'text';
 	return grow_data_replace_tokens_in_string( $content, $context );
 }, 20, 2 );
 
