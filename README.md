@@ -75,6 +75,14 @@ Configure in GitHub Environments:
 5. **BricksSync Setup**
    > **Note**: BricksSync automatically updates JSON files when you make changes locally. No setup required!
 
+6. **Git Hooks Setup**
+   ```bash
+   cp scripts/git-hooks/post-rewrite .git/hooks/
+   chmod +x .git/hooks/post-rewrite
+   ```
+   
+   > **Note**: This hook automatically syncs production BricksSync changes when rebasing with staging
+
 ## 🔄 Workflow Details
 
 ### Development Process
