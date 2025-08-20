@@ -4,7 +4,7 @@
 # This ensures you get the latest client changes directly from the database
 
 # Configuration - Load from environment file
-CONFIG_FILE="$(dirname "$0")/../.env.production"
+CONFIG_FILE="$(dirname "$0")/../.env"
 
 # Load configuration
 if [[ -f "$CONFIG_FILE" ]]; then

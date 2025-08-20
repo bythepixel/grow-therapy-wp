@@ -61,4 +61,4 @@ local-*.php
 *.sql
 
 # Environment configuration files
-.env.production
+.env
