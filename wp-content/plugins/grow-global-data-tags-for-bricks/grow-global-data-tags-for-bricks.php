@@ -292,107 +292,107 @@ if ( ! function_exists( 'grow_data_build_registry' ) ) {
 				$post_types = array_slice($post_types, 0, 10);
 			}
 
-		$args = apply_filters( 'grow_data_query_args', [
-			'post_type'      => $post_types,
-			'post_status'    => 'publish',
-			'posts_per_page' => 100,
-			'no_found_rows'  => false,
-			'fields'         => 'ids',
-			'orderby'        => 'date',
-			'order'          => 'DESC',
-		] );
+			$args = apply_filters( 'grow_data_query_args', [
+				'post_type'      => $post_types,
+				'post_status'    => 'publish',
+				'posts_per_page' => 100,
+				'no_found_rows'  => false,
+				'fields'         => 'ids',
+				'orderby'        => 'date',
+				'order'          => 'DESC',
+			] );
 
-		$page = 1;
-		do {
-			$args['paged'] = $page;
-			$query = new WP_Query($args);
-			$post_ids = $query->posts;
-			
-			if (empty($post_ids)) {
-				break;
-			}
+			$page = 1;
+			do {
+				$args['paged'] = $page;
+				$query = new WP_Query($args);
+				$post_ids = $query->posts;
+				
+				if (empty($post_ids)) {
+					break;
+				}
 
-			grow_data_log( 'Processing page ' . $page . ' with ' . count( $post_ids ) . ' posts' );
+				grow_data_log( 'Processing page ' . $page . ' with ' . count( $post_ids ) . ' posts' );
 
-		foreach ( $post_ids as $post_id ) {
-			$title      = get_the_title( $post_id );
-			$slug       = grow_data_slugify_title( $title );
-			$group_lbl  = grow_data_group_label_for_post( $post_id );
-			$fields_out = [];
+				foreach ( $post_ids as $post_id ) {
+					$title      = get_the_title( $post_id );
+					$slug       = grow_data_slugify_title( $title );
+					$group_lbl  = grow_data_group_label_for_post( $post_id );
+					$fields_out = [];
 
-			if ( function_exists( 'acf_get_field_groups' ) && function_exists( 'acf_get_fields' ) ) {
-				$field_groups = acf_get_field_groups( [ 'post_id' => $post_id ] );
-				grow_data_log( "Post {$post_id} ('{$title}') has field groups: " . count( $field_groups ) );
+					if ( function_exists( 'acf_get_field_groups' ) && function_exists( 'acf_get_fields' ) ) {
+						$field_groups = acf_get_field_groups( [ 'post_id' => $post_id ] );
+						grow_data_log( "Post {$post_id} ('{$title}') has field groups: " . count( $field_groups ) );
 
-				foreach ( (array) $field_groups as $fg ) {
-					$key = isset( $fg['key'] ) ? $fg['key'] : '';
-					if ( ! $key ) { continue; }
-					$fields = acf_get_fields( $key );
-					if ( ! is_array( $fields ) ) { continue; }
+						foreach ( (array) $field_groups as $fg ) {
+							$key = isset( $fg['key'] ) ? $fg['key'] : '';
+							if ( ! $key ) { continue; }
+							$fields = acf_get_fields( $key );
+							if ( ! is_array( $fields ) ) { continue; }
 
-					foreach ( $fields as $field ) {
-						// Group field → iterate sub_fields
-						if ( isset( $field['type'] ) && $field['type'] === 'group' && ! empty( $field['sub_fields'] ) ) {
-							$group_name = isset( $field['name'] ) ? $field['name'] : '';
-							$group_val  = $group_name ? get_field( $group_name, $post_id ) : null;
-							foreach ( $field['sub_fields'] as $sub ) {
-								$field_name  = isset( $sub['name'] ) ? $sub['name'] : '';
-								$field_label = isset( $sub['label'] ) ? $sub['label'] : $field_name;
-								if ( ! $field_name ) { continue; }
-								$value = ( is_array( $group_val ) && array_key_exists( $field_name, $group_val ) ) ? $group_val[ $field_name ] : null;
-								if ( ! GROW_DATA_INCLUDE_EMPTY && grow_data_is_effectively_empty( $value ) ) {
-									continue;
+							foreach ( $fields as $field ) {
+								// Group field → iterate sub_fields
+								if ( isset( $field['type'] ) && $field['type'] === 'group' && ! empty( $field['sub_fields'] ) ) {
+									$group_name = isset( $field['name'] ) ? $field['name'] : '';
+									$group_val  = $group_name ? get_field( $group_name, $post_id ) : null;
+									foreach ( $field['sub_fields'] as $sub ) {
+										$field_name  = isset( $sub['name'] ) ? $sub['name'] : '';
+										$field_label = isset( $sub['label'] ) ? $sub['label'] : $field_name;
+										if ( ! $field_name ) { continue; }
+										$value = ( is_array( $group_val ) && array_key_exists( $field_name, $group_val ) ) ? $group_val[ $field_name ] : null;
+										if ( ! GROW_DATA_INCLUDE_EMPTY && grow_data_is_effectively_empty( $value ) ) {
+											continue;
+										}
+										$tax_slug = grow_data_first_taxonomy_slug( $post_id );
+										$token    = grow_data_build_token( $field_name, $slug, $tax_slug, $post_id );
+
+										$fields_out[ $field_name ] = [
+											'label' => $field_label,
+											'token' => $token,
+										];
+									}
 								}
-								$tax_slug = grow_data_first_taxonomy_slug( $post_id );
-								$token    = grow_data_build_token( $field_name, $slug, $tax_slug, $post_id );
+								// Non-group field (supported)
+								else {
+									$field_name  = isset( $field['name'] ) ? $field['name'] : '';
+									$field_label = isset( $field['label'] ) ? $field['label'] : $field_name;
+									if ( ! $field_name ) { continue; }
+									$value = function_exists( 'get_field' ) ? get_field( $field_name, $post_id ) : null;
+									if ( ! GROW_DATA_INCLUDE_EMPTY && grow_data_is_effectively_empty( $value ) ) {
+										continue;
+									}
+									$tax_slug = grow_data_first_taxonomy_slug( $post_id );
+									$token    = grow_data_build_token( $field_name, $slug, $tax_slug, $post_id );
 
-								$fields_out[ $field_name ] = [
-									'label' => $field_label,
-									'token' => $token,
-								];
+									$fields_out[ $field_name ] = [
+										'label' => $field_label,
+										'token' => $token,
+									];
+								}
 							}
-						}
-						// Non-group field (supported)
-						else {
-							$field_name  = isset( $field['name'] ) ? $field['name'] : '';
-							$field_label = isset( $field['label'] ) ? $field['label'] : $field_name;
-							if ( ! $field_name ) { continue; }
-							$value = function_exists( 'get_field' ) ? get_field( $field_name, $post_id ) : null;
-							if ( ! GROW_DATA_INCLUDE_EMPTY && grow_data_is_effectively_empty( $value ) ) {
-								continue;
-							}
-							$tax_slug = grow_data_first_taxonomy_slug( $post_id );
-							$token    = grow_data_build_token( $field_name, $slug, $tax_slug, $post_id );
-
-							$fields_out[ $field_name ] = [
-								'label' => $field_label,
-								'token' => $token,
-							];
 						}
 					}
+
+					$registry[ $post_id ] = [
+						'post_title' => $title,
+						'group'      => $group_lbl,
+						'fields'     => $fields_out,
+					];
+
+					grow_data_log( "Post {$post_id} collected fields: " . count( $fields_out ) );
 				}
-			}
 
-			$registry[ $post_id ] = [
-				'post_title' => $title,
-				'group'      => $group_lbl,
-				'fields'     => $fields_out,
-			];
+				$page++;
+			} while ($query->max_num_pages >= $page);
 
-			grow_data_log( "Post {$post_id} collected fields: " . count( $fields_out ) );
-		}
+			// Hide entries without fields unless INCLUDE_EMPTY
+			$registry = array_filter( $registry, function( $entry ) {
+				return GROW_DATA_INCLUDE_EMPTY ? true : ! empty( $entry['fields'] );
+			});
 
-		$page++;
-	} while ($query->max_num_pages >= $page);
-
-		// Hide entries without fields unless INCLUDE_EMPTY
-		$registry = array_filter( $registry, function( $entry ) {
-			return GROW_DATA_INCLUDE_EMPTY ? true : ! empty( $entry['fields'] );
-		});
-
-		grow_data_log( 'Registry posts after filter: ' . count( $registry ) );
-		set_transient( GROW_DATA_TRANSIENT, $registry, GROW_DATA_CACHE_TTL );
-		return $registry;
+			grow_data_log( 'Registry posts after filter: ' . count( $registry ) );
+			set_transient( GROW_DATA_TRANSIENT, $registry, GROW_DATA_CACHE_TTL );
+			return $registry;
 		
 		} catch (Exception $e) {
 			grow_data_log('Error building registry: ' . $e->getMessage());
