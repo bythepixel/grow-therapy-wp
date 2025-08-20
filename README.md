@@ -17,6 +17,11 @@
 3. **Merge to `staging`** → final QA before production
 4. **Deploy to `main`** → live site
 
+**Client-Driven Development:**
+- **Existing templates & settings** → Edit on production
+- **New features & templates** → Develop locally, deploy to staging
+- **No conflicts** - Clear separation of concerns
+
 ### What Happens on Deploy
 - **BricksSync**: JSON files imported to database (templates, colors, typography)
 - **Plugin Management**: Composer plugins updated, premium plugins synced
@@ -109,6 +114,8 @@ Configure in GitHub Environments:
 
 ### BricksSync Integration
 - **Local Auto-update**: JSON files automatically updated when making changes
+- **Production Sync**: Use `./scripts/sync-production-brickssync.sh` to get latest client changes
+- **Git Hook**: Automatically syncs after rebasing with staging
 - **Version Control**: All Bricks settings tracked in Git
 
 ## 🔧 Deployment Secrets
