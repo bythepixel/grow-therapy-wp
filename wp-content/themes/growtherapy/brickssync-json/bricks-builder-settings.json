@@ -15099,6 +15099,106 @@
             "id": "t5guqm",
             "name": "promise__text",
             "settings": []
+        },
+        {
+            "id": "5s99i5",
+            "name": "feature",
+            "settings": []
+        },
+        {
+            "id": "diltji",
+            "name": "feature__inner",
+            "settings": {
+                "_direction": "column",
+                "_alignItems": "center",
+                "_rowGap": "var(--space-xxl)",
+                "_justifyContent": "space-between"
+            },
+            "modified": 1755808914,
+            "user_id": 4
+        },
+        {
+            "id": "z0whxk",
+            "name": "feature__heading",
+            "settings": []
+        },
+        {
+            "id": "my3rlf",
+            "name": "feature__image",
+            "settings": [],
+            "modified": 1755808914,
+            "user_id": 4
+        },
+        {
+            "id": "nsds2f",
+            "name": "feature__feature-grid",
+            "settings": {
+                "_display": "grid",
+                "_gridTemplateColumns": "1fr 1fr 1fr 1fr",
+                "_gridTemplateRows": "1fr 1fr",
+                "_gridTemplateColumns:mobile_portrait": "minmax(0, 1fr)",
+                "_gridTemplateColumns:mobile_landscape": "1fr",
+                "_gridTemplateRows:mobile_landscape": "1fr 1fr minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)",
+                "_gridGap": "var(--grid-gap)"
+            },
+            "modified": 1755808914,
+            "user_id": 4
+        },
+        {
+            "id": "tnahbj",
+            "name": "feature__feature-card",
+            "settings": {
+                "_padding": {
+                    "top": "var(--space-xs)",
+                    "bottom": "var(--space-xs)",
+                    "right": "var(--space-xs)",
+                    "left": "var(--space-xs)"
+                },
+                "_display": "flex",
+                "_direction": "column",
+                "_columnGap": "var(--card-gap)",
+                "_rowGap": "var(--card-gap)"
+            },
+            "modified": 1755808914,
+            "user_id": 4
+        },
+        {
+            "id": "g0l4cg",
+            "name": "feature__icon",
+            "settings": {
+                "iconSize": "18",
+                "iconColor": {
+                    "raw": "var(--primary-semi-light)"
+                },
+                "_background": {
+                    "color": {
+                        "raw": "var(--primary)"
+                    }
+                },
+                "_alignSelf": "flex-start",
+                "_display": "flex",
+                "_padding": {
+                    "top": "calc(var(--space-xs) * .2)",
+                    "bottom": "calc(var(--space-xs) * .2)",
+                    "right": "calc(var(--space-xs) * .65)",
+                    "left": "calc(var(--space-xs) * .65)"
+                },
+                "_border": {
+                    "radius": {
+                        "top": "calc(var(--radius-xxl) * 1.45)",
+                        "right": "calc(var(--radius-xxl) * 1.45)",
+                        "bottom": "calc(var(--radius-xxl) * 1.45)",
+                        "left": "calc(var(--radius-xxl) * 1.45)"
+                    }
+                }
+            },
+            "modified": 1755808914,
+            "user_id": 4
+        },
+        {
+            "id": "s4i2zy",
+            "name": "feature__lede",
+            "settings": []
         }
     ],
     "bricks_global_classes_categories": [
