@@ -4,11 +4,24 @@
 # This ensures devs have latest client changes when rebasing with staging
 
 if [[ "$1" == "rebase" ]]; then
-    # Only sync when rebasing with staging branch
+    # Sync in two scenarios:
+    # 1. When rebasing with staging branch (any current branch)
+    # 2. When on staging branch and rebasing with main
     current_branch=$(git branch --show-current)
-    if [[ "$current_branch" == "staging" ]]; then
+    
+    # Check if we're rebasing with staging
+    if git reflog --oneline -1 | grep -q "rebase.*staging"; then
+        should_sync=true
+    # Or check if we're on staging and rebasing with main
+    elif [[ "$current_branch" == "staging" ]] && git reflog --oneline -1 | grep -q "rebase.*main"; then
+        should_sync=true
+    else
+        should_sync=false
+    fi
+    
+    if [[ "$should_sync" == "true" ]]; then
         echo ""
-        echo "Rebase with staging completed - syncing with production BricksSync changes..."
+        echo "Rebase completed - syncing with production BricksSync changes..."
         
         # Check if sync script exists
         if [[ -f "scripts/sync-production-brickssync.sh" ]]; then
@@ -24,6 +37,7 @@ if [[ "$1" == "rebase" ]]; then
             fi
         else
             echo "WARNING: Sync script not found: scripts/sync-production-brickssync.sh"
+        fi
         fi
     fi
 fi

@@ -86,7 +86,7 @@ Configure in GitHub Environments:
    chmod +x .git/hooks/post-rewrite
    ```
    
-   > **Note**: This hook automatically syncs production BricksSync changes when rebasing with staging
+   > **Note**: This hook automatically syncs production BricksSync changes when rebasing with staging branch or when on staging branch rebasing with main
 
 ## 🔄 Workflow Details
 
@@ -115,7 +115,7 @@ Configure in GitHub Environments:
 ### BricksSync Integration
 - **Local Auto-update**: JSON files automatically updated when making changes
 - **Production Sync**: Use `./scripts/sync-production-brickssync.sh` to get latest client changes
-- **Git Hook**: Automatically syncs after rebasing with staging
+- **Git Hook**: Automatically syncs when rebasing with staging branch or when on staging branch rebasing with main
 - **Version Control**: All Bricks settings tracked in Git
 
 ## 🔧 Deployment Secrets
