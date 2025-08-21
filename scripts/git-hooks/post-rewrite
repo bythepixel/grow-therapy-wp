@@ -4,40 +4,26 @@
 # This ensures devs have latest client changes when rebasing with staging
 
 if [[ "$1" == "rebase" ]]; then
-    # Sync in two scenarios:
-    # 1. When rebasing with staging branch (any current branch)
-    # 2. When on staging branch and rebasing with main
+    # Get current branch and rebase target
     current_branch=$(git branch --show-current)
+    rebase_target=$(git reflog --oneline -1 | grep -o 'rebase.*' | cut -d' ' -f2)
     
-    # Check if we're rebasing with staging
-    if git reflog --oneline -1 | grep -q "rebase.*staging"; then
-        should_sync=true
-    # Or check if we're on staging and rebasing with main
-    elif [[ "$current_branch" == "staging" ]] && git reflog --oneline -1 | grep -q "rebase.*main"; then
-        should_sync=true
-    else
-        should_sync=false
-    fi
-    
-    if [[ "$should_sync" == "true" ]]; then
-        echo ""
-        echo "Rebase completed - syncing with production BricksSync changes..."
+    # Check if we're rebasing with staging or main on staging branch
+    if [[ "$rebase_target" == "staging" ]] || ([[ "$current_branch" == "staging" ]] && [[ "$rebase_target" == "main" ]]); then
+        echo "Rebase with $rebase_target detected - syncing BricksSync changes..."
         
-        # Check if sync script exists
+        # Check if sync script exists and run it
         if [[ -f "scripts/sync-production-brickssync.sh" ]]; then
-            echo "Syncing latest production changes..."
             ./scripts/sync-production-brickssync.sh
             
             # Check for conflicts
             if git diff --name-only --diff-filter=U | grep -q "brickssync-json"; then
                 echo "WARNING: Conflicts detected in BricksSync files"
-                echo "Review and resolve conflicts before continuing"
             else
-                echo "SUCCESS: Production changes synced successfully!"
+                echo "SUCCESS: Production changes synced"
             fi
         else
-            echo "WARNING: Sync script not found: scripts/sync-production-brickssync.sh"
-        fi
+            echo "WARNING: Sync script not found"
         fi
     fi
 fi
