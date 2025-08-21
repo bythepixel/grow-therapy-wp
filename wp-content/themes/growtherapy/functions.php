@@ -37,3 +37,6 @@ require_once __DIR__ . '/includes/custom-rewrites/rewrites-loader.php';
 
 // Include gravity forms functions
 require_once __DIR__ . '/includes/gravity-forms.php';
+
+// Include mental health data functionality
+require_once __DIR__ . '/includes/filter-api-data.php';
