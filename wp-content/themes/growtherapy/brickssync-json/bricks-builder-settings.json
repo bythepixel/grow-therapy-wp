@@ -2418,11 +2418,11 @@
         }
     ],
     "bricks_css_files_last_generated": "2.0.1",
-    "bricks_css_files_last_generated_timestamp": "1755622734",
+    "bricks_css_files_last_generated_timestamp": "1755216808",
     "bricks_filters_element_db_version": "1.1",
     "bricks_filters_index_db_version": "1.0",
     "bricks_filters_index_job_db_version": "1.0",
-    "bricks_font_face_rules": "@font-face{font-family:\"Atak\";font-weight:300;font-display:swap;src:url(https://growtherapy.kinsta.cloud/wp-content/uploads/2025/08/atak_light-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:400;font-display:swap;src:url(https://growtherapy.kinsta.cloud/wp-content/uploads/2025/08/atak_regular-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:500;font-display:swap;src:url(https://growtherapy.kinsta.cloud/wp-content/uploads/2025/08/atak_medium-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:600;font-display:swap;src:url(https://growtherapy.kinsta.cloud/wp-content/uploads/2025/08/atak_semibold-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:700;font-display:swap;src:url(https://growtherapy.kinsta.cloud/wp-content/uploads/2025/08/atak_bold-webfont.woff2) format(\"woff2\");}\n",
+    "bricks_font_face_rules": "@font-face{font-family:\"Atak\";font-weight:300;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_light-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:400;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_regular-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:500;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_medium-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:600;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_semibold-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:700;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_bold-webfont.woff2) format(\"woff2\");}\n",
     "bricks_font_favorites": [
         "custom_font_14"
     ],
@@ -15099,6 +15099,106 @@
             "id": "t5guqm",
             "name": "promise__text",
             "settings": []
+        },
+        {
+            "id": "5s99i5",
+            "name": "feature",
+            "settings": []
+        },
+        {
+            "id": "diltji",
+            "name": "feature__inner",
+            "settings": {
+                "_direction": "column",
+                "_alignItems": "center",
+                "_rowGap": "var(--space-xxl)",
+                "_justifyContent": "space-between"
+            },
+            "modified": 1755808914,
+            "user_id": 4
+        },
+        {
+            "id": "z0whxk",
+            "name": "feature__heading",
+            "settings": []
+        },
+        {
+            "id": "my3rlf",
+            "name": "feature__image",
+            "settings": [],
+            "modified": 1755808914,
+            "user_id": 4
+        },
+        {
+            "id": "nsds2f",
+            "name": "feature__feature-grid",
+            "settings": {
+                "_display": "grid",
+                "_gridTemplateColumns": "1fr 1fr 1fr 1fr",
+                "_gridTemplateRows": "1fr 1fr",
+                "_gridTemplateColumns:mobile_portrait": "minmax(0, 1fr)",
+                "_gridTemplateColumns:mobile_landscape": "1fr",
+                "_gridTemplateRows:mobile_landscape": "1fr 1fr minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)",
+                "_gridGap": "var(--grid-gap)"
+            },
+            "modified": 1755808914,
+            "user_id": 4
+        },
+        {
+            "id": "tnahbj",
+            "name": "feature__feature-card",
+            "settings": {
+                "_padding": {
+                    "top": "var(--space-xs)",
+                    "bottom": "var(--space-xs)",
+                    "right": "var(--space-xs)",
+                    "left": "var(--space-xs)"
+                },
+                "_display": "flex",
+                "_direction": "column",
+                "_columnGap": "var(--card-gap)",
+                "_rowGap": "var(--card-gap)"
+            },
+            "modified": 1755808914,
+            "user_id": 4
+        },
+        {
+            "id": "g0l4cg",
+            "name": "feature__icon",
+            "settings": {
+                "iconSize": "18",
+                "iconColor": {
+                    "raw": "var(--primary-semi-light)"
+                },
+                "_background": {
+                    "color": {
+                        "raw": "var(--primary)"
+                    }
+                },
+                "_alignSelf": "flex-start",
+                "_display": "flex",
+                "_padding": {
+                    "top": "calc(var(--space-xs) * .2)",
+                    "bottom": "calc(var(--space-xs) * .2)",
+                    "right": "calc(var(--space-xs) * .65)",
+                    "left": "calc(var(--space-xs) * .65)"
+                },
+                "_border": {
+                    "radius": {
+                        "top": "calc(var(--radius-xxl) * 1.45)",
+                        "right": "calc(var(--radius-xxl) * 1.45)",
+                        "bottom": "calc(var(--radius-xxl) * 1.45)",
+                        "left": "calc(var(--radius-xxl) * 1.45)"
+                    }
+                }
+            },
+            "modified": 1755808914,
+            "user_id": 4
+        },
+        {
+            "id": "s4i2zy",
+            "name": "feature__lede",
+            "settings": []
         }
     ],
     "bricks_global_classes_categories": [
@@ -15108,6 +15208,156 @@
         }
     ],
     "bricks_global_classes_changes": [
+        {
+            "timestamp": 1755539688,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755539688,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755539757,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755539757,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755539772,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755539772,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755539852,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 56,
+            "user_id": 2,
+            "old_count": 2401,
+            "new_count": 2038,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755540444,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 2038,
+            "new_count": 9,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755540444,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755540511,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755540511,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755540988,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755540988,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755541391,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 2401,
+            "new_count": 9,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755541391,
+            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "action": "automaticcss_save_settings_new",
+            "post_id": "",
+            "user_id": 2,
+            "old_count": 9,
+            "new_count": 2401,
+            "trash_count": 2
+        },
         {
             "timestamp": 1755541493,
             "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
@@ -15206,156 +15456,6 @@
             "user_id": 4,
             "old_count": 2040,
             "new_count": 2048,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755832806,
-            "referer": "/wp-admin/edit.php?post_type=bricks_template&all_posts=1",
-            "action": "bricks_import_template",
-            "post_id": "",
-            "user_id": 4,
-            "old_count": 2048,
-            "new_count": 2051,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755832960,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-feature/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1803,
-            "user_id": 4,
-            "old_count": 2051,
-            "new_count": 2051,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755832997,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-feature/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1803,
-            "user_id": 4,
-            "old_count": 2051,
-            "new_count": 2051,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833508,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2051,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833561,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833579,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833672,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833708,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833765,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833803,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755874611,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/kyle-test/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 56,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755874804,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/kyle-test/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 56,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755903363,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/design-style-guide/?bricks=run",
-            "action": "bricks_delete_global_classes_permanently",
-            "post_id": 124,
-            "user_id": 10,
-            "old_count": 2058,
-            "new_count": 2057,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755903365,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/design-style-guide/?bricks=run",
-            "action": "bricks_delete_global_classes_permanently",
-            "post_id": 124,
-            "user_id": 10,
-            "old_count": 2057,
-            "new_count": 2056,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755903367,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/design-style-guide/?bricks=run",
-            "action": "bricks_delete_global_classes_permanently",
-            "post_id": 124,
-            "user_id": 10,
-            "old_count": 2056,
-            "new_count": 2055,
             "trash_count": 2
         }
     ],
@@ -17757,15 +17857,26 @@
         "acss_import_hidden-accessible",
         "acss_import_clickable-parent"
     ],
-    "bricks_global_classes_timestamp": "1756136935",
-    "bricks_global_classes_trash": [],
-    "bricks_global_classes_user": "4",
-    "bricks_global_pseudo_classes": [
-        ":hover",
-        ":active",
-        ":focus",
-        "::after"
+    "bricks_global_classes_timestamp": "1755809143",
+    "bricks_global_classes_trash": [
+        {
+            "id": "fycluy",
+            "name": "text-xl",
+            "settings": [],
+            "deletedAt": 1755222595774,
+            "user_id": 2,
+            "originalIndex": 2031
+        },
+        {
+            "id": "hdsajm",
+            "name": "text-neutral-light",
+            "settings": [],
+            "deletedAt": 1755533836688,
+            "user_id": 2,
+            "originalIndex": 2038
+        }
     ],
+    "bricks_global_classes_user": "4",
     "bricks_global_settings": {
         "postTypes": [
             "page",
@@ -17818,7 +17929,7 @@
         }
     ],
     "bricks_indexer_running": "",
-    "bricks_panel_width": "240",
+    "bricks_panel_width": "311",
     "bricks_theme_styles": {
         "grow_therapy___global": {
             "label": "Grow Therapy - Global",
