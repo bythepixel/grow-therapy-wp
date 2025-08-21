@@ -1,16 +1,63 @@
-## Infrastructure
-- **Hosting**: Kinsta
-- **CMS**: WordPress
+# Grow Therapy WordPress Site
 
-## Local Development
+## 🚀 Quick Start
+- **Local Setup**: `docker-compose up -d` → http://localhost:8000
+- **Database**: Sync from Pre-prod using WP Migrate DB Pro
+
+## 🏗️ Architecture
+- **Hosting**: Kinsta
+- **CMS**: WordPress + Bricks Builder
+- **Deployment**: GitHub Actions → Kinsta environments
+
+## 🔄 Development Workflow
+> **Note**: This is a work-in-progress and may change as we build out the new site.
+
+1. **Feature Branch** from `staging` → develop locally
+2. **Merge to `dev`** → deploy to live server for QA/client review
+3. **Merge to `staging`** → final QA before production
+4. **Deploy to `main`** → live site
+
+**Client-Driven Development:**
+- **Existing templates & settings** → Edit on production
+- **New features & templates** → Develop locally, deploy to staging
+- **No conflicts** - Clear separation of concerns
+
+### What Happens on Deploy
+- **BricksSync**: JSON files imported to database (templates, colors, typography)
+- **Plugin Management**: Composer plugins updated, premium plugins synced
+- **Theme Updates**: Custom theme changes deployed
+- **Rollback Protection**: Automatic rollback if deployment fails
+
+## 🌍 Environments
+- **Dev**: Feature testing & client review
+- **Dev-Sandbox**: Client content/plugin work  
+- **Staging**: Final QA before release
+- **Production**: Live site
+
+## 🎨 Bricks Builder
+- **Local**: Auto-updates JSON files when making changes
+- **Version Control**: All settings tracked in Git
+- **Client-Driven Workflow**: Global settings, existing components, and template modifications should be made on production to avoid overwriting local development work
+
+## 📦 Plugin Management
+- **Composer**: 11 free plugins (version controlled)
+- **Git**: 25 premium plugins (manual install)
+- **All plugins version controlled** for consistency across environments
+
+## 🔧 Required Secrets
+Configure in GitHub Environments:
+- `KINSTA_SERVER_IP`, `KINSTA_USERNAME`, `KINSTA_PASSWORD`, `KINSTA_PORT`
+
+> **📚 For detailed deployment information, see [`.github/workflows/README.md`](.github/workflows/README.md)**
+
+---
+
+## 🚀 Quick Start Details
 
 ### Prerequisites
 - **Docker** - For containerized local environment
 
-### Setup Instructions
-
-> **Note**: This is a work-in-progress and may change as we build out the new site.
-
+### Setup Steps
 1. **Start Local Environment**
    ```bash
    docker-compose up -d
@@ -20,131 +67,64 @@
    - Visit [http://localhost:8000](http://localhost:8000)
    - Complete initial WordPress setup
 
+
+
 3. **Install WP Migrate DB Pro**
-   - Check 1Password for plugin credentials and installation file
+   - License available in this [Google Doc](https://docs.google.com/document/d/1XPgaV8K26F3jLI_km0CU2TrEo91ouPvT5nHhD7y-Mo8/edit?usp=sharing)
    - Install and activate the plugin
 
-4. **Sync Database from Dev**
-   - Use WP Migrate DB Pro to pull database from `Dev-Feature` Kinsta server
-   - This ensures your local environment matches the latest development state
-   - All plugins and their configurations will be synced automatically
+4. **Sync Database from Pre-prod**
+   - Use WP Migrate DB Pro to pull database from `Pre-prod` Kinsta server
+   - This ensures your local environment matches the latest working state
 
-5. **Configure Plugin Licenses**
-   - Plugin licenses and credentials available in this [Google Doc](https://docs.google.com/document/d/1XPgaV8K26F3jLI_km0CU2TrEo91ouPvT5nHhD7y-Mo8/edit?usp=sharing)
-   - Activate licenses for premium plugins as needed
-   - **Note**: All plugins are pulled from the dev environment, no local Composer installation required
+5. **BricksSync Setup**
+   > **Note**: BricksSync automatically updates JSON files when you make changes locally. No setup required!
 
-## Deployment Workflow & Environments
+6. **Git Hooks Setup**
+   ```bash
+   cp scripts/git-hooks/post-rewrite .git/hooks/
+   chmod +x .git/hooks/post-rewrite
+   ```
+   
+   > **Note**: This hook automatically syncs production BricksSync changes when rebasing with staging branch or when on staging branch rebasing with main
 
-This repository uses GitHub Actions for automated deployment to different environments in Kinsta. The workflow ensures that new features and content are reviewed, tested, and approved before going live, while giving both teams the ability to work safely without overwriting each other's changes.
+## 🔄 Workflow Details
 
-### Environments & Workflows
+### Development Process
+1. **Feature Development**
+   - Create feature branch from `staging` (default branch)
+   - Develop and test locally
+   - Merge to `dev` for live testing and client review
 
-#### 🔧 Dev (Feature Testing)
-- **Purpose**: For developers to test new features, plugins, and theme changes
-- **Git Branch**: `dev`
-- **GitHub Environment**: Dev (Feature-testing)
-- **Kinsta Environment**: Dev-Feature
-- **Workflow File**: `.github/workflows/deploy-dev.yml`
-- **Deployment**: Automatic on commit to `dev` branch
-- **Use Case**: Developers can merge multiple feature branches into `dev` for combined QA and client review
+2. **QA & Review**
+   - Multiple features can be merged to `dev` for combined testing
+   - Client reviews on live `dev` server
+   - Once approved, merge to `staging` for final QA
 
-#### 🧪 Dev (Sandbox)
-- **Purpose**: A dedicated testing environment for the Grow team to test plugins, ACFs, and other experimental updates
-- **Git Branch**: `dev-sandbox`
-- **GitHub Environment**: Dev (Sandbox)
-- **Kinsta Environment**: Dev-Sandbox
-- **Workflow File**: `.github/workflows/deploy-dev-sandbox.yml`
-- **Deployment**: Automatic on commit to `dev-sandbox` branch
-- **Use Case**: Separate environment for Grow team without impacting main workflows
+3. **Production Release**
+   - Final testing in `staging` environment
+   - Deploy `staging` → `main` (production)
+   - Live site updated
 
-#### 🚀 Staging (Pre-Production)
-- **Purpose**: A copy of the live site used for quality assurance (QA) and client review before release
-- **Git Branch**: `staging`
-- **GitHub Environment**: Staging (Pre-production)
-- **Kinsta Environment**: Pre-prod
-- **Workflow File**: `.github/workflows/deploy-staging.yml`
-- **Deployment**: Automatic on commit to `staging` branch
+### Environment Purposes
+- **`dev`**: Live feature testing and client review (prevents blocking between developers)
+- **`dev-sandbox`**: Client content/plugin work (separate from main workflow)
+- **`staging`**: Final QA before production release
+- **`main`**: Live production site
 
-#### 🌟 Production (Live Site)
-- **Purpose**: The official live website
-- **Git Branch**: `main`
-- **GitHub Environment**: Production (Live)
-- **Kinsta Environment**: Live
-- **Workflow File**: `.github/workflows/deploy-prod.yml`
-- **Deployment**: Automatic on commit to `main` branch
-- **Content Management**: Primarily managed by the marketing team (Kyle, Sindu, and Shelby)
-  - **Safety Features**: Uses Revisions plugin for content creation, preview, and publication
+### BricksSync Integration
+- **Local Auto-update**: JSON files automatically updated when making changes
+- **Production Sync**: Use `./scripts/sync-production-brickssync.sh` to get latest client changes
+- **Git Hook**: Automatically syncs when rebasing with staging branch or when on staging branch rebasing with main
+- **Version Control**: All Bricks settings tracked in Git
 
-### Workflow Process
+## 🔧 Deployment Secrets
 
-1. **Development Phase**
-   - Features developed and tested in `dev` environment
-   - Multiple feature branches can be merged for combined testing
-   - Once features pass QA and client review, they're merged into `staging`
-
-2. **Staging Phase**
-   - Final testing and verification in staging environment
-   - ACFs, plugins, and Bricks templates are validated
-   - After approval, changes are merged into `main`
-
-3. **Production Phase**
-   - Automatic deployment to live site
-   - Content changes managed via Revisions plugin
-   - Version history and easy rollbacks available
-
-4. **Grow Testing**
-   - Separate environment for the Grow team to experiment in
-   - Updated regularly to stay in sync with production
-   - Coordination required to prevent overwriting experimental work by the Grow team
-
-### Required Secrets
-
-The workflows require the following GitHub repository secrets to be configured, these are configured in their respective environments. These values can be found in the Kinsta dashboards:
+All workflows require these secrets configured in their respective GitHub environments:
 
 - `KINSTA_SERVER_IP`: IP address of the Kinsta server
 - `KINSTA_USERNAME`: SSH username for server access
 - `KINSTA_PASSWORD`: SSH password for server authentication
 - `KINSTA_PORT`: SSH port number
 
-## Plugin Management & Versioning
-
-This repository uses a hybrid approach to manage WordPress plugins, combining Composer dependency management with Git tracking for optimal efficiency and control.
-
-### Plugin Categories
-
-#### 🆓 Composer-Managed Plugins (11 plugins)
-These free plugins are automatically installed and updated via Composer with exact version pinning:
-
-- **Advanced Custom Fields**
-- **Easy Table of Contents**
-- **Enable Media Replace**
-- **Redirection**
-- **SEO by Rank Math**
-- **Simple Page Ordering**
-- **User Role Editor**
-- **WP GraphQL**
-- **WPGraphQL ACF**
-- **WPGraphQL Smart Cache**
-- **WordPress SEO**
-
-#### 💎 Premium Plugins (25 plugins)
-These premium/paid plugins are tracked in Git and require manual installation:
-
-- **Admin Columns Pro** - Advanced table management
-- **Advanced Custom Fields Pro** - Enhanced custom fields
-- **Gravity Forms Suite** - Form management and add-ons
-- **WP All Import/Export Pro** - Data import/export tools
-- **Rank Math Pro** - Advanced SEO features
-- **Yoast SEO Premium** - Enhanced SEO capabilities
-- **WP Migrate DB Pro** - Database migration tools
-- **Performance & Security** - Various optimization plugins
-
-### Benefits
-
-✅ **Minimal Repository Bloat** - Only premium plugins in Git  
-✅ **Exact Version Control** - Free plugins pinned to specific versions  
-✅ **Automatic Updates** - Composer handles dependency resolution  
-✅ **Deployment Safety** - Fail-fast strategy with comprehensive verification  
-✅ **Environment Consistency** - Same plugin versions across all environments  
-✅ **Easy Maintenance** - Single source of truth for plugin requirements
+Find these values in your Kinsta dashboard.
