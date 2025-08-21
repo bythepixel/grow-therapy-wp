@@ -17,7 +17,7 @@ if ( ! function_exists( 'grow_data_iter_post_ids' ) ) {
 			$paged_args['posts_per_page'] = $per;
 			$paged_args['paged']          = $page;
 			$paged_args['fields']         = 'ids';
-			$paged_args['no_found_rows']  = true;
+			$paged_args['no_found_rows']  = false; // Need this for pagination
 
 			$q = new WP_Query( $paged_args );
 			if ( ! $q->have_posts() ) { break; }
@@ -29,7 +29,13 @@ if ( ! function_exists( 'grow_data_iter_post_ids' ) ) {
 
 			$page++;
 			wp_reset_postdata();
-		} while ( true );
+			
+			// Safety check to prevent infinite loops
+			if ( $page > 100 ) {
+				grow_data_log( 'Safety limit reached, stopping at 100 pages' );
+				break;
+			}
+		} while ( $q->max_num_pages >= $page );
 
 		return $ids;
 	}

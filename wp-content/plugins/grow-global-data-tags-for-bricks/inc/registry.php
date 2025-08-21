@@ -29,10 +29,17 @@ if ( ! function_exists( 'grow_data_build_registry' ) ) {
 			'order'          => 'DESC',
 		] );
 
+		$start_time = microtime(true);
 		$post_ids = grow_data_iter_post_ids( $base_args );
-		grow_data_log( 'Found posts (total across batches): ' . count( $post_ids ) );
+		$end_time = microtime(true);
+		grow_data_log( 'Found posts (total across batches): ' . count( $post_ids ) . ' in ' . round(($end_time - $start_time) * 1000, 2) . 'ms' );
 
 		foreach ( $post_ids as $post_id ) {
+			// Safety check for valid post ID
+			if ( ! is_numeric( $post_id ) || $post_id <= 0 ) {
+				continue;
+			}
+			
 			$title      = get_the_title( $post_id );
 			$slug       = grow_data_slugify_title( $title );
 			$group_lbl  = grow_data_group_label_for_post( $post_id );
