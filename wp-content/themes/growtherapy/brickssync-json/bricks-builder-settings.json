@@ -2415,6 +2415,34 @@
             "_created": 1755874499,
             "_user_id": 4,
             "_version": "2.0.1"
+        },
+        {
+            "id": "tyejpw",
+            "category": "Hero",
+            "desc": "",
+            "elements": [
+                {
+                    "id": "tyejpw",
+                    "name": "section",
+                    "parent": 0,
+                    "children": [
+                        "eoppue"
+                    ],
+                    "settings": [],
+                    "label": "Hero"
+                },
+                {
+                    "id": "eoppue",
+                    "name": "container",
+                    "parent": "tyejpw",
+                    "children": [],
+                    "settings": []
+                }
+            ],
+            "properties": [],
+            "_created": 1755878862,
+            "_user_id": 10,
+            "_version": "2.0.1"
         }
     ],
     "bricks_css_files_last_generated": "2.0.1",
@@ -2422,7 +2450,7 @@
     "bricks_filters_element_db_version": "1.1",
     "bricks_filters_index_db_version": "1.0",
     "bricks_filters_index_job_db_version": "1.0",
-    "bricks_font_face_rules": "@font-face{font-family:\"Atak\";font-weight:300;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_light-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:400;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_regular-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:500;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_medium-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:600;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_semibold-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:700;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_bold-webfont.woff2) format(\"woff2\");}\n",
+    "bricks_font_face_rules": "@font-face{font-family:\"Atak\";font-weight:300;font-display:swap;src:url(http://localhost:8000/wp-content/uploads/2025/08/atak_light-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:400;font-display:swap;src:url(http://localhost:8000/wp-content/uploads/2025/08/atak_regular-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:500;font-display:swap;src:url(http://localhost:8000/wp-content/uploads/2025/08/atak_medium-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:600;font-display:swap;src:url(http://localhost:8000/wp-content/uploads/2025/08/atak_semibold-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:700;font-display:swap;src:url(http://localhost:8000/wp-content/uploads/2025/08/atak_bold-webfont.woff2) format(\"woff2\");}\n",
     "bricks_font_favorites": [
         "custom_font_14"
     ],
@@ -15167,21 +15195,18 @@
             "name": "feature__icon",
             "settings": {
                 "iconSize": "18",
-                "iconColor": {
-                    "raw": "var(--primary-semi-light)"
-                },
                 "_background": {
                     "color": {
-                        "raw": "var(--primary)"
+                        "raw": "var(--primary-ultra-light)"
                     }
                 },
                 "_alignSelf": "flex-start",
                 "_display": "flex",
                 "_padding": {
-                    "top": "calc(var(--space-xs) * .2)",
-                    "bottom": "calc(var(--space-xs) * .2)",
-                    "right": "calc(var(--space-xs) * .65)",
-                    "left": "calc(var(--space-xs) * .65)"
+                    "top": "calc(var(--space-xs) * .5)",
+                    "bottom": "calc(var(--space-xs) * .5)",
+                    "right": "calc(var(--space-xs) * .95)",
+                    "left": "calc(var(--space-xs) * .95)"
                 },
                 "_border": {
                     "radius": {
@@ -15190,14 +15215,85 @@
                         "bottom": "calc(var(--radius-xxl) * 1.45)",
                         "left": "calc(var(--radius-xxl) * 1.45)"
                     }
+                },
+                "iconColor": {
+                    "raw": "var(--primary-semi-light)"
                 }
             },
-            "modified": 1755808914,
+            "modified": 1755832997,
             "user_id": 4
         },
         {
             "id": "s4i2zy",
             "name": "feature__lede",
+            "settings": []
+        },
+        {
+            "id": "4wizyj",
+            "name": "feature-highlight",
+            "settings": {
+                "_display": "flex",
+                "_direction": "column",
+                "_alignItems": "center",
+                "_rowGap": "var(--space-xl)",
+                "_width": "var(--width-xxl)"
+            }
+        },
+        {
+            "id": "ayuyxg",
+            "name": "feature-highlight__heading",
+            "settings": []
+        },
+        {
+            "id": "x6zbk7",
+            "name": "feature-highlight__image",
+            "settings": []
+        },
+        {
+            "id": "w1z0sk",
+            "name": "promise",
+            "settings": {
+                "_padding": {
+                    "top": "var(--section-space-l)",
+                    "bottom": "var(--section-space-l)"
+                }
+            }
+        },
+        {
+            "id": "taxi4h",
+            "name": "promise__inner",
+            "settings": {
+                "_alignItems": "center",
+                "_columnGap": "calc(var(--container-gap) * 1.5)"
+            }
+        },
+        {
+            "id": "kahxjt",
+            "name": "promise__media-wrapper",
+            "settings": []
+        },
+        {
+            "id": "gs91ki",
+            "name": "promise__media",
+            "settings": []
+        },
+        {
+            "id": "t4yemr",
+            "name": "promise__promise-wrapper",
+            "settings": []
+        },
+        {
+            "id": "1havz2",
+            "name": "promise__heading",
+            "settings": {
+                "_typography": {
+                    "font-weight": "500"
+                }
+            }
+        },
+        {
+            "id": "t5guqm",
+            "name": "promise__text",
             "settings": []
         }
     ],
@@ -15300,7 +15396,7 @@
         },
         {
             "timestamp": 1755809093,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-feature/?bricks=run",
+            "referer": "http://localhost:8000/template/section-feature/?bricks=run",
             "action": "bricks_import_template",
             "post_id": 1799,
             "user_id": 4,
