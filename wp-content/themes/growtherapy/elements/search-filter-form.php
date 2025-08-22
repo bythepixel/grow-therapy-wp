@@ -160,44 +160,42 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     $search_button_icon = $settings['search_button_icon'] ?? 'fas fa-search';
 
     echo <<<HTML
-    <div {$this->render_attributes('_root')}>
-      <form class="search-filter-form" method="get">
-        {$this->render_dropdown('location', $location_config)}
-        {$this->render_dropdown('insurance', $insurance_config)}
-        {$this->render_dropdown('needs', $needs_config)}
-        
-        <button type="submit" class="search-button">
-          <i class="{$search_button_icon}"></i>
-          <span>{$search_button_text}</span>
-        </button>
-      </form>
-    </div>
+    <form class="search-filter-form" method="get" {$this->render_attributes('_root')}>
+      {$this->render_dropdown('location', $location_config)}
+      {$this->render_dropdown('insurance', $insurance_config)}
+      {$this->render_dropdown('needs', $needs_config)}
+      
+      <button type="submit" class="search-filter-form__search-button btn--s btn--primary">
+        <i class="{$search_button_icon}"></i>
+        <span>{$search_button_text}</span>
+      </button>
+    </form>
     HTML;
   }
 
   private function render_dropdown($type, $config) {
-    $required_class = $config['required'] ? 'search-filter-dropdown-wrapper--required' : '';
-    $single_select_class = $config['single_select'] ? 'search-filter-dropdown-wrapper--single-select' : 'search-filter-dropdown-wrapper--multi-select';
+    $required_class = $config['required'] ? 'search-filter-form__dropdown--required' : '';
+    $single_select_class = $config['single_select'] ? 'search-filter-form__dropdown--single-select' : 'search-filter-form__dropdown--multi-select';
     $required_indicator = $config['required'] ? '*' : '';
-    $modal_id = 'search-filter-options-modal-' . esc_attr($type);
+    $modal_id = 'search-filter-form__dropdown-modal-' . esc_attr($type);
     $modal_title_id = 'modal-title-' . esc_attr($type);
     $placeholder = esc_html($config['placeholder']);
     $api_key = esc_attr($config['api_key']);
     
     return <<<HTML
-    <div class="search-filter-dropdown-wrapper {$required_class} {$single_select_class}">
-      <button type="button" class="search-filter-select-trigger" aria-haspopup="dialog" aria-expanded="false" aria-controls="{$modal_id}">
-        <span class="search-filter-select-trigger__label">{$placeholder}{$required_indicator}</span>
+    <div class="search-filter-form__dropdown {$required_class} {$single_select_class}">
+      <button type="button" class="search-filter-form__dropdown-button" aria-haspopup="dialog" aria-expanded="false" aria-controls="{$modal_id}">
+        <span class="search-filter-form__dropdown-button-label">{$placeholder}{$required_indicator}</span>
       </button>
       
-      <div class="search-filter-options-modal" id="{$modal_id}" role="dialog" aria-modal="true" aria-labelledby="{$modal_title_id}" aria-hidden="true">
-        <div class="search-filter-options-modal__header">
+      <div class="search-filter-form__dropdown-modal" id="{$modal_id}" role="dialog" aria-modal="true" aria-labelledby="{$modal_title_id}" aria-hidden="true">
+        <div class="search-filter-form__dropdown-modal__header">
           {$this->render_optional_text($config)}
-          <button type="button" class="search-filter-options-modal__done-button" aria-label="Close">Done</button>
+          <button type="button" class="search-filter-form__dropdown-modal__done-button" aria-label="Close">Done</button>
         </div>
         
         {$this->render_search_input($type)}
-        <div class="search-filter-options-modal__options-container" data-api-key="{$api_key}">
+        <div class="search-filter-form__dropdown-modal__options-container" data-api-key="{$api_key}">
           {$this->render_options_list($config, $modal_title_id, $placeholder)}
         </div>
       </div>
@@ -207,16 +205,16 @@ class Element_Search_Filter_Form extends \Bricks\Element {
 
   private function render_optional_text($config) {
     if (!$config['required']) {
-      return '<span class="search-filter-options-modal__optional-text">' . esc_html__('OPTIONAL', 'bricks') . '</span>';
+      return '<span class="search-filter-form__dropdown-modal__optional-text">' . esc_html__('OPTIONAL', 'bricks') . '</span>';
     }
     return '';
   }
 
   private function render_search_input($type) {
     return <<<HTML
-    <div class="search-filter-options-modal__search-input-wrapper">
+    <div class="search-filter-form__dropdown-modal__search-input-wrapper">
       <label for="search-{$type}" class="sr-only">Search options</label>
-      <input type="text" id="search-{$type}" class="search-filter-options-modal__search-input" placeholder="Search" aria-describedby="search-help-{$type}">
+      <input type="text" id="search-{$type}" class="search-filter-form__dropdown-modal__search-input" placeholder="Search" aria-describedby="search-help-{$type}">
       <div id="search-help-{$type}" class="sr-only">Type to filter the available options</div>
     </div>
     HTML;
@@ -225,16 +223,16 @@ class Element_Search_Filter_Form extends \Bricks\Element {
   private function render_options_list($config, $modal_title_id, $placeholder) {
     if ($config['single_select']) {
       return <<<HTML
-      <ul class="search-filter-options-modal__options-list" role="listbox" aria-labelledby="{$modal_title_id}">
-        <li class="search-filter-options-modal__option">Test</li>
+      <ul class="search-filter-form__dropdown-modal__options-list" role="listbox" aria-labelledby="{$modal_title_id}">
+        <li class="search-filter-form__dropdown-modal__option">Test</li>
       </ul>
       HTML;
     } else {
       return <<<HTML
-      <fieldset class="search-filter-options-modal__options-fieldset">
+      <fieldset class="search-filter-form__dropdown-modal__options-fieldset">
         <legend class="sr-only">{$placeholder} options</legend>
-        <ul class="search-filter-options-modal__options-list" role="listbox" aria-labelledby="{$modal_title_id}">
-          <li class="search-filter-options-modal__option">Test</li>
+        <ul class="search-filter-form__dropdown-modal__options-list" role="listbox" aria-labelledby="{$modal_title_id}">
+          <li class="search-filter-form__dropdown-modal__option">Test</li>
         </ul>
       </fieldset>
       HTML;
@@ -244,23 +242,23 @@ class Element_Search_Filter_Form extends \Bricks\Element {
   public static function render_builder() { ?>
     <script type="text/x-template" id="tmpl-bricks-element-search-filter-form">
       <div class="search-filter-form">
-        <div class="search-filter-dropdown-wrapper">
-          <button class="search-filter-select-trigger">
-            <span class="search-filter-select-trigger__label">{{ settings.location_placeholder || 'Location' }}{{ settings.location_required ? '*' : '' }}</span>
+        <div class="search-filter-form__dropdown">
+          <button class="search-filter-form__dropdown-button">
+            <span class="search-filter-form__dropdown-button__label">{{ settings.location_placeholder || 'Location' }}{{ settings.location_required ? '*' : '' }}</span>
           </button>
         </div>
-        <div class="search-filter-dropdown-wrapper">
-          <button class="search-filter-select-trigger">
-            <span class="search-filter-select-trigger__label">{{ settings.insurance_placeholder || 'Insurance' }}{{ settings.insurance_required ? '*' : '' }}</span>
+        <div class="search-filter-form__dropdown">
+          <button class="search-filter-form__dropdown-button">
+            <span class="search-filter-form__dropdown-button__label">{{ settings.insurance_placeholder || 'Insurance' }}{{ settings.insurance_required ? '*' : '' }}</span>
           </button>
         </div>
-        <div class="search-filter-dropdown-wrapper">
-          <button class="search-filter-select-trigger">
-            <span class="search-filter-select-trigger__label">{{ settings.needs_placeholder || 'Needs' }}{{ settings.needs_required ? '*' : '' }}</span>
+        <div class="search-filter-form__dropdown">
+          <button class="search-filter-form__dropdown-button">
+            <span class="search-filter-form__dropdown-button__label">{{ settings.needs_placeholder || 'Needs' }}{{ settings.needs_required ? '*' : '' }}</span>
           </button>
         </div>
 
-        <button class="search-filter-form__search-button">
+        <button class="search-filter-form__search-button btn--s btn--primary">
           <i class="{{ settings.search_button_icon || 'fas fa-search' }}"></i>
           <span>{{ settings.search_button_text || 'Search' }}</span>
         </button>
