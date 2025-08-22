@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3469cfc9-2e86-4393-99a9-7eeefbeae7aa" name="Changes" comment="add backup">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="3469cfc9-2e86-4393-99a9-7eeefbeae7aa" name="Changes" comment="update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -154,7 +152,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755820035068</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="update">
+      <option name="closed" value="true" />
+      <created>1755823203966</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1755823203966</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,13 +168,13 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="format'n" />
-    <MESSAGE value="update" />
     <MESSAGE value="code styles" />
     <MESSAGE value="rebase" />
     <MESSAGE value="bricks sync" />
     <MESSAGE value="update workspace" />
     <MESSAGE value="add backup" />
-    <option name="LAST_COMMIT_MESSAGE" value="add backup" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
