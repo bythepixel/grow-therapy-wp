@@ -103,12 +103,11 @@ class Element_Search_Filter_Form extends \Bricks\Element {
   }
 
   public function enqueue_scripts() {
-    // Enqueue the utilities CSS
     wp_enqueue_style(
-      'growtherapy-utilities',
-      get_stylesheet_directory_uri() . '/css/utilities.css',
+      'growtherapy-search-filter-form',
+      get_stylesheet_directory_uri() . '/css/search-filter-form.css',
       [],
-      '1.0.0'
+      filemtime(get_stylesheet_directory() . '/css/search-filter-form.css')
     );
 
     // Enqueue the element-specific script

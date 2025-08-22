@@ -1,0 +1,25 @@
+{
+  "name": "grow-therapy-wp",
+  "version": "1.0.0",
+  "description": "## 🚀 Quick Start - **Local Setup**: `docker-compose up -d` → http://localhost:8000 - **Database**: Sync from Pre-prod using WP Migrate DB Pro",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "sass wp-content/themes/growtherapy/scss/_search-filter-form.scss:wp-content/themes/growtherapy/css/search-filter-form.css --style=compressed",
+    "watch:css": "sass wp-content/themes/growtherapy/scss/_search-filter-form.scss:wp-content/themes/growtherapy/css/search-filter-form.css --watch",
+    "dev:css": "sass wp-content/themes/growtherapy/scss/_search-filter-form.scss:wp-content/themes/growtherapy/css/search-filter-form.css --watch --style=expanded"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bythepixel/grow-therapy-wp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bythepixel/grow-therapy-wp/issues"
+  },
+  "homepage": "https://github.com/bythepixel/grow-therapy-wp#readme",
+  "devDependencies": {
+    "sass": "^1.90.0"
+  }
+}

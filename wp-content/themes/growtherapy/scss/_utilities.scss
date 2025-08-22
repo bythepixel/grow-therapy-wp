@@ -1,10 +1,12 @@
-/* Screen Reader Only - Hides content visually while keeping it accessible to screen readers */
+// Utilities SCSS file
+
+// Screen Reader Only
 .sr-only {
   position: absolute !important;
-  width: 0.1rem !important;
-  height: 0.1rem !important;
+  width: 1px !important;
+  height: 1px !important;
   padding: 0 !important;
-  margin: -0.1rem !important;
+  margin: -1px !important;
   overflow: hidden !important;
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
