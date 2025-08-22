@@ -103,10 +103,18 @@ class Element_Search_Filter_Form extends \Bricks\Element {
   }
 
   public function enqueue_scripts() {
+    // Enqueue the utilities CSS
+    wp_enqueue_style(
+      'growtherapy-utilities',
+      get_stylesheet_directory_uri() . '/css/utilities.css',
+      [],
+      '1.0.0'
+    );
+
     // Enqueue the element-specific script
     wp_enqueue_script(
       'search-filter-form',
-      get_template_directory_uri() . '/js/search-filter-form.js',
+      get_stylesheet_directory_uri() . '/js/search-filter-form.js',
       ['jquery'],
       '1.0.0',
       true
@@ -181,41 +189,67 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     $required_class = $config['required'] ? 'search-filter-dropdown-wrapper--required' : '';
     $single_select_class = $config['single_select'] ? 'search-filter-dropdown-wrapper--single-select' : 'search-filter-dropdown-wrapper--multi-select';
     $required_attr = $config['required'] ? 'required' : '';
-    $required_indicator = $config['required'] ? ' *' : '';
+    $required_indicator = $config['required'] ? '*' : '';
+    $modal_id = 'search-filter-options-modal-' . esc_attr($type);
+    $modal_title_id = 'modal-title-' . esc_attr($type);
     
     $output = '<div class="search-filter-dropdown-wrapper ' . esc_attr($required_class) . ' ' . esc_attr($single_select_class) . '">';
     
-    // Dropdown Trigger
-    $output .= '<button class="dropdown-trigger" data-dropdown="' . esc_attr($type) . '">';
-    $output .= '<span class="dropdown-text">' . esc_html($config['placeholder']) . $required_indicator . '</span>';
-    $output .= '<span class="dropdown-arrow"></span>';
+    // Trigger Button
+    $output .= '<button type="button" class="search-filter-select-trigger" aria-haspopup="dialog" aria-expanded="false" aria-controls="' . $modal_id . '">';
+    $output .= '<span class="search-filter-select-trigger__label">' . esc_html($config['placeholder']) . $required_indicator . '</span>';
     $output .= '</button>';
     
-    // Hidden Input Fields
-    if ($config['single_select']) {
-      $output .= '<input type="hidden" name="' . esc_attr($type) . '" ' . $required_attr . '>';
-    } else {
-      $output .= '<input type="hidden" name="' . esc_attr($type) . '[]" ' . $required_attr . '>';
-    }
+    // Modal Dialog
+    $output .= '<div class="search-filter-options-modal" id="' . $modal_id . '" role="dialog" aria-modal="true" aria-labelledby="' . $modal_title_id . '" aria-hidden="true">';
     
-    // Dropdown Modal (will be populated by JavaScript)
-    $output .= '<div class="dropdown-modal" id="modal-' . esc_attr($type) . '">';
-    $output .= '<div class="modal-header">';
+    // Modal Header
+    $output .= '<div class="search-filter-options-modal__header">';
     
     if (!$config['required']) {
-      $output .= '<span class="optional-text">' . esc_html__('OPTIONAL', 'bricks') . '</span>';
+      $output .= '<span class="search-filter-options-modal__optional-text">' . esc_html__('OPTIONAL', 'bricks') . '</span>';
     }
     
+    $output .= '<button type="button" class="search-filter-options-modal__done-button" aria-label="' . esc_attr__('Close', 'bricks') . '">Done</button>';
+    $output .= '</div>';
+    
+    // Search Input
+    $output .= '<div class="search-filter-options-modal__search-input-wrapper">';
+    $output .= '<label for="search-' . esc_attr($type) . '" class="sr-only">' . esc_html__('Search options', 'bricks') . '</label>';
+    $output .= '<input type="text" id="search-' . esc_attr($type) . '" class="search-filter-options-modal__search-input" placeholder="' . esc_attr__('Search', 'bricks') . '" aria-describedby="search-help-' . esc_attr($type) . '">';
+    $output .= '<div id="search-help-' . esc_attr($type) . '" class="sr-only">' . esc_html__('Type to filter the available options', 'bricks') . '</div>';
+    $output .= '</div>';
+    
+    // Options Container
+    $output .= '<div class="search-filter-options-modal__options-container" data-api-key="' . esc_attr($config['api_key']) . '">';
+    
+    if ($config['single_select']) {
+      // Clickable options for single select
+      $output .= '<ul class="search-filter-options-modal__options-list" role="listbox" aria-labelledby="' . $modal_title_id . '">';
+      $output .= '<li>Test</li>';
+      $output .= '</ul>';
+    } else {
+      // Checkboxes for multi select
+      $output .= '<fieldset class="search-filter-options-modal__checkbox-group">';
+      $output .= '<legend class="sr-only">' . esc_html($config['placeholder']) . ' ' . esc_html__('options', 'bricks') . '</legend>';
+      $output .= '<div class="search-filter-options-modal__checkbox-options">';
+      $output .= '<li>Test</li>';
+      $output .= '</div></fieldset>';
+    }
+    
+    $output .= '</div>';
+    
+    // Modal Footer
+    $output .= '<div class="modal-footer">';
     if (!$config['single_select']) {
       $output .= '<button type="button" class="done-button">' . esc_html__('Done', 'bricks') . '</button>';
     }
+    $output .= '</div>';
     
     $output .= '</div>';
-    $output .= '<div class="search-input-wrapper">';
-    $output .= '<input type="text" class="search-input" placeholder="' . esc_attr__('Search', 'bricks') . '">';
-    $output .= '</div>';
-    $output .= '<div class="options-list" data-api-key="' . esc_attr($config['api_key']) . '"></div>';
-    $output .= '</div>';
+    
+    // Modal Backdrop
+    $output .= '<div class="modal-backdrop" aria-hidden="true"></div>';
     
     $output .= '</div>';
     
