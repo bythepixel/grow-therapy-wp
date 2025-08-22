@@ -14,7 +14,7 @@ add_action( 'wp_enqueue_scripts', function() {
  */
 add_action( 'init', function() {
   $element_files = [
-    __DIR__ . '/elements/title.php',
+    __DIR__ . '/elements/search-filter-form.php',
   ];
 
   foreach ( $element_files as $file ) {
