@@ -13,7 +13,7 @@
 
       bindEvents() {
     // Modal trigger clicks
-    $(document).on('click', '.search-filter-select-trigger', this.handleModalOpen.bind(this));
+    $(document).on('click', '.search-filter-form__dropdown-button', this.handleModalOpen.bind(this));
     
     // Modal close events
     $(document).on('click', '.done-button', this.handleDoneClick.bind(this));
@@ -48,7 +48,7 @@
       e.stopPropagation();
       
       const $trigger = $(e.currentTarget);
-      const $dropdown = $trigger.closest('.search-filter-dropdown-wrapper');
+      const $dropdown = $trigger.closest('.search-filter-form__dropdown');
       const $modal = $dropdown.find('.search-filter-modal');
       
       // Close any other open modals
@@ -60,8 +60,8 @@
 
     openModal($modal, $dropdown) {
       // Get dropdown configuration
-      const isRequired = $dropdown.hasClass('search-filter-dropdown-wrapper--required');
-      const isSingleSelect = $dropdown.hasClass('search-filter-dropdown-wrapper--single-select');
+      const isRequired = $dropdown.hasClass('search-filter-form__dropdown--required');
+      const isSingleSelect = $dropdown.hasClass('search-filter-form__dropdown--single-select');
       
       // Populate options based on dropdown type
       this.populateOptions($modal, $dropdown);
@@ -71,7 +71,7 @@
       $modal.attr('aria-hidden', 'false');
       
       // Update trigger appearance
-      $dropdown.find('.search-filter-select-trigger').attr('aria-expanded', 'true');
+      $dropdown.find('.search-filter-form__dropdown-button').attr('aria-expanded', 'true');
       
       // Focus management
       $modal.find('.search-input').focus();
@@ -81,16 +81,16 @@
     }
 
     closeModal($modal) {
-      const $dropdown = $modal.closest('.search-filter-dropdown-wrapper');
+      const $dropdown = $modal.closest('.search-filter-form__dropdown');
       
       $modal.removeClass('active').addClass('aria-hidden');
       $modal.attr('aria-hidden', 'true');
       
       // Update trigger appearance
-      $dropdown.find('.search-filter-select-trigger').attr('aria-expanded', 'false');
+      $dropdown.find('.search-filter-form__dropdown-button').attr('aria-expanded', 'false');
       
       // Return focus to trigger
-      $dropdown.find('.search-filter-select-trigger').focus();
+      $dropdown.find('.search-filter-form__dropdown-button').focus();
     }
 
     closeAllModals() {
@@ -100,9 +100,9 @@
     }
 
     populateOptions($modal, $dropdown) {
-      const $optionsContainer = $modal.find('.search-filter-options-modal__options-container');
+      const $optionsContainer = $modal.find('.search-filter-form__dropdown-modal__options-container');
       const apiKey = $optionsContainer.data('api-key');
-      const isSingleSelect = $dropdown.hasClass('search-filter-dropdown-wrapper--single-select');
+      const isSingleSelect = $dropdown.hasClass('search-filter-form__dropdown--single-select');
       
       if (!this.apiData || !this.apiData[apiKey]) {
         $optionsContainer.html('<div class="no-options">No options available</div>');
@@ -113,7 +113,7 @@
       
       if (isSingleSelect) {
         // Clickable options for single select
-        const $optionsList = $modal.find('.search-filter-options-modal__options-list');
+        const $optionsList = $modal.find('.search-filter-form__dropdown-modal__options-list');
         let optionsHtml = '';
         
         options.forEach((option, index) => {
@@ -131,7 +131,7 @@
         $optionsList.html(optionsHtml);
       } else {
         // Checkboxes for multi select
-        const $checkboxOptions = $modal.find('.search-filter-options-modal__checkbox-options');
+        const $checkboxOptions = $modal.find('.search-filter-form__dropdown-modal__checkbox-options');
         let optionsHtml = '';
         
         options.forEach((option, index) => {
@@ -154,8 +154,8 @@
     handleSearchInput(e) {
       const $input = $(e.currentTarget);
       const searchTerm = $input.val().toLowerCase();
-      const $modal = $input.closest('.search-filter-options-modal');
-      const isSingleSelect = $modal.closest('.search-filter-dropdown-wrapper').hasClass('search-filter-dropdown-wrapper--single-select');
+      const $modal = $input.closest('.search-filter-form__dropdown-modal');
+      const isSingleSelect = $modal.closest('.search-filter-form__dropdown').hasClass('search-filter-form__dropdown--single-select');
       
       if (isSingleSelect) {
         const $options = $modal.find('.search-filter-option');
@@ -186,9 +186,9 @@
 
     handleOptionClick(e) {
       const $option = $(e.currentTarget);
-      const $modal = $option.closest('.search-filter-options-modal');
-      const $dropdown = $modal.closest('.search-filter-dropdown-wrapper');
-      const isSingleSelect = $dropdown.hasClass('search-filter-dropdown-wrapper--single-select');
+      const $modal = $option.closest('.search-filter-form__dropdown-modal');
+      const $dropdown = $modal.closest('.search-filter-form__dropdown');
+      const isSingleSelect = $dropdown.hasClass('search-filter-form__dropdown--single-select');
       
       if (isSingleSelect) {
         // Single select - handle clickable option
@@ -196,7 +196,7 @@
         const text = $option.data('text');
         
         // Update trigger text
-        $dropdown.find('.search-filter-select-trigger__label').text(text);
+        $dropdown.find('.search-filter-form__dropdown-button__label').text(text);
         
         // Close modal automatically for single select
         this.closeModal($modal);
@@ -207,7 +207,7 @@
     handleCheckboxChange(e) {
       const $checkbox = $(e.currentTarget);
       const $modal = $checkbox.closest('.search-filter-modal');
-      const $dropdown = $modal.closest('.search-filter-dropdown-wrapper');
+      const $dropdown = $modal.closest('.search-filter-form__dropdown');
       const value = $checkbox.val();
       const text = $checkbox.siblings('.checkbox-label').text();
       const isChecked = $checkbox.is(':checked');
@@ -218,11 +218,11 @@
       
       // Update trigger text
       if (selectedCount === 0) {
-        const placeholder = $dropdown.find('.search-filter-select-trigger__label').text().replace(/\s*\d+\s*selected/, '');
-        $dropdown.find('.search-filter-select-trigger__label').text(placeholder);
+        const placeholder = $dropdown.find('.search-filter-form__dropdown-button__label').text().replace(/\s*\d+\s*selected/, '');
+        $dropdown.find('.search-filter-form__dropdown-button__label').text(placeholder);
       } else {
-        const baseText = $dropdown.find('.search-filter-select-trigger__label').text().replace(/\s*\d+\s*selected/, '');
-        $dropdown.find('.search-filter-select-trigger__label').text(`${baseText} ${selectedCount} selected`);
+        const baseText = $dropdown.find('.search-filter-form__dropdown-button__label').text().replace(/\s*\d+\s*selected/, '');
+        $dropdown.find('.search-filter-form__dropdown-button__label').text(`${baseText} ${selectedCount} selected`);
       }
     }
 
@@ -230,13 +230,13 @@
 
     handleDoneClick(e) {
       e.preventDefault();
-      const $modal = $(e.currentTarget).closest('.search-filter-options-modal');
+      const $modal = $(e.currentTarget).closest('.search-filter-form__dropdown-modal');
       this.closeModal($modal);
     }
 
     handleCloseModal(e) {
       e.preventDefault();
-      const $modal = $(e.currentTarget).closest('.search-filter-options-modal');
+      const $modal = $(e.currentTarget).closest('.search-filter-form__dropdown-modal');
       this.closeModal($modal);
     }
 
@@ -278,7 +278,7 @@
       e.preventDefault();
       
       const $form = $(e.currentTarget);
-      const $dropdowns = $form.find('.search-filter-dropdown-wrapper');
+      const $dropdowns = $form.find('.search-filter-form__dropdown');
       const searchParams = new URLSearchParams();
       let isValid = true;
       
@@ -286,15 +286,15 @@
       $dropdowns.each((index, dropdown) => {
         const $dropdown = $(dropdown);
         const type = this.getDropdownType($dropdown);
-        const isRequired = $dropdown.hasClass('search-filter-dropdown-wrapper--required');
-        const isSingleSelect = $dropdown.hasClass('search-filter-dropdown-wrapper--single-select');
+        const isRequired = $dropdown.hasClass('search-filter-form__dropdown--required');
+        const isSingleSelect = $dropdown.hasClass('search-filter-form__dropdown--single-select');
         
         let value = null;
         
         if (isSingleSelect) {
           // Get selected option value from trigger text
-          const triggerText = $dropdown.find('.search-filter-select-trigger__label').text();
-          const placeholder = $dropdown.find('.search-filter-select-trigger').data('placeholder') || $dropdown.find('.search-filter-select-trigger__label').text().replace(/\s*\*$/, '');
+          const triggerText = $dropdown.find('.search-filter-form__dropdown-button__label').text();
+          const placeholder = $dropdown.find('.search-filter-form__dropdown-button').data('placeholder') || $dropdown.find('.search-filter-form__dropdown-button__label').text().replace(/\s*\*$/, '');
           
           // If trigger text is different from placeholder, it means something is selected
           if (triggerText !== placeholder) {
