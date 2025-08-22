@@ -11,32 +11,30 @@
       this.loadApiData();
     }
 
-    bindEvents() {
-      // Dropdown trigger clicks
-      $(document).on('click', '.dropdown-trigger', this.handleDropdownClick.bind(this));
-      
-      // Modal close events
-      $(document).on('click', '.done-button', this.handleDoneClick.bind(this));
-      $(document).on('click', '.close-modal', this.handleCloseModal.bind(this));
-      
-      // Search input filtering
-      $(document).on('input', '.search-input', this.handleSearchInput.bind(this));
-      
-      // Option selection
-      $(document).on('click', '.option-item', this.handleOptionClick.bind(this));
-      
-      // Option removal (X button)
-      $(document).on('click', '.remove-option', this.handleRemoveOption.bind(this));
-      
-      // Form submission
-      $(document).on('submit', '.search-filter-form', this.handleFormSubmit.bind(this));
-      
-      // Close modal when clicking outside
-      $(document).on('click', this.handleOutsideClick.bind(this));
-      
-      // Close modal on escape key
-      $(document).on('keydown', this.handleKeydown.bind(this));
-    }
+      bindEvents() {
+    // Modal trigger clicks
+    $(document).on('click', '.search-filter-select-trigger', this.handleModalOpen.bind(this));
+    
+    // Modal close events
+    $(document).on('click', '.done-button', this.handleDoneClick.bind(this));
+    $(document).on('click', '.close-modal', this.handleCloseModal.bind(this));
+    $(document).on('click', '.modal-backdrop', this.handleBackdropClick.bind(this));
+    
+    // Search input filtering
+    $(document).on('input', '.search-input', this.handleSearchInput.bind(this));
+    
+    // Clickable option selection (single-select)
+    $(document).on('click', '.search-filter-option', this.handleOptionClick.bind(this));
+    
+    // Checkbox selection (multi-select)
+    $(document).on('change', 'input[type="checkbox"]', this.handleCheckboxChange.bind(this));
+    
+    // Form submission
+    $(document).on('submit', '.search-filter-form', this.handleFormSubmit.bind(this));
+    
+    // Close modal on escape key
+    $(document).on('keydown', this.handleKeydown.bind(this));
+  }
 
     loadApiData() {
       // API data is already loaded via wp_localize_script
@@ -45,242 +43,206 @@
       }
     }
 
-    handleDropdownClick(e) {
+    handleModalOpen(e) {
       e.preventDefault();
       e.stopPropagation();
       
       const $trigger = $(e.currentTarget);
-      const dropdownType = $trigger.data('dropdown');
-      const $modal = $(`#modal-${dropdownType}`);
+      const $dropdown = $trigger.closest('.search-filter-dropdown-wrapper');
+      const $modal = $dropdown.find('.search-filter-modal');
       
       // Close any other open modals
       this.closeAllModals();
       
-      // Toggle current modal
-      if ($modal.hasClass('active')) {
-        this.closeModal($modal);
-      } else {
-        this.openModal($modal, dropdownType);
-      }
+      // Open current modal
+      this.openModal($modal, $dropdown);
     }
 
-    openModal($modal, dropdownType) {
+    openModal($modal, $dropdown) {
       // Get dropdown configuration
-      const $dropdown = $modal.closest('.dropdown-wrapper');
-      const isRequired = $dropdown.hasClass('required');
-      const isSingleSelect = $dropdown.hasClass('single-select');
+      const isRequired = $dropdown.hasClass('search-filter-dropdown-wrapper--required');
+      const isSingleSelect = $dropdown.hasClass('search-filter-dropdown-wrapper--single-select');
       
       // Populate options based on dropdown type
-      this.populateOptions($modal, dropdownType);
+      this.populateOptions($modal, $dropdown);
       
       // Show modal
-      $modal.addClass('active');
-      $modal.find('.search-input').focus();
+      $modal.removeClass('aria-hidden').addClass('active');
+      $modal.attr('aria-hidden', 'false');
       
       // Update trigger appearance
-      $modal.closest('.dropdown-wrapper').find('.dropdown-arrow').addClass('active');
+      $dropdown.find('.search-filter-select-trigger').attr('aria-expanded', 'true');
+      
+      // Focus management
+      $modal.find('.search-input').focus();
+      
+      // Trap focus in modal
+      this.trapFocus($modal);
     }
 
     closeModal($modal) {
-      $modal.removeClass('active');
-      $modal.closest('.dropdown-wrapper').find('.dropdown-arrow').removeClass('active');
+      const $dropdown = $modal.closest('.search-filter-dropdown-wrapper');
+      
+      $modal.removeClass('active').addClass('aria-hidden');
+      $modal.attr('aria-hidden', 'true');
+      
+      // Update trigger appearance
+      $dropdown.find('.search-filter-select-trigger').attr('aria-expanded', 'false');
+      
+      // Return focus to trigger
+      $dropdown.find('.search-filter-select-trigger').focus();
     }
 
     closeAllModals() {
-      $('.dropdown-modal').removeClass('active');
-      $('.dropdown-arrow').removeClass('active');
+      $('.search-filter-modal').each((index, modal) => {
+        this.closeModal($(modal));
+      });
     }
 
-    populateOptions($modal, dropdownType) {
-      const $optionsList = $modal.find('.options-list');
-      const apiKey = $modal.find('.options-list').data('api-key');
+    populateOptions($modal, $dropdown) {
+      const $optionsContainer = $modal.find('.search-filter-options-modal__options-container');
+      const apiKey = $optionsContainer.data('api-key');
+      const isSingleSelect = $dropdown.hasClass('search-filter-dropdown-wrapper--single-select');
       
       if (!this.apiData || !this.apiData[apiKey]) {
-        $optionsList.html('<div class="no-options">No options available</div>');
+        $optionsContainer.html('<div class="no-options">No options available</div>');
         return;
       }
 
       const options = this.apiData[apiKey];
-      let optionsHtml = '';
       
-      options.forEach(option => {
-        const optionId = option.id || option.value || option.name;
-        const optionText = option.name || option.label || option.value;
+      if (isSingleSelect) {
+        // Clickable options for single select
+        const $optionsList = $modal.find('.search-filter-options-modal__options-list');
+        let optionsHtml = '';
         
-        optionsHtml += `
-          <div class="option-item" data-value="${optionId}" data-text="${optionText}">
-            <span class="option-text">${optionText}</span>
-            <span class="option-checkbox"></span>
-          </div>
-        `;
-      });
-      
-      $optionsList.html(optionsHtml);
+        options.forEach((option, index) => {
+          const optionId = option.id || option.value || option.name;
+          const optionText = option.name || option.label || option.value;
+          
+          optionsHtml += `
+            <div class="search-filter-option" data-value="${optionId}" data-text="${optionText}">
+              <span class="search-filter-option__text">${optionText}</span>
+              <button type="button" class="search-filter-option__remove" aria-label="Remove ${optionText}">×</button>
+            </div>
+          `;
+        });
+        
+        $optionsList.html(optionsHtml);
+      } else {
+        // Checkboxes for multi select
+        const $checkboxOptions = $modal.find('.search-filter-options-modal__checkbox-options');
+        let optionsHtml = '';
+        
+        options.forEach((option, index) => {
+          const optionId = option.id || option.value || option.name;
+          const optionText = option.name || option.label || option.value;
+          const inputId = `checkbox-${apiKey}-${optionId}`;
+          
+          optionsHtml += `
+            <div class="search-filter-option">
+              <input type="checkbox" id="${inputId}" name="${apiKey}[]" value="${optionId}" class="checkbox-input">
+              <label for="${inputId}" class="checkbox-label">${optionText}</label>
+            </div>
+          `;
+        });
+        
+        $checkboxOptions.html(optionsHtml);
+      }
     }
 
     handleSearchInput(e) {
       const $input = $(e.currentTarget);
       const searchTerm = $input.val().toLowerCase();
-      const $modal = $input.closest('.dropdown-modal');
-      const $options = $modal.find('.option-item');
+      const $modal = $input.closest('.search-filter-options-modal');
+      const isSingleSelect = $modal.closest('.search-filter-dropdown-wrapper').hasClass('search-filter-dropdown-wrapper--single-select');
       
-      $options.each(function() {
-        const $option = $(this);
-        const optionText = $option.data('text').toLowerCase();
-        
-        if (optionText.includes(searchTerm)) {
-          $option.show();
-        } else {
-          $option.hide();
-        }
-      });
+      if (isSingleSelect) {
+        const $options = $modal.find('.search-filter-option');
+        $options.each(function() {
+          const $option = $(this);
+          const optionText = $option.find('.search-filter-option__text').text().toLowerCase();
+          
+          if (optionText.includes(searchTerm)) {
+            $option.show();
+          } else {
+            $option.hide();
+          }
+        });
+      } else {
+        const $options = $modal.find('.search-filter-option');
+        $options.each(function() {
+          const $option = $(this);
+          const optionText = $option.find('.checkbox-label').text().toLowerCase();
+          
+          if (optionText.includes(searchTerm)) {
+            $option.show();
+          } else {
+            $option.hide();
+          }
+        });
+      }
     }
 
     handleOptionClick(e) {
       const $option = $(e.currentTarget);
-      const $modal = $option.closest('.dropdown-modal');
-      const $dropdown = $modal.closest('.dropdown-wrapper');
-      const isSingleSelect = $dropdown.hasClass('single-select');
-      
-      const value = $option.data('value');
-      const text = $option.data('text');
+      const $modal = $option.closest('.search-filter-options-modal');
+      const $dropdown = $modal.closest('.search-filter-dropdown-wrapper');
+      const isSingleSelect = $dropdown.hasClass('search-filter-dropdown-wrapper--single-select');
       
       if (isSingleSelect) {
-        // Single select - replace current selection
-        this.selectSingleOption($dropdown, value, text);
-        this.closeModal($modal);
-      } else {
-        // Multi select - toggle selection
-        this.toggleMultiOption($dropdown, value, text);
-      }
-    }
-
-    selectSingleOption($dropdown, value, text) {
-      // Clear previous selection
-      $dropdown.find('.selected-options').remove();
-      
-      // Add new selection
-      const $selectedOptions = $(`
-        <div class="selected-options">
-          <span class="selected-option">
-            <span class="option-text">${text}</span>
-            <span class="remove-option" data-value="${value}">×</span>
-          </span>
-        </div>
-      `);
-      
-      $dropdown.append($selectedOptions);
-      
-      // Update hidden input
-      $dropdown.find('input[type="hidden"]').val(value);
-      
-      // Update trigger text
-      $dropdown.find('.dropdown-text').text(text);
-    }
-
-    toggleMultiOption($dropdown, value, text) {
-      let $selectedOptions = $dropdown.find('.selected-options');
-      
-      if ($selectedOptions.length === 0) {
-        $selectedOptions = $('<div class="selected-options"></div>');
-        $dropdown.append($selectedOptions);
-      }
-      
-      // Check if option is already selected
-      const $existingOption = $selectedOptions.find(`[data-value="${value}"]`);
-      
-      if ($existingOption.length > 0) {
-        // Remove option
-        $existingOption.remove();
-      } else {
-        // Add option
-        const $newOption = $(`
-          <span class="selected-option">
-            <span class="option-text">${text}</span>
-            <span class="remove-option" data-value="${value}">×</span>
-          </span>
-        `);
+        // Single select - handle clickable option
+        const value = $option.data('value');
+        const text = $option.data('text');
         
-        $selectedOptions.append($newOption);
+        // Update trigger text
+        $dropdown.find('.search-filter-select-trigger__label').text(text);
+        
+        // Close modal automatically for single select
+        this.closeModal($modal);
       }
+      // Multi-select is handled by checkbox change events
+    }
+
+    handleCheckboxChange(e) {
+      const $checkbox = $(e.currentTarget);
+      const $modal = $checkbox.closest('.search-filter-modal');
+      const $dropdown = $modal.closest('.search-filter-dropdown-wrapper');
+      const value = $checkbox.val();
+      const text = $checkbox.siblings('.checkbox-label').text();
+      const isChecked = $checkbox.is(':checked');
       
-      // Update hidden input with array of values
-      const selectedValues = [];
-      $selectedOptions.find('.selected-option').each(function() {
-        selectedValues.push($(this).find('.remove-option').data('value'));
-      });
-      
-      $dropdown.find('input[type="hidden"]').val(selectedValues);
+      // Count selected checkboxes
+      const $selectedCheckboxes = $dropdown.find('input[type="checkbox"]:checked');
+      const selectedCount = $selectedCheckboxes.length;
       
       // Update trigger text
-      if (selectedValues.length === 0) {
-        $dropdown.find('.dropdown-text').text($dropdown.find('.dropdown-trigger').data('placeholder') || 'Select options');
+      if (selectedCount === 0) {
+        const placeholder = $dropdown.find('.search-filter-select-trigger__label').text().replace(/\s*\d+\s*selected/, '');
+        $dropdown.find('.search-filter-select-trigger__label').text(placeholder);
       } else {
-        $dropdown.find('.dropdown-text').text(`${selectedValues.length} selected`);
+        const baseText = $dropdown.find('.search-filter-select-trigger__label').text().replace(/\s*\d+\s*selected/, '');
+        $dropdown.find('.search-filter-select-trigger__label').text(`${baseText} ${selectedCount} selected`);
       }
     }
 
-    handleRemoveOption(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      const $removeBtn = $(e.currentTarget);
-      const value = $removeBtn.data('value');
-      const $dropdown = $removeBtn.closest('.dropdown-wrapper');
-      const isSingleSelect = $dropdown.hasClass('single-select');
-      
-      if (isSingleSelect) {
-        // Reset single select dropdown
-        this.resetDropdown($dropdown);
-      } else {
-        // Remove specific option from multi select
-        $removeBtn.closest('.selected-option').remove();
-        this.updateMultiSelectInput($dropdown);
-      }
-    }
 
-    resetDropdown($dropdown) {
-      $dropdown.find('.selected-options').remove();
-      $dropdown.find('input[type="hidden"]').val('');
-      
-      const placeholder = $dropdown.find('.dropdown-trigger').data('placeholder') || 'Select option';
-      $dropdown.find('.dropdown-text').text(placeholder);
-    }
-
-    updateMultiSelectInput($dropdown) {
-      const $selectedOptions = $dropdown.find('.selected-options');
-      const selectedValues = [];
-      
-      $selectedOptions.find('.selected-option').each(function() {
-        selectedValues.push($(this).find('.remove-option').data('value'));
-      });
-      
-      $dropdown.find('input[type="hidden"]').val(selectedValues);
-      
-      if (selectedValues.length === 0) {
-        const placeholder = $dropdown.find('.dropdown-trigger').data('placeholder') || 'Select options';
-        $dropdown.find('.dropdown-text').text(placeholder);
-      } else {
-        $dropdown.find('.dropdown-text').text(`${selectedValues.length} selected`);
-      }
-    }
 
     handleDoneClick(e) {
       e.preventDefault();
-      const $modal = $(e.currentTarget).closest('.dropdown-modal');
+      const $modal = $(e.currentTarget).closest('.search-filter-options-modal');
       this.closeModal($modal);
     }
 
     handleCloseModal(e) {
       e.preventDefault();
-      const $modal = $(e.currentTarget).closest('.dropdown-modal');
+      const $modal = $(e.currentTarget).closest('.search-filter-options-modal');
       this.closeModal($modal);
     }
 
-    handleOutsideClick(e) {
-      if (!$(e.target).closest('.dropdown-wrapper').length) {
-        this.closeAllModals();
-      }
+    handleBackdropClick(e) {
+      const $modal = $(e.currentTarget).siblings('.search-filter-modal');
+      this.closeModal($modal);
     }
 
     handleKeydown(e) {
@@ -289,28 +251,107 @@
       }
     }
 
+    trapFocus($modal) {
+      const focusableElements = $modal.find('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      const firstElement = focusableElements.first();
+      const lastElement = focusableElements.last();
+      
+      // Handle tab key navigation
+      $modal.on('keydown', (e) => {
+        if (e.key === 'Tab') {
+          if (e.shiftKey) {
+            if (document.activeElement === firstElement[0]) {
+              e.preventDefault();
+              lastElement.focus();
+            }
+          } else {
+            if (document.activeElement === lastElement[0]) {
+              e.preventDefault();
+              firstElement.focus();
+            }
+          }
+        }
+      });
+    }
+
     handleFormSubmit(e) {
+      e.preventDefault();
+      
       const $form = $(e.currentTarget);
-      const $requiredFields = $form.find('input[required]');
+      const $dropdowns = $form.find('.search-filter-dropdown-wrapper');
+      const searchParams = new URLSearchParams();
       let isValid = true;
       
-      // Validate required fields
-      $requiredFields.each(function() {
-        const $field = $(this);
-        const value = $field.val();
+      // Collect values from each dropdown
+      $dropdowns.each((index, dropdown) => {
+        const $dropdown = $(dropdown);
+        const type = this.getDropdownType($dropdown);
+        const isRequired = $dropdown.hasClass('search-filter-dropdown-wrapper--required');
+        const isSingleSelect = $dropdown.hasClass('search-filter-dropdown-wrapper--single-select');
         
-        if (!$field.val() || (Array.isArray(value) && value.length === 0)) {
-          isValid = false;
-          $field.addClass('error');
+        let value = null;
+        
+        if (isSingleSelect) {
+          // Get selected option value from trigger text
+          const triggerText = $dropdown.find('.search-filter-select-trigger__label').text();
+          const placeholder = $dropdown.find('.search-filter-select-trigger').data('placeholder') || $dropdown.find('.search-filter-select-trigger__label').text().replace(/\s*\*$/, '');
+          
+          // If trigger text is different from placeholder, it means something is selected
+          if (triggerText !== placeholder) {
+            // Find the option that matches the trigger text
+            const $options = $dropdown.find('.search-filter-option');
+            $options.each(function() {
+              const $option = $(this);
+              if ($option.data('text') === triggerText) {
+                value = $option.data('value');
+                return false; // break the loop
+              }
+            });
+          }
         } else {
-          $field.removeClass('error');
+          // Get selected checkbox values
+          const $selectedCheckboxes = $dropdown.find('input[type="checkbox"]:checked');
+          value = $selectedCheckboxes.map(function() {
+            return $(this).val();
+          }).get();
+        }
+        
+        // Validate required fields
+        if (isRequired && (!value || (Array.isArray(value) && value.length === 0))) {
+          isValid = false;
+          $dropdown.addClass('error');
+        } else {
+          $dropdown.removeClass('error');
+          
+          // Add to search params
+          if (value) {
+            if (Array.isArray(value)) {
+              value.forEach(v => searchParams.append(type, v));
+            } else {
+              searchParams.append(type, value);
+            }
+          }
         }
       });
       
       if (!isValid) {
-        e.preventDefault();
         this.showValidationError($form);
+        return;
       }
+      
+      // Redirect to search results page with params
+      const baseUrl = window.location.origin + '/find/therapists'; // You can make this configurable
+      const searchUrl = baseUrl + '?' + searchParams.toString();
+      window.location.href = searchUrl;
+    }
+
+    getDropdownType($dropdown) {
+      // Extract type from dropdown classes or data attributes
+      const classes = $dropdown.attr('class');
+      if (classes.includes('location')) return 'location';
+      if (classes.includes('insurance')) return 'insurance';
+      if (classes.includes('needs')) return 'needs';
+      return 'unknown';
     }
 
     showValidationError($form) {
