@@ -2961,6 +2961,34 @@
             "_created": "1755812103",
             "_user_id": "22",
             "_version": "2.0.1"
+        },
+        {
+            "id": "tyejpw",
+            "category": "Hero",
+            "desc": "",
+            "elements": [
+                {
+                    "id": "tyejpw",
+                    "name": "section",
+                    "parent": 0,
+                    "children": [
+                        "eoppue"
+                    ],
+                    "settings": [],
+                    "label": "Hero"
+                },
+                {
+                    "id": "eoppue",
+                    "name": "container",
+                    "parent": "tyejpw",
+                    "children": [],
+                    "settings": []
+                }
+            ],
+            "properties": [],
+            "_created": 1755878862,
+            "_user_id": 10,
+            "_version": "2.0.1"
         }
     ],
     "bricks_css_files_last_generated": "2.0.1",
