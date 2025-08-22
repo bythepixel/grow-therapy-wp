@@ -65,3 +65,9 @@ local-*.php
 
 # Environment configuration files
 .env
+
+# NPM dependencies
+node_modules/
+
+# SCSS files
+wp-content/themes/growtherapy/css/
