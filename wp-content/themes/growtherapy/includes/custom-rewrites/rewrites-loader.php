@@ -16,5 +16,6 @@ if (!defined('ABSPATH')) {
 require_once __DIR__ . '/utilities.php';
 
 // Load individual rewrite systems
+require_once __DIR__ . '/events.php';
 require_once __DIR__ . '/guides.php';
 require_once __DIR__ . '/landing-pages.php';
