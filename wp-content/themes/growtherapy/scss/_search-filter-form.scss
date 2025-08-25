@@ -1,5 +1,6 @@
 @use 'utilities';
 
+$breakpoint-s: 480px;
 $breakpoint-l: 870px;
 
 .search-filter-form {
@@ -82,6 +83,13 @@ $breakpoint-l: 870px;
       top: 0;
       width: 100vw;
       z-index: 1;
+
+      @media (min-width: $breakpoint-s) {
+        height: 25.2rem;
+        position: absolute;
+        top: 100%;
+        width: max-content;
+      }
 
       &-done-button {
         background-color: transparent;
