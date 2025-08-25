@@ -1,19 +1,30 @@
 @use 'utilities';
 
+$breakpoint-l: 870px;
+
 .search-filter-form {
   background-color: #fff;
   border: 0.1rem solid var(--neutral);
   border-radius: 3.2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
   padding: 1.4rem 1.2rem;
   width: 100%;
 
-  @media (min-width: var(--breakpoint-l)) {
+  @media (min-width: $breakpoint-l) {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    max-width: 54.7rem;
+    padding: 0.4rem 0.6rem 0.4rem 2.8rem;
   }
 
   &__dropdown {
     position: relative;
+
+    @media (min-width: $breakpoint-l) {
+      align-items: center;
+      display: flex;
+    }
 
     &::after {
       background-color: var(--neutral);
@@ -22,12 +33,38 @@
       height: 0.1rem;
       margin: 0.8rem 0;
       width: 100%;
+
+      @media (min-width: $breakpoint-l) {
+        height: 2.4rem;
+        margin: 0;
+        width: 0.1rem;
+      }
+    }
+
+    &:first-of-type {
+      .search-filter-form__dropdown-button {
+        @media (min-width: $breakpoint-l) {
+          padding-left: 0;
+        }
+      }
+    }
+
+    &:last-of-type {
+      &::after {
+        @media (min-width: $breakpoint-l) {
+          display: none;
+        }
+      }
     }
 
     &-button {
       background-color: transparent;
       padding: 0.8rem 0;
       width: 100%;
+
+      @media (min-width: $breakpoint-l) {
+        padding: 0 4.5rem;
+      }
 
       &-label {
         font-size: var(--text-s);
@@ -44,5 +81,10 @@
   &__search-button {
     margin-top: 2.4rem;
     width: 100%;
+
+    @media (min-width: $breakpoint-l) {
+      margin: 0;
+      width: 8.8rem;
+    }
   }
 }
