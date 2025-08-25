@@ -184,11 +184,26 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     
     return <<<HTML
     <div class="search-filter-form__dropdown {$required_class} {$single_select_class}">
-      <button type="button" class="search-filter-form__dropdown-button" aria-haspopup="dialog" aria-expanded="false" aria-controls="{$modal_id}">
+      <button
+        type="button"
+        class="search-filter-form__dropdown-button"
+        aria-haspopup="dialog"
+        aria-expanded="false"
+        aria-controls="{$modal_id}"
+        data-search-filter-form-dropdown-button="{$type}"
+      >
         <span class="search-filter-form__dropdown-button-label">{$placeholder}{$required_indicator}</span>
       </button>
       
-      <div class="search-filter-form__dropdown-modal" id="{$modal_id}" role="dialog" aria-modal="true" aria-labelledby="{$modal_title_id}" aria-hidden="true">
+      <div
+        class="search-filter-form__dropdown-modal"
+        id="{$modal_id}"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="{$modal_title_id}"
+        aria-hidden="true"
+        data-search-filter-form-dropdown-modal="{$type}"
+      >
         <div class="search-filter-form__dropdown-modal__header">
           {$this->render_optional_text($config)}
           <button type="button" class="search-filter-form__dropdown-modal__done-button" aria-label="Close">Done</button>

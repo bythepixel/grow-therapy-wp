@@ -1,6 +1,11 @@
 (function($) {
   'use strict';
 
+  const selectors = {
+    dropdownButton: '[data-search-filter-form-dropdown-button]',
+    dropdownModal: '[data-search-filter-form-dropdown-modal]',
+  };
+
   class SearchFilterForm {
     constructor() {
       this.init();
@@ -13,7 +18,7 @@
 
       bindEvents() {
     // Modal trigger clicks
-    $(document).on('click', '.search-filter-form__dropdown-button', this.handleModalOpen.bind(this));
+    $(document).on('click', selectors.dropdownButton, this.handleModalOpen.bind(this));
     
     // Modal close events
     $(document).on('click', '.done-button', this.handleDoneClick.bind(this));
@@ -71,7 +76,7 @@
       $modal.attr('aria-hidden', 'false');
       
       // Update trigger appearance
-      $dropdown.find('.search-filter-form__dropdown-button').attr('aria-expanded', 'true');
+      $dropdown.find(selectors.dropdownButton).attr('aria-expanded', 'true');
       
       // Focus management
       $modal.find('.search-input').focus();
@@ -87,10 +92,10 @@
       $modal.attr('aria-hidden', 'true');
       
       // Update trigger appearance
-      $dropdown.find('.search-filter-form__dropdown-button').attr('aria-expanded', 'false');
+      $dropdown.find(selectors.dropdownButton).attr('aria-expanded', 'false');
       
       // Return focus to trigger
-      $dropdown.find('.search-filter-form__dropdown-button').focus();
+      $dropdown.find(selectors.dropdownButton).focus();
     }
 
     closeAllModals() {
@@ -154,7 +159,7 @@
     handleSearchInput(e) {
       const $input = $(e.currentTarget);
       const searchTerm = $input.val().toLowerCase();
-      const $modal = $input.closest('.search-filter-form__dropdown-modal');
+      const $modal = $input.closest(selectors.dropdownModal);
       const isSingleSelect = $modal.closest('.search-filter-form__dropdown').hasClass('search-filter-form__dropdown--single-select');
       
       if (isSingleSelect) {
@@ -186,7 +191,7 @@
 
     handleOptionClick(e) {
       const $option = $(e.currentTarget);
-      const $modal = $option.closest('.search-filter-form__dropdown-modal');
+      const $modal = $option.closest(selectors.dropdownModal);
       const $dropdown = $modal.closest('.search-filter-form__dropdown');
       const isSingleSelect = $dropdown.hasClass('search-filter-form__dropdown--single-select');
       
@@ -230,13 +235,13 @@
 
     handleDoneClick(e) {
       e.preventDefault();
-      const $modal = $(e.currentTarget).closest('.search-filter-form__dropdown-modal');
+      const $modal = $(e.currentTarget).closest(selectors.dropdownModal);
       this.closeModal($modal);
     }
 
     handleCloseModal(e) {
       e.preventDefault();
-      const $modal = $(e.currentTarget).closest('.search-filter-form__dropdown-modal');
+      const $modal = $(e.currentTarget).closest(selectors.dropdownModal);
       this.closeModal($modal);
     }
 
@@ -294,7 +299,7 @@
         if (isSingleSelect) {
           // Get selected option value from trigger text
           const triggerText = $dropdown.find('.search-filter-form__dropdown-button__label').text();
-          const placeholder = $dropdown.find('.search-filter-form__dropdown-button').data('placeholder') || $dropdown.find('.search-filter-form__dropdown-button__label').text().replace(/\s*\*$/, '');
+          const placeholder = $dropdown.find(selectors.dropdownButton).data('placeholder') || $dropdown.find('.search-filter-form__dropdown-button__label').text().replace(/\s*\*$/, '');
           
           // If trigger text is different from placeholder, it means something is selected
           if (triggerText !== placeholder) {
