@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Register/enqueue custom scripts and styles
  */
