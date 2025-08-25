@@ -84,7 +84,7 @@
               "ihqoqu"
             ]
           },
-          "themeStyles": {},
+          "themeStyles": [],
           "label": "Text Link"
         }
       ],
@@ -172,7 +172,7 @@
     {
       "id": "acss_import_gap--none",
       "name": "gap--none",
-      "settings": {},
+      "settings": [],
       "category": "acss"
     },
     {
@@ -260,7 +260,7 @@
     {
       "id": "q73fvk",
       "name": "stepped-card__text-link",
-      "settings": {}
+      "settings": []
     },
     {
       "id": "ihqoqu",
