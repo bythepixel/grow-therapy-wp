@@ -1,58 +1,108 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Grow\BricksTags\Tags;
 
 use Grow\BricksTags\Rendering\Finalizer;
 use Grow\BricksTags\Support\Context;
 use Grow\BricksTags\Support\Parser;
 
-if (!defined('ABSPATH')) { exit; }
+if (!defined('ABSPATH')) {
+    exit;
+}
 
-final class GtFieldTag {
-  /**
-   * {gt_field:meta_key[|source:post|term|user][|id:<ID>][|raw][|noescape][|DEFAULT][|filters]}
-   */
-  public static function render(string $argStr, $post, string $context) {
-    $parts = explode('|', (string)$argStr);
-    $meta_key = trim(array_shift($parts));
-    if ($meta_key === '') return '';
+/**
+ * GT Field Tag Handler
+ * 
+ * Fetches meta data from posts, terms, or users with support for nested
+ * dynamic tags and various formatting options.
+ * 
+ * Usage: {gt_field:payor_name|source:post|id:123|title|Default Value}
+ * 
+ * Perfect for extracting specific data that can then be used in FAQ content
+ * or other dynamic elements.
+ */
+final class GtFieldTag
+{
+    /**
+     * Render the field tag
+     * 
+     * @param string $argStr The tag arguments
+     * @param mixed $post The current post object
+     * @param string $context The rendering context
+     * @return string The resolved meta value
+     */
+    public static function render(string $argStr, $post, string $context): string
+    {
+        $parts = explode('|', $argStr);
+        $metaKey = trim(array_shift($parts));
+        
+        if ($metaKey === '') {
+            return '';
+        }
 
-    $opts   = Parser::parseOptionTokens($parts); // flags, kv, filters, fallback
-    $source = isset($opts['kv']['source']) ? strtolower($opts['kv']['source']) : 'post';
-    $id     = isset($opts['kv']['id']) ? (int)$opts['kv']['id'] : 0;
+        // Parse options (flags, key-value pairs, filters, fallback)
+        $opts = Parser::parseOptionTokens($parts);
+        $source = isset($opts['kv']['source']) ? strtolower($opts['kv']['source']) : 'post';
+        $id = isset($opts['kv']['id']) ? (int) $opts['kv']['id'] : 0;
 
-    $value = '';
+        // Fetch the meta value based on source type
+        $value = self::fetchMetaValue($source, $metaKey, $id, $post);
 
-    if ($source === 'post') {
-      $post_id = $id ?: ( $post instanceof \WP_Post ? $post->ID : get_the_ID() );
-      if ($post_id) $value = get_post_meta($post_id, $meta_key, true);
-    } elseif ($source === 'term') {
-      $term_id = $id ?: Context::inferTermId();
-      if ($term_id) $value = get_term_meta($term_id, $meta_key, true);
-    } elseif ($source === 'user') {
-      $user_id = $id ?: Context::inferUserId();
-      if ($user_id) $value = get_user_meta($user_id, $meta_key, true);
+        // Pre-resolve any {gt_ctx:...} tags within the fetched value
+        if (is_string($value) && $value !== '') {
+            $value = Parser::resolveGtCtxWithinString($value, $context);
+        }
+
+        // Let Bricks render any remaining dynamic tags
+        if (is_string($value) && $value !== '' && strpos($value, '{') !== false && function_exists('bricks_render_dynamic_data')) {
+            $loopPostId = self::getLoopPostId($source, $id, $post);
+            $value = bricks_render_dynamic_data($value, $loopPostId, $context);
+        }
+
+        // Apply fallback if empty
+        if (Finalizer::isEffectivelyEmpty($value) && $opts['fallback'] !== null) {
+            $value = $opts['fallback'];
+        }
+
+        // Apply formatters and finalize
+        $value = Finalizer::applyFiltersChain($value, $opts['filters']);
+        return Finalizer::finalizeOutput($value, $opts['flags'], $context);
     }
 
-    // Pre-resolve any {gt_ctx:...} INSIDE the fetched string BEFORE other tags
-    if (is_string($value) && $value !== '') {
-      $value = Parser::resolveGtCtxWithinString($value, $context);
+    /**
+     * Fetch meta value based on source type
+     */
+    private static function fetchMetaValue(string $source, string $metaKey, int $id, $post): string
+    {
+        switch ($source) {
+            case 'post':
+                $postId = $id ?: ($post instanceof \WP_Post ? $post->ID : get_the_ID());
+                return $postId ? (string) get_post_meta($postId, $metaKey, true) : '';
+                
+            case 'term':
+                $termId = $id ?: Context::inferTermId();
+                return $termId ? (string) get_term_meta($termId, $metaKey, true) : '';
+                
+            case 'user':
+                $userId = $id ?: Context::inferUserId();
+                return $userId ? (string) get_user_meta($userId, $metaKey, true) : '';
+                
+            default:
+                return '';
+        }
     }
 
-    // Then let Bricks render remaining tags in LOOP ITEM context (only if braces remain)
-    if (is_string($value) && $value !== '' && strpos($value, '{') !== false && function_exists('bricks_render_dynamic_data')) {
-      $loop_post_id = ($source === 'post')
-        ? ($id ?: ( $post instanceof \WP_Post ? $post->ID : get_the_ID() ))
-        : ( $post instanceof \WP_Post ? $post->ID : get_the_ID() );
-      $value = bricks_render_dynamic_data($value, $loop_post_id, $context);
+    /**
+     * Get the appropriate post ID for loop context
+     */
+    private static function getLoopPostId(string $source, int $id, $post): int
+    {
+        if ($source === 'post') {
+            return $id ?: ($post instanceof \WP_Post ? $post->ID : get_the_ID());
+        }
+        
+        return $post instanceof \WP_Post ? $post->ID : get_the_ID();
     }
-
-    // Fallback if empty
-    if (Finalizer::isEffectivelyEmpty($value) && $opts['fallback'] !== null) {
-      $value = $opts['fallback'];
-    }
-
-    // Apply formatters & finalize
-    $value = Finalizer::applyFiltersChain($value, $opts['filters']);
-    return Finalizer::finalizeOutput($value, $opts['flags'], $context);
-  }
 }
