@@ -15477,7 +15477,7 @@
     "bricks_global_classes_changes": [
         {
             "timestamp": 1755894953,
-            "referer": "http://localhost:8000/template/global-footer/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 1751,
             "user_id": 22,
@@ -15487,7 +15487,7 @@
         },
         {
             "timestamp": 1755897587,
-            "referer": "http://localhost:8000/template/global-footer/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 1751,
             "user_id": 22,
@@ -15497,7 +15497,7 @@
         },
         {
             "timestamp": 1755897616,
-            "referer": "http://localhost:8000/template/global-footer/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 1751,
             "user_id": 22,
@@ -15507,7 +15507,7 @@
         },
         {
             "timestamp": 1755897724,
-            "referer": "http://localhost:8000/template/global-footer/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 1751,
             "user_id": 22,
@@ -15517,7 +15517,7 @@
         },
         {
             "timestamp": 1755897765,
-            "referer": "http://localhost:8000/template/global-footer/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 1751,
             "user_id": 22,
@@ -15527,7 +15527,7 @@
         },
         {
             "timestamp": 1755897787,
-            "referer": "http://localhost:8000/template/global-footer/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 1751,
             "user_id": 22,
@@ -15537,7 +15537,7 @@
         },
         {
             "timestamp": 1755897886,
-            "referer": "http://localhost:8000/template/global-footer/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 1751,
             "user_id": 22,
