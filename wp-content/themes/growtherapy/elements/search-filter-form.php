@@ -30,6 +30,15 @@ class Element_Search_Filter_Form extends \Bricks\Element {
 
   public function set_controls() {
     // First Dropdown (Location)
+    $this->controls['location_label'] = [
+      'tab'         => 'content',
+      'group'       => 'dropdowns',
+      'label'       => esc_html__('Location Label', 'bricks'),
+      'type'        => 'text',
+      'default'     => esc_html__('Select your state', 'bricks'),
+      'placeholder' => esc_html__('Enter label text', 'bricks'),
+    ];
+
     $this->controls['location_placeholder'] = [
       'tab'         => 'content',
       'group'       => 'dropdowns',
@@ -48,6 +57,15 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     ];
 
     // Second Dropdown (Insurance)
+    $this->controls['insurance_label'] = [
+      'tab'         => 'content',
+      'group'       => 'dropdowns',
+      'label'       => esc_html__('Insurance Label', 'bricks'),
+      'type'        => 'text',
+      'default'     => esc_html__('Select your carrier', 'bricks'),
+      'placeholder' => esc_html__('Enter label text', 'bricks'),
+    ];
+
     $this->controls['insurance_placeholder'] = [
       'tab'         => 'content',
       'group'       => 'dropdowns',
@@ -66,6 +84,15 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     ];
 
     // Third Dropdown (Needs)
+    $this->controls['needs_label'] = [
+      'tab'         => 'content',
+      'group'       => 'dropdowns',
+      'label'       => esc_html__('Needs Label', 'bricks'),
+      'type'        => 'text',
+      'default'     => esc_html__('Select your needs', 'bricks'),
+      'placeholder' => esc_html__('Enter label text', 'bricks'),
+    ];
+
     $this->controls['needs_placeholder'] = [
       'tab'         => 'content',
       'group'       => 'dropdowns',
@@ -136,6 +163,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
 
     // Get dropdown configurations
     $location_config = [
+      'label'         => $settings['location_label'] ?? esc_html__('Select your state', 'bricks'),
       'placeholder'   => $settings['location_placeholder'] ?? esc_html__('Location', 'bricks'),
       'required'      => $settings['location_required'] ?? true,
       'single_select' => true, // Location is always single-select
@@ -143,6 +171,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     ];
 
     $insurance_config = [
+      'label'         => $settings['insurance_label'] ?? esc_html__('Select your carrier', 'bricks'),
       'placeholder'   => $settings['insurance_placeholder'] ?? esc_html__('Insurance', 'bricks'),
       'required'      => $settings['insurance_required'] ?? true,
       'single_select' => true, // Insurance is always single-select
@@ -150,6 +179,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     ];
 
     $needs_config = [
+      'label'         => $settings['needs_label'] ?? esc_html__('Select your needs', 'bricks'),
       'placeholder'   => $settings['needs_placeholder'] ?? esc_html__('Needs', 'bricks'),
       'required'      => $settings['needs_required'] ?? false,
       'single_select' => false, // Needs is always multi-select
@@ -179,6 +209,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     $required_indicator = $config['required'] ? '*' : '';
     $modal_id = 'search-filter-form__dropdown-modal-' . esc_attr($type);
     $modal_title_id = 'modal-title-' . esc_attr($type);
+    $label = esc_html($config['label']);
     $placeholder = esc_html($config['placeholder']);
     $api_key = esc_attr($config['api_key']);
     
@@ -207,14 +238,34 @@ class Element_Search_Filter_Form extends \Bricks\Element {
         aria-hidden="true"
         data-search-filter-form-dropdown-modal
       >
-        <div class="search-filter-form__dropdown-modal__header">
+        <div class="search-filter-form__dropdown-modal-header">
           {$this->render_optional_text($config)}
-          <button type="button" class="search-filter-form__dropdown-modal__done-button" aria-label="Close">Done</button>
+          <h3 class="search-filter-form__dropdown-modal-heading">{$label}</h3>
+          <button type="button" class="search-filter-form__dropdown-modal-done-button" aria-label="Close">Done</button>
         </div>
         
-        {$this->render_search_input($type)}
-        <div class="search-filter-form__dropdown-modal__options-container" data-api-key="{$api_key}">
-          {$this->render_options_list($config, $modal_title_id, $placeholder)}
+        <div class="search-filter-form__dropdown-modal-options">
+          <div class="search-filter-form__dropdown-modal-search-input-wrapper">
+            <label for="search-{$type}" class="sr-only">Search options</label>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="-4 -3 32 32"
+              stroke-width="1"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path>
+            </svg>
+            <input
+              type="text"
+              id="search-{$type}"
+              class="search-filter-form__dropdown-modal-search-input"
+              placeholder="Search"
+              aria-describedby="search-help-{$type}"
+            >
+            <div id="search-help-{$type}" class="sr-only">Type to filter the available options</div>
+          </div>
+          {$this->render_options_list($config, $modal_title_id, $placeholder, $api_key)}
         </div>
       </div>
     </div>
@@ -228,29 +279,51 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     return '';
   }
 
-  private function render_search_input($type) {
-    return <<<HTML
-    <div class="search-filter-form__dropdown-modal__search-input-wrapper">
-      <label for="search-{$type}" class="sr-only">Search options</label>
-      <input type="text" id="search-{$type}" class="search-filter-form__dropdown-modal__search-input" placeholder="Search" aria-describedby="search-help-{$type}">
-      <div id="search-help-{$type}" class="sr-only">Type to filter the available options</div>
-    </div>
-    HTML;
-  }
-
-  private function render_options_list($config, $modal_title_id, $placeholder) {
+  private function render_options_list($config, $modal_title_id, $placeholder, $api_key) {
+    // Get the appropriate API data based on the key
+    $api_data = [];
+    switch ($api_key) {
+      case 'states':
+        $api_data = get_filter_api_states();
+        break;
+      case 'payors':
+        $api_data = get_filter_api_payors();
+        break;
+      case 'specialties':
+        $api_data = get_filter_api_specialties();
+        break;
+    }
+    
+    // Generate options HTML
+    $options_html = '';
+    if (!empty($api_data) && is_array($api_data)) {
+      foreach ($api_data as $item) {
+        $value = isset($item['value']) ? $item['value'] : (isset($item['id']) ? $item['id'] : '');
+        $label = isset($item['label']) ? $item['label'] : (isset($item['name']) ? $item['name'] : '');
+        
+        if ($value && $label) {
+          $options_html .= '<li class="search-filter-form__dropdown-modal-option" data-value="' . esc_attr($value) . '">' . esc_html($label) . '</li>';
+        }
+      }
+    }
+    
+    // If no data, show a placeholder
+    if (empty($options_html)) {
+      $options_html = '<li class="search-filter-form__dropdown-modal-option">No options available</li>';
+    }
+    
     if ($config['single_select']) {
       return <<<HTML
-      <ul class="search-filter-form__dropdown-modal__options-list" role="listbox" aria-labelledby="{$modal_title_id}">
-        <li class="search-filter-form__dropdown-modal__option">Test</li>
+      <ul class="search-filter-form__dropdown-modal-options-list" role="listbox" aria-labelledby="{$modal_title_id}">
+        {$options_html}
       </ul>
       HTML;
     } else {
       return <<<HTML
       <fieldset class="search-filter-form__dropdown-modal__options-fieldset">
         <legend class="sr-only">{$placeholder} options</legend>
-        <ul class="search-filter-form__dropdown-modal__options-list" role="listbox" aria-labelledby="{$modal_title_id}">
-          <li class="search-filter-form__dropdown-modal__option">Test</li>
+        <ul class="search-filter-form__dropdown-modal-options-list" role="listbox" aria-labelledby="{$modal_title_id}">
+          {$options_html}
         </ul>
       </fieldset>
       HTML;
