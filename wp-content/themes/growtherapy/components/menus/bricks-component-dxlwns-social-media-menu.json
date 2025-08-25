@@ -65,13 +65,13 @@
             "_cssGlobalClasses": [
               "4h0xv6"
             ],
-            "file": {
-              "id": "1759",
-              "filename": "Vector.svg",
-              "url": "http://localhost:8000/wp-content/uploads/2025/08/Vector.svg"
-            },
             "stroke": {
               "raw": "currentColor"
+            },
+            "file": {
+              "id": 1774,
+              "filename": "x-twitter-icon.svg",
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/x-twitter-icon.svg"
             }
           },
           "label": "Svg"
@@ -107,13 +107,13 @@
             "_cssGlobalClasses": [
               "4h0xv6"
             ],
-            "file": {
-              "id": 1760,
-              "filename": "Social-icon-1.svg",
-              "url": "http://localhost:8000/wp-content/uploads/2025/08/Social-icon-1.svg"
-            },
             "fill": {
               "raw": "currentColor"
+            },
+            "file": {
+              "id": 1772,
+              "filename": "linkedin-icon.svg",
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/linkedin-icon.svg"
             }
           },
           "label": "Svg"
@@ -149,13 +149,13 @@
             "_cssGlobalClasses": [
               "4h0xv6"
             ],
-            "file": {
-              "id": 1758,
-              "filename": "Social-icon.svg",
-              "url": "http://localhost:8000/wp-content/uploads/2025/08/Social-icon.svg"
-            },
             "fill": {
               "raw": "currentColor"
+            },
+            "file": {
+              "id": 1768,
+              "filename": "facebook-icon.svg",
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/facebook-icon.svg"
             }
           },
           "label": "Svg"
@@ -191,14 +191,14 @@
             "_cssGlobalClasses": [
               "4h0xv6"
             ],
-            "file": {
-              "id": 1756,
-              "filename": "Social-icon-2.svg",
-              "url": "http://localhost:8000/wp-content/uploads/2025/08/Social-icon-2.svg"
-            },
             "fill": {
               "hex": "#000000",
               "raw": "currentColor"
+            },
+            "file": {
+              "id": 1771,
+              "filename": "instagram-icon.svg",
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/instagram-icon.svg"
             }
           },
           "label": "Svg"
@@ -234,13 +234,13 @@
             "_cssGlobalClasses": [
               "4h0xv6"
             ],
-            "file": {
-              "id": "1757",
-              "filename": "Social-icon-3.svg",
-              "url": "http://localhost:8000/wp-content/uploads/2025/08/Social-icon-3.svg"
-            },
             "fill": {
               "raw": "currentColor"
+            },
+            "file": {
+              "id": 1773,
+              "filename": "tiktok-icon.svg",
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/tiktok-icon.svg"
             }
           },
           "label": "Svg"
@@ -255,7 +255,9 @@
     {
       "id": "hulamc",
       "name": "social-media-list",
-      "settings": {}
+      "settings": [],
+      "modified": 1755897886,
+      "user_id": 22
     },
     {
       "id": "acss_import_link--neutral-semi-light",

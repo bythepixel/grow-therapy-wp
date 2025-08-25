@@ -6,6 +6,7 @@ license.txt
 readme.html
 wp-*.php
 xmlrpc.php
+.idea/workspace.xml
 
 # Third-party plugins out of git by default
 wp-content/plugins/*

@@ -1,0 +1,276 @@
+{
+  "components": [
+    {
+      "id": "witjfm",
+      "category": "Card",
+      "desc": "A stepped card with a counter, two headings and a CTA.",
+      "elements": [
+        {
+          "id": "witjfm",
+          "name": "block",
+          "parent": 0,
+          "children": [
+            "chousi",
+            "uxsxtj",
+            "ksnkgp",
+            "jdrmdh"
+          ],
+          "settings": {
+            "_cssGlobalClasses": [
+              "acss_import_gap--none",
+              "thvmjz"
+            ],
+            "tag": "li",
+            "_padding:mobile_landscape": {
+              "left": "0"
+            }
+          },
+          "label": "Stepped Card"
+        },
+        {
+          "id": "chousi",
+          "name": "heading",
+          "parent": "witjfm",
+          "children": [],
+          "settings": {
+            "text": "01",
+            "_cssGlobalClasses": [
+              "dd0cz5"
+            ],
+            "tag": "h3"
+          },
+          "label": "Heading"
+        },
+        {
+          "id": "uxsxtj",
+          "name": "heading",
+          "parent": "witjfm",
+          "children": [],
+          "settings": {
+            "text": "Heading",
+            "tag": "h4",
+            "_cssGlobalClasses": [
+              "bnhfai"
+            ]
+          },
+          "label": "Subheading"
+        },
+        {
+          "id": "ksnkgp",
+          "name": "text-basic",
+          "parent": "witjfm",
+          "children": [],
+          "settings": {
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquam ipsum non convallis cursus. Suspendisse cursus posuere volutpat.",
+            "_cssGlobalClasses": [
+              "ihqoqu",
+              "mux6kz"
+            ]
+          },
+          "label": "Text Basic"
+        },
+        {
+          "id": "jdrmdh",
+          "name": "text-link",
+          "parent": "witjfm",
+          "children": [],
+          "settings": {
+            "text": "Call to action",
+            "link": {
+              "type": "internal"
+            },
+            "_cssGlobalClasses": [
+              "q73fvk",
+              "ihqoqu"
+            ]
+          },
+          "themeStyles": [],
+          "label": "Text Link"
+        }
+      ],
+      "properties": [
+        {
+          "label": "Subheading",
+          "type": "text",
+          "group": "qgvbst",
+          "default": "Heading",
+          "id": "zjvcmy",
+          "connections": {
+            "uxsxtj": [
+              "text"
+            ]
+          }
+        },
+        {
+          "label": "Counter",
+          "type": "text",
+          "group": "qgvbst",
+          "default": "01",
+          "id": "tckqnv",
+          "connections": {
+            "chousi": [
+              "text"
+            ]
+          }
+        },
+        {
+          "label": "Body Text",
+          "type": "text",
+          "group": "cbiagh",
+          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquam ipsum non convallis cursus. Suspendisse cursus posuere volutpat.",
+          "id": "xojivc",
+          "connections": {
+            "ksnkgp": [
+              "text"
+            ]
+          }
+        },
+        {
+          "label": "Link Text",
+          "type": "text",
+          "group": "cbiagh",
+          "default": "Call to action",
+          "id": "flqyke",
+          "connections": {
+            "jdrmdh": [
+              "text"
+            ]
+          }
+        },
+        {
+          "label": "Link URL",
+          "type": "link",
+          "group": "cbiagh",
+          "default": {
+            "type": "internal",
+            "postId": "43"
+          },
+          "id": "futrfs",
+          "connections": {
+            "jdrmdh": [
+              "link"
+            ]
+          }
+        }
+      ],
+      "_created": 1755905201,
+      "_user_id": 22,
+      "_version": "2.0.1",
+      "propertyGroups": [
+        {
+          "id": "qgvbst",
+          "name": "Headings"
+        },
+        {
+          "id": "cbiagh",
+          "name": "Body"
+        }
+      ]
+    }
+  ],
+  "globalClasses": [
+    {
+      "id": "acss_import_gap--none",
+      "name": "gap--none",
+      "settings": [],
+      "category": "acss"
+    },
+    {
+      "id": "thvmjz",
+      "name": "stepped-card",
+      "settings": {
+        "_padding": {
+          "left": "var(--radius-4xl)"
+        },
+        "_border": {
+          "width": {
+            "left": "1px"
+          },
+          "style": "solid",
+          "color": {
+            "raw": "var(--neutral-ultra-dark)"
+          }
+        },
+        "_border:mobile_landscape": {
+          "width": {
+            "left": "0",
+            "top": "1px"
+          },
+          "color": {
+            "hex": "#000000"
+          },
+          "style": "solid"
+        },
+        "_padding:mobile_landscape": {
+          "top": "2.4rem",
+          "bottom": "2.4rem",
+          "left": "0"
+        }
+      }
+    },
+    {
+      "id": "dd0cz5",
+      "name": "stepped-card__heading",
+      "settings": {
+        "_margin": {
+          "bottom": "var(--radius-xxl)"
+        },
+        "_typography": {
+          "font-size": "5.6rem"
+        },
+        "_typography:mobile_landscape": {
+          "font-size": "4.8rem"
+        }
+      }
+    },
+    {
+      "id": "bnhfai",
+      "name": "stepped-card__subheading",
+      "settings": {
+        "_margin": {
+          "bottom": "0.8rem"
+        },
+        "_typography": {
+          "font-size": "2.4rem"
+        }
+      }
+    },
+    {
+      "id": "ihqoqu",
+      "name": "text--line-height-s",
+      "settings": {
+        "_typography": {
+          "line-height": "2.4rem"
+        },
+        "_cssCustom": ".text--line-height-s {\n  --text-s-line-height: 2.4rem;\n}"
+      }
+    },
+    {
+      "id": "mux6kz",
+      "name": "stepped-card__text-basic",
+      "settings": {
+        "_margin": {
+          "bottom": "3.2rem"
+        },
+        "_margin:mobile_landscape": {
+          "bottom": "2.4rem"
+        }
+      }
+    },
+    {
+      "id": "q73fvk",
+      "name": "stepped-card__text-link",
+      "settings": []
+    },
+    {
+      "id": "ihqoqu",
+      "name": "text--line-height-s",
+      "settings": {
+        "_typography": {
+          "line-height": "2.4rem"
+        },
+        "_cssCustom": ".text--line-height-s {\n  --text-s-line-height: 2.4rem;\n}"
+      }
+    }
+  ]
+}

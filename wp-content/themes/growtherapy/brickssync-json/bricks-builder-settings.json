@@ -1997,432 +1997,429 @@
     ],
     "bricks_components": [
         {
-            "id": "dxlwns",
-            "category": "Menu",
-            "desc": "Sub-menu for social media links and contact information.",
-            "elements": [
-            {
-                "id": "dxlwns",
-                "name": "block",
-                "parent": "0",
-                "children": [
-                "taqkvv",
-                "qckwra",
-                "hhbjlh",
-                "ffjkkw",
-                "uvrqdn"
-                ],
-                "settings": {
-                "_cssGlobalClasses": [
-                    "xrmfth",
-                    "hulamc"
-                ],
-                "_direction": "row",
-                "_display": "flex",
-                "_gridAutoFlow": "column",
-                "_gridTemplateRows": "1fr",
-                "_gridGap": "2.4rem",
-                "_justifyItemsGrid": "flex-start",
-                "_justifyContentGrid": "flex-start",
-                "_alignItemsGrid": "flex-start",
-                "_alignContentGrid": "flex-start",
-                "_heightMin": "2.4rem"
-                },
-                "label": "Social Media Menu"
-            },
-            {
-                "id": "taqkvv",
-                "name": "div",
-                "parent": "dxlwns",
-                "children": [
-                "zgezcb"
-                ],
-                "settings": {
-                "tag": "a",
-                "_cssGlobalClasses": [
-                    "vlh97y",
-                    "acss_import_link--neutral-semi-light",
-                    "acss_import_link-hover--accent"
-                ],
-                "link": {
-                    "type": "external",
-                    "ariaLabel": "Follow GT on X/Twitter",
-                    "url": "https://x.com/growtherapy_",
-                    "newTab": true
-                }
-                },
-                "label": "Link"
-            },
-            {
-                "id": "zgezcb",
-                "name": "svg",
-                "parent": "taqkvv",
-                "settings": {
-                "_cssGlobalClasses": [
-                    "4h0xv6"
-                ],
-                "file": {
-                    "id": "1759",
-                    "filename": "Vector.svg",
-                    "url": "http://localhost:8000/wp-content/uploads/2025/08/Vector.svg"
-                },
-                "stroke": {
-                    "raw": "currentColor"
-                }
-                },
-                "label": "Svg"
-            },
-            {
-                "id": "qckwra",
-                "name": "div",
-                "parent": "dxlwns",
-                "children": [
-                "qkuixu"
-                ],
-                "settings": {
-                "tag": "a",
-                "_cssGlobalClasses": [
-                    "vlh97y",
-                    "acss_import_link--neutral-semi-light",
-                    "acss_import_link-hover--accent"
-                ],
-                "link": {
-                    "type": "external",
-                    "url": "https://www.linkedin.com/company/grow-therapy/",
-                    "newTab": true,
-                    "ariaLabel": "Connect with GT on LinkedIn"
-                }
-                },
-                "label": "Link"
-            },
-            {
-                "id": "qkuixu",
-                "name": "svg",
-                "parent": "qckwra",
-                "settings": {
-                "_cssGlobalClasses": [
-                    "4h0xv6"
-                ],
-                "file": {
-                    "id": 1760,
-                    "filename": "Social-icon-1.svg",
-                    "url": "http://localhost:8000/wp-content/uploads/2025/08/Social-icon-1.svg"
-                },
-                "fill": {
-                    "raw": "currentColor"
-                }
-                },
-                "label": "Svg"
-            },
-            {
-                "id": "hhbjlh",
-                "name": "div",
-                "parent": "dxlwns",
-                "children": [
-                "vgvbjh"
-                ],
-                "settings": {
-                "tag": "a",
-                "_cssGlobalClasses": [
-                    "vlh97y",
-                    "acss_import_link--neutral-semi-light",
-                    "acss_import_link-hover--accent"
-                ],
-                "link": {
-                    "type": "external",
-                    "url": "https://www.facebook.com/joingrowtherapy/",
-                    "ariaLabel": "Follow GT on Facebook",
-                    "newTab": true
-                }
-                },
-                "label": "Link"
-            },
-            {
-                "id": "vgvbjh",
-                "name": "svg",
-                "parent": "hhbjlh",
-                "settings": {
-                "_cssGlobalClasses": [
-                    "4h0xv6"
-                ],
-                "file": {
-                    "id": 1758,
-                    "filename": "Social-icon.svg",
-                    "url": "http://localhost:8000/wp-content/uploads/2025/08/Social-icon.svg"
-                },
-                "fill": {
-                    "raw": "currentColor"
-                }
-                },
-                "label": "Svg"
-            },
-            {
-                "id": "ffjkkw",
-                "name": "div",
-                "parent": "dxlwns",
-                "children": [
-                "miooad"
-                ],
-                "settings": {
-                "tag": "a",
-                "_cssGlobalClasses": [
-                    "vlh97y",
-                    "acss_import_link--neutral-semi-light",
-                    "acss_import_link-hover--accent"
-                ],
-                "link": {
-                    "type": "external",
-                    "url": "https://www.instagram.com/growtherapy/",
-                    "ariaLabel": "Follow GT on Instagram",
-                    "newTab": true
-                }
-                },
-                "label": "Link"
-            },
-            {
-                "id": "miooad",
-                "name": "svg",
-                "parent": "ffjkkw",
-                "settings": {
-                "_cssGlobalClasses": [
-                    "4h0xv6"
-                ],
-                "file": {
-                    "id": 1756,
-                    "filename": "Social-icon-2.svg",
-                    "url": "http://localhost:8000/wp-content/uploads/2025/08/Social-icon-2.svg"
-                },
-                "fill": {
-                    "hex": "#000000",
-                    "raw": "currentColor"
-                }
-                },
-                "label": "Svg"
-            },
-            {
-                "id": "uvrqdn",
-                "name": "div",
-                "parent": "dxlwns",
-                "children": [
-                "lzgbvw"
-                ],
-                "settings": {
-                "tag": "a",
-                "_cssGlobalClasses": [
-                    "vlh97y",
-                    "acss_import_link--neutral-semi-light",
-                    "acss_import_link-hover--accent"
-                ],
-                "link": {
-                    "type": "external",
-                    "url": "https://www.tiktok.com/@growtherapy",
-                    "ariaLabel": "Follow GT on TikTok",
-                    "newTab": true
-                }
-                },
-                "label": "Link"
-            },
-            {
-                "id": "lzgbvw",
-                "name": "svg",
-                "parent": "uvrqdn",
-                "settings": {
-                "_cssGlobalClasses": [
-                    "4h0xv6"
-                ],
-                "file": {
-                    "id": "1757",
-                    "filename": "Social-icon-3.svg",
-                    "url": "http://localhost:8000/wp-content/uploads/2025/08/Social-icon-3.svg"
-                },
-                "fill": {
-                    "raw": "currentColor"
-                }
-                },
-                "label": "Svg"
-            }],
-            "_created": "1755812103",
-            "_user_id": "22",
-            "_version": "2.0.1"
-        },
-        {
-            "id": "frwzqx",
-            "category": "Section",
-            "desc": "",
+            "id": "witjfm",
+            "category": "Card",
+            "desc": "A stepped card with a counter, two headings and a CTA.",
             "elements": [
                 {
-                    "id": "frwzqx",
-                    "name": "section",
+                    "id": "witjfm",
+                    "name": "block",
                     "parent": 0,
                     "children": [
-                        "1b8f3d"
+                        "chousi",
+                        "uxsxtj",
+                        "ksnkgp",
+                        "jdrmdh"
                     ],
                     "settings": {
                         "_cssGlobalClasses": [
-                            "w1z0sk"
-                        ]
-                    },
-                    "label": "Our Promise"
-                },
-                {
-                    "id": "1b8f3d",
-                    "name": "container",
-                    "parent": "frwzqx",
-                    "children": [
-                        "585308",
-                        "8851f6"
-                    ],
-                    "settings": {
-                        "_direction": "row",
-                        "_cssGlobalClasses": [
-                            "taxi4h"
+                            "acss_import_gap--none",
+                            "thvmjz"
                         ],
-                        "_direction:mobile_landscape": "row-reverse",
-                        "_direction:mobile_portrait": "row",
-                        "_flexWrap:mobile_landscape": "wrap-reverse"
+                        "tag": "li",
+                        "_padding:mobile_landscape": {
+                            "left": "0"
+                        }
                     },
-                    "label": "Inner"
+                    "label": "Stepped Card"
                 },
                 {
-                    "id": "585308",
-                    "name": "block",
-                    "parent": "1b8f3d",
-                    "children": [
-                        "805e4c"
-                    ],
-                    "settings": {
-                        "_cssGlobalClasses": [
-                            "kahxjt"
-                        ]
-                    },
-                    "label": "Media Wrapper"
-                },
-                {
-                    "id": "805e4c",
-                    "name": "image",
-                    "parent": "585308",
-                    "children": [],
-                    "settings": {
-                        "_cssGlobalClasses": [
-                            "gs91ki"
-                        ],
-                        "image": {
-                            "url": "https://env-growtherapy-devcontent.kinsta.cloud/wp-content/themes/bricks/assets/images/placeholder-image-800x600.jpg",
-                            "full": "https://env-growtherapy-devcontent.kinsta.cloud/wp-content/themes/bricks/assets/images/placeholder-image-800x600.jpg",
-                            "isPlaceholder": true
-                        },
-                        "tag": "figure"
-                    },
-                    "label": "Media",
-                    "themeStyles": {
-                        "caption": "none"
-                    }
-                },
-                {
-                    "id": "8851f6",
-                    "name": "block",
-                    "parent": "1b8f3d",
-                    "children": [
-                        "604118",
-                        "d2e923"
-                    ],
-                    "settings": {
-                        "_cssGlobalClasses": [
-                            "t4yemr"
-                        ]
-                    },
-                    "label": "Promise Wrapper"
-                },
-                {
-                    "id": "604118",
+                    "id": "chousi",
                     "name": "heading",
-                    "parent": "8851f6",
+                    "parent": "witjfm",
                     "children": [],
                     "settings": {
-                        "text": "Our promise to you",
+                        "text": "01",
                         "_cssGlobalClasses": [
-                            "1havz2"
-                        ]
+                            "dd0cz5"
+                        ],
+                        "tag": "h3"
                     },
                     "label": "Heading"
                 },
                 {
-                    "id": "d2e923",
-                    "name": "text",
-                    "parent": "8851f6",
+                    "id": "uxsxtj",
+                    "name": "heading",
+                    "parent": "witjfm",
                     "children": [],
                     "settings": {
-                        "text": "<p>We are a team of mental health advocates and healthcare veterans who believe providers shouldn\u2019t have to decide between independence or administrative support; a diverse client base or a decent living; a full practice or clinical autonomy.</p>\n<p>Our team works tirelessly to help you build a successful practice while allowing you to focus on what you do best\u2026 helping clients. We hope to have the opportunity to serve you!</p>\n<p><strong>Jake Cooper</strong><br />CEO, Grow Therapy</p>",
+                        "text": "Heading",
+                        "tag": "h4",
                         "_cssGlobalClasses": [
-                            "t5guqm"
-                        ],
-                        "type": "lead"
+                            "bnhfai"
+                        ]
                     },
-                    "label": "Text"
+                    "label": "Subheading"
+                },
+                {
+                    "id": "ksnkgp",
+                    "name": "text-basic",
+                    "parent": "witjfm",
+                    "children": [],
+                    "settings": {
+                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquam ipsum non convallis cursus. Suspendisse cursus posuere volutpat.",
+                        "_cssGlobalClasses": [
+                            "ihqoqu",
+                            "mux6kz"
+                        ]
+                    },
+                    "label": "Text Basic"
+                },
+                {
+                    "id": "jdrmdh",
+                    "name": "text-link",
+                    "parent": "witjfm",
+                    "children": [],
+                    "settings": {
+                        "text": "Call to action",
+                        "link": {
+                            "type": "internal"
+                        },
+                        "_cssGlobalClasses": [
+                            "q73fvk",
+                            "ihqoqu"
+                        ]
+                    },
+                    "themeStyles": [],
+                    "label": "Text Link"
                 }
             ],
             "properties": [
                 {
-                    "label": "Image",
-                    "type": "image",
+                    "label": "Subheading",
+                    "type": "text",
+                    "group": "qgvbst",
+                    "default": "Heading",
+                    "id": "zjvcmy",
+                    "connections": {
+                        "uxsxtj": [
+                            "text"
+                        ]
+                    }
+                },
+                {
+                    "label": "Counter",
+                    "type": "text",
+                    "group": "qgvbst",
+                    "default": "01",
+                    "id": "tckqnv",
+                    "connections": {
+                        "chousi": [
+                            "text"
+                        ]
+                    }
+                },
+                {
+                    "label": "Body Text",
+                    "type": "text",
+                    "group": "cbiagh",
+                    "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquam ipsum non convallis cursus. Suspendisse cursus posuere volutpat.",
+                    "id": "xojivc",
+                    "connections": {
+                        "ksnkgp": [
+                            "text"
+                        ]
+                    }
+                },
+                {
+                    "label": "Link Text",
+                    "type": "text",
+                    "group": "cbiagh",
+                    "default": "Call to action",
+                    "id": "flqyke",
+                    "connections": {
+                        "jdrmdh": [
+                            "text"
+                        ]
+                    }
+                },
+                {
+                    "label": "Link URL",
+                    "type": "link",
+                    "group": "cbiagh",
                     "default": {
-                        "id": 877,
-                        "filename": "Group-1321315975-e1712335030315.png",
-                        "size": "medium_large",
-                        "full": "https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2024/01/Group-1321315975-e1712335030315.png",
-                        "url": "https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2024/01/Group-1321315975-e1712335030315-768x768.png"
+                        "type": "internal",
+                        "postId": "43"
                     },
-                    "id": "ododae",
+                    "id": "futrfs",
                     "connections": {
-                        "805e4c": [
-                            "image"
+                        "jdrmdh": [
+                            "link"
                         ]
                     }
-                },
-                {
-                    "label": "Image - Alt Text (Optional)",
-                    "type": "text",
-                    "id": "kebthi",
-                    "connections": {
-                        "805e4c": [
-                            "altText"
-                        ]
-                    }
-                },
-                {
-                    "label": "Headline",
-                    "type": "text",
-                    "id": "kybhzz",
-                    "connections": {
-                        "604118": [
-                            "text"
-                        ]
-                    },
-                    "default": "Our promise to you"
-                },
-                {
-                    "label": "Promise Text",
-                    "type": "editor",
-                    "id": "zeahns",
-                    "connections": {
-                        "d2e923": [
-                            "text"
-                        ]
-                    },
-                    "default": "<p>We are a team of mental health advocates and healthcare veterans who believe providers shouldn\u2019t have to decide between independence or administrative support; a diverse client base or a decent living; a full practice or clinical autonomy.</p>\n<p>Our team works tirelessly to help you build a successful practice while allowing you to focus on what you do best\u2026 helping clients. We hope to have the opportunity to serve you!</p>\n<p><strong>Jake Cooper</strong><br />CEO, Grow Therapy</p>"
                 }
             ],
-            "_created": 1755874499,
-            "_user_id": 4,
+            "_created": 1755905201,
+            "_user_id": 22,
+            "_version": "2.0.1",
+            "propertyGroups": [
+                {
+                    "id": "qgvbst",
+                    "name": "Headings"
+                },
+                {
+                    "id": "cbiagh",
+                    "name": "Body"
+                }
+            ]
+        },
+        {
+            "id": "dxlwns",
+            "category": "Menu",
+            "desc": "Sub-menu for social media links and contact information.",
+            "elements": [
+                {
+                    "id": "dxlwns",
+                    "name": "block",
+                    "parent": "0",
+                    "children": [
+                        "taqkvv",
+                        "qckwra",
+                        "hhbjlh",
+                        "ffjkkw",
+                        "uvrqdn"
+                    ],
+                    "settings": {
+                        "_cssGlobalClasses": [
+                            "xrmfth",
+                            "hulamc"
+                        ],
+                        "_direction": "row",
+                        "_display": "flex",
+                        "_gridAutoFlow": "column",
+                        "_gridTemplateRows": "1fr",
+                        "_gridGap": "2.4rem",
+                        "_justifyItemsGrid": "flex-start",
+                        "_justifyContentGrid": "flex-start",
+                        "_alignItemsGrid": "flex-start",
+                        "_alignContentGrid": "flex-start",
+                        "_heightMin": "2.4rem"
+                    },
+                    "label": "Social Media Menu"
+                },
+                {
+                    "id": "taqkvv",
+                    "name": "div",
+                    "parent": "dxlwns",
+                    "children": [
+                        "zgezcb"
+                    ],
+                    "settings": {
+                        "tag": "a",
+                        "_cssGlobalClasses": [
+                            "vlh97y",
+                            "acss_import_link--neutral-semi-light",
+                            "acss_import_link-hover--accent"
+                        ],
+                        "link": {
+                            "type": "external",
+                            "ariaLabel": "Follow GT on X/Twitter",
+                            "url": "https://x.com/growtherapy_",
+                            "newTab": true
+                        }
+                    },
+                    "label": "Link"
+                },
+                {
+                    "id": "zgezcb",
+                    "name": "svg",
+                    "parent": "taqkvv",
+                    "settings": {
+                        "_cssGlobalClasses": [
+                            "4h0xv6"
+                        ],
+                        "stroke": {
+                            "raw": "currentColor"
+                        },
+                        "file": {
+                            "id": 1774,
+                            "filename": "x-twitter-icon.svg",
+                            "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/x-twitter-icon.svg"
+                        }
+                    },
+                    "label": "Svg"
+                },
+                {
+                    "id": "qckwra",
+                    "name": "div",
+                    "parent": "dxlwns",
+                    "children": [
+                        "qkuixu"
+                    ],
+                    "settings": {
+                        "tag": "a",
+                        "_cssGlobalClasses": [
+                            "vlh97y",
+                            "acss_import_link--neutral-semi-light",
+                            "acss_import_link-hover--accent"
+                        ],
+                        "link": {
+                            "type": "external",
+                            "url": "https://www.linkedin.com/company/grow-therapy/",
+                            "newTab": true,
+                            "ariaLabel": "Connect with GT on LinkedIn"
+                        }
+                    },
+                    "label": "Link"
+                },
+                {
+                    "id": "qkuixu",
+                    "name": "svg",
+                    "parent": "qckwra",
+                    "settings": {
+                        "_cssGlobalClasses": [
+                            "4h0xv6"
+                        ],
+                        "fill": {
+                            "raw": "currentColor"
+                        },
+                        "file": {
+                            "id": 1772,
+                            "filename": "linkedin-icon.svg",
+                            "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/linkedin-icon.svg"
+                        }
+                    },
+                    "label": "Svg"
+                },
+                {
+                    "id": "hhbjlh",
+                    "name": "div",
+                    "parent": "dxlwns",
+                    "children": [
+                        "vgvbjh"
+                    ],
+                    "settings": {
+                        "tag": "a",
+                        "_cssGlobalClasses": [
+                            "vlh97y",
+                            "acss_import_link--neutral-semi-light",
+                            "acss_import_link-hover--accent"
+                        ],
+                        "link": {
+                            "type": "external",
+                            "url": "https://www.facebook.com/joingrowtherapy/",
+                            "ariaLabel": "Follow GT on Facebook",
+                            "newTab": true
+                        }
+                    },
+                    "label": "Link"
+                },
+                {
+                    "id": "vgvbjh",
+                    "name": "svg",
+                    "parent": "hhbjlh",
+                    "settings": {
+                        "_cssGlobalClasses": [
+                            "4h0xv6"
+                        ],
+                        "fill": {
+                            "raw": "currentColor"
+                        },
+                        "file": {
+                            "id": 1768,
+                            "filename": "facebook-icon.svg",
+                            "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/facebook-icon.svg"
+                        }
+                    },
+                    "label": "Svg"
+                },
+                {
+                    "id": "ffjkkw",
+                    "name": "div",
+                    "parent": "dxlwns",
+                    "children": [
+                        "miooad"
+                    ],
+                    "settings": {
+                        "tag": "a",
+                        "_cssGlobalClasses": [
+                            "vlh97y",
+                            "acss_import_link--neutral-semi-light",
+                            "acss_import_link-hover--accent"
+                        ],
+                        "link": {
+                            "type": "external",
+                            "url": "https://www.instagram.com/growtherapy/",
+                            "ariaLabel": "Follow GT on Instagram",
+                            "newTab": true
+                        }
+                    },
+                    "label": "Link"
+                },
+                {
+                    "id": "miooad",
+                    "name": "svg",
+                    "parent": "ffjkkw",
+                    "settings": {
+                        "_cssGlobalClasses": [
+                            "4h0xv6"
+                        ],
+                        "fill": {
+                            "hex": "#000000",
+                            "raw": "currentColor"
+                        },
+                        "file": {
+                            "id": 1771,
+                            "filename": "instagram-icon.svg",
+                            "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/instagram-icon.svg"
+                        }
+                    },
+                    "label": "Svg"
+                },
+                {
+                    "id": "uvrqdn",
+                    "name": "div",
+                    "parent": "dxlwns",
+                    "children": [
+                        "lzgbvw"
+                    ],
+                    "settings": {
+                        "tag": "a",
+                        "_cssGlobalClasses": [
+                            "vlh97y",
+                            "acss_import_link--neutral-semi-light",
+                            "acss_import_link-hover--accent"
+                        ],
+                        "link": {
+                            "type": "external",
+                            "url": "https://www.tiktok.com/@growtherapy",
+                            "ariaLabel": "Follow GT on TikTok",
+                            "newTab": true
+                        }
+                    },
+                    "label": "Link"
+                },
+                {
+                    "id": "lzgbvw",
+                    "name": "svg",
+                    "parent": "uvrqdn",
+                    "settings": {
+                        "_cssGlobalClasses": [
+                            "4h0xv6"
+                        ],
+                        "fill": {
+                            "raw": "currentColor"
+                        },
+                        "file": {
+                            "id": 1773,
+                            "filename": "tiktok-icon.svg",
+                            "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/tiktok-icon.svg"
+                        }
+                    },
+                    "label": "Svg"
+                }
+            ],
+            "_created": "1755812103",
+            "_user_id": "22",
             "_version": "2.0.1"
         }
     ],
     "bricks_css_files_last_generated": "2.0.1",
-    "bricks_css_files_last_generated_timestamp": "1755876239",
+    "bricks_css_files_last_generated_timestamp": "1755906109",
     "bricks_filters_element_db_version": "1.1",
     "bricks_filters_index_db_version": "1.0",
     "bricks_filters_index_job_db_version": "1.0",
-    "bricks_font_face_rules": "@font-face{font-family:\"Atak\";font-weight:300;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_light-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:400;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_regular-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:500;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_medium-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:600;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_semibold-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:700;font-display:swap;src:url(https://env-growtherapy-devcontent.kinsta.cloud/wp-content/uploads/2025/08/atak_bold-webfont.woff2) format(\"woff2\");}\n",
+    "bricks_font_face_rules": "@font-face{font-family:\"Atak\";font-weight:300;font-display:swap;src:url(https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/atak_light-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:400;font-display:swap;src:url(https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/atak_regular-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:500;font-display:swap;src:url(https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/atak_medium-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:600;font-display:swap;src:url(https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/atak_semibold-webfont.woff2) format(\"woff2\");}@font-face{font-family:\"Atak\";font-weight:700;font-display:swap;src:url(https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/atak_bold-webfont.woff2) format(\"woff2\");}\n",
     "bricks_font_favorites": [
         "custom_font_14"
     ],
@@ -15099,6 +15096,376 @@
             "id": "t5guqm",
             "name": "promise__text",
             "settings": []
+        },
+        {
+            "id": "acss_import_link-hover--accent",
+            "name": "link-hover--accent",
+            "settings": [],
+            "category": "acss",
+            "_categoryData": {
+                "id": "acss",
+                "name": "Automatic.css"
+            }
+        },
+        {
+            "id": "kvasrc",
+            "name": "footer__list",
+            "settings": {
+                "_rowGap": "1.6rem",
+                "_columnGap": "1.6rem",
+                "_alignSelf": "flex-start",
+                "_justifyContent": "flex-start",
+                "_alignItems": "flex-start",
+                "_display": "grid",
+                "_gridGap": "var(--radius-xl) var(--radius-xxl)",
+                "_margin:mobile_portrait": {
+                    "bottom": "-0.4rem"
+                }
+            },
+            "modified": 1755718291,
+            "user_id": 22
+        },
+        {
+            "id": "bslom3",
+            "name": "footer",
+            "settings": {
+                "_background": {
+                    "color": {
+                        "id": "acss_import_accent-dark",
+                        "name": "accent-dark",
+                        "raw": "var(--accent-dark)"
+                    }
+                },
+                "_padding": {
+                    "top": "64",
+                    "bottom": "32",
+                    "left": "40",
+                    "right": "40"
+                },
+                "_rowGap:mobile_portrait": "4.8rem",
+                "_rowGap": "48px",
+                "_padding:mobile_portrait": {
+                    "left": "16",
+                    "right": "16"
+                },
+                "_attributes": [
+                    {
+                        "id": "guvjdc",
+                        "name": "aria-label",
+                        "value": "Links and support"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "j4s67i",
+            "name": "footer__site-links",
+            "settings": {
+                "_direction": "row",
+                "_flexWrap": "nowrap",
+                "_display": "grid",
+                "_gridTemplateColumns": "1.465fr 1fr 1fr 1fr 1fr",
+                "_gridGap": "3.2rem 1.6rem",
+                "_gridTemplateColumns:mobile_portrait": "1fr",
+                "_gridTemplateColumns:tablet_portrait": "1fr 1fr 1fr 1fr",
+                "_gridTemplateColumns:mobile_landscape": "1fr 1fr",
+                "_attributes": [
+                    {
+                        "id": "guvjdc",
+                        "name": "aria-label",
+                        "value": "Links and support"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "4qy3jl",
+            "name": "footer__list-item",
+            "settings": []
+        },
+        {
+            "id": "16evza",
+            "name": "footer__list-heading",
+            "settings": {
+                "_typography": {
+                    "letter-spacing": "0"
+                },
+                "_padding": {
+                    "bottom": "var(--radius-xs)"
+                }
+            }
+        },
+        {
+            "id": "smvkvj",
+            "name": "footer__link",
+            "settings": {
+                "_border:hover": {
+                    "color": {
+                        "id": "acss_import_accent-light",
+                        "name": "accent-light",
+                        "raw": "var(--accent-light)"
+                    }
+                },
+                "_cssCustom": ".footer__link .footer__text {\n  --link-transition: border-block-color 0.125s ease-in-out;\n  \n  border-block-width: 1px;\n  border-block-style: solid;\n  border-block-color: transparent;\n  transition: var(--link-transition);\n}\n\n.footer__link:hover .footer__text,\n.footer__link:focus-visible .footer__text {\n  border-block-color: transparent currentColor;\n}",
+                "_typography": {
+                    "letter-spacing": "0.35"
+                },
+                "_display": "grid",
+                "_justifyContent": "flex-start",
+                "_columnGap": "var(--space-xxs)",
+                "_typography:mobile_portrait": {
+                    "color": {
+                        "id": "acss_import_neutral-semi-light",
+                        "name": "neutral-semi-light",
+                        "raw": "var(--neutral-semi-light)"
+                    }
+                },
+                "_alignItems": "center",
+                "_gridAutoFlow": "column"
+            },
+            "modified": 1755823888,
+            "user_id": 22
+        },
+        {
+            "id": "c2yoj8",
+            "name": "footer__text",
+            "settings": {
+                "_typography": {
+                    "line-height": "2rem"
+                },
+                "_padding": {
+                    "top": "0.1rem",
+                    "bottom": "0.1rem"
+                }
+            }
+        },
+        {
+            "id": "ihqoqu",
+            "name": "text--line-height-s",
+            "settings": {
+                "_typography": {
+                    "line-height": "2.4rem"
+                },
+                "_cssCustom": ".text--line-height-s {\n  --text-s-line-height: 2.4rem;\n}"
+            }
+        },
+        {
+            "id": "zsaapq",
+            "name": "footer__state-links",
+            "settings": {
+                "_padding": {
+                    "top": "3.2rem"
+                },
+                "_border": {
+                    "style": "solid",
+                    "width": {
+                        "top": "1px",
+                        "right": "0",
+                        "bottom": "0",
+                        "left": "0"
+                    },
+                    "color": {
+                        "id": "acss_import_neutral-semi-light",
+                        "name": "neutral-semi-light",
+                        "raw": "var(--neutral-semi-light)"
+                    }
+                },
+                "_display:mobile_portrait": "none",
+                "_attributes": [
+                    {
+                        "id": "xaoklj",
+                        "name": "aria-labelledby",
+                        "value": "brxe-josrek"
+                    }
+                ],
+                "_rowGap": "2rem"
+            }
+        },
+        {
+            "id": "jesexx",
+            "name": "link",
+            "settings": []
+        },
+        {
+            "id": "yyepgo",
+            "name": "footer__crisis-info",
+            "settings": {
+                "_direction": "column"
+            }
+        },
+        {
+            "id": "xjfpxs",
+            "name": "footer__legal-info",
+            "settings": {
+                "_padding": {
+                    "top": "3.2rem"
+                },
+                "_border": {
+                    "style": "solid",
+                    "width": {
+                        "top": "1px",
+                        "right": "0",
+                        "bottom": "0",
+                        "left": "0"
+                    },
+                    "color": {
+                        "id": "acss_import_neutral-semi-light",
+                        "name": "neutral-semi-light",
+                        "raw": "var(--neutral-semi-light)"
+                    }
+                },
+                "_direction": "row",
+                "_justifyContent": "space-between",
+                "_flexWrap": "wrap",
+                "_display": "grid",
+                "_gridTemplateColumns": "1fr 1fr",
+                "_gridTemplateColumns:mobile_landscape": "1fr",
+                "_gridGap": " 6.4rem 3.2rem",
+                "_gridGap:mobile_landscape": "3.2rem",
+                "_gridGap:mobile_portrait": "2.4rem"
+            }
+        },
+        {
+            "id": "dbgqnq",
+            "name": "footer__copyright",
+            "settings": {
+                "_alignItems": "flex-end",
+                "_alignItems:mobile_landscape": "flex-start",
+                "_margin:mobile_portrait": {
+                    "top": "1rem",
+                    "bottom": "0.2rem"
+                }
+            }
+        },
+        {
+            "id": "tmalij",
+            "name": "text--figma-ls-fix",
+            "settings": {
+                "_typography": {
+                    "letter-spacing": "0.35"
+                }
+            },
+            "modified": 1755823888,
+            "user_id": 22
+        },
+        {
+            "id": "ovtzdu",
+            "name": "states-list",
+            "settings": {
+                "_gridTemplateColumns": "1fr 1fr 1fr 1fr",
+                "_attributes": [
+                    {
+                        "id": "nadvea",
+                        "name": "aria-label",
+                        "value": "Supported States"
+                    }
+                ],
+                "_gridAutoFlow": "column",
+                "_gridTemplateRows": "1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr",
+                "_gridTemplateColumns:desktop_nav_cutoff": "1fr 1fr 1fr",
+                "_gridTemplateRows:desktop_nav_cutoff": "1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr"
+            }
+        },
+        {
+            "id": "vzqwxx",
+            "name": "states-list__code",
+            "settings": {
+                "_cssCustom": ".states-list__code {\n  grid-column: 1 / -1;\n  grid-row: 1 / -1;\n  display: grid;\n  grid-template-columns: subgrid;\n  grid-template-rows: subgrid;\n}"
+            }
+        },
+        {
+            "id": "hulamc",
+            "name": "social-media-list",
+            "settings": [],
+            "modified": 1755897886,
+            "user_id": 22
+        },
+        {
+            "id": "thvmjz",
+            "name": "stepped-card",
+            "settings": {
+                "_padding": {
+                    "left": "var(--radius-4xl)"
+                },
+                "_border": {
+                    "width": {
+                        "left": "1px"
+                    },
+                    "style": "solid",
+                    "color": {
+                        "raw": "var(--neutral-ultra-dark)"
+                    }
+                },
+                "_border:mobile_landscape": {
+                    "width": {
+                        "left": "0",
+                        "top": "1px"
+                    },
+                    "color": {
+                        "hex": "#000000"
+                    },
+                    "style": "solid"
+                },
+                "_padding:mobile_landscape": {
+                    "top": "2.4rem",
+                    "bottom": "2.4rem",
+                    "left": "0"
+                }
+            }
+        },
+        {
+            "id": "dd0cz5",
+            "name": "stepped-card__heading",
+            "settings": {
+                "_margin": {
+                    "bottom": "var(--radius-xxl)"
+                },
+                "_typography": {
+                    "font-size": "5.6rem"
+                },
+                "_typography:mobile_landscape": {
+                    "font-size": "4.8rem"
+                }
+            }
+        },
+        {
+            "id": "mux6kz",
+            "name": "stepped-card__text-basic",
+            "settings": {
+                "_margin": {
+                    "bottom": "3.2rem"
+                },
+                "_margin:mobile_landscape": {
+                    "bottom": "2.4rem"
+                }
+            }
+        },
+        {
+            "id": "q73fvk",
+            "name": "stepped-card__text-link",
+            "settings": []
+        },
+        {
+            "id": "bnhfai",
+            "name": "stepped-card__subheading",
+            "settings": {
+                "_margin": {
+                    "bottom": "0.8rem"
+                },
+                "_typography": {
+                    "font-size": "2.4rem"
+                }
+            }
+        },
+        {
+            "id": "ztopgc",
+            "name": "text--line-height-l",
+            "settings": []
+        },
+        {
+            "id": "xpytzu",
+            "name": "section",
+            "settings": []
         }
     ],
     "bricks_global_classes_categories": [
@@ -15109,253 +15476,253 @@
     ],
     "bricks_global_classes_changes": [
         {
-            "timestamp": 1755541493,
-            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
-            "action": "automaticcss_save_settings_new",
-            "post_id": "",
-            "user_id": 2,
-            "old_count": 2401,
-            "new_count": 9,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755541493,
-            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
-            "action": "automaticcss_save_settings_new",
-            "post_id": "",
-            "user_id": 2,
-            "old_count": 9,
-            "new_count": 2401,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755541574,
-            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
+            "timestamp": 1755894953,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
             "action": "bricks_save_post",
-            "post_id": 56,
-            "user_id": 2,
-            "old_count": 2401,
-            "new_count": 2038,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755541919,
-            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 56,
-            "user_id": 2,
-            "old_count": 2038,
-            "new_count": 2040,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755542002,
-            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
-            "action": "automaticcss_save_settings_new",
-            "post_id": "",
-            "user_id": 2,
-            "old_count": 2040,
-            "new_count": 11,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755542002,
-            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
-            "action": "automaticcss_save_settings_new",
-            "post_id": "",
-            "user_id": 2,
-            "old_count": 11,
-            "new_count": 2403,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755542100,
-            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
-            "action": "automaticcss_save_settings_new",
-            "post_id": "",
-            "user_id": 2,
-            "old_count": 2403,
-            "new_count": 11,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755542100,
-            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
-            "action": "automaticcss_save_settings_new",
-            "post_id": "",
-            "user_id": 2,
-            "old_count": 11,
-            "new_count": 2403,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755542134,
-            "referer": "https://growtherapy-dev.local/?page_id=56&bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 56,
-            "user_id": 2,
-            "old_count": 2403,
-            "new_count": 2040,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755809093,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-feature/?bricks=run",
-            "action": "bricks_import_template",
-            "post_id": 1799,
-            "user_id": 4,
-            "old_count": 2040,
-            "new_count": 2048,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755832806,
-            "referer": "/wp-admin/edit.php?post_type=bricks_template&all_posts=1",
-            "action": "bricks_import_template",
-            "post_id": "",
-            "user_id": 4,
-            "old_count": 2048,
-            "new_count": 2051,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755832960,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-feature/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1803,
-            "user_id": 4,
-            "old_count": 2051,
-            "new_count": 2051,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755832997,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-feature/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1803,
-            "user_id": 4,
-            "old_count": 2051,
-            "new_count": 2051,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833508,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2051,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833561,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833579,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833672,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833708,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833765,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755833803,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/section-promise-to-you/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1806,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755874611,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/kyle-test/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 56,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755874804,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/kyle-test/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 56,
-            "user_id": 4,
-            "old_count": 2058,
-            "new_count": 2058,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755903363,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/design-style-guide/?bricks=run",
-            "action": "bricks_delete_global_classes_permanently",
-            "post_id": 124,
-            "user_id": 10,
-            "old_count": 2058,
-            "new_count": 2057,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755903365,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/design-style-guide/?bricks=run",
-            "action": "bricks_delete_global_classes_permanently",
-            "post_id": 124,
-            "user_id": 10,
-            "old_count": 2057,
+            "post_id": 1751,
+            "user_id": 22,
+            "old_count": 2056,
             "new_count": 2056,
             "trash_count": 2
         },
         {
-            "timestamp": 1755903367,
-            "referer": "https://env-growtherapy-devcontent.kinsta.cloud/template/design-style-guide/?bricks=run",
-            "action": "bricks_delete_global_classes_permanently",
-            "post_id": 124,
-            "user_id": 10,
+            "timestamp": 1755897587,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1751,
+            "user_id": 22,
             "old_count": 2056,
-            "new_count": 2055,
+            "new_count": 2057,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755897616,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1751,
+            "user_id": 22,
+            "old_count": 2057,
+            "new_count": 2057,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755897724,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1751,
+            "user_id": 22,
+            "old_count": 2057,
+            "new_count": 2057,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755897765,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1751,
+            "user_id": 22,
+            "old_count": 2057,
+            "new_count": 2057,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755897787,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1751,
+            "user_id": 22,
+            "old_count": 2057,
+            "new_count": 2057,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755897886,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/global-footer/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1751,
+            "user_id": 22,
+            "old_count": 2057,
+            "new_count": 2058,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755903773,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2058,
+            "new_count": 2058,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755903799,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2058,
+            "new_count": 2058,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755904336,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2058,
+            "new_count": 2059,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755904360,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2059,
+            "new_count": 2059,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755904406,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2059,
+            "new_count": 2059,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755904892,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2059,
+            "new_count": 2064,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755904969,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2064,
+            "new_count": 2064,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755905002,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2064,
+            "new_count": 2064,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755905077,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2064,
+            "new_count": 2064,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755905613,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2064,
+            "new_count": 2064,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755905746,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2064,
+            "new_count": 2064,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755905759,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2064,
+            "new_count": 2064,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755905772,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2064,
+            "new_count": 2064,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755905792,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2064,
+            "new_count": 2064,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755905849,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2064,
+            "new_count": 2064,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755906105,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2064,
+            "new_count": 2064,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755906435,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2064,
+            "new_count": 2065,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1755906463,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 1766,
+            "user_id": 22,
+            "old_count": 2065,
+            "new_count": 2065,
             "trash_count": 2
         }
     ],
@@ -16686,7 +17053,6 @@
         "acss_import_text--danger-comp",
         "acss_import_text--danger-hover",
         "acss_import_text--xs",
-        "acss_import_text--s",
         "acss_import_text--m",
         "acss_import_text--l",
         "acss_import_text--xl",
@@ -17755,16 +18121,34 @@
         "acss_import_focus-parent--shadow",
         "acss_import_focus-parent--outline",
         "acss_import_hidden-accessible",
-        "acss_import_clickable-parent"
+        "acss_import_clickable-parent",
+        "acss_import_text--s",
+        "ihqoqu",
+        "smvkvj",
+        "tmalij"
     ],
-    "bricks_global_classes_timestamp": "1756136935",
-    "bricks_global_classes_trash": [],
-    "bricks_global_classes_user": "4",
+    "bricks_global_classes_timestamp": "1756154611",
+    "bricks_global_classes_trash": [
+        {
+            "id": "fycluy",
+            "name": "text-xl",
+            "settings": [],
+            "deletedAt": 1755222595774,
+            "user_id": 2,
+            "originalIndex": 2031
+        },
+        {
+            "id": "hdsajm",
+            "name": "text-neutral-light",
+            "settings": [],
+            "deletedAt": 1755533836688,
+            "user_id": 2,
+            "originalIndex": 2038
+        }
+    ],
+    "bricks_global_classes_user": "22",
     "bricks_global_pseudo_classes": [
-        ":hover",
-        ":active",
-        ":focus",
-        "::after"
+        ":hover"
     ],
     "bricks_global_settings": {
         "postTypes": [
@@ -17818,7 +18202,8 @@
         }
     ],
     "bricks_indexer_running": "",
-    "bricks_panel_width": "356",
+    "bricks_panel_width": "600",
+    "bricks_structure_width": "596",
     "bricks_theme_styles": {
         "grow_therapy___global": {
             "label": "Grow Therapy - Global",
