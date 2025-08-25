@@ -74,7 +74,18 @@ $breakpoint-l: 870px;
     }
 
     &-modal {
+      background-color: #fff;
       display: none;
+      left: 0;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: 1;
+
+      &--active {
+        display: block;
+      }
     }
   }
 

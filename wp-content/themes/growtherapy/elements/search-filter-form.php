@@ -160,7 +160,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     $search_button_icon = $settings['search_button_icon'] ?? 'fas fa-search';
 
     echo <<<HTML
-    <form class="search-filter-form" method="get" {$this->render_attributes('_root')}>
+    <form class="search-filter-form" method="get" data-search-filter-form {$this->render_attributes('_root')}>
       {$this->render_dropdown('location', $location_config)}
       {$this->render_dropdown('insurance', $insurance_config)}
       {$this->render_dropdown('needs', $needs_config)}
@@ -183,14 +183,17 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     $api_key = esc_attr($config['api_key']);
     
     return <<<HTML
-    <div class="search-filter-form__dropdown {$required_class} {$single_select_class}">
+    <div
+      class="search-filter-form__dropdown {$required_class} {$single_select_class}"
+      data-search-filter-form-dropdown
+    >
       <button
         type="button"
         class="search-filter-form__dropdown-button"
         aria-haspopup="dialog"
         aria-expanded="false"
         aria-controls="{$modal_id}"
-        data-search-filter-form-dropdown-button="{$type}"
+        data-search-filter-form-dropdown-button
       >
         <span class="search-filter-form__dropdown-button-label">{$placeholder}{$required_indicator}</span>
       </button>
@@ -202,7 +205,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
         aria-modal="true"
         aria-labelledby="{$modal_title_id}"
         aria-hidden="true"
-        data-search-filter-form-dropdown-modal="{$type}"
+        data-search-filter-form-dropdown-modal
       >
         <div class="search-filter-form__dropdown-modal__header">
           {$this->render_optional_text($config)}
