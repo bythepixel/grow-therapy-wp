@@ -141,8 +141,8 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     wp_enqueue_script(
       'search-filter-form',
       get_stylesheet_directory_uri() . '/js/search-filter-form.js',
-      ['jquery'],
-      '1.0.0',
+      [],
+      filemtime(get_stylesheet_directory() . '/js/search-filter-form.js'),
       true
     );
 
@@ -150,11 +150,8 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     wp_localize_script('search-filter-form', 'searchFilterFormData', [
       'ajaxUrl' => admin_url('admin-ajax.php'),
       'nonce'   => wp_create_nonce('search_filter_form_nonce'),
-      'apiData' => [
-        'states'     => get_filter_api_states(),
-        'payors'    => get_filter_api_payors(),
-        'specialties' => get_filter_api_specialties(),
-      ],
+      'payorsByState' => get_filter_api_payors_by_state(),
+      'statesByPayor' => get_filter_api_states_by_payor(),
     ]);
   }
 
@@ -190,7 +187,20 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     $search_button_icon = $settings['search_button_icon'] ?? 'fas fa-search';
 
     echo <<<HTML
-    <form class="search-filter-form" method="get" data-search-filter-form {$this->render_attributes('_root')}>
+    <form 
+      class="search-filter-form" 
+      method="get" 
+      action="/find/therapists"
+      data-search-filter-form 
+      {$this->render_attributes('_root')}
+      aria-labelledby="form-title"
+      aria-describedby="form-description"
+    >
+      <div class="sr-only">
+        <h2 id="form-title">Find a Therapist</h2>
+        <p id="form-description">Use the filters below to find a therapist that matches your location, insurance, and needs</p>
+      </div>
+      
       {$this->render_dropdown('location', $location_config)}
       {$this->render_dropdown('insurance', $insurance_config)}
       {$this->render_dropdown('needs', $needs_config)}
@@ -225,6 +235,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
         aria-expanded="false"
         aria-controls="{$modal_id}"
         data-search-filter-form-dropdown-button
+        data-placeholder="{$placeholder}{$required_indicator}"
       >
         <span class="search-filter-form__dropdown-button-label">{$placeholder}{$required_indicator}</span>
       </button>
@@ -239,14 +250,18 @@ class Element_Search_Filter_Form extends \Bricks\Element {
         data-search-filter-form-dropdown-modal
       >
         <div class="search-filter-form__dropdown-modal-header">
-          {$this->render_optional_text($config)}
           <h3 class="search-filter-form__dropdown-modal-heading">{$label}</h3>
-          <button type="button" class="search-filter-form__dropdown-modal-done-button" aria-label="Close">Done</button>
+          <button type="button" class="search-filter-form__dropdown-modal-done-button" aria-label="Close {$label} options">Done</button>
         </div>
         
         <div class="search-filter-form__dropdown-modal-options">
+          <div class="search-filter-form__dropdown-modal-desktop-header">
+            {$this->render_optional_text($config)}
+            <button type="button" class="search-filter-form__dropdown-modal-done-button" aria-label="Close {$label} options">Done</button>
+          </div>
+
           <div class="search-filter-form__dropdown-modal-search-input-wrapper">
-            <label for="search-{$type}" class="sr-only">Search options</label>
+            <label for="search-{$type}" class="sr-only">Search {$config['label']} options</label>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -257,13 +272,15 @@ class Element_Search_Filter_Form extends \Bricks\Element {
               <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path>
             </svg>
             <input
-              type="text"
+              type="search"
               id="search-{$type}"
               class="search-filter-form__dropdown-modal-search-input"
               placeholder="Search"
               aria-describedby="search-help-{$type}"
+              autocomplete="off"
+              data-search-filter-form-search-input
             >
-            <div id="search-help-{$type}" class="sr-only">Type to filter the available options</div>
+            <div id="search-help-{$type}" class="sr-only">Type to filter the available {$config['label']} options</div>
           </div>
           {$this->render_options_list($config, $modal_title_id, $placeholder, $api_key)}
         </div>
@@ -274,7 +291,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
 
   private function render_optional_text($config) {
     if (!$config['required']) {
-      return '<span class="search-filter-form__dropdown-modal__optional-text">' . esc_html__('OPTIONAL', 'bricks') . '</span>';
+      return '<span class="search-filter-form__dropdown-modal-optional-text">' . esc_html__('OPTIONAL', 'bricks') . '</span>';
     }
     return '';
   }
@@ -302,32 +319,120 @@ class Element_Search_Filter_Form extends \Bricks\Element {
         $label = isset($item['label']) ? $item['label'] : (isset($item['name']) ? $item['name'] : '');
         
         if ($value && $label) {
-          $options_html .= '<li class="search-filter-form__dropdown-modal-option" data-value="' . esc_attr($value) . '">' . esc_html($label) . '</li>';
+          $checkbox_id = 'option-' . esc_attr($api_key) . '-' . str_replace(' ', '-', $value);
+          $checkbox_name = $api_key . '-options';
+          $multi_select_class = $config['single_select'] ? '' : 'search-filter-form__dropdown-modal-input--multi-select';
+          
+          // Generate search data and related data attributes
+          $search_data = $this->get_search_data($api_key, $item);
+          $related_data_attributes = '';
+          
+          if ($api_key === 'states') {
+            // Add related insurance data for states
+            $related_insurance = $this->get_related_insurance_for_state($value);
+            if (!empty($related_insurance)) {
+              $related_data_attributes .= ' data-related-insurance="' . esc_attr(json_encode($related_insurance)) . '"';
+            }
+          } elseif ($api_key === 'payors') {
+            // Add related states data for insurance
+            $related_states = $this->get_related_states_for_insurance($value);
+            if (!empty($related_states)) {
+              $related_data_attributes .= ' data-related-states="' . esc_attr(json_encode($related_states)) . '"';
+            }
+          }
+          
+          $options_html .= '<label class="search-filter-form__dropdown-modal-option" for="' . $checkbox_id . '">
+            <input type="checkbox" 
+              id="' . $checkbox_id . '" 
+              name="' . $checkbox_name . '" 
+              value="' . esc_attr($value) . '" 
+              class="search-filter-form__dropdown-modal-input ' . $multi_select_class . '"
+              ' . ($config['single_select'] ? 'data-search-filter-form-single-select' : '') . '
+              data-search-data="' . esc_attr($search_data) . '"
+              ' . $related_data_attributes . '
+            />
+            ' . esc_html($label) . '
+            ' . ($config['single_select'] ? '
+              <button
+                type="button"
+                class="search-filter-form__dropdown-modal-option-deselect"
+                aria-label="Deselect ' . esc_attr($label) . '"
+                title="Deselect ' . esc_attr($label) . '"
+                data-search-filter-form-deselect-button
+              >
+                <svg
+                  width="12"
+                  height="11"
+                  viewBox="0 0 12 11"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                <path d="M10.6875 2.21875L7.40625 5.5L10.6875 8.8125C11.0938 9.1875 11.0938 9.84375 10.6875 10.2188C10.3125 10.625 9.65625 10.625 9.28125 10.2188L6 6.9375L2.6875 10.2188C2.3125 10.625 1.65625 10.625 1.28125 10.2188C0.875 9.84375 0.875 9.1875 1.28125 8.8125L4.5625 5.5L1.28125 2.21875C0.875 1.84375 0.875 1.1875 1.28125 0.8125C1.65625 0.40625 2.3125 0.40625 2.6875 0.8125L6 4.09375L9.28125 0.8125C9.65625 0.40625 10.3125 0.40625 10.6875 0.8125C11.0938 1.1875 11.0938 1.84375 10.6875 2.21875Z" fill="#353535"></path>
+                </svg>
+              </button>' : '') . '
+          </label>';
         }
       }
     }
     
-    // If no data, show a placeholder
-    if (empty($options_html)) {
-      $options_html = '<li class="search-filter-form__dropdown-modal-option">No options available</li>';
-    }
+    // If no data, TODO
     
-    if ($config['single_select']) {
-      return <<<HTML
-      <ul class="search-filter-form__dropdown-modal-options-list" role="listbox" aria-labelledby="{$modal_title_id}">
-        {$options_html}
-      </ul>
-      HTML;
+    return <<<HTML
+    <fieldset class="search-filter-form__dropdown-modal-fieldset">
+      <legend class="sr-only">{$placeholder} options</legend>
+      {$options_html}
+    </fieldset>
+    HTML;
+  }
+
+  /**
+   * Generate search data for filtering options
+   * @param string $api_key - The API key (states, payors, specialties)
+   * @param array $item - The item data
+   * @return string - JSON encoded search data
+   */
+  private function get_search_data($api_key, $item) {
+    if ($api_key === 'states') {
+      // For states, include both full name and abbreviation
+      $abbreviation = isset($item['abbreviation']) ? $item['abbreviation'] : '';
+      $label = isset($item['label']) ? $item['label'] : (isset($item['name']) ? $item['name'] : '');
+      
+      return json_encode([
+        'label' => $label,
+        'abbreviation' => $abbreviation,
+        'searchText' => strtolower($label . ' ' . $abbreviation)
+      ]);
     } else {
-      return <<<HTML
-      <fieldset class="search-filter-form__dropdown-modal__options-fieldset">
-        <legend class="sr-only">{$placeholder} options</legend>
-        <ul class="search-filter-form__dropdown-modal-options-list" role="listbox" aria-labelledby="{$modal_title_id}">
-          {$options_html}
-        </ul>
-      </fieldset>
-      HTML;
+      // For other dropdowns, just include the label
+      $label = isset($item['label']) ? $item['label'] : (isset($item['name']) ? $item['name'] : '');
+      
+      return json_encode([
+        'label' => $label,
+        'searchText' => strtolower($label)
+      ]);
     }
+  }
+
+  /**
+   * Get related insurance data for a specific state
+   * @param string $state_value - The state value
+   * @return array - Array of related insurance data
+   */
+  private function get_related_insurance_for_state($state_value) {
+    $payors_by_state = get_filter_api_payors_by_state();
+    return isset($payors_by_state[$state_value]) ? $payors_by_state[$state_value] : [];
+  }
+
+  /**
+   * Get related states data for a specific insurance
+   * @param string $insurance_value - The insurance value
+   * @return array - Array of related states data
+   */
+  private function get_related_states_for_insurance($insurance_value) {
+    $states_by_payor = get_filter_api_states_by_payor();
+    return isset($states_by_payor[$insurance_value]) ? $states_by_payor[$insurance_value] : [];
   }
 
   public static function render_builder() { ?>
