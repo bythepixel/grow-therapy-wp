@@ -2058,7 +2058,7 @@
                             "svg": {
                                 "id": 2026,
                                 "icon_id": "icon_ep9ojpb7b",
-                                "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
                             }
                         },
                         "_cssGlobalClasses": [
@@ -2148,7 +2148,8 @@
                         ],
                         "_margin": {
                             "bottom": "1.4rem"
-                        }
+                        },
+                        "style": "light"
                     },
                     "label": "Text"
                 },
@@ -2240,7 +2241,7 @@
                             "svg": {
                                 "id": 2026,
                                 "icon_id": "icon_ep9ojpb7b",
-                                "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
                             }
                         },
                         "_cssGlobalClasses": [
@@ -2261,7 +2262,7 @@
                             "svg": {
                                 "id": 2026,
                                 "icon_id": "icon_ep9ojpb7b",
-                                "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
                             }
                         },
                         "_cssGlobalClasses": [
@@ -2282,7 +2283,7 @@
                             "svg": {
                                 "id": 2026,
                                 "icon_id": "icon_ep9ojpb7b",
-                                "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
                             }
                         },
                         "_cssGlobalClasses": [
@@ -2303,7 +2304,7 @@
                             "svg": {
                                 "id": 2026,
                                 "icon_id": "icon_ep9ojpb7b",
-                                "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
                             }
                         },
                         "_cssGlobalClasses": [
@@ -2324,7 +2325,7 @@
                             "svg": {
                                 "id": 2026,
                                 "icon_id": "icon_ep9ojpb7b",
-                                "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
                             }
                         },
                         "_cssGlobalClasses": [
@@ -2383,7 +2384,7 @@
                         "svg": {
                             "id": 2026,
                             "icon_id": "icon_ep9ojpb7b",
-                            "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                            "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
                         }
                     }
                 },
@@ -2397,7 +2398,7 @@
                         "svg": {
                             "id": 2026,
                             "icon_id": "icon_ep9ojpb7b",
-                            "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                            "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
                         }
                     },
                     "connections": {
@@ -2439,7 +2440,7 @@
                         "svg": {
                             "id": 2026,
                             "icon_id": "icon_ep9ojpb7b",
-                            "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                            "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
                         }
                     },
                     "id": "geruen",
@@ -2459,7 +2460,7 @@
                         "svg": {
                             "id": 2026,
                             "icon_id": "icon_ep9ojpb7b",
-                            "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                            "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
                         }
                     },
                     "connections": {
@@ -2477,7 +2478,7 @@
                         "svg": {
                             "id": 2026,
                             "icon_id": "icon_ep9ojpb7b",
-                            "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                            "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
                         }
                     },
                     "id": "yckrkb",
@@ -2496,7 +2497,7 @@
                         "svg": {
                             "id": 2026,
                             "icon_id": "icon_ep9ojpb7b",
-                            "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                            "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
                         }
                     },
                     "id": "pqorhh",
@@ -2968,7 +2969,7 @@
         {
             "id": "icon_ep9ojpb7b",
             "name": "medicaid-gov-logo",
-            "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg",
+            "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg",
             "setId": "set_vfcvxit95",
             "attachment_id": 2026
         }
@@ -16135,6 +16136,9 @@
                         "name": "neutral-light",
                         "raw": "var(--neutral-light)"
                     }
+                },
+                "_typography:mobile_portrait": {
+                    "letter-spacing": "-0.98"
                 }
             },
             "modified": 1756249424,
@@ -16153,7 +16157,7 @@
                     }
                 }
             },
-            "modified": 1756250215,
+            "modified": 1756251001,
             "user_id": 22
         },
         {
@@ -16199,28 +16203,8 @@
     ],
     "bricks_global_classes_changes": [
         {
-            "timestamp": 1755906463,
-            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1766,
-            "user_id": 22,
-            "old_count": 2065,
-            "new_count": 2065,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1756164302,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 2023,
-            "user_id": 22,
-            "old_count": 2098,
-            "new_count": 2103,
-            "trash_count": 2
-        },
-        {
             "timestamp": 1756164331,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16230,7 +16214,7 @@
         },
         {
             "timestamp": 1756165149,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16240,7 +16224,7 @@
         },
         {
             "timestamp": 1756165238,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16250,7 +16234,7 @@
         },
         {
             "timestamp": 1756165679,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16260,7 +16244,7 @@
         },
         {
             "timestamp": 1756165739,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16270,7 +16254,7 @@
         },
         {
             "timestamp": 1756235960,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16280,7 +16264,7 @@
         },
         {
             "timestamp": 1756236689,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16290,7 +16274,7 @@
         },
         {
             "timestamp": 1756236736,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16300,7 +16284,7 @@
         },
         {
             "timestamp": 1756236793,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16310,7 +16294,7 @@
         },
         {
             "timestamp": 1756241150,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16320,7 +16304,7 @@
         },
         {
             "timestamp": 1756241171,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16330,7 +16314,7 @@
         },
         {
             "timestamp": 1756241357,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16340,7 +16324,7 @@
         },
         {
             "timestamp": 1756242521,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16350,7 +16334,7 @@
         },
         {
             "timestamp": 1756245812,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16360,7 +16344,7 @@
         },
         {
             "timestamp": 1756246445,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16370,7 +16354,7 @@
         },
         {
             "timestamp": 1756246449,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16380,7 +16364,7 @@
         },
         {
             "timestamp": 1756248721,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16390,7 +16374,7 @@
         },
         {
             "timestamp": 1756248973,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16400,7 +16384,7 @@
         },
         {
             "timestamp": 1756249077,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16410,7 +16394,7 @@
         },
         {
             "timestamp": 1756249102,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16420,7 +16404,7 @@
         },
         {
             "timestamp": 1756249424,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16430,7 +16414,7 @@
         },
         {
             "timestamp": 1756250088,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -16440,7 +16424,27 @@
         },
         {
             "timestamp": 1756250215,
-            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 2023,
+            "user_id": 22,
+            "old_count": 2109,
+            "new_count": 2109,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1756250528,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 2023,
+            "user_id": 22,
+            "old_count": 2109,
+            "new_count": 2109,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1756251001,
+            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
             "user_id": 22,
@@ -18850,7 +18854,7 @@
         "smvkvj",
         "glyalr"
     ],
-    "bricks_global_classes_timestamp": "1756250215",
+    "bricks_global_classes_timestamp": "1756251001",
     "bricks_global_classes_trash": [
         {
             "id": "fycluy",

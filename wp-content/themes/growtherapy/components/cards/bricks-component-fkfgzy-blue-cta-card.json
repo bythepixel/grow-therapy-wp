@@ -62,7 +62,7 @@
               "svg": {
                 "id": 2026,
                 "icon_id": "icon_ep9ojpb7b",
-                "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
               }
             },
             "_cssGlobalClasses": [
@@ -152,7 +152,8 @@
             ],
             "_margin": {
               "bottom": "1.4rem"
-            }
+            },
+            "style": "light"
           },
           "label": "Text"
         },
@@ -244,7 +245,7 @@
               "svg": {
                 "id": 2026,
                 "icon_id": "icon_ep9ojpb7b",
-                "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
               }
             },
             "_cssGlobalClasses": [
@@ -265,7 +266,7 @@
               "svg": {
                 "id": 2026,
                 "icon_id": "icon_ep9ojpb7b",
-                "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
               }
             },
             "_cssGlobalClasses": [
@@ -286,7 +287,7 @@
               "svg": {
                 "id": 2026,
                 "icon_id": "icon_ep9ojpb7b",
-                "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
               }
             },
             "_cssGlobalClasses": [
@@ -307,7 +308,7 @@
               "svg": {
                 "id": 2026,
                 "icon_id": "icon_ep9ojpb7b",
-                "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
               }
             },
             "_cssGlobalClasses": [
@@ -328,7 +329,7 @@
               "svg": {
                 "id": 2026,
                 "icon_id": "icon_ep9ojpb7b",
-                "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
               }
             },
             "_cssGlobalClasses": [
@@ -387,7 +388,7 @@
             "svg": {
               "id": 2026,
               "icon_id": "icon_ep9ojpb7b",
-              "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
             }
           }
         },
@@ -401,7 +402,7 @@
             "svg": {
               "id": 2026,
               "icon_id": "icon_ep9ojpb7b",
-              "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
             }
           },
           "connections": {
@@ -443,7 +444,7 @@
             "svg": {
               "id": 2026,
               "icon_id": "icon_ep9ojpb7b",
-              "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
             }
           },
           "id": "geruen",
@@ -463,7 +464,7 @@
             "svg": {
               "id": 2026,
               "icon_id": "icon_ep9ojpb7b",
-              "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
             }
           },
           "connections": {
@@ -481,7 +482,7 @@
             "svg": {
               "id": 2026,
               "icon_id": "icon_ep9ojpb7b",
-              "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
             }
           },
           "id": "yckrkb",
@@ -500,7 +501,7 @@
             "svg": {
               "id": 2026,
               "icon_id": "icon_ep9ojpb7b",
-              "url": "http://localhost:8000/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
             }
           },
           "id": "pqorhh",
@@ -660,6 +661,9 @@
             "name": "neutral-light",
             "raw": "var(--neutral-light)"
           }
+        },
+        "_typography:mobile_portrait": {
+          "letter-spacing": "-0.98"
         }
       },
       "modified": 1756249424,
