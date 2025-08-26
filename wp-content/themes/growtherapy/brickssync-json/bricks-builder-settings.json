@@ -2225,7 +2225,7 @@
                             "top": "2.4rem"
                         },
                         "_gridGap:mobile_landscape": "2.4rem",
-                        "_gridGap:mobile_portrait": "2.4rem 3.6rem"
+                        "_gridGap:mobile_portrait": "2.2rem 3.6rem"
                     },
                     "label": "Row"
                 },
@@ -2419,18 +2419,6 @@
                     "group": "xothvf"
                 },
                 {
-                    "label": "Body Text 1",
-                    "type": "editor",
-                    "group": "mvcokg",
-                    "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>",
-                    "id": "gttovh",
-                    "connections": {
-                        "xnlanr": [
-                            "text"
-                        ]
-                    }
-                },
-                {
                     "label": "URL",
                     "type": "text",
                     "group": "dyimvf",
@@ -2441,18 +2429,6 @@
                         ]
                     },
                     "default": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/water-ripples1.mp4"
-                },
-                {
-                    "label": "Body Text 2",
-                    "type": "editor",
-                    "group": "mvcokg",
-                    "default": "<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>",
-                    "id": "ngnpkw",
-                    "connections": {
-                        "oemxew": [
-                            "text"
-                        ]
-                    }
                 },
                 {
                     "label": "Logo 3",
@@ -2527,6 +2503,42 @@
                     "connections": {
                         "vswsxc": [
                             "icon"
+                        ]
+                    }
+                },
+                {
+                    "label": "Heading",
+                    "type": "text",
+                    "group": "mvcokg",
+                    "default": "Lorem ipsum dolor sit amet, consectetur",
+                    "id": "sylajc",
+                    "connections": {
+                        "akmqsr": [
+                            "text"
+                        ]
+                    }
+                },
+                {
+                    "label": "Body Text 1",
+                    "type": "editor",
+                    "group": "mvcokg",
+                    "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>",
+                    "id": "gttovh",
+                    "connections": {
+                        "xnlanr": [
+                            "text"
+                        ]
+                    }
+                },
+                {
+                    "label": "Body Text 2",
+                    "type": "editor",
+                    "group": "mvcokg",
+                    "default": "<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>",
+                    "id": "ngnpkw",
+                    "connections": {
+                        "oemxew": [
+                            "text"
                         ]
                     }
                 }
@@ -16088,7 +16100,8 @@
                         "name": "neutral-light",
                         "raw": "var(--neutral-light)"
                     }
-                }
+                },
+                "_rowGap:mobile_portrait": "3rem"
             }
         },
         {
@@ -16140,7 +16153,7 @@
                     }
                 }
             },
-            "modified": 1756249424,
+            "modified": 1756250215,
             "user_id": 22
         },
         {
@@ -16185,26 +16198,6 @@
         }
     ],
     "bricks_global_classes_changes": [
-        {
-            "timestamp": 1755906105,
-            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1766,
-            "user_id": 22,
-            "old_count": 2064,
-            "new_count": 2064,
-            "trash_count": 2
-        },
-        {
-            "timestamp": 1755906435,
-            "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
-            "action": "bricks_save_post",
-            "post_id": 1766,
-            "user_id": 22,
-            "old_count": 2064,
-            "new_count": 2065,
-            "trash_count": 2
-        },
         {
             "timestamp": 1755906463,
             "referer": "https://stg-growtherapy-dev.kinsta.cloud/template/how-it-works/?bricks=run",
@@ -16427,6 +16420,26 @@
         },
         {
             "timestamp": 1756249424,
+            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 2023,
+            "user_id": 22,
+            "old_count": 2109,
+            "new_count": 2109,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1756250088,
+            "referer": "http://localhost:8000/template/homepage/?bricks=run",
+            "action": "bricks_save_post",
+            "post_id": 2023,
+            "user_id": 22,
+            "old_count": 2109,
+            "new_count": 2109,
+            "trash_count": 2
+        },
+        {
+            "timestamp": 1756250215,
             "referer": "http://localhost:8000/template/homepage/?bricks=run",
             "action": "bricks_save_post",
             "post_id": 2023,
@@ -18837,7 +18850,7 @@
         "smvkvj",
         "glyalr"
     ],
-    "bricks_global_classes_timestamp": "1756249424",
+    "bricks_global_classes_timestamp": "1756250215",
     "bricks_global_classes_trash": [
         {
             "id": "fycluy",
