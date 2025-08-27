@@ -261,6 +261,12 @@ $breakpoint-l: 870px;
     }
 
     &--multi-select {
+      .search-filter-form__dropdown-modal-fieldset {
+        @media (min-width: $breakpoint-s) {
+          height: 13.2rem;
+        }
+      }
+
       .search-filter-form__dropdown-modal-desktop-header {
         @media (min-width: $breakpoint-s) {
           display: flex;
