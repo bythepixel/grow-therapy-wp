@@ -3,6 +3,11 @@
 /**
  * Search Filter Form - Vanilla JavaScript implementation
  * Handles dropdown modals, search filtering, and form submission
+ * 
+ * SHARED STATE FEATURE:
+ * Multiple instances of this form on the same page will automatically
+ * share their state. When a user selects an option in one instance,
+ * all other instances will be updated to reflect the same selection.
  */
 class SearchFilterForm {
   constructor() {
@@ -23,12 +28,174 @@ class SearchFilterForm {
 
     this.activeModals = new Set();
     this.searchDebounceTimers = new Map();
+    this.instanceId = this.generateInstanceId();
     
     this.init();
+  }
+  
+  /**
+   * Generate unique instance ID for this form
+   * @return {string} - Unique instance identifier
+   */
+  generateInstanceId() {
+    return 'search-filter-form-' + Math.random().toString(36).substr(2, 9);
+  }
+  
+  /**
+   * Get or create shared state manager for all form instances
+   * @return {Object} - Shared state manager
+   */
+  static getSharedState() {
+    if (!SearchFilterForm.sharedState) {
+      SearchFilterForm.sharedState = {
+        selections: new Map(), // name -> Set of values
+        instances: new Set()   // Set of instance IDs
+      };
+    }
+    return SearchFilterForm.sharedState;
+  }
+  
+  /**
+   * Update shared state and notify other instances
+   * @param {string} name - Input name (e.g., 'states-options')
+   * @param {string} value - Selected value
+   * @param {boolean} checked - Whether option is checked
+   */
+  updateSharedState(name, value, checked) {
+    const sharedState = SearchFilterForm.sharedState;
+    if (!sharedState) return;
+    
+    if (!sharedState.selections.has(name)) {
+      sharedState.selections.set(name, new Set());
+    }
+    
+    const selectionSet = sharedState.selections.get(name);
+    
+    if (checked) {
+      selectionSet.add(value);
+    } else {
+      selectionSet.delete(value);
+    }
+    
+    // Notify other instances (but not this one)
+    this.notifyOtherInstances(name, value, checked);
+  }
+  
+  /**
+   * Notify other form instances of state changes
+   * @param {string} name - Input name
+   * @param {string} value - Selected value
+   * @param {boolean} checked - Whether option is checked
+   */
+  notifyOtherInstances(name, value, checked) {
+    const event = new CustomEvent('searchFilterFormStateChange', {
+      detail: {
+        name,
+        value,
+        checked,
+        sourceInstanceId: this.instanceId
+      }
+    });
+    
+    document.dispatchEvent(event);
+  }
+  
+  /**
+   * Handle state changes from other instances
+   * @param {CustomEvent} event - State change event
+   */
+  handleExternalStateChange(event) {
+    const { name, value, checked, sourceInstanceId } = event.detail;
+    
+    // Don't process our own events
+    if (sourceInstanceId === this.instanceId) return;
+    
+    // Find and update the corresponding checkbox in this instance
+    const checkbox = this.findCheckboxByNameAndValue(name, value);
+    if (checkbox) {
+      checkbox.checked = checked;
+      
+      // Update visual state
+      if (checked) {
+        const option = checkbox.closest('.search-filter-form__dropdown-modal-option');
+        if (option) {
+          option.classList.add(this.cssClasses.optionSelected);
+        }
+      } else {
+        const option = checkbox.closest('.search-filter-form__dropdown-modal-option');
+        if (option) {
+          option.classList.remove(this.cssClasses.optionSelected);
+        }
+      }
+      
+      // Update dropdown labels
+      this.updateDropdownLabel(checkbox);
+      
+      // Apply cross-filtering
+      if (checked) {
+        this.applyCrossFiltering(checkbox);
+      } else {
+        this.resetCrossFiltering(checkbox);
+      }
+    }
+  }
+  
+  /**
+   * Find checkbox by name and value in this instance
+   * @param {string} name - Input name
+   * @param {string} value - Input value
+   * @return {HTMLInputElement|null} - Found checkbox or null
+   */
+  findCheckboxByNameAndValue(name, value) {
+    const dropdowns = this.elements.dropdown ? 
+      document.querySelectorAll(this.elements.dropdown) : 
+      document.querySelectorAll('[data-search-filter-form-dropdown]');
+    
+    for (const dropdown of dropdowns) {
+      const checkbox = dropdown.querySelector(`input[name="${name}"][value="${value}"]`);
+      if (checkbox) return checkbox;
+    }
+    
+    return null;
+  }
+  
+  /**
+   * Sync this instance with the current shared state
+   */
+  syncWithSharedState() {
+    const sharedState = SearchFilterForm.getSharedState();
+    if (!sharedState || !sharedState.selections) return;
+    
+    // Update all checkboxes in this instance to match shared state
+    for (const [name, values] of sharedState.selections) {
+      for (const value of values) {
+        const checkbox = this.findCheckboxByNameAndValue(name, value);
+        if (checkbox && !checkbox.checked) {
+          // Update checkbox state
+          checkbox.checked = true;
+          
+          // Update visual state
+          const option = checkbox.closest('.search-filter-form__dropdown-modal-option');
+          if (option) {
+            option.classList.add(this.cssClasses.optionSelected);
+          }
+          
+          // Update dropdown labels
+          this.updateDropdownLabel(checkbox);
+          
+          // Apply cross-filtering
+          this.applyCrossFiltering(checkbox);
+        }
+      }
+    }
+    
+    // Register this instance with shared state
+    sharedState.instances.add(this.instanceId);
   }
 
   init() {
     this.bindEvents();
+    this.syncWithSharedState();
   }
 
   bindEvents() {
@@ -49,6 +216,12 @@ class SearchFilterForm {
     
     // Handle search input filtering
     document.addEventListener('input', this.handleSearchInput.bind(this), { 
+      passive: true,
+      capture: false 
+    });
+    
+    // Listen for state changes from other instances
+    document.addEventListener('searchFilterFormStateChange', this.handleExternalStateChange.bind(this), { 
       passive: true,
       capture: false 
     });
@@ -140,6 +313,16 @@ class SearchFilterForm {
     this.searchDebounceTimers.forEach(timer => clearTimeout(timer));
     this.searchDebounceTimers.clear();
   }
+  
+  /**
+   * Remove this instance from shared state (called when instance is destroyed)
+   */
+  destroy() {
+    const sharedState = SearchFilterForm.sharedState;
+    if (sharedState && sharedState.instances) {
+      sharedState.instances.delete(this.instanceId);
+    }
+  }
 
   /**
    * Handle checkbox changes for single-select behavior
@@ -147,6 +330,9 @@ class SearchFilterForm {
    */
   handleCheckboxChange(e) {
     const { target: checkbox } = e;
+    
+    // Update shared state for all instances
+    this.updateSharedState(checkbox.name, checkbox.value, checkbox.checked);
     
     if (!checkbox.matches(this.elements.checkboxSingleSelect)) {
       this.updateDropdownLabel(checkbox);
@@ -199,6 +385,9 @@ class SearchFilterForm {
    */
   deselectSingleSelectOption(checkbox) {
     checkbox.checked = false;
+    
+    // Update shared state for all instances
+    this.updateSharedState(checkbox.name, checkbox.value, false);
     
     const option = checkbox.closest('.search-filter-form__dropdown-modal-option');
     if (option) {
