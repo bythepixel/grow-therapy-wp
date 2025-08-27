@@ -1,0 +1,796 @@
+{
+  "components": [
+    {
+      "id": "fkfgzy",
+      "category": "Card",
+      "desc": "Full-width CTA card with animated background and logos bar.",
+      "elements": [
+        {
+          "id": "fkfgzy",
+          "name": "container",
+          "parent": 0,
+          "children": [
+            "heoxeq",
+            "wjpzzn",
+            "yxlwgx"
+          ],
+          "settings": {
+            "_cssGlobalClasses": [
+              "9rscll"
+            ]
+          },
+          "label": "Blue CTA Card"
+        },
+        {
+          "id": "yxlwgx",
+          "name": "video",
+          "parent": "fkfgzy",
+          "children": [],
+          "settings": {
+            "videoType": "file",
+            "youTubeId": "5DGo0AYOJ7s",
+            "youtubeControls": true,
+            "vimeoByline": true,
+            "vimeoTitle": true,
+            "vimeoPortrait": true,
+            "youtubeAutoplay": true,
+            "youtubeMute": true,
+            "youtubeLoop": true,
+            "youtubeDoNotTrack": true,
+            "_position": "absolute",
+            "_width": "100%",
+            "_height": "100%",
+            "_top": "0",
+            "_right": "0",
+            "_bottom": "0",
+            "_left": "0",
+            "_zIndex": "-1",
+            "fileAutoplay": true,
+            "fileLoop": true,
+            "fileMute": true,
+            "fileInline": true
+          }
+        },
+        {
+          "id": "euzfpk",
+          "name": "icon",
+          "parent": "wjpzzn",
+          "children": [],
+          "settings": {
+            "icon": {
+              "library": "custom_set_vfcvxit95",
+              "svg": {
+                "id": 2026,
+                "icon_id": "icon_ep9ojpb7b",
+                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+              }
+            },
+            "_cssGlobalClasses": [
+              "ujgnap"
+            ]
+          },
+          "label": "Logo 1",
+          "themeStyles": []
+        },
+        {
+          "id": "heoxeq",
+          "name": "container",
+          "parent": "fkfgzy",
+          "children": [
+            "yxemqf",
+            "kjpqyx"
+          ],
+          "settings": {
+            "_cssGlobalClasses": [
+              "m19rry"
+            ],
+            "_justifyContent": "space-between",
+            "_rowGap": "2.4rem",
+            "_columnGap": "2.4rem"
+          },
+          "label": "Row"
+        },
+        {
+          "id": "yxemqf",
+          "name": "block",
+          "parent": "heoxeq",
+          "children": [
+            "akmqsr"
+          ],
+          "settings": {
+            "_cssGlobalClasses": [
+              "3mogl4"
+            ],
+            "_flexBasis": "52.2rem"
+          },
+          "label": "Column"
+        },
+        {
+          "id": "akmqsr",
+          "name": "heading",
+          "parent": "yxemqf",
+          "children": [],
+          "settings": {
+            "_cssGlobalClasses": [
+              "5jd3qj"
+            ],
+            "text": "Lorem ipsum dolor sit amet, consectetur"
+          },
+          "label": "Heading"
+        },
+        {
+          "id": "kjpqyx",
+          "name": "block",
+          "parent": "heoxeq",
+          "children": [
+            "xnlanr",
+            "oemxew",
+            "ygniji"
+          ],
+          "settings": {
+            "_cssGlobalClasses": [
+              "3mogl4"
+            ],
+            "_flexBasis": "38.5rem",
+            "_rowGap": "1.1rem",
+            "_flexBasis:mobile_landscape": "100%"
+          },
+          "label": "Column"
+        },
+        {
+          "id": "xnlanr",
+          "name": "text",
+          "parent": "kjpqyx",
+          "children": [],
+          "settings": {
+            "text": "<p>No subscriptions or surprise fees. We handle  the paperwork, so you can focus on feeling better.</p>",
+            "_typography": {
+              "text-wrap": "balance"
+            },
+            "_cssGlobalClasses": [
+              "t63zk1"
+            ],
+            "_margin": {
+              "bottom": "1.4rem"
+            },
+            "style": "light"
+          },
+          "label": "Text"
+        },
+        {
+          "id": "oemxew",
+          "name": "text",
+          "parent": "kjpqyx",
+          "children": [],
+          "settings": {
+            "_cssGlobalClasses": [
+              "t63zk1"
+            ],
+            "_margin": {
+              "bottom": "2.1rem"
+            }
+          },
+          "label": "Text"
+        },
+        {
+          "id": "ygniji",
+          "name": "button",
+          "parent": "kjpqyx",
+          "children": [],
+          "settings": {
+            "_cssGlobalClasses": [
+              "s2jl8w",
+              "glyalr"
+            ],
+            "text": "Get your estimate",
+            "style": "btn--neutral",
+            "size": "btn--m"
+          },
+          "label": "Button"
+        },
+        {
+          "id": "wjpzzn",
+          "name": "container",
+          "parent": "fkfgzy",
+          "children": [
+            "euzfpk",
+            "vrvssk",
+            "xvvfuv",
+            "bsguiw",
+            "sictrd",
+            "vswsxc"
+          ],
+          "settings": {
+            "_cssGlobalClasses": [
+              "m19rry"
+            ],
+            "_columnGap": "2.4rem",
+            "_display:mobile_landscape": "grid",
+            "_gridTemplateColumns:mobile_landscape": "auto auto auto",
+            "_gridTemplateColumns:mobile_portrait": "auto auto",
+            "_rowGap": "2.4rem",
+            "_alignSelf": "center",
+            "_justifyContent": "space-between",
+            "_justifyItemsGrid:mobile_landscape": "space-around",
+            "_padding": {
+              "top": "3.2rem"
+            },
+            "_border": {
+              "width": {
+                "top": "1px"
+              },
+              "color": {
+                "id": "acss_import_neutral-light",
+                "name": "neutral-light",
+                "raw": "var(--neutral-light)"
+              },
+              "style": "solid"
+            },
+            "_padding:mobile_landscape": {
+              "top": "2.4rem"
+            },
+            "_gridGap:mobile_landscape": "2.4rem",
+            "_gridGap:mobile_portrait": "2.2rem 3.6rem"
+          },
+          "label": "Row"
+        },
+        {
+          "id": "vrvssk",
+          "name": "icon",
+          "parent": "wjpzzn",
+          "children": [],
+          "settings": {
+            "icon": {
+              "library": "custom_set_vfcvxit95",
+              "svg": {
+                "id": 2026,
+                "icon_id": "icon_ep9ojpb7b",
+                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+              }
+            },
+            "_cssGlobalClasses": [
+              "ujgnap"
+            ]
+          },
+          "themeStyles": [],
+          "label": "Logo 2"
+        },
+        {
+          "id": "xvvfuv",
+          "name": "icon",
+          "parent": "wjpzzn",
+          "children": [],
+          "settings": {
+            "icon": {
+              "library": "custom_set_vfcvxit95",
+              "svg": {
+                "id": 2026,
+                "icon_id": "icon_ep9ojpb7b",
+                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+              }
+            },
+            "_cssGlobalClasses": [
+              "ujgnap"
+            ]
+          },
+          "themeStyles": [],
+          "label": "Logo 3"
+        },
+        {
+          "id": "bsguiw",
+          "name": "icon",
+          "parent": "wjpzzn",
+          "children": [],
+          "settings": {
+            "icon": {
+              "library": "custom_set_vfcvxit95",
+              "svg": {
+                "id": 2026,
+                "icon_id": "icon_ep9ojpb7b",
+                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+              }
+            },
+            "_cssGlobalClasses": [
+              "ujgnap"
+            ]
+          },
+          "themeStyles": [],
+          "label": "Logo 4"
+        },
+        {
+          "id": "sictrd",
+          "name": "icon",
+          "parent": "wjpzzn",
+          "children": [],
+          "settings": {
+            "icon": {
+              "library": "custom_set_vfcvxit95",
+              "svg": {
+                "id": 2026,
+                "icon_id": "icon_ep9ojpb7b",
+                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+              }
+            },
+            "_cssGlobalClasses": [
+              "ujgnap"
+            ]
+          },
+          "themeStyles": [],
+          "label": "Logo 5"
+        },
+        {
+          "id": "vswsxc",
+          "name": "icon",
+          "parent": "wjpzzn",
+          "children": [],
+          "settings": {
+            "icon": {
+              "library": "custom_set_vfcvxit95",
+              "svg": {
+                "id": 2026,
+                "icon_id": "icon_ep9ojpb7b",
+                "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+              }
+            },
+            "_cssGlobalClasses": [
+              "ujgnap"
+            ]
+          },
+          "themeStyles": [],
+          "label": "Logo 6"
+        }
+      ],
+      "_created": 1756241758,
+      "_user_id": 22,
+      "_version": "2.0.1",
+      "propertyGroups": [
+        {
+          "id": "mvcokg",
+          "name": "Body"
+        },
+        {
+          "id": "xothvf",
+          "name": "Button"
+        },
+        {
+          "id": "nrakij",
+          "name": "Logos"
+        },
+        {
+          "id": "dyimvf",
+          "name": "Background"
+        }
+      ],
+      "properties": [
+        {
+          "label": "Link",
+          "type": "link",
+          "id": "zktkbd",
+          "group": "xothvf",
+          "connections": {
+            "ygniji": [
+              "link"
+            ]
+          }
+        },
+        {
+          "label": "Logo 1",
+          "type": "icon",
+          "group": "nrakij",
+          "id": "nrcmni",
+          "connections": {
+            "euzfpk": [
+              "icon"
+            ]
+          },
+          "default": {
+            "library": "custom_set_vfcvxit95",
+            "svg": {
+              "id": 2026,
+              "icon_id": "icon_ep9ojpb7b",
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+            }
+          }
+        },
+        {
+          "label": "Logo 2",
+          "type": "icon",
+          "group": "nrakij",
+          "id": "itzsdq",
+          "default": {
+            "library": "custom_set_vfcvxit95",
+            "svg": {
+              "id": 2026,
+              "icon_id": "icon_ep9ojpb7b",
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+            }
+          },
+          "connections": {
+            "vrvssk": [
+              "icon"
+            ]
+          }
+        },
+        {
+          "label": "Button Text",
+          "type": "text",
+          "default": "Call to Action",
+          "id": "xmjhff",
+          "connections": {
+            "ygniji": [
+              "text"
+            ]
+          },
+          "group": "xothvf"
+        },
+        {
+          "label": "URL",
+          "type": "text",
+          "group": "dyimvf",
+          "id": "sqfmne",
+          "connections": {
+            "yxlwgx": [
+              "fileUrl"
+            ]
+          },
+          "default": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/water-ripples1.mp4"
+        },
+        {
+          "label": "Logo 3",
+          "type": "icon",
+          "group": "nrakij",
+          "default": {
+            "library": "custom_set_vfcvxit95",
+            "svg": {
+              "id": 2026,
+              "icon_id": "icon_ep9ojpb7b",
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+            }
+          },
+          "id": "geruen",
+          "connections": {
+            "xvvfuv": [
+              "icon"
+            ]
+          }
+        },
+        {
+          "label": "Logo 4",
+          "type": "icon",
+          "group": "nrakij",
+          "id": "qallql",
+          "default": {
+            "library": "custom_set_vfcvxit95",
+            "svg": {
+              "id": 2026,
+              "icon_id": "icon_ep9ojpb7b",
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+            }
+          },
+          "connections": {
+            "bsguiw": [
+              "icon"
+            ]
+          }
+        },
+        {
+          "label": "Logo 5",
+          "type": "icon",
+          "group": "nrakij",
+          "default": {
+            "library": "custom_set_vfcvxit95",
+            "svg": {
+              "id": 2026,
+              "icon_id": "icon_ep9ojpb7b",
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+            }
+          },
+          "id": "yckrkb",
+          "connections": {
+            "sictrd": [
+              "icon"
+            ]
+          }
+        },
+        {
+          "label": "Logo 6",
+          "type": "icon",
+          "group": "nrakij",
+          "default": {
+            "library": "custom_set_vfcvxit95",
+            "svg": {
+              "id": 2026,
+              "icon_id": "icon_ep9ojpb7b",
+              "url": "https://stg-growtherapy-dev.kinsta.cloud/wp-content/uploads/2025/08/medicaid-gov-logo.svg"
+            }
+          },
+          "id": "pqorhh",
+          "connections": {
+            "vswsxc": [
+              "icon"
+            ]
+          }
+        },
+        {
+          "label": "Heading",
+          "type": "text",
+          "group": "mvcokg",
+          "default": "Lorem ipsum dolor sit amet, consectetur",
+          "id": "sylajc",
+          "connections": {
+            "akmqsr": [
+              "text"
+            ]
+          }
+        },
+        {
+          "label": "Body Text 1",
+          "type": "editor",
+          "group": "mvcokg",
+          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>",
+          "id": "gttovh",
+          "connections": {
+            "xnlanr": [
+              "text"
+            ]
+          }
+        },
+        {
+          "label": "Body Text 2",
+          "type": "editor",
+          "group": "mvcokg",
+          "default": "<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>",
+          "id": "ngnpkw",
+          "connections": {
+            "oemxew": [
+              "text"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "globalClasses": [
+    {
+      "id": "9rscll",
+      "name": "blue-cta-card",
+      "settings": {
+        "_margin": {
+          "bottom": "12rem"
+        },
+        "_margin:mobile_portrait": {
+          "bottom": "6.4rem"
+        },
+        "_padding": {
+          "left": "4rem",
+          "right": "4rem",
+          "bottom": "4rem",
+          "top": "4rem"
+        },
+        "_direction": "row",
+        "_gradient": {
+          "applyTo": "overlay",
+          "repeat": true,
+          "colors": [
+            {
+              "id": "gvnjca",
+              "color": {
+                "hex": "#264653",
+                "rgb": "rgba(38, 70, 83, 0.88)",
+                "hsl": "hsla(197, 37%, 24%, 0.88)"
+              }
+            },
+            {
+              "id": "gvnjca",
+              "color": {
+                "hex": "#264653",
+                "rgb": "rgba(38, 70, 83, 0.88)",
+                "hsl": "hsla(197, 37%, 24%, 0.88)"
+              }
+            }
+          ]
+        },
+        "_flexWrap": "wrap",
+        "_border": {
+          "radius": {
+            "top": "1.6rem",
+            "right": "1.6rem",
+            "left": "1.6rem",
+            "bottom": "1.6rem"
+          },
+          "width": {
+            "left": "1",
+            "top": "1",
+            "right": "1"
+          }
+        },
+        "_overflow": "hidden",
+        "_rowGap": "4.8rem",
+        "_columnGap": "4rem",
+        "_padding:mobile_landscape": {
+          "bottom": "2.4rem",
+          "top": "2.4rem",
+          "right": "2.4rem",
+          "left": "2.4rem"
+        },
+        "_rowGap:mobile_landscape": "3.2rem",
+        "propertyDefault": {
+          "fill:mobile_portrait": {
+            "id": "acss_import_neutral-light",
+            "name": "neutral-light",
+            "raw": "var(--neutral-light)"
+          }
+        },
+        "_rowGap:mobile_portrait": "3rem"
+      }
+    },
+    {
+      "id": "ujgnap",
+      "name": "blue-cta-card__logo",
+      "settings": {
+        "_typography:mobile_portrait": {
+          "color": {
+            "id": "acss_import_neutral-light",
+            "name": "neutral-light",
+            "raw": "var(--neutral-light)"
+          }
+        }
+      }
+    },
+    {
+      "id": "m19rry",
+      "name": "blue-cta-card__row",
+      "settings": {
+        "_flexBasis": "100%",
+        "_direction": "row",
+        "_justifyContent": "space-between"
+      }
+    },
+    {
+      "id": "3mogl4",
+      "name": "blue-cta-card__column",
+      "settings": []
+    },
+    {
+      "id": "5jd3qj",
+      "name": "blue-cta-card__heading",
+      "settings": {
+        "_typography": {
+          "color": {
+            "id": "acss_import_neutral-light",
+            "name": "neutral-light",
+            "raw": "var(--neutral-light)"
+          }
+        },
+        "_typography:mobile_portrait": {
+          "letter-spacing": "-0.98"
+        }
+      },
+      "modified": 1756249424,
+      "user_id": 22
+    },
+    {
+      "id": "3mogl4",
+      "name": "blue-cta-card__column",
+      "settings": []
+    },
+    {
+      "id": "t63zk1",
+      "name": "blue-cta-card__text",
+      "settings": {
+        "_widthMax:mobile_landscape": "46ch",
+        "_typography": {
+          "color": {
+            "id": "acss_import_neutral-light",
+            "name": "neutral-light",
+            "raw": "var(--neutral-light)"
+          }
+        }
+      },
+      "modified": 1756249424,
+      "user_id": 22
+    },
+    {
+      "id": "t63zk1",
+      "name": "blue-cta-card__text",
+      "settings": {
+        "_widthMax:mobile_landscape": "46ch",
+        "_typography": {
+          "color": {
+            "id": "acss_import_neutral-light",
+            "name": "neutral-light",
+            "raw": "var(--neutral-light)"
+          }
+        }
+      },
+      "modified": 1756249424,
+      "user_id": 22
+    },
+    {
+      "id": "s2jl8w",
+      "name": "blue-cta-card__button",
+      "settings": []
+    },
+    {
+      "id": "glyalr",
+      "name": "btn--fill",
+      "settings": {
+        "_width:mobile_landscape": "100%"
+      }
+    },
+    {
+      "id": "m19rry",
+      "name": "blue-cta-card__row",
+      "settings": {
+        "_flexBasis": "100%",
+        "_direction": "row",
+        "_justifyContent": "space-between"
+      }
+    },
+    {
+      "id": "ujgnap",
+      "name": "blue-cta-card__logo",
+      "settings": {
+        "_typography:mobile_portrait": {
+          "color": {
+            "id": "acss_import_neutral-light",
+            "name": "neutral-light",
+            "raw": "var(--neutral-light)"
+          }
+        }
+      }
+    },
+    {
+      "id": "ujgnap",
+      "name": "blue-cta-card__logo",
+      "settings": {
+        "_typography:mobile_portrait": {
+          "color": {
+            "id": "acss_import_neutral-light",
+            "name": "neutral-light",
+            "raw": "var(--neutral-light)"
+          }
+        }
+      }
+    },
+    {
+      "id": "ujgnap",
+      "name": "blue-cta-card__logo",
+      "settings": {
+        "_typography:mobile_portrait": {
+          "color": {
+            "id": "acss_import_neutral-light",
+            "name": "neutral-light",
+            "raw": "var(--neutral-light)"
+          }
+        }
+      }
+    },
+    {
+      "id": "ujgnap",
+      "name": "blue-cta-card__logo",
+      "settings": {
+        "_typography:mobile_portrait": {
+          "color": {
+            "id": "acss_import_neutral-light",
+            "name": "neutral-light",
+            "raw": "var(--neutral-light)"
+          }
+        }
+      }
+    },
+    {
+      "id": "ujgnap",
+      "name": "blue-cta-card__logo",
+      "settings": {
+        "_typography:mobile_portrait": {
+          "color": {
+            "id": "acss_import_neutral-light",
+            "name": "neutral-light",
+            "raw": "var(--neutral-light)"
+          }
+        }
+      }
+    }
+  ]
+}
