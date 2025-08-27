@@ -407,24 +407,21 @@ class SearchFilterForm {
   resetCrossFiltering(checkbox) {
     const { name } = checkbox;
     
-    if (name === 'states-options') {
-      // Reset insurance filter - show all options
-      const insuranceModal = this.findModalByInputName('payors-options');
-      if (insuranceModal) {
-        const options = insuranceModal.querySelectorAll('.search-filter-form__dropdown-modal-option');
-        options.forEach(option => {
-          option.style.display = '';
-        });
-      }
-    } else if (name === 'payors-options') {
-      // Reset state filter - show all options
-      const stateModal = this.findModalByInputName('states-options');
-      if (stateModal) {
-        const options = stateModal.querySelectorAll('.search-filter-form__dropdown-modal-option');
-        options.forEach(option => {
-          option.style.display = '';
-        });
-      }
+    // Map input names to their corresponding target modals for cross-filtering reset
+    const crossFilterMap = {
+      'states-options': 'payors-options',
+      'payors-options': 'states-options'
+    };
+    
+    const targetModalName = crossFilterMap[name];
+    if (!targetModalName) return;
+    
+    const targetModal = this.findModalByInputName(targetModalName);
+    if (targetModal) {
+      const options = targetModal.querySelectorAll('.search-filter-form__dropdown-modal-option');
+      options.forEach(option => {
+        option.classList.remove(this.cssClasses.optionHidden);
+      });
     }
   }
 
@@ -449,15 +446,48 @@ class SearchFilterForm {
       selections[name].push(checkbox.value);
     }
     
+    // Build query parameters
     for (const [name, values] of Object.entries(selections)) {
-      values.forEach(value => {
-        searchParams.append(name, value);
-      });
+      if (name === 'specialties-options') {
+        // Handle specialties as array parameters
+        values.forEach((value, index) => {
+          searchParams.append(`specialty[${index}]`, value);
+        });
+      } else if (name === 'states-options') {
+        // Handle states as single parameter
+        searchParams.append('state', values[0]);
+      } else if (name === 'payors-options') {
+        // Handle insurance as single parameter
+        searchParams.append('insurance', values[0]);
+      }
     }
     
+    // Get state slug for URL path
+    const stateValue = selections['states-options']?.[0];
+    const stateSlug = stateValue ? this.convertToSlug(stateValue) : '';
+    
+    // Build URL with path parameter and query string
     const baseUrl = window.location.origin + '/find/therapists';
-    const searchUrl = baseUrl + '?' + searchParams.toString();
-    window.location.href = searchUrl;
+    const urlPath = stateSlug ? `/${stateSlug}` : '';
+    const searchUrl = baseUrl + urlPath + '?' + searchParams.toString();
+    
+    console.log(searchUrl);
+    
+    // window.location.href = searchUrl;
+  }
+
+  /**
+   * Convert text to URL-friendly slug
+   * @param {string} text - Text to convert
+   * @return {string} - URL-friendly slug
+   */
+  convertToSlug(text) {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim('-');
   }
 
   /**

@@ -319,7 +319,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
         $label = isset($item['label']) ? $item['label'] : (isset($item['name']) ? $item['name'] : '');
         
         if ($value && $label) {
-          $checkbox_id = 'option-' . esc_attr($api_key) . '-' . str_replace(' ', '-', $value);
+          $checkbox_id = 'option-' . esc_attr($api_key) . '-' . preg_replace('/[^\da-z]/i', '', $value);          ;
           $checkbox_name = $api_key . '-options';
           $multi_select_class = $config['single_select'] ? '' : 'search-filter-form__dropdown-modal-input--multi-select';
           
