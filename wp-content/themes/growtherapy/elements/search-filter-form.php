@@ -35,8 +35,9 @@ class Element_Search_Filter_Form extends \Bricks\Element {
       'group'       => 'dropdowns',
       'label'       => esc_html__('Location Label', 'bricks'),
       'type'        => 'text',
-      'default'     => esc_html__('Select your state', 'bricks'),
-      'placeholder' => esc_html__('Enter label text', 'bricks'),
+      'default'     => esc_html__('Please select a state', 'bricks'),
+      'placeholder' => esc_html__('Enter label and validation message', 'bricks'),
+      'description' => esc_html__('This text serves as both the dropdown label and validation message when required', 'bricks'),
     ];
 
     $this->controls['location_placeholder'] = [
@@ -62,8 +63,9 @@ class Element_Search_Filter_Form extends \Bricks\Element {
       'group'       => 'dropdowns',
       'label'       => esc_html__('Insurance Label', 'bricks'),
       'type'        => 'text',
-      'default'     => esc_html__('Select your carrier', 'bricks'),
-      'placeholder' => esc_html__('Enter label text', 'bricks'),
+      'default'     => esc_html__('Please select an insurance', 'bricks'),
+      'placeholder' => esc_html__('Enter label and validation message', 'bricks'),
+      'description' => esc_html__('This text serves as both the dropdown label and validation message when required', 'bricks'),
     ];
 
     $this->controls['insurance_placeholder'] = [
@@ -89,8 +91,9 @@ class Element_Search_Filter_Form extends \Bricks\Element {
       'group'       => 'dropdowns',
       'label'       => esc_html__('Needs Label', 'bricks'),
       'type'        => 'text',
-      'default'     => esc_html__('Select your needs', 'bricks'),
-      'placeholder' => esc_html__('Enter label text', 'bricks'),
+      'default'     => esc_html__('Please select at least one need', 'bricks'),
+      'placeholder' => esc_html__('Enter label and validation message', 'bricks'),
+      'description' => esc_html__('This text serves as both the dropdown label and validation message when required', 'bricks'),
     ];
 
     $this->controls['needs_placeholder'] = [
@@ -165,6 +168,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
       'required'      => $settings['location_required'] ?? true,
       'single_select' => true, // Location is always single-select
       'api_key'       => 'states',
+      'validation_message' => $settings['location_label'] ?? esc_html__('Please select a state', 'bricks'),
     ];
 
     $insurance_config = [
@@ -173,6 +177,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
       'required'      => $settings['insurance_required'] ?? true,
       'single_select' => true, // Insurance is always single-select
       'api_key'       => 'payors',
+      'validation_message' => $settings['insurance_label'] ?? esc_html__('Please select an insurance', 'bricks'),
     ];
 
     $needs_config = [
@@ -181,6 +186,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
       'required'      => $settings['needs_required'] ?? false,
       'single_select' => false, // Needs is always multi-select
       'api_key'       => 'specialties',
+      'validation_message' => $settings['needs_label'] ?? esc_html__('Please select at least one need', 'bricks'),
     ];
 
     $search_button_text = $settings['search_button_text'] ?? esc_html__('Search', 'bricks');
@@ -222,6 +228,8 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     $label = esc_html($config['label']);
     $placeholder = esc_html($config['placeholder']);
     $api_key = esc_attr($config['api_key']);
+    $validation_message = esc_attr($config['validation_message'] ?? '');
+    $required_attr = $config['required'] ? 'true' : 'false';
     
     return <<<HTML
     <div
@@ -236,8 +244,11 @@ class Element_Search_Filter_Form extends \Bricks\Element {
         aria-controls="{$modal_id}"
         data-search-filter-form-dropdown-button
         data-placeholder="{$placeholder}{$required_indicator}"
+        data-validation-message="{$validation_message}"
+        data-required="{$required_attr}"
       >
         <span class="search-filter-form__dropdown-button-label">{$placeholder}{$required_indicator}</span>
+        <span class="search-filter-form__dropdown-button-error-msg" role="alert" aria-live="polite"></span>
       </button>
       
       <div

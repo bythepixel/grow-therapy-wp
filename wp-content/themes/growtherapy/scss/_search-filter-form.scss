@@ -48,6 +48,11 @@ $breakpoint-l: 870px;
           padding-left: 0 !important;
         }
       }
+
+      .search-filter-form__dropdown-button-error-msg {
+        left: 0;
+        transform: none;
+      }
     }
 
     &:last-of-type {
@@ -61,6 +66,7 @@ $breakpoint-l: 870px;
     &-button {
       background-color: transparent;
       padding: 0.8rem 0;
+      position: relative;
       width: 100%;
 
       @media (min-width: $breakpoint-l) {
@@ -283,5 +289,25 @@ $breakpoint-l: 870px;
       margin: 0;
       width: 8.8rem;
     }
+  }
+
+  // Validation error states
+  &--error {
+    .search-filter-form__dropdown-button-error-msg {
+      display: block;
+    }
+  }
+
+  &__dropdown-button-error-msg {
+    color: var(--accent-dark);
+    display: none;
+    font-size: 1rem;
+    font-weight: 500;
+    left: 50%;
+    position: absolute;
+    text-align: left;
+    top: 60%;
+    transform: translateX(-50%);
+    white-space: nowrap;
   }
 }

@@ -519,6 +519,12 @@ class SearchFilterForm {
   handleFormSubmit(e) {
     e.preventDefault();
     
+    this.validation.clearAllErrors();
+    
+    if (!this.validation.validateRequiredFields()) {
+      return false;
+    }
+    
     const form = e.target;
     const searchParams = new URLSearchParams();
     
@@ -557,6 +563,174 @@ class SearchFilterForm {
     // window.location.href = searchUrl;
   }
 
+  /**
+   * Validation system for form fields
+   */
+  validation = {
+    // Cache for validation states to avoid unnecessary DOM queries
+    stateCache: new Map(),
+    
+    // Constants for validation states
+    STATES: {
+      VALID: 'valid',
+      ERROR: 'error'
+    },
+    
+    /**
+     * Validate all required fields
+     * @returns {boolean} - True if all required fields are valid
+     */
+    validateRequiredFields: () => {
+      const requiredDropdowns = document.querySelectorAll('[data-required="true"]');
+      let isValid = true;
+      
+      requiredDropdowns.forEach(dropdown => {
+        const dropdownWrapper = dropdown.closest(this.elements.dropdown);
+        if (!dropdownWrapper) return;
+        
+        const checkboxes = dropdownWrapper.querySelectorAll('input[type="checkbox"]:checked');
+        const hasSelection = checkboxes.length > 0;
+        const currentState = hasSelection ? this.validation.STATES.VALID : this.validation.STATES.ERROR;
+        const cachedState = this.validation.stateCache.get(dropdownWrapper);
+        
+        if (cachedState !== currentState) {
+          if (!hasSelection) {
+            const message = dropdown.dataset.validationMessage || 'This field is required';
+            this.validation.setFieldState(dropdownWrapper, this.validation.STATES.ERROR, message);
+            isValid = false;
+          } else {
+            this.validation.setFieldState(dropdownWrapper, this.validation.STATES.VALID);
+          }
+        } else if (!hasSelection) {
+          isValid = false;
+        }
+      });
+      
+      return isValid;
+    },
+
+    /**
+     * Set field validation state
+     * @param {HTMLElement} dropdown - The dropdown wrapper element
+     * @param {string} state - 'valid' or 'error'
+     * @param {string} [message] - Error message (required for error state)
+     */
+    setFieldState: (dropdown, state, message = '') => {
+      const errorMsg = dropdown.querySelector('.search-filter-form__dropdown-button-error-msg');
+      const button = dropdown.querySelector(this.elements.dropdownButton);
+      
+      if (state === this.validation.STATES.ERROR) {
+        dropdown.classList.add('search-filter-form__dropdown--error');
+        
+        if (errorMsg) {
+          errorMsg.textContent = message;
+          errorMsg.style.display = 'block';
+        }
+        
+        if (button) {
+          button.setAttribute('aria-invalid', 'true');
+        }
+      } else {
+        dropdown.classList.remove('search-filter-form__dropdown--error');
+        
+        if (errorMsg) {
+          errorMsg.style.display = 'none';
+          errorMsg.textContent = '';
+        }
+        
+        if (button) {
+          button.removeAttribute('aria-invalid');
+        }
+      }
+      
+      this.validation.stateCache.set(dropdown, state);
+    },
+
+    /**
+     * Clear validation error for a specific dropdown
+     * @param {HTMLElement} dropdown - The dropdown wrapper element
+     */
+    clearFieldError: (dropdown) => {
+      this.validation.setFieldState(dropdown, 'valid');
+    },
+
+    /**
+     * Clear all validation errors
+     */
+    clearAllErrors: () => {
+      const errorDropdowns = document.querySelectorAll('.search-filter-form__dropdown--error');
+      errorDropdowns.forEach(dropdown => {
+        this.validation.clearFieldError(dropdown);
+      });
+      this.validation.stateCache.clear();
+    },
+
+    /**
+     * Clear validation cache for a specific field
+     * @param {HTMLElement} dropdown - The dropdown wrapper element
+     */
+    clearFieldCache: (dropdown) => {
+      this.validation.stateCache.delete(dropdown);
+    },
+
+    /**
+     * Get validation statistics
+     * @returns {Object} - Object with validation counts and status
+     */
+    getValidationStats: () => {
+      const requiredDropdowns = document.querySelectorAll('[data-required="true"]');
+      let validCount = 0;
+      let errorCount = 0;
+      
+      requiredDropdowns.forEach(dropdown => {
+        const dropdownWrapper = dropdown.closest(this.elements.dropdown);
+        if (!dropdownWrapper) return;
+        
+        const checkboxes = dropdownWrapper.querySelectorAll('input[type="checkbox"]:checked');
+        if (checkboxes.length > 0) {
+          validCount++;
+        } else {
+          errorCount++;
+        }
+      });
+      
+      return {
+        total: requiredDropdowns.length,
+        valid: validCount,
+        errors: errorCount,
+        isValid: errorCount === 0
+      };
+    },
+
+    /**
+     * Reset entire validation system
+     */
+    reset: () => {
+      this.validation.clearAllErrors();
+      this.validation.stateCache.clear();
+    },
+
+    /**
+     * Validate a single field
+     * @param {HTMLElement} dropdown - The dropdown wrapper element
+     * @returns {boolean} - True if field is valid
+     */
+    validateField: (dropdown) => {
+      const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]:checked');
+      const hasSelection = checkboxes.length > 0;
+      
+      if (!hasSelection) {
+        const button = dropdown.querySelector('[data-required="true"]');
+        const message = button?.dataset.validationMessage || 'This field is required';
+        this.validation.setFieldState(dropdown, this.validation.STATES.ERROR, message);
+        return false;
+      } else {
+        this.validation.setFieldState(dropdown, this.validation.STATES.VALID);
+        return true;
+      }
+    }
+  };
+
   updateDropdownLabel(checkbox) {
     const modal = checkbox.closest(this.elements.dropdownModal);
     const dropdown = modal?.closest(this.elements.dropdown);
@@ -583,6 +757,10 @@ class SearchFilterForm {
     } else {
       const placeholder = button.dataset.placeholder || 'Options';
       label.textContent = `${placeholder} (${checkedOptions.length})`;
+    }
+
+    if (checkedOptions.length > 0) {
+      this.validation.validateField(dropdown);
     }
   }
 }
