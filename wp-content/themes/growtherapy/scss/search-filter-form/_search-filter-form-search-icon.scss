@@ -1,0 +1,10 @@
+@use "config" as config;
+
+.search-filter-form-search-icon {
+  height: 2.4rem;
+  width: 2.4rem;
+
+  @media (min-width: config.$breakpoint-l) {
+    stroke-width: 0.2rem;
+  }
+}

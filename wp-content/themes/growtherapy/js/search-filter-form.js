@@ -12,18 +12,23 @@
 class SearchFilterForm {
   constructor() {
     this.elements = {
-      deselectButton: '[data-search-filter-form-deselect-button]',
       checkboxSingleSelect: '[data-search-filter-form-single-select]',
+      deselectButton: '[data-search-filter-form-deselect-button]',
+      doneButton: '[data-search-filter-form-done-button]',
       dropdown: '[data-search-filter-form-dropdown]',
-      dropdownButton: '[data-search-filter-form-dropdown-button]',
       dropdownModal: '[data-search-filter-form-dropdown-modal]',
+      label: '[data-search-filter-form-label]',
+      modalTrigger: '[data-search-filter-form-modal-trigger]',
+      option: '[data-search-filter-form-option]',
       searchInput: '[data-search-filter-form-search-input]',
+      validationMessage: '[data-search-filter-form-validation-message]',
     };
 
     this.cssClasses = {
-      modalActive: 'search-filter-form__dropdown-modal--active',
-      optionHidden: 'search-filter-form__dropdown-modal-option--hidden',
-      optionSelected: 'search-filter-form__dropdown-modal-option--selected',
+      dropdownError: 'search-filter-form-dropdown--error',
+      modalActive: 'search-filter-form-modal--active',
+      optionHidden: 'search-filter-form-modal__option--hidden',
+      optionSelected: 'search-filter-form-modal__option--selected',
     };
 
     this.activeModals = new Set();
@@ -96,7 +101,7 @@ class SearchFilterForm {
       if (checkbox) {
         checkbox.checked = checked;
         
-        const option = checkbox.closest('.search-filter-form__dropdown-modal-option');
+        const option = checkbox.closest(this.elements.option);
         if (option) {
           option.classList.toggle(this.cssClasses.optionSelected, checked);
         }
@@ -134,7 +139,7 @@ class SearchFilterForm {
           if (checkbox && !checkbox.checked) {
             checkbox.checked = true;
             
-            const option = checkbox.closest('.search-filter-form__dropdown-modal-option');
+            const option = checkbox.closest(this.elements.option);
             if (option) {
               option.classList.add(this.cssClasses.optionSelected);
             }
@@ -183,14 +188,14 @@ class SearchFilterForm {
 
   eventManager = {
     handleGlobalClick: (e) => {
-      const dropdownButton = e.target.closest(this.elements.dropdownButton);
-      const doneButton = e.target.closest('.search-filter-form__dropdown-modal-done-button');
+      const modalTrigger = e.target.closest(this.elements.modalTrigger);
+      const doneButton = e.target.closest(this.elements.doneButton);
       const deselectButton = e.target.closest(this.elements.deselectButton);
       
-      if (dropdownButton) {
+      if (modalTrigger) {
         e.preventDefault();
         e.stopPropagation();
-        this.handleModalOpen(dropdownButton);
+        this.handleModalOpen(modalTrigger);
         return;
       }
       
@@ -234,7 +239,7 @@ class SearchFilterForm {
     getOpenModals: () => Array.from(this.activeModals),
     
     open: (modal, dropdown) => {
-      const button = dropdown.querySelector(this.elements.dropdownButton);
+      const button = dropdown.querySelector(this.elements.modalTrigger);
       
       modal.classList.remove('aria-hidden');
       modal.classList.add(this.cssClasses.modalActive);
@@ -249,7 +254,7 @@ class SearchFilterForm {
       const dropdown = modal.closest(this.elements.dropdown);
       if (!dropdown) return;
       
-      const button = dropdown.querySelector(this.elements.dropdownButton);
+      const button = dropdown.querySelector(this.elements.modalTrigger);
       
       modal.classList.remove(this.cssClasses.modalActive);
       modal.classList.add('aria-hidden');
@@ -338,7 +343,7 @@ class SearchFilterForm {
       this.applyCrossFiltering(checkbox);
     } else {
       const label = checkbox.closest('label');
-      if (label && !e.target.closest('.search-filter-form__dropdown-modal-option-deselect')) {
+      if (label && !e.target.closest(this.elements.deselectButton)) {
         checkbox.checked = true;
         return;
       }
@@ -371,7 +376,7 @@ class SearchFilterForm {
     e.preventDefault();
     e.stopPropagation();
     
-    const option = deselectButton.closest('.search-filter-form__dropdown-modal-option');
+    const option = deselectButton.closest(this.elements.option);
     const checkbox = option?.querySelector('input[type="checkbox"]');
 
     if (checkbox) {
@@ -422,7 +427,7 @@ class SearchFilterForm {
         return;
       }
 
-      const options = modal.querySelectorAll('.search-filter-form__dropdown-modal-option');
+      const options = modal.querySelectorAll(this.elements.option);
       
       options.forEach(option => {
         const checkbox = option.querySelector('input[type="checkbox"]');
@@ -445,7 +450,7 @@ class SearchFilterForm {
     },
 
     applyCrossFiltering: (modal) => {
-      const options = modal.querySelectorAll('.search-filter-form__dropdown-modal-option');
+      const options = modal.querySelectorAll(this.elements.option);
       options.forEach(option => {
         const isCrossFiltered = !option.classList.contains(this.cssClasses.optionHidden);
         option.style.display = isCrossFiltered ? '' : 'none';
@@ -453,7 +458,7 @@ class SearchFilterForm {
     },
 
     clear: (modal) => {
-      const searchInput = modal.querySelector('.searchInput');
+      const searchInput = modal.querySelector(this.elements.searchInput);
       if (searchInput) {
         searchInput.value = '';
       }
@@ -489,7 +494,7 @@ class SearchFilterForm {
       const targetModal = this.dom.findModalByInputName(targetModalInputName);
       if (!targetModal) return;
 
-      const options = targetModal.querySelectorAll('.search-filter-form__dropdown-modal-option');
+      const options = targetModal.querySelectorAll(this.elements.option);
       
       options.forEach(option => {
         const checkbox = option.querySelector('input[type="checkbox"]');
@@ -512,9 +517,9 @@ class SearchFilterForm {
       return firstInput.closest('[data-search-filter-form-dropdown-modal]');
     },
     
-    findOption: (checkbox) => checkbox.closest('.search-filter-form__dropdown-modal-option'),
+    findOption: (checkbox) => checkbox.closest(this.elements.option),
     
-    findCheckboxes: (modal) => modal.querySelectorAll('.search-filter-form__dropdown-modal-option input[type="checkbox"]'),
+    findCheckboxes: (modal) => modal.querySelectorAll(this.elements.option + ' input[type="checkbox"]'),
     
     findDropdown: (modal) => modal.closest(this.elements.dropdown)
   };
@@ -532,7 +537,7 @@ class SearchFilterForm {
     
     const targetModal = this.dom.findModalByInputName(targetModalName);
     if (targetModal) {
-      const options = targetModal.querySelectorAll('.search-filter-form__dropdown-modal-option');
+      const options = targetModal.querySelectorAll(this.elements.option);
       options.forEach(option => {
         option.classList.remove(this.cssClasses.optionHidden);
       });
@@ -639,11 +644,11 @@ class SearchFilterForm {
      * @param {string} [message] - Error message (required for error state)
      */
     setFieldState: (dropdown, state, message = '') => {
-      const errorMsg = dropdown.querySelector('.search-filter-form__dropdown-button-error-msg');
-      const button = dropdown.querySelector(this.elements.dropdownButton);
+      const errorMsg = dropdown.querySelector(this.elements.validationMessage);
+      const button = dropdown.querySelector(this.elements.modalTrigger);
       
       if (state === this.validation.STATES.ERROR) {
-        dropdown.classList.add('search-filter-form__dropdown--error');
+        dropdown.classList.add(this.cssClasses.dropdownError);
         
         if (errorMsg) {
           errorMsg.textContent = message;
@@ -654,7 +659,7 @@ class SearchFilterForm {
           button.setAttribute('aria-invalid', 'true');
         }
       } else {
-        dropdown.classList.remove('search-filter-form__dropdown--error');
+        dropdown.classList.remove(this.cssClasses.dropdownError);
         
         if (errorMsg) {
           errorMsg.style.display = 'none';
@@ -681,7 +686,7 @@ class SearchFilterForm {
      * Clear all validation errors
      */
     clearAllErrors: () => {
-      const errorDropdowns = document.querySelectorAll('.search-filter-form__dropdown--error');
+      const errorDropdowns = document.querySelectorAll(this.cssClasses.dropdownError);
       errorDropdowns.forEach(dropdown => {
         this.validation.clearFieldError(dropdown);
       });
@@ -759,8 +764,8 @@ class SearchFilterForm {
     const dropdown = modal?.closest(this.elements.dropdown);
     if (!dropdown) return;
     
-    const button = dropdown.querySelector(this.elements.dropdownButton);
-    const label = button?.querySelector('.search-filter-form__dropdown-button-label');
+    const button = dropdown.querySelector(this.elements.modalTrigger);
+    const label = button?.querySelector(this.elements.label);
     if (!label) return;
     
     const name = checkbox.name;
@@ -769,7 +774,7 @@ class SearchFilterForm {
     if (checkedOptions.length === 0) {
       label.textContent = button.dataset.placeholder || 'Select option';
     } else if (checkedOptions.length === 1) {
-      const option = checkedOptions[0].closest('.search-filter-form__dropdown-modal-option');
+      const option = checkedOptions[0].closest(this.elements.option);
       if (option) {
         const textContent = Array.from(option.childNodes)
           .filter(node => node.nodeType === Node.TEXT_NODE)

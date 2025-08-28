@@ -1,0 +1,82 @@
+@use "config" as config;
+
+.search-filter-form-dropdown {
+  position: relative;
+
+  @media (min-width: config.$breakpoint-l) {
+    align-items: center;
+    display: flex;
+  }
+
+  &::after {
+    background-color: var(--neutral);
+    content: '';
+    display: block;
+    height: 0.1rem;
+    margin: 0.8rem 0;
+    width: 100%;
+
+    @media (min-width: config.$breakpoint-l) {
+      height: 2.4rem;
+      margin: 0;
+      width: 0.1rem;
+    }
+  }
+
+  &[data-search-filter-form-dropdown="type-of-care"] {
+    .search-filter-form-modal-trigger__label {
+      @media (min-width: config.$breakpoint-l) {
+        width: 9.52rem;
+      }
+    }
+  }
+
+  &[data-search-filter-form-dropdown="payors"] {
+    .search-filter-form-modal-trigger__label {
+      @media (min-width: config.$breakpoint-l) {
+        width: 8.5rem;
+      }
+    }
+  }
+
+  &:nth-of-type(2) {
+    .search-filter-form-modal-trigger {
+      @media (min-width: config.$breakpoint-l) {
+        padding-left: 0;
+      }
+    }
+
+    .search-filter-form__validation-message {
+      @media (min-width: config.$breakpoint-l) { 
+        left: 0;
+        transform: none;
+      }
+    }
+  }
+
+  &:last-of-type {
+    &::after {
+      @media (min-width: config.$breakpoint-l) {
+        display: none;
+
+        .search-filter-form-modal-trigger__label {
+          width: 4.33rem;
+        }
+      }
+    }
+  }
+
+  &--multi-select {
+    .search-filter-form-modal__fieldset {
+      @media (min-width: config.$breakpoint-s) {
+        height: 13.2rem;
+      }
+    }
+
+    .search-filter-form-modal__desktop-header {
+      @media (min-width: config.$breakpoint-s) {
+        display: flex;
+      }
+    }
+  }
+}

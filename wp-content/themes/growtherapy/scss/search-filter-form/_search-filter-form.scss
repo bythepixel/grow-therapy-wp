@@ -1,0 +1,54 @@
+@use "config" as config;
+
+.search-filter-form {
+  background-color: #fff;
+  border: 0.1rem solid var(--neutral);
+  border-radius: 3.2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+  padding: 1.4rem 1.2rem;
+  width: 100%;
+
+  @media (min-width: config.$breakpoint-l) {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    max-width: 61.2rem;
+    padding: 0.5rem 0.6rem 0.5rem 2.8rem;
+  }
+
+  &__validation-message {
+    color: var(--accent-dark);
+    display: none;
+    font-size: 1rem;
+    font-weight: 500;
+    position: absolute;
+    text-align: left;
+    top: 60%;
+    white-space: nowrap;
+
+    @media (min-width: config.$breakpoint-l) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__submit-button {
+    align-items: center;
+    display: flex;
+    gap: 0.25rem;
+    justify-content: center;
+    margin-top: 3rem;
+    width: 100%;
+
+    @media (min-width: config.$breakpoint-l) {
+      margin: 0;
+      width: 8.8rem;
+    }
+  }
+
+  &--error {
+    .search-filter-form__validation-message {
+      display: block;
+    }
+  }
+}

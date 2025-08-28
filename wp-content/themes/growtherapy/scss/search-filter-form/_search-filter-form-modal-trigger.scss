@@ -1,0 +1,30 @@
+@use "config" as config;
+
+.search-filter-form-modal-trigger {
+  align-items: center;
+  background-color: transparent;
+  display: flex;
+  padding: 1rem 0;
+  position: relative;
+  width: 100%;
+
+  @media (min-width: config.$breakpoint-l) {
+    padding: 0 1.6rem 0 4rem;
+  }
+
+  &__label {
+    display: inline-block;
+    font-size: var(--text-s);
+    font-weight: 500;
+    line-height: var(--text-s-line-height);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @media (min-width: config.$breakpoint-l) {
+      font-size: var(--text-xs);
+      line-height: var(--text-xs-line-height);
+      width: 6.1rem;
+    }
+  }
+}
