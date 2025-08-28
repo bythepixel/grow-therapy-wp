@@ -146,7 +146,7 @@ final class Parser
                     $kv['source'] = $value;
                     continue;
                 }
-                if (in_array($key, self::KNOWN_FILTERS, true)) {
+                if (isset(self::KNOWN_FILTERS[$key])) {
                     $filters[] = [$key, $value];
                     continue;
                 }
@@ -154,11 +154,11 @@ final class Parser
                 continue;
             }
 
-            if (in_array($token, self::KNOWN_FILTERS, true)) {
+            if (isset(self::KNOWN_FILTERS[$token])) {
                 $filters[] = [$token, null];
                 continue;
             }
-            if (in_array($token, self::KNOWN_FLAGS, true)) {
+            if (isset(self::KNOWN_FLAGS[$token])) {
                 $flags[] = $token;
                 continue;
             }

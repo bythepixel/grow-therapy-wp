@@ -23,7 +23,9 @@ final class Plugin
 {
     // Public tag slugs
     public const TAG_FIELD = 'gt_field';
+    public const TAG_FIELD_PREFIX = 'gt_field:';
     public const TAG_CTX = 'gt_ctx';
+    public const TAG_CTX_PREFIX = 'gt_ctx:';
 
     // Recursion protection
     private static int $depth = 0;
@@ -97,17 +99,17 @@ final class Plugin
         try {
             $clean = trim($tag, '{}');
 
-            if (str_starts_with($clean, self::TAG_FIELD . ':')) {
+            if (str_starts_with($clean, self::TAG_FIELD_PREFIX)) {
                 return GtFieldTag::render(
-                    substr($clean, strlen(self::TAG_FIELD . ':')),
+                    substr($clean, strlen(self::TAG_FIELD_PREFIX)),
                     $post,
                     $context
                 );
             }
 
-            if (str_starts_with($clean, self::TAG_CTX . ':')) {
+            if (str_starts_with($clean, self::TAG_CTX_PREFIX)) {
                 return GtCtxTag::render(
-                    substr($clean, strlen(self::TAG_CTX . ':')),
+                    substr($clean, strlen(self::TAG_CTX_PREFIX)),
                     $post,
                     $context
                 );

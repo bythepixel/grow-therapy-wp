@@ -137,17 +137,17 @@ final class ContentRenderer
      */
     private static function renderTag(string $inner, $post, string $context): string
     {
-        if (str_starts_with($inner, Plugin::TAG_FIELD . ':')) {
+        if (str_starts_with($inner, Plugin::TAG_FIELD_PREFIX)) {
             return GtFieldTag::render(
-                substr($inner, strlen(Plugin::TAG_FIELD . ':')),
+                substr($inner, strlen(Plugin::TAG_FIELD_PREFIX)),
                 $post,
                 $context
             );
         }
 
-        if (str_starts_with($inner, Plugin::TAG_CTX . ':')) {
+        if (str_starts_with($inner, Plugin::TAG_CTX_PREFIX)) {
             return GtCtxTag::render(
-                substr($inner, strlen(Plugin::TAG_CTX . ':')),
+                substr($inner, strlen(Plugin::TAG_CTX_PREFIX)),
                 $post,
                 $context
             );

@@ -67,7 +67,7 @@ final class Finalizer
     public static function applyFiltersChain($value, array $filters)
     {
         foreach ($filters as $filter) {
-            [$name, $arg] = $filter + [null, null];
+            [$name, $arg] = $filter + array_pad($filter, 2, null);
             $value = self::applyFilter($value, $name, $arg);
         }
         return $value;
