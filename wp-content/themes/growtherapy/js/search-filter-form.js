@@ -213,17 +213,35 @@ class SearchFilterForm {
   };
 
   modalManager = {
+    isOpen: (modal) => this.activeModals.has(modal),
+    
+    getOpenModal: (dropdown) => {
+      const modal = dropdown.querySelector(this.elements.dropdownModal);
+      return modal && this.activeModals.has(modal) ? modal : null;
+    },
+    
+    toggle: (modal, dropdown) => {
+      if (this.activeModals.has(modal)) {
+        this.modalManager.close(modal);
+      } else {
+        this.modalManager.closeAll();
+        this.modalManager.open(modal, dropdown);
+      }
+    },
+    
+    hasOpenModal: () => this.activeModals.size > 0,
+    
+    getOpenModals: () => Array.from(this.activeModals),
+    
     open: (modal, dropdown) => {
-      const updates = [
-        () => modal.classList.remove('aria-hidden'),
-        () => modal.classList.add(this.cssClasses.modalActive),
-        () => modal.setAttribute('aria-hidden', 'false'),
-        () => dropdown.querySelector(this.elements.dropdownButton)?.setAttribute('aria-expanded', 'true')
-      ];
+      const button = dropdown.querySelector(this.elements.dropdownButton);
       
-      updates.forEach(update => update());
+      modal.classList.remove('aria-hidden');
+      modal.classList.add(this.cssClasses.modalActive);
+      modal.setAttribute('aria-hidden', 'false');
+      button?.setAttribute('aria-expanded', 'true');
+      
       this.activeModals.add(modal);
-      
       this.searchManager.clear(modal);
     },
 
@@ -231,17 +249,15 @@ class SearchFilterForm {
       const dropdown = modal.closest(this.elements.dropdown);
       if (!dropdown) return;
       
-      const updates = [
-        () => modal.classList.remove(this.cssClasses.modalActive),
-        () => modal.classList.add('aria-hidden'),
-        () => modal.setAttribute('aria-hidden', 'true'),
-        () => dropdown.querySelector(this.elements.dropdownButton)?.setAttribute('aria-expanded', 'false'),
-        () => dropdown.querySelector(this.elements.dropdownButton)?.focus()
-      ];
+      const button = dropdown.querySelector(this.elements.dropdownButton);
       
-      updates.forEach(update => update());
+      modal.classList.remove(this.cssClasses.modalActive);
+      modal.classList.add('aria-hidden');
+      modal.setAttribute('aria-hidden', 'true');
+      button?.setAttribute('aria-expanded', 'false');
+      button?.focus();
+      
       this.activeModals.delete(modal);
-      
       this.cleanup();
     },
 
@@ -249,17 +265,24 @@ class SearchFilterForm {
       for (const modal of this.activeModals) {
         this.modalManager.close(modal);
       }
+    },
+    
+    closeByDropdown: (dropdown) => {
+      const modal = this.modalManager.getOpenModal(dropdown);
+      if (modal) {
+        this.modalManager.close(modal);
+      }
     }
   };
 
   handleModalOpen(button) {
     const dropdown = button.closest(this.elements.dropdown);
-    const modal = dropdown?.querySelector(this.elements.dropdownModal);
+    if (!dropdown) return;
     
-    if (!dropdown || !modal) return;
+    const modal = dropdown.querySelector(this.elements.dropdownModal);
+    if (!modal) return;
     
-    this.modalManager.closeAll();
-    this.modalManager.open(modal, dropdown);
+    this.modalManager.toggle(modal, dropdown);
   }
 
   /**
