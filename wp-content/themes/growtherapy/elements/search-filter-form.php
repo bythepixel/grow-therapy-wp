@@ -1,11 +1,11 @@
 <?php
-if (!defined('ABSPATH')) exit; // Exit if accessed directly
+if (!defined('ABSPATH')) exit;
 
 class Element_Search_Filter_Form extends \Bricks\Element {
   public $category     = 'custom';
-  public $name         = 'search-filter-form';
+  public $css_selector = '.search-filter-form';
   public $icon         = 'fas fa-search';
-  public $css_selector = '.search-filter-form-wrapper';
+  public $name         = 'search-filter-form';
   public $scripts      = ['searchFilterForm'];
 
   public function get_label() {
@@ -13,12 +13,36 @@ class Element_Search_Filter_Form extends \Bricks\Element {
   }
 
   public function get_keywords() {
-    return ['search', 'filter', 'form', 'dropdown', 'location', 'insurance', 'needs'];
+    return [
+      'dropdown',
+      'filter',
+      'form',
+      'insurance',
+      'location',
+      'needs',
+      'search',
+      'type of care',
+    ];
   }
 
   public function set_control_groups() {
-    $this->control_groups['dropdowns'] = [
-      'title' => esc_html__('Dropdowns', 'bricks'),
+    $this->control_groups['type_of_care'] = [
+      'title' => esc_html__('Type of Care', 'bricks'),
+      'tab'   => 'content',
+    ];
+
+    $this->control_groups['location'] = [
+      'title' => esc_html__('Location', 'bricks'),
+      'tab'   => 'content',
+    ];
+
+    $this->control_groups['insurance'] = [
+      'title' => esc_html__('Insurance', 'bricks'),
+      'tab'   => 'content',
+    ];
+
+    $this->control_groups['need'] = [
+      'title' => esc_html__('Needs', 'bricks'),
       'tab'   => 'content',
     ];
 
@@ -31,114 +55,122 @@ class Element_Search_Filter_Form extends \Bricks\Element {
   public function set_controls() {
     // First Dropdown (Type of Care)
     $this->controls['type_of_care_label'] = [
+      'default'     => esc_html__('Type of Care', 'bricks'),
+      'description' => esc_html__('This text appears as the dropdown label.', 'bricks'),
+      'group'       => 'type_of_care',
+      'label'       => esc_html__('Label', 'bricks'),
+      'placeholder' => esc_html__('Type of Care', 'bricks'),
       'tab'         => 'content',
-      'group'       => 'dropdowns',
-      'label'       => esc_html__('Type of Care Label', 'bricks'),
       'type'        => 'text',
-      'default'     => esc_html__('Please select your type of care', 'bricks'),
-      'placeholder' => esc_html__('Enter label and validation message', 'bricks'),
-      'description' => esc_html__('This text serves as both the dropdown label and validation message when required', 'bricks'),
     ];
 
-    $this->controls['type_of_care_placeholder'] = [
+    $this->controls['type_of_care_modal_heading'] = [
+      'default'     => esc_html__('Select your type of care', 'bricks'),
+      'description' => esc_html__('This text appears as the modal header label in mobile and in validation messages.', 'bricks'),
+      'group'       => 'type_of_care',
+      'label'       => esc_html__('Modal Heading', 'bricks'),
+      'placeholder' => esc_html__('Select your type of care', 'bricks'),
       'tab'         => 'content',
-      'group'       => 'dropdowns',
-      'label'       => esc_html__('Type of Care Placeholder', 'bricks'),
       'type'        => 'text',
-      'default'     => esc_html__('Type of Care', 'bricks'),
-      'placeholder' => esc_html__('Enter placeholder text', 'bricks'),
     ];
 
     $this->controls['type_of_care_required'] = [
-      'tab'         => 'content',
-      'group'       => 'dropdowns',
-      'label'       => esc_html__('Type of Care Required', 'bricks'),
-      'type'        => 'checkbox',
       'default'     => true,
+      'description' => esc_html__('Enable this to make the type of care field required.', 'bricks'),
+      'label'       => esc_html__('Required', 'bricks'),
+      'group'       => 'type_of_care',
+      'tab'         => 'content',
+      'type'        => 'checkbox',
     ];
 
     // Second Dropdown (Location)
     $this->controls['location_label'] = [
+      'default'     => esc_html__('State', 'bricks'),
+      'description' => esc_html__('This text appears as the dropdown label.', 'bricks'),
+      'group'       => 'location',
+      'label'       => esc_html__('Label', 'bricks'),
+      'placeholder' => esc_html__('State', 'bricks'),
       'tab'         => 'content',
-      'group'       => 'dropdowns',
-      'label'       => esc_html__('Location Label', 'bricks'),
       'type'        => 'text',
-      'default'     => esc_html__('Please select a state', 'bricks'),
-      'placeholder' => esc_html__('Enter label and validation message', 'bricks'),
-      'description' => esc_html__('This text serves as both the dropdown label and validation message when required', 'bricks'),
     ];
 
-    $this->controls['location_placeholder'] = [
+    $this->controls['location_modal_heading'] = [
+      'default'     => esc_html__('Select a state', 'bricks'),
+      'description' => esc_html__('This text appears as the modal header label in mobile and in validation messages.', 'bricks'),
+      'group'       => 'location',
+      'label'       => esc_html__('Modal Heading', 'bricks'),
+      'placeholder' => esc_html__('Select a state', 'bricks'),
       'tab'         => 'content',
-      'group'       => 'dropdowns',
-      'label'       => esc_html__('Location Placeholder', 'bricks'),
       'type'        => 'text',
-      'default'     => esc_html__('Location', 'bricks'),
-      'placeholder' => esc_html__('Enter placeholder text', 'bricks'),
     ];
 
     $this->controls['location_required'] = [
-      'tab'         => 'content',
-      'group'       => 'dropdowns',
-      'label'       => esc_html__('Location Required', 'bricks'),
-      'type'        => 'checkbox',
       'default'     => true,
+      'description' => esc_html__('Enable this to make the location field required.', 'bricks'),
+      'label'       => esc_html__('Required', 'bricks'),
+      'group'       => 'location',
+      'tab'         => 'content',
+      'type'        => 'checkbox',
     ];
 
-    // Second Dropdown (Insurance)
+    // Third Dropdown (Insurance)
     $this->controls['insurance_label'] = [
+      'default'     => esc_html__('Insurance', 'bricks'),
+      'description' => esc_html__('This text appears as the dropdown label.', 'bricks'),
+      'group'       => 'insurance',
+      'label'       => esc_html__('Label', 'bricks'),
+      'placeholder' => esc_html__('Insurance', 'bricks'),
       'tab'         => 'content',
-      'group'       => 'dropdowns',
-      'label'       => esc_html__('Insurance Label', 'bricks'),
       'type'        => 'text',
-      'default'     => esc_html__('Please select an insurance', 'bricks'),
-      'placeholder' => esc_html__('Enter label and validation message', 'bricks'),
-      'description' => esc_html__('This text serves as both the dropdown label and validation message when required', 'bricks'),
     ];
 
-    $this->controls['insurance_placeholder'] = [
+    $this->controls['insurance_modal_heading'] = [
+      'default'     => esc_html__('Select a carrier', 'bricks'),
+      'description' => esc_html__('This text appears as the modal header label in mobile and in validation messages.', 'bricks'),
+      'group'       => 'insurance',
+      'label'       => esc_html__('Modal Heading', 'bricks'),
+      'placeholder' => esc_html__('Select a carrier', 'bricks'),
       'tab'         => 'content',
-      'group'       => 'dropdowns',
-      'label'       => esc_html__('Insurance Placeholder', 'bricks'),
       'type'        => 'text',
-      'default'     => esc_html__('Insurance', 'bricks'),
-      'placeholder' => esc_html__('Enter placeholder text', 'bricks'),
     ];
 
     $this->controls['insurance_required'] = [
-      'tab'         => 'content',
-      'group'       => 'dropdowns',
-      'label'       => esc_html__('Insurance Required', 'bricks'),
-      'type'        => 'checkbox',
       'default'     => true,
+      'description' => esc_html__('Enable this to make the insurance field required.', 'bricks'),
+      'label'       => esc_html__('Required', 'bricks'),
+      'group'       => 'insurance',
+      'tab'         => 'content',
+      'type'        => 'checkbox',
     ];
 
-    // Third Dropdown (Needs)
+    // Fourth Dropdown (Needs)
     $this->controls['needs_label'] = [
+      'default'     => esc_html__('Needs', 'bricks'),
+      'description' => esc_html__('This text appears as the dropdown label.', 'bricks'),
+      'group'       => 'need',
+      'label'       => esc_html__('Label', 'bricks'),
+      'placeholder' => esc_html__('Needs', 'bricks'),
       'tab'         => 'content',
-      'group'       => 'dropdowns',
-      'label'       => esc_html__('Needs Label', 'bricks'),
       'type'        => 'text',
-      'default'     => esc_html__('Please select at least one need', 'bricks'),
-      'placeholder' => esc_html__('Enter label and validation message', 'bricks'),
-      'description' => esc_html__('This text serves as both the dropdown label and validation message when required', 'bricks'),
     ];
 
-    $this->controls['needs_placeholder'] = [
+    $this->controls['needs_modal_heading'] = [
+      'default'     => esc_html__('Select your needs', 'bricks'),
+      'description' => esc_html__('This text appears as the modal header label in mobile and in validation messages.', 'bricks'),
+      'group'       => 'need',
+      'label'       => esc_html__('Modal Heading', 'bricks'),
+      'placeholder' => esc_html__('Select your needs', 'bricks'),
       'tab'         => 'content',
-      'group'       => 'dropdowns',
-      'label'       => esc_html__('Needs Placeholder', 'bricks'),
       'type'        => 'text',
-      'default'     => esc_html__('Needs', 'bricks'),
-      'placeholder' => esc_html__('Enter placeholder text', 'bricks'),
     ];
 
     $this->controls['needs_required'] = [
-      'tab'         => 'content',
-      'group'       => 'dropdowns',
-      'label'       => esc_html__('Needs Required', 'bricks'),
-      'type'        => 'checkbox',
       'default'     => false,
+      'description' => esc_html__('Enable this to make the needs field required.', 'bricks'),
+      'label'       => esc_html__('Required', 'bricks'),
+      'group'       => 'need',
+      'tab'         => 'content',
+      'type'        => 'checkbox',
     ];
 
     // Form Settings
@@ -148,15 +180,6 @@ class Element_Search_Filter_Form extends \Bricks\Element {
       'label'       => esc_html__('Search Button Text', 'bricks'),
       'type'        => 'text',
       'default'     => esc_html__('Search', 'bricks'),
-    ];
-
-    $this->controls['search_button_icon'] = [
-      'tab'         => 'content',
-      'group'       => 'form',
-      'label'       => esc_html__('Search Button Icon', 'bricks'),
-      'type'        => 'text',
-      'default'     => 'fas fa-search',
-      'placeholder' => esc_html__('fas fa-search', 'bricks'),
     ];
   }
 
@@ -186,58 +209,47 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     ]);
   }
 
-  /**
-   * Get setting value with fallback to control default
-   */
-  private function get_setting($key, $default = '') {
-    if (isset($this->settings[$key]) && $this->settings[$key] !== '') {
-      return $this->settings[$key];
-    }
-    return $default;
-  }
-
   public function render() {
     $settings = $this->settings;
 
     // Get dropdown configurations
     $type_of_care_config = [
-      'label'         => $this->get_setting('type_of_care_label', 'Select your type of care'),
-      'placeholder'   => $this->get_setting('type_of_care_placeholder', 'Type of Care'),
-      'required'      => $this->get_setting('type_of_care_required', true),
-      'single_select' => true,
       'api_key'       => 'type_of_care',
-      'validation_message' => $this->get_setting('type_of_care_label', 'Please select a type of care'),
+      'label'         => $this->settings['type_of_care_label'],
+      'modal_heading'   => $this->settings['type_of_care_modal_heading'],
+      'required'      => $this->settings['type_of_care_required'],
+      'single_select' => true,
+      'validation_message' => 'Please ' . strtolower($this->settings['type_of_care_modal_heading']),
     ];
 
     $location_config = [
-      'label'         => $this->get_setting('location_label', 'Please select a state'),
-      'placeholder'   => $this->get_setting('location_placeholder', 'Location'),
-      'required'      => $this->get_setting('location_required', true),
-      'single_select' => true, // Location is always single-select
       'api_key'       => 'states',
-      'validation_message' => $this->get_setting('location_label', 'Please select a state'),
+      'label'         => $this->settings['location_label'],
+      'modal_heading'   => $this->settings['location_modal_heading'],
+      'required'      => $this->settings['location_required'],
+      'single_select' => true,
+      'validation_message' => 'Please ' . strtolower($this->settings['location_modal_heading']),
     ];
 
     $insurance_config = [
-      'label'         => $this->get_setting('insurance_label', 'Please select an insurance'),
-      'placeholder'   => $this->get_setting('insurance_placeholder', 'Insurance'),
-      'required'      => $this->get_setting('insurance_required', true),
-      'single_select' => true, // Insurance is always single-select
       'api_key'       => 'payors',
-      'validation_message' => $this->get_setting('insurance_label', 'Please select an insurance'),
+      'label'         => $this->settings['insurance_label'],
+      'modal_heading'   => $this->settings['insurance_modal_heading'],
+      'required'      => $this->settings['insurance_required'],
+      'single_select' => true,
+      'validation_message' => 'Please ' . strtolower($this->settings['insurance_modal_heading']),
     ];
 
     $needs_config = [
-      'label'         => $this->get_setting('needs_label', 'Please select at least one need'),
-      'placeholder'   => $this->get_setting('needs_placeholder', 'Needs'),
-      'required'      => $this->get_setting('needs_required', false),
-      'single_select' => false, // Needs is always multi-select
       'api_key'       => 'specialties',
-      'validation_message' => $this->get_setting('needs_label', 'Please select at least one need'),
+      'label'         => $this->settings['needs_label'],
+      'modal_heading'   => $this->settings['needs_modal_heading'],
+      'required'      => $this->settings['needs_required'],
+      'single_select' => false,
+      'validation_message' => 'Please ' . strtolower($this->settings['needs_modal_heading']),
     ];
 
-    $search_button_text = $settings['search_button_text'] ?? esc_html__('Search', 'bricks');
-    $search_button_icon = $settings['search_button_icon'] ?? 'fas fa-search';
+    $search_button_text = $settings['search_button_text'];
 
     echo <<<HTML
     <form 
@@ -260,7 +272,6 @@ class Element_Search_Filter_Form extends \Bricks\Element {
       {$this->render_dropdown('needs', $needs_config)}
       
       <button type="submit" class="search-filter-form__search-button btn--s btn--primary">
-        <i class="{$search_button_icon}"></i>
         <span>{$search_button_text}</span>
       </button>
     </form>
@@ -274,15 +285,15 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     $modal_id = 'search-filter-form__dropdown-modal-' . esc_attr($type);
     $modal_title_id = 'modal-title-' . esc_attr($type);
     $label = esc_html($config['label']);
-    $placeholder = esc_html($config['placeholder']);
     $api_key = esc_attr($config['api_key']);
     $validation_message = esc_attr($config['validation_message'] ?? '');
     $required_attr = $config['required'] ? 'true' : 'false';
+    $modal_heading = esc_html($config['modal_heading']);
     
     return <<<HTML
     <div
       class="search-filter-form__dropdown {$required_class} {$single_select_class}"
-      data-search-filter-form-dropdown
+      data-search-filter-form-dropdown="{$type}"
     >
       <button
         type="button"
@@ -291,11 +302,11 @@ class Element_Search_Filter_Form extends \Bricks\Element {
         aria-expanded="false"
         aria-controls="{$modal_id}"
         data-search-filter-form-dropdown-button
-        data-placeholder="{$placeholder}{$required_indicator}"
+        data-placeholder="{$label}{$required_indicator}"
         data-validation-message="{$validation_message}"
         data-required="{$required_attr}"
       >
-        <span class="search-filter-form__dropdown-button-label">{$placeholder}{$required_indicator}</span>
+        <span class="search-filter-form__dropdown-button-label">{$label}{$required_indicator}</span>
         <span class="search-filter-form__dropdown-button-error-msg" role="alert" aria-live="polite"></span>
       </button>
       
@@ -309,7 +320,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
         data-search-filter-form-dropdown-modal
       >
         <div class="search-filter-form__dropdown-modal-header">
-          <h3 class="search-filter-form__dropdown-modal-heading">{$label}</h3>
+          <h3 class="search-filter-form__dropdown-modal-heading">{$modal_heading}</h3>
           <button type="button" class="search-filter-form__dropdown-modal-done-button" aria-label="Close {$label} options">Done</button>
         </div>
         
@@ -341,7 +352,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
             >
             <div id="search-help-{$type}" class="sr-only">Type to filter the available {$config['label']} options</div>
           </div>
-          {$this->render_options_list($config, $modal_title_id, $placeholder, $api_key)}
+          {$this->render_options_list($config, $modal_title_id, $api_key)}
         </div>
       </div>
     </div>
@@ -355,7 +366,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     return '';
   }
 
-  private function render_options_list($config, $modal_title_id, $placeholder, $api_key) {
+  private function render_options_list($config, $modal_title_id, $api_key) {
     // Get the appropriate API data based on the key
     $api_data = [];
     switch ($api_key) {
@@ -443,7 +454,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     
     return <<<HTML
     <fieldset class="search-filter-form__dropdown-modal-fieldset">
-      <legend class="sr-only">{$placeholder} options</legend>
+      <legend class="sr-only">{$label} options</legend>
       {$options_html}
     </fieldset>
     HTML;
@@ -502,28 +513,27 @@ class Element_Search_Filter_Form extends \Bricks\Element {
       <div class="search-filter-form">
         <div class="search-filter-form__dropdown">
           <button class="search-filter-form__dropdown-button">
-            <span class="search-filter-form__dropdown-button__label">{{ settings.type_of_care_placeholder || 'Type of Care' }}{{ settings.type_of_care_required ? '*' : '' }}</span>
+            <span class="search-filter-form__dropdown-button__label">{{ settings.type_of_care_label }}{{ settings.type_of_care_required ? '*' : '' }}</span>
           </button>
         </div>
         <div class="search-filter-form__dropdown">
           <button class="search-filter-form__dropdown-button">
-            <span class="search-filter-form__dropdown-button__label">{{ settings.location_placeholder || 'Location' }}{{ settings.location_required ? '*' : '' }}</span>
+            <span class="search-filter-form__dropdown-button__label">{{ settings.location_label }}{{ settings.location_required ? '*' : '' }}</span>
           </button>
         </div>
         <div class="search-filter-form__dropdown">
           <button class="search-filter-form__dropdown-button">
-            <span class="search-filter-form__dropdown-button__label">{{ settings.insurance_placeholder || 'Insurance' }}{{ settings.insurance_required ? '*' : '' }}</span>
+            <span class="search-filter-form__dropdown-button__label">{{ settings.insurance_label }}{{ settings.insurance_required ? '*' : '' }}</span>
           </button>
         </div>
         <div class="search-filter-form__dropdown">
           <button class="search-filter-form__dropdown-button">
-            <span class="search-filter-form__dropdown-button__label">{{ settings.needs_placeholder || 'Needs' }}{{ settings.needs_required ? '*' : '' }}</span>
+            <span class="search-filter-form__dropdown-button__label">{{ settings.needs_label }}{{ settings.needs_required ? '*' : '' }}</span>
           </button>
         </div>
 
         <button class="search-filter-form__search-button btn--s btn--primary">
-          <i class="{{ settings.search_button_icon || 'fas fa-search' }}"></i>
-          <span>{{ settings.search_button_text || 'Search' }}</span>
+          <span>{{ settings.search_button_text }}</span>
         </button>
       </div>
     </script>
