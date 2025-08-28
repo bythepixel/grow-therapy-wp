@@ -78,6 +78,7 @@ add_action('init', function() {
 /**
  * Helper functions for filter API data
  */
+
 if (!function_exists('get_filter_api_states')) {
     function get_filter_api_states() {
         global $growtherapy_states_payors;
@@ -110,5 +111,22 @@ if (!function_exists('get_filter_api_specialties')) {
     function get_filter_api_specialties() {
         global $growtherapy_specialties;
         return $growtherapy_specialties['specialties'] ?? [];
+    }
+}
+
+if (!function_exists('get_filter_api_type_of_care')) {
+    function get_filter_api_type_of_care() {
+        return [
+            [
+                'label' => 'Talk Therapy',
+                'value' => 'Talk therapy',
+                'short_label' => 'Therapy'
+            ],
+            [
+                'label' => 'Medication Management',
+                'value' => 'Medication management',
+                'short_label' => 'Medication'
+            ]
+        ];
     }
 }
