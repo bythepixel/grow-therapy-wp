@@ -20,6 +20,7 @@ wp-content/plugins/*
 !wp-content/plugins/gravityforms/
 !wp-content/plugins/gravityformssurvey/
 !wp-content/plugins/gravityformswebhooks/
+!wp-content/plugins/grow-dynamic-tags-for-bricks/
 !wp-content/plugins/grow-global-data-tags-for-bricks/
 !wp-content/plugins/happyfiles-pro/
 !wp-content/plugins/perfmatters/
