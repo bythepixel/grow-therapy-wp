@@ -10,6 +10,13 @@
  * all other instances will be updated to reflect the same selection.
  */
 class SearchFilterForm {
+  // Static constants for better performance and maintainability
+  static CONSTANTS = {
+    URL_PARAMS: ['state', 'insurance', 'specialty', 'typeOfCare'],
+    RETRY_DELAY: 100,
+    MODAL_PREFIX: 'modal-'
+  };
+
   constructor() {
     this.elements = {
       checkboxSingleSelect: '[data-search-filter-form-single-select]',
@@ -46,7 +53,49 @@ class SearchFilterForm {
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
-      .trim('-')
+      .trim('-'),
+    
+    /**
+     * Generate URL parameters from current form state
+     * @returns {string} - URL query string with current selections
+     */
+    generateUrlParams: () => {
+      const params = new URLSearchParams();
+      
+      // Use Map for O(1) lookups
+      const paramMap = new Map([
+        ['states', 'state'],
+        ['payors', 'insurance'],
+        ['specialties', 'specialty'],
+        ['type-of-care', 'typeOfCare']
+      ]);
+      
+      // Cache selector for better performance
+      const dropdowns = document.querySelectorAll('[data-search-filter-form-dropdown]');
+      
+      for (const dropdown of dropdowns) {
+        const modal = dropdown.querySelector('[data-search-filter-form-dropdown-modal]');
+        if (!modal?.id) continue;
+        
+        const apiKey = modal.id.slice(SearchFilterForm.CONSTANTS.MODAL_PREFIX.length); // Remove 'modal-' prefix
+        const paramName = paramMap.get(apiKey);
+        if (!paramName) continue;
+        
+        const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]:checked');
+        if (checkboxes.length === 0) continue;
+        
+        // Add values to params
+        for (const checkbox of checkboxes) {
+          if (paramName === 'specialty') {
+            params.append(paramName, checkbox.value);
+          } else {
+            params.set(paramName, checkbox.value);
+          }
+        }
+      }
+      
+      return params.toString();
+    }
   };
   
   stateManager = {
@@ -157,6 +206,215 @@ class SearchFilterForm {
   init() {
     this.bindEvents();
     this.stateManager.sync();
+    
+    // Try to populate from URL params immediately
+    this.populateFromUrlParams();
+    
+    // If no dropdowns found, retry after a short delay (in case they're still loading)
+    if (document.querySelectorAll(this.elements.dropdown).length === 0) {
+      setTimeout(() => {
+        this.populateFromUrlParams();
+      }, SearchFilterForm.CONSTANTS.RETRY_DELAY);
+    }
+  }
+
+  /**
+   * Parse URL parameters and populate dropdowns accordingly
+   * Supports: state, insurance, specialty[], typeOfCare
+   */
+  populateFromUrlParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Cache relevant parameter checks for better performance
+    const hasRelevantParams = SearchFilterForm.CONSTANTS.URL_PARAMS.some(param => urlParams.has(param));
+    
+    if (!hasRelevantParams) return;
+    
+    // Use Map for O(1) lookups instead of Object.entries iteration
+    const paramMappings = new Map([
+      ['state', 'location'],
+      ['insurance', 'insurance'],
+      ['typeOfCare', 'type_of_care']
+    ]);
+    
+    // Batch process parameters for better performance
+    const populationPromises = [];
+    
+    for (const [param, dropdownType] of paramMappings) {
+      const value = urlParams.get(param);
+      if (value) {
+        populationPromises.push(this.populateDropdownFromParam(dropdownType, value));
+      }
+    }
+    
+    // Handle specialty array parameter (needs dropdown) - try multiple formats
+    let specialties = [];
+    
+    // Try standard specialty parameter
+    specialties = urlParams.getAll('specialty');
+    
+    // If empty, try specialty[] format (array notation)
+    if (specialties.length === 0) {
+      const specialtyArrayParams = [];
+      for (const [key, value] of urlParams.entries()) {
+        if (key.startsWith('specialty[') && key.endsWith(']')) {
+          specialtyArrayParams.push(value);
+        }
+      }
+      if (specialtyArrayParams.length > 0) {
+        specialties = specialtyArrayParams;
+      }
+    }
+    
+    // If still empty, try specialty with different casing
+    if (specialties.length === 0) {
+      specialties = urlParams.getAll('Specialty') || urlParams.getAll('SPECIALTY');
+    }
+    
+    // If still empty, try to find any parameter that might be specialty-related
+    if (specialties.length === 0) {
+      for (const [key, value] of urlParams.entries()) {
+        if (key.toLowerCase().includes('specialty') || key.toLowerCase().includes('need')) {
+          specialties = [value];
+          break;
+        }
+      }
+    }
+    
+    // If still empty, try to decode the URL and look for specialty-related content
+    if (specialties.length === 0) {
+      const decodedUrl = decodeURIComponent(window.location.search);
+      
+      // Look for specialty patterns in the decoded URL
+      const specialtyMatches = decodedUrl.match(/specialty[^=&]*=([^&]+)/gi);
+      if (specialtyMatches) {
+        specialties = specialtyMatches.map(match => {
+          const value = match.split('=')[1];
+          return decodeURIComponent(value);
+        });
+      }
+    }
+    
+    if (specialties.length > 0) {
+      populationPromises.push(this.populateDropdownFromParam('needs', specialties));
+    }
+    
+    // Process all populations concurrently
+    Promise.allSettled(populationPromises).then(results => {
+      const successCount = results.filter(result => result.status === 'fulfilled').length;
+      if (successCount > 0) {
+        console.log(`SearchFilterForm: Successfully populated ${successCount} dropdowns from URL parameters`);
+      }
+    });
+  }
+
+  /**
+   * Populate a specific dropdown based on parameter value
+   * @param {string} dropdownType - The type of dropdown to populate
+   * @param {string|string[]} values - Single value or array of values
+   */
+  populateDropdownFromParam(dropdownType, values) {
+    // Cache DOM queries for better performance
+    const dropdowns = document.querySelectorAll(this.elements.dropdown);
+    if (dropdowns.length === 0) return 0;
+    
+    const expectedApiKey = this.getExpectedApiKey(dropdownType);
+    if (!expectedApiKey) return 0;
+    
+    // Convert single value to array for consistent processing
+    const valueArray = Array.isArray(values) ? values : [values];
+    
+    // Use Set for O(1) value lookups
+    const valueSet = new Set(valueArray);
+    let populatedCount = 0;
+    
+    // Batch DOM updates for better performance
+    const updates = [];
+    
+    for (const dropdown of dropdowns) {
+      const modal = dropdown.querySelector(this.elements.dropdownModal);
+      if (!modal) continue;
+      
+      // Determine which dropdown this is based on API key
+      const apiKey = this.getDropdownApiKey(dropdown);
+      
+      if (apiKey !== expectedApiKey) continue;
+      
+      // Find all checkboxes at once to avoid multiple DOM queries
+      const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]');
+      
+      for (const checkbox of checkboxes) {
+        if (valueSet.has(checkbox.value)) {
+          updates.push(() => this.processCheckboxUpdate(checkbox));
+          populatedCount++;
+        }
+      }
+    }
+    
+    // Batch process all updates for better performance
+    if (updates.length > 0) {
+      // Use requestAnimationFrame for smooth UI updates
+      requestAnimationFrame(() => {
+        updates.forEach(update => update());
+      });
+    }
+    
+    return populatedCount;
+  }
+
+  /**
+   * Process a single checkbox update (extracted for better performance)
+   * @param {HTMLInputElement} checkbox - The checkbox to update
+   */
+  processCheckboxUpdate(checkbox) {
+    checkbox.checked = true;
+    
+    // Update UI state
+    const option = checkbox.closest(this.elements.option);
+    if (option) {
+      option.classList.add(this.cssClasses.optionSelected);
+    }
+    
+    // Update dropdown label
+    this.updateDropdownLabel(checkbox);
+    
+    // Apply cross-filtering if needed
+    this.applyCrossFiltering(checkbox);
+  }
+
+  /**
+   * Get the API key for a specific dropdown
+   * @param {HTMLElement} dropdown - The dropdown element
+   * @returns {string} - The API key (states, payors, specialties, type-of-care)
+   */
+  getDropdownApiKey(dropdown) {
+    const modal = dropdown.querySelector(this.elements.dropdownModal);
+    if (!modal?.id) {
+      return null;
+    }
+    
+    // Use startsWith for better performance than regex
+    const apiKey = modal.id.startsWith(SearchFilterForm.CONSTANTS.MODAL_PREFIX) ? 
+                   modal.id.slice(SearchFilterForm.CONSTANTS.MODAL_PREFIX.length) : null;
+    
+    return apiKey;
+  }
+
+  /**
+   * Get the expected API key for a dropdown type
+   * @param {string} dropdownType - The dropdown type (location, insurance, needs, type_of_care)
+   * @returns {string} - The expected API key
+   */
+  getExpectedApiKey(dropdownType) {
+    // Use Map for O(1) lookups instead of object property access
+    const apiKeyMap = new Map([
+      ['location', 'states'],
+      ['insurance', 'payors'],
+      ['needs', 'specialties'],
+      ['type_of_care', 'type-of-care']
+    ]);
+    
+    return apiKeyMap.get(dropdownType) || null;
   }
 
   bindEvents() {

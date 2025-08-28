@@ -196,9 +196,9 @@ class Element_Search_Filter_Form extends \Bricks\Element {
 
     wp_enqueue_script(
       'search-filter-form',
-      get_stylesheet_directory_uri() . '/js/search-filter-form.js',
+      get_stylesheet_directory_uri() . '/js/search-filter-form/index.js',
       [],
-      filemtime(get_stylesheet_directory() . '/js/search-filter-form.js'),
+      filemtime(get_stylesheet_directory() . '/js/search-filter-form/index.js'),
       true
     );
   }
@@ -347,7 +347,6 @@ class Element_Search_Filter_Form extends \Bricks\Element {
               id="search-{$api_key}"
               placeholder="Search"
               type="search"
-              data-search-filter-form-search-input
             >
             <div id="search-help-{$api_key}" class="sr-only">Type to filter the available {$config['label']} options</div>
           </div>
