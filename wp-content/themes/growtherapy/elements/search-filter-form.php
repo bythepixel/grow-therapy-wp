@@ -29,7 +29,35 @@ class Element_Search_Filter_Form extends \Bricks\Element {
   }
 
   public function set_controls() {
-    // First Dropdown (Location)
+    // First Dropdown (Type of Care)
+    $this->controls['type_of_care_label'] = [
+      'tab'         => 'content',
+      'group'       => 'dropdowns',
+      'label'       => esc_html__('Type of Care Label', 'bricks'),
+      'type'        => 'text',
+      'default'     => esc_html__('Please select your type of care', 'bricks'),
+      'placeholder' => esc_html__('Enter label and validation message', 'bricks'),
+      'description' => esc_html__('This text serves as both the dropdown label and validation message when required', 'bricks'),
+    ];
+
+    $this->controls['type_of_care_placeholder'] = [
+      'tab'         => 'content',
+      'group'       => 'dropdowns',
+      'label'       => esc_html__('Type of Care Placeholder', 'bricks'),
+      'type'        => 'text',
+      'default'     => esc_html__('Type of Care', 'bricks'),
+      'placeholder' => esc_html__('Enter placeholder text', 'bricks'),
+    ];
+
+    $this->controls['type_of_care_required'] = [
+      'tab'         => 'content',
+      'group'       => 'dropdowns',
+      'label'       => esc_html__('Type of Care Required', 'bricks'),
+      'type'        => 'checkbox',
+      'default'     => true,
+    ];
+
+    // Second Dropdown (Location)
     $this->controls['location_label'] = [
       'tab'         => 'content',
       'group'       => 'dropdowns',
@@ -158,35 +186,54 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     ]);
   }
 
+  /**
+   * Get setting value with fallback to control default
+   */
+  private function get_setting($key, $default = '') {
+    if (isset($this->settings[$key]) && $this->settings[$key] !== '') {
+      return $this->settings[$key];
+    }
+    return $default;
+  }
+
   public function render() {
     $settings = $this->settings;
 
     // Get dropdown configurations
+    $type_of_care_config = [
+      'label'         => $this->get_setting('type_of_care_label', 'Select your type of care'),
+      'placeholder'   => $this->get_setting('type_of_care_placeholder', 'Type of Care'),
+      'required'      => $this->get_setting('type_of_care_required', true),
+      'single_select' => true,
+      'api_key'       => 'type_of_care',
+      'validation_message' => $this->get_setting('type_of_care_label', 'Please select a type of care'),
+    ];
+
     $location_config = [
-      'label'         => $settings['location_label'] ?? esc_html__('Select your state', 'bricks'),
-      'placeholder'   => $settings['location_placeholder'] ?? esc_html__('Location', 'bricks'),
-      'required'      => $settings['location_required'] ?? true,
+      'label'         => $this->get_setting('location_label', 'Please select a state'),
+      'placeholder'   => $this->get_setting('location_placeholder', 'Location'),
+      'required'      => $this->get_setting('location_required', true),
       'single_select' => true, // Location is always single-select
       'api_key'       => 'states',
-      'validation_message' => $settings['location_label'] ?? esc_html__('Please select a state', 'bricks'),
+      'validation_message' => $this->get_setting('location_label', 'Please select a state'),
     ];
 
     $insurance_config = [
-      'label'         => $settings['insurance_label'] ?? esc_html__('Select your carrier', 'bricks'),
-      'placeholder'   => $settings['insurance_placeholder'] ?? esc_html__('Insurance', 'bricks'),
-      'required'      => $settings['insurance_required'] ?? true,
+      'label'         => $this->get_setting('insurance_label', 'Please select an insurance'),
+      'placeholder'   => $this->get_setting('insurance_placeholder', 'Insurance'),
+      'required'      => $this->get_setting('insurance_required', true),
       'single_select' => true, // Insurance is always single-select
       'api_key'       => 'payors',
-      'validation_message' => $settings['insurance_label'] ?? esc_html__('Please select an insurance', 'bricks'),
+      'validation_message' => $this->get_setting('insurance_label', 'Please select an insurance'),
     ];
 
     $needs_config = [
-      'label'         => $settings['needs_label'] ?? esc_html__('Select your needs', 'bricks'),
-      'placeholder'   => $settings['needs_placeholder'] ?? esc_html__('Needs', 'bricks'),
-      'required'      => $settings['needs_required'] ?? false,
+      'label'         => $this->get_setting('needs_label', 'Please select at least one need'),
+      'placeholder'   => $this->get_setting('needs_placeholder', 'Needs'),
+      'required'      => $this->get_setting('needs_required', false),
       'single_select' => false, // Needs is always multi-select
       'api_key'       => 'specialties',
-      'validation_message' => $settings['needs_label'] ?? esc_html__('Please select at least one need', 'bricks'),
+      'validation_message' => $this->get_setting('needs_label', 'Please select at least one need'),
     ];
 
     $search_button_text = $settings['search_button_text'] ?? esc_html__('Search', 'bricks');
@@ -204,9 +251,10 @@ class Element_Search_Filter_Form extends \Bricks\Element {
     >
       <div class="sr-only">
         <h2 id="form-title">Find a Therapist</h2>
-        <p id="form-description">Use the filters below to find a therapist that matches your location, insurance, and needs</p>
+        <p id="form-description">Use the filters below to find a therapist that matches your type of care, location, insurance, and needs</p>
       </div>
       
+      {$this->render_dropdown('type-of-care', $type_of_care_config)}
       {$this->render_dropdown('location', $location_config)}
       {$this->render_dropdown('insurance', $insurance_config)}
       {$this->render_dropdown('needs', $needs_config)}
@@ -319,6 +367,9 @@ class Element_Search_Filter_Form extends \Bricks\Element {
         break;
       case 'specialties':
         $api_data = get_filter_api_specialties();
+        break;
+      case 'type_of_care':
+        $api_data = get_filter_api_type_of_care();
         break;
     }
     
@@ -449,6 +500,11 @@ class Element_Search_Filter_Form extends \Bricks\Element {
   public static function render_builder() { ?>
     <script type="text/x-template" id="tmpl-bricks-element-search-filter-form">
       <div class="search-filter-form">
+        <div class="search-filter-form__dropdown">
+          <button class="search-filter-form__dropdown-button">
+            <span class="search-filter-form__dropdown-button__label">{{ settings.type_of_care_placeholder || 'Type of Care' }}{{ settings.type_of_care_required ? '*' : '' }}</span>
+          </button>
+        </div>
         <div class="search-filter-form__dropdown">
           <button class="search-filter-form__dropdown-button">
             <span class="search-filter-form__dropdown-button__label">{{ settings.location_placeholder || 'Location' }}{{ settings.location_required ? '*' : '' }}</span>
