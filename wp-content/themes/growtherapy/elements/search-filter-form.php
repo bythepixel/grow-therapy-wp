@@ -595,23 +595,35 @@ SVG;
 
   public static function render_builder() { ?>
     <script type="text/x-template" id="tmpl-bricks-element-search-filter-form">
-      <div class="search-filter-form">
-        <div class="search-filter-form-dropdown">
+      <div class="search-filter-form search-filter-form--builder">
+        <div
+          class="search-filter-form-dropdown"
+          data-search-filter-form-dropdown="type-of-care"
+        >
           <button class="search-filter-form-modal-trigger">
             <span class="search-filter-form-modal-trigger__label">{{ settings.type_of_care_label }}{{ settings.type_of_care_required ? '*' : '' }}</span>
           </button>
         </div>
-        <div class="search-filter-form-dropdown">
+        <div
+          class="search-filter-form-dropdown"
+          data-search-filter-form-dropdown="location"
+        >
           <button class="search-filter-form-modal-trigger">
             <span class="search-filter-form-modal-trigger__label">{{ settings.location_label }}{{ settings.location_required ? '*' : '' }}</span>
           </button>
         </div>
-        <div class="search-filter-form-dropdown">
+        <div
+          class="search-filter-form-dropdown"
+          data-search-filter-form-dropdown="payors"
+        >
           <button class="search-filter-form-modal-trigger">
             <span class="search-filter-form-modal-trigger__label">{{ settings.insurance_label }}{{ settings.insurance_required ? '*' : '' }}</span>
           </button>
         </div>
-        <div class="search-filter-form-dropdown">
+        <div
+          class="search-filter-form-dropdown"
+          data-search-filter-form-dropdown="needs"
+        >
           <button class="search-filter-form-modal-trigger">
             <span class="search-filter-form-modal-trigger__label">{{ settings.needs_label }}{{ settings.needs_required ? '*' : '' }}</span>
           </button>
