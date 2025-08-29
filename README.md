@@ -22,6 +22,29 @@
 - **New features & templates** → Develop locally, deploy to staging
 - **No conflicts** - Clear separation of concerns
 
+### CSS/SCSS Development
+- **Source Files**: SCSS files located in `wp-content/themes/growtherapy/scss/`
+- **Build Process**: CSS compilation happens locally, not on deployment servers
+- **Workflow**: 
+  1. Edit SCSS files locally
+  2. Run `npm run build:css` to compile to CSS
+  3. Commit both SCSS and compiled CSS files
+  4. Deploy - CSS files are already built and ready
+
+### CSS Build Commands
+```bash
+# Build CSS once (production)
+npm run build:css
+
+# Watch and build during development
+npm run watch:css
+
+# Watch with expanded output for debugging
+npm run dev:css
+```
+
+> **⚠️ Important**: Always commit compiled CSS files after making SCSS changes. Kinsta servers don't support Node.js, so CSS compilation cannot happen during deployment.
+
 ### What Happens on Deploy
 - **BricksSync**: JSON files imported to database (templates, colors, typography)
 - **Plugin Management**: Composer plugins updated, premium plugins synced

@@ -68,6 +68,3 @@ local-*.php
 
 # NPM dependencies
 node_modules/
-
-# Mapped CSS files
-wp-content/themes/growtherapy/css/
