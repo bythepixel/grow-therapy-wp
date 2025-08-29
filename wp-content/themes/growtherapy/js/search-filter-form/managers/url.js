@@ -15,15 +15,37 @@ export class URLManager {
   populateFromUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     
-    if (!this.hasRelevantParams(urlParams)) return;
+    if (!this.hasRelevantParams(urlParams)) {
+      return;
+    }
     
     const populationPromises = [];
     
-    // Handle specialty parameters
+    const state = urlParams.get('state');
+    if (state) {
+      populationPromises.push(
+        this.populateDropdownFromParam('states-options', [state])
+      );
+    }
+    
+    const insurance = urlParams.get('insurance');
+    if (insurance) {
+      populationPromises.push(
+        this.populateDropdownFromParam('payors-options', [insurance])
+      );
+    }
+    
+    const typeOfCare = urlParams.get('typeOfCare');
+    if (typeOfCare) {
+      populationPromises.push(
+        this.populateDropdownFromParam('type-of-care-options', [typeOfCare])
+      );
+    }
+    
     const specialties = this.parseSpecialtyParams(urlParams);
     if (specialties.length > 0) {
       populationPromises.push(
-        this.populateDropdownFromParam('needs', specialties)
+        this.populateDropdownFromParam('specialties-options', specialties)
       );
     }
     
@@ -35,7 +57,10 @@ export class URLManager {
   }
 
   hasRelevantParams(urlParams) {
-    return this.hasSpecialtyParams(urlParams);
+    return urlParams.has('state') || 
+           urlParams.has('insurance') || 
+           urlParams.has('typeOfCare') ||
+           this.hasSpecialtyParams(urlParams);
   }
 
   hasSpecialtyParams(urlParams) {
@@ -94,7 +119,8 @@ export class URLManager {
       const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
       if (!modal) continue;
       
-      const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]');
+      const checkboxes = modal.querySelectorAll('input[type="checkbox"]');
+      
       for (const checkbox of checkboxes) {
         if (valueSet.has(checkbox.value)) {
           updates.push(() => this.processCheckboxUpdate(checkbox));
@@ -128,9 +154,6 @@ export class URLManager {
   }
 
   handlePopulationResults(results) {
-    const successCount = results.filter(result => result.status === 'fulfilled').length;
-    if (successCount > 0) {
-      console.log(`SearchFilterForm: Successfully populated ${successCount} dropdowns from URL parameters`);
-    }
+    results.filter(result => result.status === 'fulfilled').length;
   }
 }

@@ -4,6 +4,7 @@ import { CONFIG } from './config.js';
 import {
   utils,
   EventsManager,
+  FormSyncManager,
   ModalManager,
   SearchManager,
   URLManager,
@@ -17,10 +18,16 @@ export default class SearchFilterForm {
     
     this.searchManager = new SearchManager();
     this.modalManager = new ModalManager(this.activeModals, this.searchManager);
-    this.urlManager = new URLManager({
-      updateDropdownLabel: this.updateDropdownLabel.bind(this)
-    });
     this.validation = new ValidationManager(this.forms);
+    
+    this.formSyncManager = new FormSyncManager(this.forms, this.validation, {
+      applyCrossFiltering: this.applyCrossFiltering.bind(this),
+      resetCrossFiltering: this.resetCrossFiltering.bind(this)
+    });
+    
+    this.urlManager = new URLManager({
+      updateDropdownLabel: this.formSyncManager.updateDropdownLabel.bind(this.formSyncManager)
+    });
     
     this.eventsManager = new EventsManager({
       checkboxChange: this.handleCheckboxChange.bind(this),
@@ -54,11 +61,11 @@ export default class SearchFilterForm {
     const { target: checkbox } = e;
     
     if (!checkbox.matches(CONFIG.ELEMENTS.checkboxSingleSelect)) {
-      this.updateDropdownLabel(checkbox);
+      this.formSyncManager.updateDropdownLabel(checkbox);
       if (checkbox.checked) {
-        this.syncCheckboxToAllForms(checkbox);
+        this.formSyncManager.syncCheckboxToAllForms(checkbox);
       } else {
-        this.syncCheckboxDeselectionToAllForms(checkbox);
+        this.formSyncManager.syncCheckboxDeselectionToAllForms(checkbox);
       }
       return;
     }
@@ -84,7 +91,7 @@ export default class SearchFilterForm {
     const otherCheckboxes = modal.querySelectorAll(selector);
     
     otherCheckboxes.forEach(otherCheckbox => {
-      this.syncCheckboxDeselectionToAllForms(otherCheckbox);
+      this.formSyncManager.syncCheckboxDeselectionToAllForms(otherCheckbox);
     });
     
     const currentOption = checkbox.closest(CONFIG.ELEMENTS.option);
@@ -93,21 +100,21 @@ export default class SearchFilterForm {
     }
     
     this.modalManager.close(modal);
-    this.updateDropdownLabel(checkbox);
-    this.syncCheckboxToAllForms(checkbox);
+    this.formSyncManager.updateDropdownLabel(checkbox);
+    this.formSyncManager.syncCheckboxToAllForms(checkbox);
   }
 
   handleSingleSelectUncheck(checkbox, e) {
     const label = checkbox.closest('label');
     if (label && !e.target.closest(CONFIG.ELEMENTS.deselectButton)) {
       checkbox.checked = true;
-      this.updateDropdownLabel(checkbox);
-      this.syncCheckboxToAllForms(checkbox);
+      this.formSyncManager.updateDropdownLabel(checkbox);
+      this.formSyncManager.syncCheckboxToAllForms(checkbox);
       return;
     }
     
-    this.updateDropdownLabel(checkbox);
-    this.syncCheckboxDeselectionToAllForms(checkbox);
+    this.formSyncManager.updateDropdownLabel(checkbox);
+    this.formSyncManager.syncCheckboxDeselectionToAllForms(checkbox);
   }
 
   handleDeselectClick(e) {
@@ -121,8 +128,8 @@ export default class SearchFilterForm {
     const checkbox = option?.querySelector('input[type="checkbox"]');
 
     if (checkbox) {
-      this.updateDropdownLabel(checkbox);
-      this.syncCheckboxDeselectionToAllForms(checkbox);
+      this.formSyncManager.updateDropdownLabel(checkbox);
+      this.formSyncManager.syncCheckboxDeselectionToAllForms(checkbox);
     }
   }
 
@@ -275,88 +282,5 @@ export default class SearchFilterForm {
     const baseUrl = `https://growtherapy.com/find/${stateSlug}`;
     
     return baseUrl + '?' + searchParams.toString();
-  }
-
-  updateDropdownLabel(checkbox) {
-    try {
-      const dropdown = checkbox.closest(CONFIG.ELEMENTS.dropdown);
-      if (!dropdown) return;
-
-      const searchData = JSON.parse(checkbox.dataset.searchData);
-      const checkboxLabel = searchData.label;
-      
-      const button = dropdown.querySelector(CONFIG.ELEMENTS.modalTrigger);
-      if (!button) return;
-      
-      const label = button.querySelector(CONFIG.ELEMENTS.label);
-      if (!label) return;
-      
-      const checkboxName = checkbox.name;
-      const checkedOptions = dropdown.querySelectorAll(`input[name="${checkboxName}"]:checked`);
-      const checkedCount = checkedOptions.length;
-      
-      if (checkedCount === 0) {
-        label.textContent = button.dataset.placeholder || 'Select option';
-      } else if (checkedCount === 1) {
-        label.textContent = checkboxLabel;
-      } else {
-        // Multi-select
-        const placeholder = button.dataset.placeholder || 'Options';
-        label.textContent = `${placeholder} (${checkedCount})`;
-      }
-      
-      if (checkedCount > 0) {
-        this.validation.validateField(dropdown);
-      }
-    } catch (error) {
-      console.warn('Failed to parse searchData:', error);
-    }
-  }
-
-  syncCheckboxToAllForms(sourceCheckbox) {
-    if (!this.forms || this.forms.length === 0) return;
-    
-    const { name, value } = sourceCheckbox;
-    this.applyCrossFiltering();
-    
-    this.forms.forEach(form => {
-      const targetCheckbox = form.querySelector(`input[name="${name}"][value="${value}"]`);
-      if (targetCheckbox && !targetCheckbox.checked) {
-        targetCheckbox.checked = true;
-        
-        const option = targetCheckbox.closest(CONFIG.ELEMENTS.option);
-        if (option && targetCheckbox.matches(CONFIG.ELEMENTS.checkboxSingleSelect)) {
-          option.classList.add(CONFIG.CSS_CLASSES.optionSelected);
-        }
-        
-        this.updateDropdownLabel(targetCheckbox);
-        
-        const dropdown = targetCheckbox.closest(CONFIG.ELEMENTS.dropdown);
-        if (dropdown && dropdown.querySelector('[data-required="true"]')) {
-          this.validation.validateField(dropdown);
-        }
-      }
-    });
-  }
-
-  syncCheckboxDeselectionToAllForms(sourceCheckbox) {
-    if (!this.forms || this.forms.length === 0) return;
-    
-    const { name, value } = sourceCheckbox;
-    
-    this.forms.forEach(form => {
-      const targetCheckbox = form.querySelector(`input[name="${name}"][value="${value}"]`);
-      if (targetCheckbox && targetCheckbox.checked) {
-        targetCheckbox.checked = false;
-        
-        const option = targetCheckbox.closest(CONFIG.ELEMENTS.option);
-        if (option && targetCheckbox.matches(CONFIG.ELEMENTS.checkboxSingleSelect)) {
-          option.classList.remove(CONFIG.CSS_CLASSES.optionSelected);
-        }
-        
-        this.updateDropdownLabel(targetCheckbox);
-        this.resetCrossFiltering(targetCheckbox);
-      }
-    });
   }
 }
