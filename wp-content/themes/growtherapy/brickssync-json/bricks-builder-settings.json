@@ -2972,23 +2972,422 @@
                     "name": "section",
                     "parent": 0,
                     "children": [
+                        "exrrmp",
                         "eoppue"
                     ],
-                    "settings": [],
+                    "settings": {
+                        "_cssGlobalClasses": [
+                            "zfwbpi"
+                        ],
+                        "_conditions": [
+                            [
+                                {
+                                    "id": "xjxwgm",
+                                    "key": "dynamic_data"
+                                }
+                            ]
+                        ]
+                    },
                     "label": "Hero"
                 },
                 {
                     "id": "eoppue",
                     "name": "container",
                     "parent": "tyejpw",
+                    "children": [
+                        "wljbbf",
+                        "sdtbit",
+                        "duiidr",
+                        "ypgllh"
+                    ],
+                    "settings": {
+                        "_cssGlobalClasses": [
+                            "flvvqh"
+                        ]
+                    },
+                    "label": "Content Container"
+                },
+                {
+                    "id": "exrrmp",
+                    "name": "container",
+                    "parent": "tyejpw",
+                    "children": [
+                        "qroeox"
+                    ],
+                    "settings": {
+                        "_cssGlobalClasses": [
+                            "foyxpj"
+                        ]
+                    },
+                    "label": "Media Container"
+                },
+                {
+                    "id": "qroeox",
+                    "name": "image",
+                    "parent": "exrrmp",
+                    "children": [],
+                    "settings": {
+                        "_cssGlobalClasses": [
+                            "gcbqcf"
+                        ]
+                    }
+                },
+                {
+                    "id": "wljbbf",
+                    "name": "heading",
+                    "parent": "eoppue",
+                    "children": [],
+                    "settings": {
+                        "text": "I am a heading",
+                        "_cssGlobalClasses": [
+                            "fvmajs"
+                        ]
+                    }
+                },
+                {
+                    "id": "duiidr",
+                    "name": "search-filter-form",
+                    "parent": "eoppue",
+                    "children": [],
+                    "settings": {
+                        "location_placeholder": "Location",
+                        "insurance_placeholder": "Insurance"
+                    }
+                },
+                {
+                    "id": "sdtbit",
+                    "name": "block",
+                    "parent": "eoppue",
+                    "children": [
+                        "pmhocb",
+                        "sawsed"
+                    ],
+                    "settings": {
+                        "_cssGlobalClasses": [
+                            "vuxufb",
+                            "sfcopu"
+                        ]
+                    }
+                },
+                {
+                    "id": "sawsed",
+                    "name": "text-basic",
+                    "parent": "sdtbit",
+                    "children": [],
+                    "settings": {
+                        "text": "Here goes your text ... Select any part of your text to access the formatting toolbar.",
+                        "_cssGlobalClasses": [
+                            "cdlgqo"
+                        ]
+                    }
+                },
+                {
+                    "id": "ypgllh",
+                    "name": "block",
+                    "parent": "eoppue",
+                    "children": [
+                        "kkwbgx",
+                        "avaqqx"
+                    ],
+                    "settings": {
+                        "_cssGlobalClasses": [
+                            "vuxufb",
+                            "mzwplb"
+                        ]
+                    }
+                },
+                {
+                    "id": "kkwbgx",
+                    "name": "image",
+                    "parent": "ypgllh",
+                    "children": [],
+                    "settings": []
+                },
+                {
+                    "id": "avaqqx",
+                    "name": "text-basic",
+                    "parent": "ypgllh",
+                    "children": [],
+                    "settings": {
+                        "text": "Here goes your text ... Select any part of your text to access the formatting toolbar.",
+                        "_cssGlobalClasses": [
+                            "cdlgqo"
+                        ]
+                    }
+                },
+                {
+                    "id": "pmhocb",
+                    "name": "image",
+                    "parent": "sdtbit",
                     "children": [],
                     "settings": []
                 }
             ],
-            "properties": [],
+            "properties": [
+                {
+                    "label": "Background Image",
+                    "type": "image",
+                    "id": "ezjnij",
+                    "connections": {
+                        "qroeox": [
+                            "image"
+                        ]
+                    },
+                    "group": "clvnhw"
+                },
+                {
+                    "label": "Label",
+                    "type": "text",
+                    "group": "sqcuvt",
+                    "default": "Type of Care",
+                    "id": "gjggtp",
+                    "connections": {
+                        "duiidr": [
+                            "type_of_care_label"
+                        ]
+                    }
+                },
+                {
+                    "label": "Modal Heading",
+                    "type": "text",
+                    "group": "sqcuvt",
+                    "default": "Select your type of care",
+                    "id": "opzgqa",
+                    "connections": {
+                        "duiidr": [
+                            "type_of_care_modal_heading"
+                        ]
+                    }
+                },
+                {
+                    "label": "Required",
+                    "type": "toggle",
+                    "group": "sqcuvt",
+                    "default": true,
+                    "id": "rdvakz",
+                    "connections": {
+                        "duiidr": [
+                            "type_of_care_required"
+                        ]
+                    }
+                },
+                {
+                    "label": "Label",
+                    "type": "text",
+                    "group": "cxfbty",
+                    "default": "State",
+                    "id": "ktzsei",
+                    "connections": {
+                        "duiidr": [
+                            "location_label"
+                        ]
+                    }
+                },
+                {
+                    "label": "Modal Heading",
+                    "type": "text",
+                    "group": "cxfbty",
+                    "default": "Select a state",
+                    "id": "abljxo",
+                    "connections": {
+                        "duiidr": [
+                            "location_modal_heading"
+                        ]
+                    }
+                },
+                {
+                    "label": "Required",
+                    "type": "toggle",
+                    "group": "cxfbty",
+                    "default": true,
+                    "id": "qcinry",
+                    "connections": {
+                        "duiidr": [
+                            "location_required"
+                        ]
+                    }
+                },
+                {
+                    "label": "Label",
+                    "type": "text",
+                    "group": "gmlfze",
+                    "default": "Insurance",
+                    "id": "xdnyce",
+                    "connections": {
+                        "duiidr": [
+                            "insurance_label"
+                        ]
+                    }
+                },
+                {
+                    "label": "Modal Heading",
+                    "type": "text",
+                    "group": "gmlfze",
+                    "default": "Select a carrier",
+                    "id": "qmpnxb",
+                    "connections": {
+                        "duiidr": [
+                            "insurance_modal_heading"
+                        ]
+                    }
+                },
+                {
+                    "label": "Required",
+                    "type": "toggle",
+                    "group": "gmlfze",
+                    "default": true,
+                    "id": "pqtinm",
+                    "connections": {
+                        "duiidr": [
+                            "insurance_required"
+                        ]
+                    }
+                },
+                {
+                    "label": "Label",
+                    "type": "text",
+                    "group": "lhutre",
+                    "default": "Needs",
+                    "id": "fdqopn",
+                    "connections": {
+                        "duiidr": [
+                            "needs_label"
+                        ]
+                    }
+                },
+                {
+                    "label": "Modal Heading",
+                    "type": "text",
+                    "group": "lhutre",
+                    "default": "Select your needs",
+                    "id": "yynomt",
+                    "connections": {
+                        "duiidr": [
+                            "needs_modal_heading"
+                        ]
+                    }
+                },
+                {
+                    "label": "Required",
+                    "type": "toggle",
+                    "group": "lhutre",
+                    "id": "impwnh",
+                    "connections": {
+                        "duiidr": [
+                            "needs_required"
+                        ]
+                    }
+                },
+                {
+                    "label": "Search Button Text",
+                    "type": "text",
+                    "group": "jhoscl",
+                    "default": "Search",
+                    "id": "ajbhvo",
+                    "connections": {
+                        "duiidr": [
+                            "search_button_text"
+                        ]
+                    }
+                },
+                {
+                    "label": "Heading",
+                    "type": "text",
+                    "group": "clvnhw",
+                    "default": "Therapy, made easier, covered by insurance",
+                    "id": "jshcru",
+                    "connections": {
+                        "wljbbf": [
+                            "text"
+                        ]
+                    }
+                },
+                {
+                    "label": "Copy",
+                    "type": "text",
+                    "group": "clvnhw",
+                    "default": "Clients pay $21/session on average with their insurance",
+                    "id": "qpvrfs",
+                    "connections": {
+                        "sawsed": [
+                            "text"
+                        ],
+                        "avaqqx": [
+                            "text"
+                        ]
+                    }
+                },
+                {
+                    "label": "Icon",
+                    "type": "image",
+                    "group": "clvnhw",
+                    "default": {
+                        "id": 2044,
+                        "filename": "\uf336.svg",
+                        "size": "full",
+                        "full": "http://localhost:8000/wp-content/uploads/2025/08/\uf336.svg",
+                        "url": "http://localhost:8000/wp-content/uploads/2025/08/\uf336.svg"
+                    },
+                    "id": "ofpkeg",
+                    "connections": {
+                        "pmhocb": [
+                            "image"
+                        ],
+                        "kkwbgx": [
+                            "image"
+                        ]
+                    }
+                },
+                {
+                    "label": "Classes",
+                    "type": "class",
+                    "group": "clvnhw",
+                    "options": [
+                        {
+                            "id": "sizozl",
+                            "label": "Hide Media in Mobile",
+                            "value": [
+                                "xlmdtv"
+                            ]
+                        }
+                    ],
+                    "id": "vmotfp",
+                    "connections": {
+                        "tyejpw": [
+                            "_cssGlobalClasses"
+                        ]
+                    }
+                }
+            ],
             "_created": 1755878862,
             "_user_id": 10,
-            "_version": "2.0.1"
+            "_version": "2.0.1",
+            "propertyGroups": [
+                {
+                    "id": "sqcuvt",
+                    "name": "Type of Care"
+                },
+                {
+                    "id": "cxfbty",
+                    "name": "Location"
+                },
+                {
+                    "id": "gmlfze",
+                    "name": "Insurance"
+                },
+                {
+                    "id": "lhutre",
+                    "name": "Needs"
+                },
+                {
+                    "id": "jhoscl",
+                    "name": "Form Settings"
+                },
+                {
+                    "id": "clvnhw",
+                    "name": "Content"
+                }
+            ]
         }
     ],
     "bricks_css_files_last_generated": "2.0.1",
@@ -16220,6 +16619,134 @@
                         "raw": "var(--neutral-light)"
                     }
                 }
+            }
+        },
+        {
+            "id": "zfwbpi",
+            "name": "hero",
+            "settings": {
+                "_position": "relative",
+                "_overflow": "hidden",
+                "_height": "66.4rem",
+                "_padding": {
+                    "top": "21.5rem"
+                },
+                "_padding:mobile_landscape": {
+                    "top": "12rem"
+                },
+                "_height:mobile_landscape": "63.4rem"
+            }
+        },
+        {
+            "id": "foyxpj",
+            "name": "hero__media-container",
+            "settings": {
+                "_position": "absolute",
+                "_top": "0",
+                "_left": "0",
+                "_width": "100%",
+                "_height": "100%",
+                "_cssCustom": ".hero__media-container::after {\n  content: '';\n  background: linear-gradient(0deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.28) 100%);\n  background-blend-mode: hard-light, normal;\n  height: 100%;\n  left: 0;\n  position: absolute;\n  top: 0;\n  width: 100%;\n}"
+            }
+        },
+        {
+            "id": "gcbqcf",
+            "name": "hero__image",
+            "settings": {
+                "_objectFit": "cover",
+                "_width": "100%",
+                "_height": "100%"
+            }
+        },
+        {
+            "id": "flvvqh",
+            "name": "hero__content-container",
+            "settings": {
+                "_position": "relative",
+                "_direction": "column",
+                "_alignItems": "center",
+                "_justifyContent": "center",
+                "_height": "100%",
+                "_height:mobile_landscape": "auto",
+                "_columnGap:mobile_landscape": "0",
+                "_rowGap:mobile_landscape": "1rem"
+            }
+        },
+        {
+            "id": "fvmajs",
+            "name": "hero__heading",
+            "settings": {
+                "_typography": {
+                    "color": {
+                        "id": "acss_import_neutral-light",
+                        "name": "neutral-light",
+                        "raw": "var(--neutral-light)"
+                    },
+                    "font-size": "var(--h1)",
+                    "text-align": "center"
+                },
+                "_width": "70.9rem"
+            }
+        },
+        {
+            "id": "cdlgqo",
+            "name": "hero__copy",
+            "settings": {
+                "_typography": {
+                    "color": {
+                        "id": "acss_import_neutral-light",
+                        "name": "neutral-light",
+                        "raw": "var(--neutral-light)"
+                    }
+                },
+                "_cssCustom:mobile_landscape": ".hero__copy {\n  white-space: nowrap;\n}"
+            }
+        },
+        {
+            "id": "vuxufb",
+            "name": "hero__copy-container",
+            "settings": {
+                "_alignItems": "center",
+                "_direction": "row",
+                "_justifyContent": "center",
+                "_flexWrap:mobile_landscape": "nowrap",
+                "_typography:mobile_landscape": {
+                    "font-size": "var(--text-xs)"
+                },
+                "_columnGap": "0.5rem",
+                "_margin:mobile_landscape": {
+                    "top": "-0.5rem",
+                    "bottom": "0.5rem"
+                }
+            },
+            "modified": 1756461382,
+            "user_id": 10
+        },
+        {
+            "id": "mzwplb",
+            "name": "hide-in-mobile",
+            "settings": {
+                "_display:mobile_landscape": "none"
+            }
+        },
+        {
+            "id": "sfcopu",
+            "name": "hide-in-desktop",
+            "settings": {
+                "_display": "none",
+                "_display:mobile_landscape": "flex"
+            }
+        },
+        {
+            "id": "xlmdtv",
+            "name": "hero--hide-media-in-mobile",
+            "settings": {
+                "_cssCustom:mobile_landscape": ".hero--hide-media-in-mobile {\n  .hero__media-container {\n  \tdisplay: none;\n\t}\n\n\t.hero__copy,\n\t.hero__heading {\n  \tcolor: var(--base);\n\t}\n  \n  .hero__copy-container {\n    margin-top: -1.25rem;\n    margin-bottom: 1.5rem;\n  }\n}\n",
+                "_padding:mobile_landscape": {
+                    "top": "5.5rem",
+                    "bottom": "3.2rem"
+                },
+                "_height:mobile_landscape": "58.4rem"
             }
         }
     ],
