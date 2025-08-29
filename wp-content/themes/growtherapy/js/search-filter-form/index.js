@@ -834,6 +834,8 @@ class SearchFilterForm {
         searchParams.append('state', values[0]);
       } else if (name === 'payors-options') {
         searchParams.append('insurance', values[0]);
+      } else if (name === 'type-of-care-options') {
+        searchParams.append('typeOfCare', values[0]);
       }
     }
     
