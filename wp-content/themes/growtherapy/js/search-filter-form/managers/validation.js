@@ -1,6 +1,6 @@
 'use strict';
 
-import { CONFIG } from '../config.js';
+import { CONFIG } from '../core/config.js';
 
 /**
  * Form Validation System
