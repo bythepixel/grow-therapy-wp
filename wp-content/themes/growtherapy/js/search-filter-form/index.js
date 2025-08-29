@@ -1,48 +1,18 @@
 'use strict';
 
+import { CONFIG } from './config.js';
 import { ValidationManager } from './managers/index.js';
 
-/**
- * Search Filter Form
- * Handles dropdown modals, search filtering, and form submission
- * 
- * SHARED STATE FEATURE:
- * Multiple instances of this form on the same page will automatically
- * share their state. When a user selects an option in one instance,
- * all other instances will be updated to reflect the same selection.
- */
 class SearchFilterForm {
   // Static constants for better performance and maintainability
-  static CONSTANTS = {
-    URL_PARAMS: ['state', 'insurance', 'specialty', 'typeOfCare'],
-    RETRY_DELAY: 100,
-    MODAL_PREFIX: 'modal-'
-  };
+  static CONSTANTS = CONFIG.CONSTANTS;
 
   constructor() {
-    this.elements = {
-      checkboxSingleSelect: '[data-search-filter-form-single-select]',
-      deselectButton: '[data-search-filter-form-deselect-button]',
-      doneButton: '[data-search-filter-form-done-button]',
-      dropdown: '[data-search-filter-form-dropdown]',
-      dropdownModal: '[data-search-filter-form-dropdown-modal]',
-      label: '[data-search-filter-form-label]',
-      modalTrigger: '[data-search-filter-form-modal-trigger]',
-      option: '[data-search-filter-form-option]',
-      searchInput: '[data-search-filter-form-search-input]',
-      validationMessage: '[data-search-filter-form-validation-message]',
-    };
-
-    this.cssClasses = {
-      dropdownError: 'search-filter-form-dropdown--error',
-      modalActive: 'search-filter-form-modal--active',
-      optionHidden: 'search-filter-form-modal__option--hidden',
-      optionSelected: 'search-filter-form-modal__option--selected',
-    };
-
     this.activeModals = new Set();
     this.searchDebounceTimers = new Map();
     this.instanceId = this.utils.generateId();
+    
+    this.validation = new ValidationManager();
     
     this.init();
   }
@@ -63,24 +33,14 @@ class SearchFilterForm {
      */
     generateUrlParams: () => {
       const params = new URLSearchParams();
-      
-      // Use Map for O(1) lookups
-      const paramMap = new Map([
-        ['states', 'state'],
-        ['payors', 'insurance'],
-        ['specialties', 'specialty'],
-        ['type-of-care', 'typeOfCare']
-      ]);
-      
-      // Cache selector for better performance
-      const dropdowns = document.querySelectorAll('[data-search-filter-form-dropdown]');
+      const dropdowns = document.querySelectorAll(CONFIG.ELEMENTS.dropdown);
       
       for (const dropdown of dropdowns) {
-        const modal = dropdown.querySelector('[data-search-filter-form-dropdown-modal]');
+        const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
         if (!modal?.id) continue;
         
-        const apiKey = modal.id.slice(SearchFilterForm.CONSTANTS.MODAL_PREFIX.length); // Remove 'modal-' prefix
-        const paramName = paramMap.get(apiKey);
+        const apiKey = modal.id.slice(CONFIG.CONSTANTS.MODAL_PREFIX.length); // Remove 'modal-' prefix
+        const paramName = CONFIG.PARAM_MAPPINGS.API_TO_URL.get(apiKey);
         if (!paramName) continue;
         
         const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]:checked');
@@ -152,9 +112,9 @@ class SearchFilterForm {
       if (checkbox) {
         checkbox.checked = checked;
         
-        const option = checkbox.closest(this.elements.option);
+        const option = checkbox.closest(CONFIG.ELEMENTS.option);
         if (option) {
-          option.classList.toggle(this.cssClasses.optionSelected, checked);
+          option.classList.toggle(CONFIG.CSS_CLASSES.optionSelected, checked);
         }
         
         this.updateDropdownLabel(checkbox);
@@ -168,8 +128,8 @@ class SearchFilterForm {
     },
 
     findCheckbox: (name, value) => {
-      const dropdowns = this.elements.dropdown ? 
-        document.querySelectorAll(this.elements.dropdown) : 
+      const dropdowns = CONFIG.ELEMENTS.dropdown ? 
+        document.querySelectorAll(CONFIG.ELEMENTS.dropdown) : 
         document.querySelectorAll('[data-search-filter-form-dropdown]');
       
       for (const dropdown of dropdowns) {
@@ -190,9 +150,9 @@ class SearchFilterForm {
           if (checkbox && !checkbox.checked) {
             checkbox.checked = true;
             
-            const option = checkbox.closest(this.elements.option);
+            const option = checkbox.closest(CONFIG.ELEMENTS.option);
             if (option) {
-              option.classList.add(this.cssClasses.optionSelected);
+              option.classList.add(CONFIG.CSS_CLASSES.optionSelected);
             }
             
             this.updateDropdownLabel(checkbox);
@@ -213,7 +173,7 @@ class SearchFilterForm {
     this.populateFromUrlParams();
     
     // If no dropdowns found, retry after a short delay (in case they're still loading)
-    if (document.querySelectorAll(this.elements.dropdown).length === 0) {
+    if (document.querySelectorAll(CONFIG.ELEMENTS.dropdown).length === 0) {
       setTimeout(() => {
         this.populateFromUrlParams();
       }, SearchFilterForm.CONSTANTS.RETRY_DELAY);
@@ -226,23 +186,11 @@ class SearchFilterForm {
    */
   populateFromUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
-    
-    // Cache relevant parameter checks for better performance
     const hasRelevantParams = SearchFilterForm.CONSTANTS.URL_PARAMS.some(param => urlParams.has(param));
-    
     if (!hasRelevantParams) return;
     
-    // Use Map for O(1) lookups instead of Object.entries iteration
-    const paramMappings = new Map([
-      ['state', 'location'],
-      ['insurance', 'insurance'],
-      ['typeOfCare', 'type_of_care']
-    ]);
-    
-    // Batch process parameters for better performance
     const populationPromises = [];
-    
-    for (const [param, dropdownType] of paramMappings) {
+    for (const [param, dropdownType] of CONFIG.PARAM_MAPPINGS.URL_TO_DROPDOWN) {
       const value = urlParams.get(param);
       if (value) {
         populationPromises.push(this.populateDropdownFromParam(dropdownType, value));
@@ -317,10 +265,10 @@ class SearchFilterForm {
    */
   populateDropdownFromParam(dropdownType, values) {
     // Cache DOM queries for better performance
-    const dropdowns = document.querySelectorAll(this.elements.dropdown);
+    const dropdowns = document.querySelectorAll(CONFIG.ELEMENTS.dropdown);
     if (dropdowns.length === 0) return 0;
     
-    const expectedApiKey = this.getExpectedApiKey(dropdownType);
+    const expectedApiKey = CONFIG.PARAM_MAPPINGS.DROPDOWN_TO_API.get(dropdownType) || null;
     if (!expectedApiKey) return 0;
     
     // Convert single value to array for consistent processing
@@ -334,10 +282,9 @@ class SearchFilterForm {
     const updates = [];
     
     for (const dropdown of dropdowns) {
-      const modal = dropdown.querySelector(this.elements.dropdownModal);
+      const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
       if (!modal) continue;
       
-      // Determine which dropdown this is based on API key
       const apiKey = this.getDropdownApiKey(dropdown);
       
       if (apiKey !== expectedApiKey) continue;
@@ -372,9 +319,9 @@ class SearchFilterForm {
     checkbox.checked = true;
     
     // Update UI state
-    const option = checkbox.closest(this.elements.option);
+    const option = checkbox.closest(CONFIG.ELEMENTS.option);
     if (option) {
-      option.classList.add(this.cssClasses.optionSelected);
+      option.classList.add(CONFIG.CSS_CLASSES.optionSelected);
     }
     
     // Update dropdown label
@@ -390,7 +337,7 @@ class SearchFilterForm {
    * @returns {string} - The API key (states, payors, specialties, type-of-care)
    */
   getDropdownApiKey(dropdown) {
-    const modal = dropdown.querySelector(this.elements.dropdownModal);
+    const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
     if (!modal?.id) {
       return null;
     }
@@ -400,23 +347,6 @@ class SearchFilterForm {
                    modal.id.slice(SearchFilterForm.CONSTANTS.MODAL_PREFIX.length) : null;
     
     return apiKey;
-  }
-
-  /**
-   * Get the expected API key for a dropdown type
-   * @param {string} dropdownType - The dropdown type (location, insurance, needs, type_of_care)
-   * @returns {string} - The expected API key
-   */
-  getExpectedApiKey(dropdownType) {
-    // Use Map for O(1) lookups instead of object property access
-    const apiKeyMap = new Map([
-      ['location', 'states'],
-      ['insurance', 'payors'],
-      ['needs', 'specialties'],
-      ['type_of_care', 'type-of-care']
-    ]);
-    
-    return apiKeyMap.get(dropdownType) || null;
   }
 
   bindEvents() {
@@ -448,9 +378,9 @@ class SearchFilterForm {
 
   eventManager = {
     handleGlobalClick: (e) => {
-      const modalTrigger = e.target.closest(this.elements.modalTrigger);
-      const doneButton = e.target.closest(this.elements.doneButton);
-      const deselectButton = e.target.closest(this.elements.deselectButton);
+      const modalTrigger = e.target.closest(CONFIG.ELEMENTS.modalTrigger);
+      const doneButton = e.target.closest(CONFIG.ELEMENTS.doneButton);
+      const deselectButton = e.target.closest(CONFIG.ELEMENTS.deselectButton);
       
       if (modalTrigger) {
         e.preventDefault();
@@ -481,7 +411,7 @@ class SearchFilterForm {
     isOpen: (modal) => this.activeModals.has(modal),
     
     getOpenModal: (dropdown) => {
-      const modal = dropdown.querySelector(this.elements.dropdownModal);
+      const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
       return modal && this.activeModals.has(modal) ? modal : null;
     },
     
@@ -499,10 +429,10 @@ class SearchFilterForm {
     getOpenModals: () => Array.from(this.activeModals),
     
     open: (modal, dropdown) => {
-      const button = dropdown.querySelector(this.elements.modalTrigger);
+      const button = dropdown.querySelector(CONFIG.ELEMENTS.modalTrigger);
       
       modal.classList.remove('aria-hidden');
-      modal.classList.add(this.cssClasses.modalActive);
+      modal.classList.add(CONFIG.CSS_CLASSES.modalActive);
       modal.setAttribute('aria-hidden', 'false');
       button?.setAttribute('aria-expanded', 'true');
       
@@ -511,12 +441,12 @@ class SearchFilterForm {
     },
 
     close: (modal) => {
-      const dropdown = modal.closest(this.elements.dropdown);
+      const dropdown = modal.closest(CONFIG.ELEMENTS.dropdown);
       if (!dropdown) return;
       
-      const button = dropdown.querySelector(this.elements.modalTrigger);
+      const button = dropdown.querySelector(CONFIG.ELEMENTS.modalTrigger);
       
-      modal.classList.remove(this.cssClasses.modalActive);
+      modal.classList.remove(CONFIG.CSS_CLASSES.modalActive);
       modal.classList.add('aria-hidden');
       modal.setAttribute('aria-hidden', 'true');
       button?.setAttribute('aria-expanded', 'false');
@@ -541,10 +471,10 @@ class SearchFilterForm {
   };
 
   handleModalOpen(button) {
-    const dropdown = button.closest(this.elements.dropdown);
+    const dropdown = button.closest(CONFIG.ELEMENTS.dropdown);
     if (!dropdown) return;
     
-    const modal = dropdown.querySelector(this.elements.dropdownModal);
+    const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
     if (!modal) return;
     
     this.modalManager.toggle(modal, dropdown);
@@ -573,13 +503,13 @@ class SearchFilterForm {
     
     this.stateManager.update(checkbox.name, checkbox.value, checkbox.checked);
     
-    if (!checkbox.matches(this.elements.checkboxSingleSelect)) {
+    if (!checkbox.matches(CONFIG.ELEMENTS.checkboxSingleSelect)) {
       this.updateDropdownLabel(checkbox);
       return;
     }
     
     const { name } = checkbox;
-    const modal = checkbox.closest(this.elements.dropdownModal);
+    const modal = checkbox.closest(CONFIG.ELEMENTS.dropdownModal);
     
     if (!modal || !name) {
       console.warn('Required elements not found for single-select behavior', { modal, name });
@@ -596,14 +526,14 @@ class SearchFilterForm {
       
       const currentOption = this.dom.findOption(checkbox);
       if (currentOption) {
-        currentOption.classList.add(this.cssClasses.optionSelected);
+        currentOption.classList.add(CONFIG.CSS_CLASSES.optionSelected);
       }
       
       this.modalManager.close(modal);
       this.applyCrossFiltering(checkbox);
     } else {
       const label = checkbox.closest('label');
-      if (label && !e.target.closest(this.elements.deselectButton)) {
+      if (label && !e.target.closest(CONFIG.ELEMENTS.deselectButton)) {
         checkbox.checked = true;
         return;
       }
@@ -621,7 +551,7 @@ class SearchFilterForm {
     
     const option = this.dom.findOption(checkbox);
     if (option) {
-      option.classList.remove(this.cssClasses.optionSelected);
+      option.classList.remove(CONFIG.CSS_CLASSES.optionSelected);
     }
     
     this.resetCrossFiltering(checkbox);
@@ -629,14 +559,14 @@ class SearchFilterForm {
   }
 
   handleDeselectClick(e) {
-    const deselectButton = e.target.closest(this.elements.deselectButton);
+    const deselectButton = e.target.closest(CONFIG.ELEMENTS.deselectButton);
 
     if (!deselectButton) return;
     
     e.preventDefault();
     e.stopPropagation();
     
-    const option = deselectButton.closest(this.elements.option);
+    const option = deselectButton.closest(CONFIG.ELEMENTS.option);
     const checkbox = option?.querySelector('input[type="checkbox"]');
 
     if (checkbox) {
@@ -645,7 +575,7 @@ class SearchFilterForm {
   }
 
   handleDoneClick(doneButton) {
-    const modal = doneButton.closest(this.elements.dropdownModal);
+    const modal = doneButton.closest(CONFIG.ELEMENTS.dropdownModal);
     if (modal) {
       this.modalManager.close(modal);
     }
@@ -662,7 +592,7 @@ class SearchFilterForm {
   searchManager = {
     handleInput: (e) => {
       const searchInput = e.target;
-      if (!searchInput.matches(this.elements.searchInput)) return;
+      if (!searchInput.matches(CONFIG.ELEMENTS.searchInput)) return;
 
       if (this.searchDebounceTimers.has(searchInput)) {
         clearTimeout(this.searchDebounceTimers.get(searchInput));
@@ -677,7 +607,7 @@ class SearchFilterForm {
     },
 
     perform: (searchInput) => {
-      const modal = searchInput.closest(this.elements.dropdownModal);
+      const modal = searchInput.closest(CONFIG.ELEMENTS.dropdownModal);
       if (!modal) return;
 
       const searchTerm = searchInput.value.toLowerCase().trim();
@@ -687,7 +617,7 @@ class SearchFilterForm {
         return;
       }
 
-      const options = modal.querySelectorAll(this.elements.option);
+      const options = modal.querySelectorAll(CONFIG.ELEMENTS.option);
       
       options.forEach(option => {
         const checkbox = option.querySelector('input[type="checkbox"]');
@@ -699,7 +629,7 @@ class SearchFilterForm {
         try {
           const data = JSON.parse(searchData);
           const isSearchMatch = data.searchText.includes(searchTerm);
-          const isCrossFiltered = !option.classList.contains(this.cssClasses.optionHidden);
+          const isCrossFiltered = !option.classList.contains(CONFIG.CSS_CLASSES.optionHidden);
           
           option.style.display = (isSearchMatch && isCrossFiltered) ? '' : 'none';
         } catch (error) {
@@ -710,15 +640,15 @@ class SearchFilterForm {
     },
 
     applyCrossFiltering: (modal) => {
-      const options = modal.querySelectorAll(this.elements.option);
+      const options = modal.querySelectorAll(CONFIG.ELEMENTS.option);
       options.forEach(option => {
-        const isCrossFiltered = !option.classList.contains(this.cssClasses.optionHidden);
+        const isCrossFiltered = !option.classList.contains(CONFIG.CSS_CLASSES.optionHidden);
         option.style.display = isCrossFiltered ? '' : 'none';
       });
     },
 
     clear: (modal) => {
-      const searchInput = modal.querySelector(this.elements.searchInput);
+      const searchInput = modal.querySelector(CONFIG.ELEMENTS.searchInput);
       if (searchInput) {
         searchInput.value = '';
       }
@@ -754,14 +684,14 @@ class SearchFilterForm {
       const targetModal = this.dom.findModalByInputName(targetModalInputName);
       if (!targetModal) return;
 
-      const options = targetModal.querySelectorAll(this.elements.option);
+      const options = targetModal.querySelectorAll(CONFIG.ELEMENTS.option);
       
       options.forEach(option => {
         const checkbox = option.querySelector('input[type="checkbox"]');
         if (!checkbox) return;
 
         const isAvailable = itemValues.has(checkbox.value);
-        option.classList.toggle(this.cssClasses.optionHidden, !isAvailable);
+        option.classList.toggle(CONFIG.CSS_CLASSES.optionHidden, !isAvailable);
       });
     } catch (error) {
       console.warn(`Error parsing ${dataAttribute} data:`, error);
@@ -777,11 +707,11 @@ class SearchFilterForm {
       return firstInput.closest('[data-search-filter-form-dropdown-modal]');
     },
     
-    findOption: (checkbox) => checkbox.closest(this.elements.option),
+    findOption: (checkbox) => checkbox.closest(CONFIG.ELEMENTS.option),
     
-    findCheckboxes: (modal) => modal.querySelectorAll(this.elements.option + ' input[type="checkbox"]'),
+    findCheckboxes: (modal) => modal.querySelectorAll(CONFIG.ELEMENTS.option + ' input[type="checkbox"]'),
     
-    findDropdown: (modal) => modal.closest(this.elements.dropdown)
+    findDropdown: (modal) => modal.closest(CONFIG.ELEMENTS.dropdown)
   };
 
   resetCrossFiltering(checkbox) {
@@ -797,9 +727,9 @@ class SearchFilterForm {
     
     const targetModal = this.dom.findModalByInputName(targetModalName);
     if (targetModal) {
-      const options = targetModal.querySelectorAll(this.elements.option);
+      const options = targetModal.querySelectorAll(CONFIG.ELEMENTS.option);
       options.forEach(option => {
-        option.classList.remove(this.cssClasses.optionHidden);
+        option.classList.remove(CONFIG.CSS_CLASSES.optionHidden);
       });
     }
   }
@@ -853,15 +783,13 @@ class SearchFilterForm {
     // window.location.href = searchUrl;
   }
 
-  validation = new ValidationManager(this.elements, this.cssClasses);
-
   updateDropdownLabel(checkbox) {
-    const modal = checkbox.closest(this.elements.dropdownModal);
-    const dropdown = modal?.closest(this.elements.dropdown);
+    const modal = checkbox.closest(CONFIG.ELEMENTS.dropdownModal);
+    const dropdown = modal?.closest(CONFIG.ELEMENTS.dropdown);
     if (!dropdown) return;
     
-    const button = dropdown.querySelector(this.elements.modalTrigger);
-    const label = button?.querySelector(this.elements.label);
+    const button = dropdown.querySelector(CONFIG.ELEMENTS.modalTrigger);
+    const label = button?.querySelector(CONFIG.ELEMENTS.label);
     if (!label) return;
     
     const name = checkbox.name;
@@ -870,7 +798,7 @@ class SearchFilterForm {
     if (checkedOptions.length === 0) {
       label.textContent = button.dataset.placeholder || 'Select option';
     } else if (checkedOptions.length === 1) {
-      const option = checkedOptions[0].closest(this.elements.option);
+      const option = checkedOptions[0].closest(CONFIG.ELEMENTS.option);
       if (option) {
         const textContent = Array.from(option.childNodes)
           .filter(node => node.nodeType === Node.TEXT_NODE)

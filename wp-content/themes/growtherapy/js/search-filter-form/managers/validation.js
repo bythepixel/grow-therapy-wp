@@ -1,36 +1,73 @@
 'use strict';
 
+import { CONFIG } from '../config.js';
+
 /**
  * Form Validation System
  * Handles form field validation, error states, and validation caching
  */
 export class ValidationManager {
-  constructor(elements, cssClasses) {
-    this.elements = elements;
-    this.cssClasses = cssClasses;
-    this.stateCache = new Map();
-    this.STATES = {
-      VALID: 'valid',
-      ERROR: 'error'
-    };
+  #stateCache = new Map();
+  #cachedRequiredDropdowns = null;
+  #cachedErrorDropdowns = null;
+  
+  STATES = {
+    VALID: 'valid',
+    ERROR: 'error'
+  };
+  
+  /**
+   * Get cached required dropdowns or query DOM if not cached
+   * @returns {NodeList} - Required dropdown elements
+   */
+  #getRequiredDropdowns() {
+    if (!this.#cachedRequiredDropdowns) {
+      this.#cachedRequiredDropdowns = document.querySelectorAll('[data-required="true"]');
+    }
+    return this.#cachedRequiredDropdowns;
+  }
+  
+  /**
+   * Get cached error dropdowns or query DOM if not cached
+   * @returns {NodeList} - Error dropdown elements
+   */
+  #getErrorDropdowns() {
+    if (!this.#cachedErrorDropdowns) {
+      this.#cachedErrorDropdowns = document.querySelectorAll(CONFIG.CSS_CLASSES.dropdownError);
+    }
+    return this.#cachedErrorDropdowns;
+  }
+  
+  /**
+   * Clear DOM caches when validation state changes
+   */
+  #clearDOMCache() {
+    this.#cachedRequiredDropdowns = null;
+    this.#cachedErrorDropdowns = null;
   }
   
   validateRequiredFields() {
-    const requiredDropdowns = document.querySelectorAll('[data-required="true"]');
+    const requiredDropdowns = this.#getRequiredDropdowns();
+    
+    if (requiredDropdowns.length === 0) {
+      return true;
+    }
+    
     let isValid = true;
     
     requiredDropdowns.forEach(dropdown => {
-      const dropdownWrapper = dropdown.closest(this.elements.dropdown);
+      const dropdownWrapper = dropdown.closest(CONFIG.ELEMENTS.dropdown);
       if (!dropdownWrapper) return;
       
       const checkboxes = dropdownWrapper.querySelectorAll('input[type="checkbox"]:checked');
       const hasSelection = checkboxes.length > 0;
       const currentState = hasSelection ? this.STATES.VALID : this.STATES.ERROR;
-      const cachedState = this.stateCache.get(dropdownWrapper);
+      const cachedState = this.#stateCache.get(dropdownWrapper);
       
+      // Only update state if it has changed
       if (cachedState !== currentState) {
         if (!hasSelection) {
-          const message = dropdown.dataset.validationMessage || 'This field is required';
+          const message = dropdown.dataset.validationMessage ?? 'This field is required';
           this.setFieldState(dropdownWrapper, this.STATES.ERROR, message);
           isValid = false;
         } else {
@@ -45,59 +82,83 @@ export class ValidationManager {
   }
   
   setFieldState(dropdown, state, message = '') {
-    const errorMsg = dropdown.querySelector(this.elements.validationMessage);
-    const button = dropdown.querySelector(this.elements.modalTrigger);
+    // Early return if state hasn't changed
+    const cachedState = this.#stateCache.get(dropdown);
+    if (cachedState === state) {
+      return;
+    }
+    
+    const errorMsg = dropdown.querySelector(CONFIG.ELEMENTS.validationMessage);
+    const button = dropdown.querySelector(CONFIG.ELEMENTS.modalTrigger);
     
     if (state === this.STATES.ERROR) {
-      dropdown.classList.add(this.cssClasses.dropdownError);
+      dropdown.classList.add(CONFIG.CSS_CLASSES.dropdownError);
       
       if (errorMsg) {
         errorMsg.textContent = message;
         errorMsg.style.display = 'block';
       }
       
-      if (button) {
-        button.setAttribute('aria-invalid', 'true');
-      }
+      button?.setAttribute('aria-invalid', 'true');
     } else {
-      dropdown.classList.remove(this.cssClasses.dropdownError);
+      dropdown.classList.remove(CONFIG.CSS_CLASSES.dropdownError);
       
       if (errorMsg) {
         errorMsg.style.display = 'none';
         errorMsg.textContent = '';
       }
       
-      if (button) {
-        button.removeAttribute('aria-invalid');
-      }
+      button?.removeAttribute('aria-invalid');
     }
     
-    this.stateCache.set(dropdown, state);
+    this.#stateCache.set(dropdown, state);
+    this.#clearDOMCache(); // Clear cache when state changes
   }
   
   clearFieldError(dropdown) {
-    this.setFieldState(dropdown, 'valid');
+    this.setFieldState(dropdown, this.STATES.VALID);
   }
   
   clearAllErrors() {
-    const errorDropdowns = document.querySelectorAll(this.cssClasses.dropdownError);
+    const errorDropdowns = this.#getErrorDropdowns();
+    
+    // Early return if no errors to clear
+    if (errorDropdowns.length === 0) {
+      this.#stateCache.clear();
+      this.#clearDOMCache();
+      return;
+    }
+    
     errorDropdowns.forEach(dropdown => {
       this.clearFieldError(dropdown);
     });
-    this.stateCache.clear();
+    
+    this.#stateCache.clear();
+    this.#clearDOMCache();
   }
   
   clearFieldCache(dropdown) {
-    this.stateCache.delete(dropdown);
+    this.#stateCache.delete(dropdown);
   }
   
   getValidationStats() {
-    const requiredDropdowns = document.querySelectorAll('[data-required="true"]');
+    const requiredDropdowns = this.#getRequiredDropdowns();
+    
+    // Early return if no required fields
+    if (requiredDropdowns.length === 0) {
+      return {
+        total: 0,
+        valid: 0,
+        errors: 0,
+        isValid: true
+      };
+    }
+    
     let validCount = 0;
     let errorCount = 0;
     
     requiredDropdowns.forEach(dropdown => {
-      const dropdownWrapper = dropdown.closest(this.elements.dropdown);
+      const dropdownWrapper = dropdown.closest(CONFIG.ELEMENTS.dropdown);
       if (!dropdownWrapper) return;
       
       const checkboxes = dropdownWrapper.querySelectorAll('input[type="checkbox"]:checked');
@@ -118,16 +179,22 @@ export class ValidationManager {
   
   reset() {
     this.clearAllErrors();
-    this.stateCache.clear();
+    this.#stateCache.clear();
+    this.#clearDOMCache();
   }
   
   validateField(dropdown) {
+    // Early return if dropdown is not valid
+    if (!dropdown) {
+      return false;
+    }
+    
     const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]:checked');
     const hasSelection = checkboxes.length > 0;
     
     if (!hasSelection) {
       const button = dropdown.querySelector('[data-required="true"]');
-      const message = button?.dataset.validationMessage || 'This field is required';
+      const message = button?.dataset.validationMessage ?? 'This field is required';
       this.setFieldState(dropdown, this.STATES.ERROR, message);
       return false;
     } else {
