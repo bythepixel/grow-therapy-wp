@@ -5,6 +5,7 @@ import {
   dom,
   utils,
   ModalManager,
+  SearchManager,
   URLManager,
   ValidationManager,
 } from '../managers/index.js';
@@ -14,9 +15,9 @@ export default class SearchFilterForm {
   
   constructor() {
     this.activeModals = new Set();
-    this.searchDebounceTimers = new Map();
     this.instanceId = utils.generateId();
     
+    this.searchManager = new SearchManager();
     this.modalManager = new ModalManager(this.activeModals, this.searchManager);
     this.urlManager = new URLManager({
       processCheckboxUpdate: this.processCheckboxUpdate.bind(this),
@@ -96,7 +97,7 @@ export default class SearchFilterForm {
       capture: false 
     });
     
-    document.addEventListener('input', this.searchManager.handleInput.bind(this), { 
+    document.addEventListener('input', (e) => this.searchManager.handleInput(e), { 
       passive: true,
       capture: false 
     });
@@ -142,8 +143,7 @@ export default class SearchFilterForm {
    * Clean up resources when closing modals
    */
   cleanup() {
-    this.searchDebounceTimers.forEach(timer => clearTimeout(timer));
-    this.searchDebounceTimers.clear();
+    this.searchManager.cleanup();
   }
   
   /**
@@ -242,74 +242,6 @@ export default class SearchFilterForm {
       }
     }
   }
-
-  searchManager = {
-    handleInput: (e) => {
-      const searchInput = e.target;
-      if (!searchInput.matches(CONFIG.ELEMENTS.searchInput)) return;
-
-      if (this.searchDebounceTimers.has(searchInput)) {
-        clearTimeout(this.searchDebounceTimers.get(searchInput));
-      }
-
-      const timer = setTimeout(() => {
-        this.searchManager.perform(searchInput);
-        this.searchDebounceTimers.delete(searchInput);
-      }, 300);
-
-      this.searchDebounceTimers.set(searchInput, timer);
-    },
-
-    perform: (searchInput) => {
-      const modal = searchInput.closest(CONFIG.ELEMENTS.dropdownModal);
-      if (!modal) return;
-
-      const searchTerm = searchInput.value.toLowerCase().trim();
-      
-      if (!searchTerm) {
-        this.searchManager.applyCrossFiltering(modal);
-        return;
-      }
-
-      const options = modal.querySelectorAll(CONFIG.ELEMENTS.option);
-      
-      options.forEach(option => {
-        const checkbox = option.querySelector('input[type="checkbox"]');
-        if (!checkbox) return;
-
-        const searchData = checkbox.dataset.searchData;
-        if (!searchData) return;
-
-        try {
-          const data = JSON.parse(searchData);
-          const isSearchMatch = data.searchText.includes(searchTerm);
-          const isCrossFiltered = !option.classList.contains(CONFIG.CSS_CLASSES.optionHidden);
-          
-          option.style.display = (isSearchMatch && isCrossFiltered) ? '' : 'none';
-        } catch (error) {
-          console.warn('Invalid search data for option:', checkbox);
-          option.style.display = '';
-        }
-      });
-    },
-
-    applyCrossFiltering: (modal) => {
-      const options = modal.querySelectorAll(CONFIG.ELEMENTS.option);
-      options.forEach(option => {
-        const isCrossFiltered = !option.classList.contains(CONFIG.CSS_CLASSES.optionHidden);
-        option.style.display = isCrossFiltered ? '' : 'none';
-      });
-    },
-
-    clear: (modal) => {
-      const searchInput = modal.querySelector(CONFIG.ELEMENTS.searchInput);
-      if (searchInput) {
-        searchInput.value = '';
-      }
-      
-      this.searchManager.applyCrossFiltering(modal);
-    }
-  };
 
   applyCrossFiltering(checkbox) {
     const form = checkbox.closest('form');
