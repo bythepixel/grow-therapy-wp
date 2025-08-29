@@ -2,7 +2,6 @@
 
 import { CONFIG } from './config.js';
 import {
-  utils,
   EventsManager,
   FormSyncManager,
   ModalManager,
@@ -152,6 +151,20 @@ export default class SearchFilterForm {
     }
   }
 
+  /**
+   * Applies cross-filtering logic between insurance and state selections across all forms.
+   * 
+   * Business Requirement:
+   * - When a user selects an insurance provider, it filters available states to only show
+   *   states where that insurance is accepted
+   * - When a user selects a state, it filters available insurance providers to only show
+   *   providers that operate in that state
+   * - This ensures users can only select valid insurance-state combinations
+   * 
+   * @example
+   * User selects "Blue Cross Blue Shield" → Only states where BCBS operates are shown
+   * User selects "California" → Only insurance providers operating in CA are shown
+   */
   applyCrossFiltering() {
     let globalSelectedState = null;
     let globalSelectedInsurance = null;
@@ -175,6 +188,9 @@ export default class SearchFilterForm {
     }
   }
 
+  /**
+   * Filters dropdown options based on related data attributes to implement cross-filtering.
+   */
   filterOptionsByRelatedData(selectedItem, dataAttribute, targetModalInputName) {
     const relatedData = selectedItem.dataset[dataAttribute];
     if (!relatedData) return;
@@ -238,50 +254,9 @@ export default class SearchFilterForm {
       return false;
     }
 
-    const searchParams = this.buildSearchParams(form);
-    const searchUrl = this.buildSearchUrl(searchParams);
+    const searchParams = this.urlManager.buildSearchParams(form);
+    const searchUrl = this.urlManager.buildSearchUrl(searchParams);
     
     window.location.href = searchUrl;
-  }
-
-  buildSearchParams(form) {
-    const searchParams = new URLSearchParams();
-    const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked');
-    
-    const selections = {};
-    for (const checkbox of checkboxes) {
-      const name = checkbox.name;
-      if (!selections[name]) {
-        selections[name] = [];
-      }
-      selections[name].push(checkbox.value);
-    }
-    
-    for (const [name, values] of Object.entries(selections)) {
-      if (name === 'specialties-options') {
-        values.forEach((value, index) => {
-          searchParams.append(`specialty[${index}]`, value);
-        });
-      } else if (name === 'states-options') {
-        searchParams.append('state', values[0]);
-      } else if (name === 'payors-options') {
-        searchParams.append('insurance', values[0]);
-      } else if (name === 'type-of-care-options') {
-        searchParams.append('typeOfCare', values[0]);
-      }
-    }
-
-    searchParams.append('setting', 'Virtual');
-    
-    return searchParams;
-  }
-
-  buildSearchUrl(searchParams) {
-    const stateValue = searchParams.get('state');
-    const stateSlug = stateValue ? utils.slugify(stateValue) : '';
-    
-    const baseUrl = `https://growtherapy.com/find/${stateSlug}`;
-    
-    return baseUrl + '?' + searchParams.toString();
   }
 }

@@ -34,6 +34,17 @@ export class URLManager {
     };
   }
 
+  slugify(text) {
+    if (!text) return '';
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '') // Remove special chars except word chars, spaces, hyphens
+      .replace(/\s+/g, '-')     // Replace spaces with hyphens
+      .replace(/-+/g, '-')      // Replace multiple hyphens with single
+      .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+  }
+
   populateFromUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     
@@ -165,5 +176,52 @@ export class URLManager {
     if (this.callbacks.triggerCrossFiltering) {
       this.callbacks.triggerCrossFiltering();
     }
+  }
+
+  /**
+   * Builds URLSearchParams from form checkbox selections.
+   */
+  buildSearchParams(form) {
+    const searchParams = new URLSearchParams();
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked');
+    
+    const selections = {};
+    for (const checkbox of checkboxes) {
+      const name = checkbox.name;
+      if (!selections[name]) {
+        selections[name] = [];
+      }
+      selections[name].push(checkbox.value);
+    }
+    
+    for (const [name, values] of Object.entries(selections)) {
+      if (name === 'specialties-options') {
+        values.forEach((value, index) => {
+          searchParams.append(`specialty[${index}]`, value);
+        });
+      } else if (name === 'states-options') {
+        searchParams.append('state', values[0]);
+      } else if (name === 'payors-options') {
+        searchParams.append('insurance', values[0]);
+      } else if (name === 'type-of-care-options') {
+        searchParams.append('typeOfCare', values[0]);
+      }
+    }
+
+    searchParams.append('setting', 'Virtual');
+    
+    return searchParams;
+  }
+
+  /**
+   * Constructs the final search URL from URLSearchParams.
+   */
+  buildSearchUrl(searchParams) {
+    const stateValue = searchParams.get('state');
+    const stateSlug = stateValue ? this.slugify(stateValue) : '';
+    
+    const baseUrl = `https://growtherapy.com/find/${stateSlug}`;
+    
+    return baseUrl + '?' + searchParams.toString();
   }
 }

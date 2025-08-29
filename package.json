@@ -1,7 +1,6 @@
 {
   "name": "grow-therapy-wp",
   "version": "1.0.0",
-  "description": "## 🚀 Quick Start - **Local Setup**: `docker-compose up -d` → http://localhost:8000 - **Database**: Sync from Pre-prod using WP Migrate DB Pro",
   "main": "index.js",
   "scripts": {
     "build:css": "sass wp-content/themes/growtherapy/scss/search-filter-form/index.scss:wp-content/themes/growtherapy/css/search-filter-form.css --style=compressed",
