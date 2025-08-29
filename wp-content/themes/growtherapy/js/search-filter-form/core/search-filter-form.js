@@ -2,9 +2,10 @@
 
 import { CONFIG } from './config.js';
 import {
+  dom,
+  utils,
   ModalManager,
   ValidationManager,
-  utils,
 } from '../managers/index.js';
 
 export default class SearchFilterForm {
@@ -304,7 +305,7 @@ export default class SearchFilterForm {
         this.deselectSingleSelectOption(otherCheckbox);
       });
       
-      const currentOption = this.dom.findOption(checkbox);
+      const currentOption = dom.findOption(checkbox);
       if (currentOption) {
         currentOption.classList.add(CONFIG.CSS_CLASSES.optionSelected);
       }
@@ -327,7 +328,7 @@ export default class SearchFilterForm {
   deselectSingleSelectOption(checkbox) {
     checkbox.checked = false;
     
-    const option = this.dom.findOption(checkbox);
+    const option = dom.findOption(checkbox);
     if (option) {
       option.classList.remove(CONFIG.CSS_CLASSES.optionSelected);
     }
@@ -459,7 +460,7 @@ export default class SearchFilterForm {
       const relatedItems = JSON.parse(relatedData);
       const itemValues = new Set(relatedItems.map(item => item.value || item.id));
 
-      const targetModal = this.dom.findModalByInputName(targetModalInputName);
+      const targetModal = dom.findModalByInputName(targetModalInputName);
       if (!targetModal) return;
 
       const options = targetModal.querySelectorAll(CONFIG.ELEMENTS.option);
@@ -476,22 +477,6 @@ export default class SearchFilterForm {
     }
   }
 
-  dom = {
-    findModalByInputName: (inputName) => {
-      const inputs = document.querySelectorAll(`input[name="${inputName}"]`);
-      if (inputs.length === 0) return null;
-      
-      const firstInput = inputs[0];
-      return firstInput.closest('[data-search-filter-form-dropdown-modal]');
-    },
-    
-    findOption: (checkbox) => checkbox.closest(CONFIG.ELEMENTS.option),
-    
-    findCheckboxes: (modal) => modal.querySelectorAll(CONFIG.ELEMENTS.option + ' input[type="checkbox"]'),
-    
-    findDropdown: (modal) => modal.closest(CONFIG.ELEMENTS.dropdown)
-  };
-
   resetCrossFiltering(checkbox) {
     const { name } = checkbox;
     
@@ -503,7 +488,7 @@ export default class SearchFilterForm {
     const targetModalName = crossFilterMap[name];
     if (!targetModalName) return;
     
-    const targetModal = this.dom.findModalByInputName(targetModalName);
+    const targetModal = dom.findModalByInputName(targetModalName);
     if (targetModal) {
       const options = targetModal.querySelectorAll(CONFIG.ELEMENTS.option);
       options.forEach(option => {

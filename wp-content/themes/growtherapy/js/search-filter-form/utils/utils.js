@@ -1,11 +1,7 @@
-/**
- * Utility functions for Search Filter Form
- */
 export const utils = {
   /**
    * Generate a unique ID for form instances
    * Uses crypto.randomUUID() when available, falls back to Math.random()
-   * @returns {string} - Unique identifier with prefix
    */
   generateId: () => {
     const prefix = 'search-filter-form-';
@@ -17,9 +13,6 @@ export const utils = {
   
   /**
    * Convert text to URL-friendly slug format
-   * Optimized regex pattern for better performance
-   * @param {string} text - Text to convert
-   * @returns {string} - URL-friendly slug
    */
   slugify: (text) => {
     if (!text) return '';
