@@ -1,64 +1,18 @@
 'use strict';
 
 import { CONFIG } from './config.js';
-import { ValidationManager } from './managers/index.js';
+import { ValidationManager, utils } from './managers/index.js';
 
 class SearchFilterForm {
-  // Static constants for better performance and maintainability
-  static CONSTANTS = CONFIG.CONSTANTS;
-
   constructor() {
     this.activeModals = new Set();
     this.searchDebounceTimers = new Map();
-    this.instanceId = this.utils.generateId();
+    this.instanceId = utils.generateId();
     
     this.validation = new ValidationManager();
     
     this.init();
   }
-  
-  utils = {
-    generateId: () => 'search-filter-form-' + Math.random().toString(36).substr(2, 9),
-    
-    slugify: (text) => text
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .trim('-'),
-    
-    /**
-     * Generate URL parameters from current form state
-     * @returns {string} - URL query string with current selections
-     */
-    generateUrlParams: () => {
-      const params = new URLSearchParams();
-      const dropdowns = document.querySelectorAll(CONFIG.ELEMENTS.dropdown);
-      
-      for (const dropdown of dropdowns) {
-        const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
-        if (!modal?.id) continue;
-        
-        const apiKey = modal.id.slice(CONFIG.CONSTANTS.MODAL_PREFIX.length); // Remove 'modal-' prefix
-        const paramName = CONFIG.PARAM_MAPPINGS.API_TO_URL.get(apiKey);
-        if (!paramName) continue;
-        
-        const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]:checked');
-        if (checkboxes.length === 0) continue;
-        
-        // Add values to params
-        for (const checkbox of checkboxes) {
-          if (paramName === 'specialty') {
-            params.append(paramName, checkbox.value);
-          } else {
-            params.set(paramName, checkbox.value);
-          }
-        }
-      }
-      
-      return params.toString();
-    }
-  };
   
   stateManager = {
     getShared: () => {
@@ -176,7 +130,7 @@ class SearchFilterForm {
     if (document.querySelectorAll(CONFIG.ELEMENTS.dropdown).length === 0) {
       setTimeout(() => {
         this.populateFromUrlParams();
-      }, SearchFilterForm.CONSTANTS.RETRY_DELAY);
+      }, CONFIG.CONSTANTS.RETRY_DELAY);
     }
   }
 
@@ -186,7 +140,7 @@ class SearchFilterForm {
    */
   populateFromUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
-    const hasRelevantParams = SearchFilterForm.CONSTANTS.URL_PARAMS.some(param => urlParams.has(param));
+    const hasRelevantParams = CONFIG.CONSTANTS.URL_PARAMS.some(param => urlParams.has(param));
     if (!hasRelevantParams) return;
     
     const populationPromises = [];
@@ -343,8 +297,8 @@ class SearchFilterForm {
     }
     
     // Use startsWith for better performance than regex
-    const apiKey = modal.id.startsWith(SearchFilterForm.CONSTANTS.MODAL_PREFIX) ? 
-                   modal.id.slice(SearchFilterForm.CONSTANTS.MODAL_PREFIX.length) : null;
+    const apiKey = modal.id.startsWith(CONFIG.CONSTANTS.MODAL_PREFIX) ? 
+                   modal.id.slice(CONFIG.CONSTANTS.MODAL_PREFIX.length) : null;
     
     return apiKey;
   }
@@ -772,7 +726,7 @@ class SearchFilterForm {
     }
     
     const stateValue = selections['states-options']?.[0];
-    const stateSlug = stateValue ? this.utils.slugify(stateValue) : '';
+    const stateSlug = stateValue ? utils.slugify(stateValue) : '';
     
     const baseUrl = window.location.origin + '/find/therapists';
     const urlPath = stateSlug ? `/${stateSlug}` : '';
