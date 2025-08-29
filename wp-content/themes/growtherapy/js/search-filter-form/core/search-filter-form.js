@@ -3,6 +3,7 @@
 import { CONFIG } from './config.js';
 import {
   utils,
+  EventsManager,
   ModalManager,
   SearchManager,
   URLManager,
@@ -21,71 +22,31 @@ export default class SearchFilterForm {
     });
     this.validation = new ValidationManager(this.forms);
     
+    this.eventsManager = new EventsManager({
+      checkboxChange: this.handleCheckboxChange.bind(this),
+      clickOutside: this.handleClickOutside.bind(this),
+      deselectButton: this.handleDeselectClick.bind(this),
+      doneButton: this.handleDoneClick.bind(this),
+      formSubmit: this.handleFormSubmit.bind(this),
+      input: (e) => this.searchManager.handleInput(e),
+      modalCleanup: this.cleanup.bind(this),
+      modalTrigger: this.modalManager.handleModalOpen.bind(this.modalManager),
+    });
+    
     this.init();
   }
   
   init() {
     this.urlManager.populateFromUrlParams();
-    this.bindEvents();
-  }
-
-  bindEvents() {
-    document.addEventListener('click', this.handleGlobalClick.bind(this), { 
-      passive: false,
-      capture: false 
-    });
-    
-    document.addEventListener('change', this.handleCheckboxChange.bind(this), { 
-      passive: true,
-      capture: false 
-    });
-    
-    document.addEventListener('submit', this.handleFormSubmit.bind(this), { 
-      passive: false,
-      capture: false 
-    });
-    
-    document.addEventListener('input', (e) => this.searchManager.handleInput(e), { 
-      passive: true,
-      capture: false 
-    });
-    
-    document.addEventListener('modalCleanup', this.cleanup.bind(this), { 
-      passive: true,
-      capture: false 
-    });
-  }
-
-  handleGlobalClick(e) {
-    const modalTrigger = e.target.closest(CONFIG.ELEMENTS.modalTrigger);
-    const doneButton = e.target.closest(CONFIG.ELEMENTS.doneButton);
-    const deselectButton = e.target.closest(CONFIG.ELEMENTS.deselectButton);
-    
-    if (modalTrigger) {
-      e.preventDefault();
-      e.stopPropagation();
-      this.modalManager.handleModalOpen(modalTrigger);
-      return;
-    }
-    
-    if (doneButton) {
-      e.preventDefault();
-      e.stopPropagation();
-      this.handleDoneClick(doneButton);
-      return;
-    }
-    
-    if (deselectButton) {
-      e.preventDefault();
-      e.stopPropagation();
-      this.handleDeselectClick(e);
-      return;
-    }
-    
-    this.handleClickOutside(e);
+    this.eventsManager.bind();
   }
 
   cleanup() {
+    this.searchManager.cleanup();
+  }
+
+  destroy() {
+    this.eventsManager.unbind();
     this.searchManager.cleanup();
   }
 
@@ -165,7 +126,10 @@ export default class SearchFilterForm {
     }
   }
 
-  handleDoneClick(doneButton) {
+  handleDoneClick(e) {
+    const doneButton = e.target.closest(CONFIG.ELEMENTS.doneButton);
+    if (!doneButton) return;
+    
     const modal = doneButton.closest(CONFIG.ELEMENTS.dropdownModal);
     if (modal) {
       this.modalManager.close(modal);

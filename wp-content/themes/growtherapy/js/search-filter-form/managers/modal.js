@@ -90,7 +90,10 @@ export class ModalManager {
     document.dispatchEvent(event);
   }
   
-  handleModalOpen(button) {
+  handleModalOpen(e) {
+    const button = e.target.closest(CONFIG.ELEMENTS.modalTrigger);
+    if (!button) return;
+    
     const dropdown = button.closest(CONFIG.ELEMENTS.dropdown);
     if (!dropdown) return;
     
