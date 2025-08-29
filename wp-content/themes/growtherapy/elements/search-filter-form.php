@@ -201,6 +201,19 @@ class Element_Search_Filter_Form extends \Bricks\Element {
       filemtime(get_stylesheet_directory() . '/js/search-filter-form/index.js'),
       true
     );
+    
+    // Add module type for ES6 imports using filter
+    add_filter('script_loader_tag', [$this, 'add_module_type'], 10, 3);
+  }
+
+  /**
+   * Add module type attribute to script tag for ES6 imports
+   */
+  public function add_module_type($tag, $handle, $src) {
+    if ($handle === 'search-filter-form') {
+      return str_replace('<script ', '<script type="module" ', $tag);
+    }
+    return $tag;
   }
 
   // =============================================================================
