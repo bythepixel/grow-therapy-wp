@@ -84,8 +84,42 @@ runs:
           echo "   Latest commit: $(git log -1 --oneline)"
           echo ""
           
+          # Build CSS assets
+          echo "PHASE 4: Building CSS assets..."
+          if [ -f "package.json" ]; then
+            # Check if Node.js is available and get version
+            if command -v node >/dev/null 2>&1; then
+              NODE_VERSION=$(node --version)
+              NODE_MAJOR=$(echo $NODE_VERSION | sed 's/v\([0-9]*\).*/\1/')
+              
+              if [ "$NODE_MAJOR" -lt "18" ]; then
+                echo "✗ Node.js $NODE_MAJOR too old (requires 18+)"
+                exit 1
+              fi
+            else
+              echo "✗ Node.js not found on server"
+              exit 1
+            fi
+            
+            echo "Installing dependencies..."
+            if npm ci --silent; then
+              echo "Compiling CSS..."
+              if npm run build:css --silent; then
+                echo "✓ CSS built"
+              else
+                echo "✗ CSS compilation failed"
+                exit 1
+              fi
+            else
+              echo "✗ Dependency installation failed"
+              exit 1
+            fi
+          else
+            echo "⚠ No package.json - skipping CSS build"
+          fi
+          
           # Deploy plugins using reusable script
-          echo "PHASE 4: Plugin deployment..."
+          echo "PHASE 5: Plugin deployment..."
           if [ -f "scripts/deploy-plugins.sh" ]; then
             chmod +x scripts/deploy-plugins.sh
             ./scripts/deploy-plugins.sh
@@ -96,7 +130,7 @@ runs:
           fi
           
           # Sync BricksSync JSON files to database
-          echo "PHASE 5: BricksSync database synchronization..."
+          echo "PHASE 6: BricksSync database synchronization..."
           if wp plugin is-active brickssync --allow-root; then
             if [ -d "wp-content/themes/growtherapy/brickssync-json" ]; then
               # Create backup and sync
@@ -137,7 +171,7 @@ runs:
           echo ""
           
           # Final health check after BricksSync sync
-          echo "PHASE 6: Post-sync health verification..."
+          echo "PHASE 7: Post-sync health verification..."
           echo "   Testing WordPress core functionality after BricksSync changes..."
           if wp core version --allow-root; then
             echo "   ✓ WordPress core responding normally"
@@ -162,4 +196,4 @@ runs:
           echo "   Branch: ${{ inputs.branch }}"
           echo "   Completed: $(date)"
           echo "   Duration: $(($(date +%s) - $(date +%s))) seconds"
-          echo "=== Plugin deployment complete ==="
+          echo "=== Deployment complete ==="
