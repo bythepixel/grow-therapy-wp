@@ -3,127 +3,30 @@
 import { CONFIG } from './config.js';
 import {
   ModalManager,
+  StateManager,
   ValidationManager,
   utils,
 } from '../managers/index.js';
 
 export default class SearchFilterForm {
+  static sharedState = null;
+  
   constructor() {
     this.activeModals = new Set();
     this.searchDebounceTimers = new Map();
     this.instanceId = utils.generateId();
     
     this.modalManager = new ModalManager(this.activeModals, this.searchManager);
+    this.stateManager = new StateManager(this.instanceId, {
+      updateDropdownLabel: this.updateDropdownLabel.bind(this),
+      applyCrossFiltering: this.applyCrossFiltering.bind(this),
+      resetCrossFiltering: this.resetCrossFiltering.bind(this)
+    });
     this.validation = new ValidationManager();
     
     this.init();
   }
   
-  stateManager = {
-    getShared: () => {
-      if (!SearchFilterForm.sharedState) {
-        SearchFilterForm.sharedState = {
-          selections: new Map(),
-          instances: new Set()
-        };
-      }
-      return SearchFilterForm.sharedState;
-    },
-
-    update: (name, value, checked) => {
-      const sharedState = SearchFilterForm.sharedState;
-      if (!sharedState) return;
-      
-      if (!sharedState.selections.has(name)) {
-        sharedState.selections.set(name, new Set());
-      }
-      
-      const selectionSet = sharedState.selections.get(name);
-      
-      if (checked) {
-        selectionSet.add(value);
-      } else {
-        selectionSet.delete(value);
-      }
-      
-      this.stateManager.notify(name, value, checked);
-    },
-
-    notify: (name, value, checked) => {
-      const event = new CustomEvent('searchFilterFormStateChange', {
-        detail: {
-          name,
-          value,
-          checked,
-          sourceInstanceId: this.instanceId
-        }
-      });
-      
-      document.dispatchEvent(event);
-    },
-
-    handleExternal: (event) => {
-      const { name, value, checked, sourceInstanceId } = event.detail;
-      
-      if (sourceInstanceId === this.instanceId) return;
-      
-      const checkbox = this.stateManager.findCheckbox(name, value);
-      if (checkbox) {
-        checkbox.checked = checked;
-        
-        const option = checkbox.closest(CONFIG.ELEMENTS.option);
-        if (option) {
-          option.classList.toggle(CONFIG.CSS_CLASSES.optionSelected, checked);
-        }
-        
-        this.updateDropdownLabel(checkbox);
-        
-        if (checked) {
-          this.applyCrossFiltering(checkbox);
-        } else {
-          this.resetCrossFiltering(checkbox);
-        }
-      }
-    },
-
-    findCheckbox: (name, value) => {
-      const dropdowns = CONFIG.ELEMENTS.dropdown ? 
-        document.querySelectorAll(CONFIG.ELEMENTS.dropdown) : 
-        document.querySelectorAll('[data-search-filter-form-dropdown]');
-      
-      for (const dropdown of dropdowns) {
-        const checkbox = dropdown.querySelector(`input[name="${name}"][value="${value}"]`);
-        if (checkbox) return checkbox;
-      }
-      
-      return null;
-    },
-
-    sync: () => {
-      const sharedState = SearchFilterForm.sharedState;
-      if (!sharedState || !sharedState.selections) return;
-      
-      for (const [name, values] of sharedState.selections) {
-        for (const value of values) {
-          const checkbox = this.stateManager.findCheckbox(name, value);
-          if (checkbox && !checkbox.checked) {
-            checkbox.checked = true;
-            
-            const option = checkbox.closest(CONFIG.ELEMENTS.option);
-            if (option) {
-              option.classList.add(CONFIG.CSS_CLASSES.optionSelected);
-            }
-            
-            this.updateDropdownLabel(checkbox);
-            this.applyCrossFiltering(checkbox);
-          }
-        }
-      }
-      
-      sharedState.instances.add(this.instanceId);
-    }
-  };
-
   init() {
     this.bindEvents();
     this.stateManager.sync();
