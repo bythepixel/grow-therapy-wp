@@ -1,7 +1,11 @@
 'use strict';
 
 import { CONFIG } from './config.js';
-import { ValidationManager, utils } from '../managers/index.js';
+import {
+  ModalManager,
+  ValidationManager,
+  utils,
+} from '../managers/index.js';
 
 export default class SearchFilterForm {
   constructor() {
@@ -9,6 +13,7 @@ export default class SearchFilterForm {
     this.searchDebounceTimers = new Map();
     this.instanceId = utils.generateId();
     
+    this.modalManager = new ModalManager(this.activeModals, this.searchManager);
     this.validation = new ValidationManager();
     
     this.init();
@@ -328,6 +333,11 @@ export default class SearchFilterForm {
       passive: true,
       capture: false 
     });
+    
+    document.addEventListener('modalCleanup', this.cleanup.bind(this), { 
+      passive: true,
+      capture: false 
+    });
   }
 
   eventManager = {
@@ -339,7 +349,7 @@ export default class SearchFilterForm {
       if (modalTrigger) {
         e.preventDefault();
         e.stopPropagation();
-        this.handleModalOpen(modalTrigger);
+        this.modalManager.handleModalOpen(modalTrigger);
         return;
       }
       
@@ -360,79 +370,6 @@ export default class SearchFilterForm {
       this.handleClickOutside(e);
     }
   };
-
-  modalManager = {
-    isOpen: (modal) => this.activeModals.has(modal),
-    
-    getOpenModal: (dropdown) => {
-      const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
-      return modal && this.activeModals.has(modal) ? modal : null;
-    },
-    
-    toggle: (modal, dropdown) => {
-      if (this.activeModals.has(modal)) {
-        this.modalManager.close(modal);
-      } else {
-        this.modalManager.closeAll();
-        this.modalManager.open(modal, dropdown);
-      }
-    },
-    
-    hasOpenModal: () => this.activeModals.size > 0,
-    
-    getOpenModals: () => Array.from(this.activeModals),
-    
-    open: (modal, dropdown) => {
-      const button = dropdown.querySelector(CONFIG.ELEMENTS.modalTrigger);
-      
-      modal.classList.remove('aria-hidden');
-      modal.classList.add(CONFIG.CSS_CLASSES.modalActive);
-      modal.setAttribute('aria-hidden', 'false');
-      button?.setAttribute('aria-expanded', 'true');
-      
-      this.activeModals.add(modal);
-      this.searchManager.clear(modal);
-    },
-
-    close: (modal) => {
-      const dropdown = modal.closest(CONFIG.ELEMENTS.dropdown);
-      if (!dropdown) return;
-      
-      const button = dropdown.querySelector(CONFIG.ELEMENTS.modalTrigger);
-      
-      modal.classList.remove(CONFIG.CSS_CLASSES.modalActive);
-      modal.classList.add('aria-hidden');
-      modal.setAttribute('aria-hidden', 'true');
-      button?.setAttribute('aria-expanded', 'false');
-      button?.focus();
-      
-      this.activeModals.delete(modal);
-      this.cleanup();
-    },
-
-    closeAll: () => {
-      for (const modal of this.activeModals) {
-        this.modalManager.close(modal);
-      }
-    },
-    
-    closeByDropdown: (dropdown) => {
-      const modal = this.modalManager.getOpenModal(dropdown);
-      if (modal) {
-        this.modalManager.close(modal);
-      }
-    }
-  };
-
-  handleModalOpen(button) {
-    const dropdown = button.closest(CONFIG.ELEMENTS.dropdown);
-    if (!dropdown) return;
-    
-    const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
-    if (!modal) return;
-    
-    this.modalManager.toggle(modal, dropdown);
-  }
 
   /**
    * Clean up resources when closing modals
