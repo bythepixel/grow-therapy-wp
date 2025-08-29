@@ -18,6 +18,7 @@ export const CONFIG = {
     doneButton: '[data-search-filter-form-done-button]',
     dropdown: '[data-search-filter-form-dropdown]',
     dropdownModal: '[data-search-filter-form-dropdown-modal]',
+    form: '[data-search-filter-form]',
     label: '[data-search-filter-form-label]',
     modalTrigger: '[data-search-filter-form-modal-trigger]',
     option: '[data-search-filter-form-option]',

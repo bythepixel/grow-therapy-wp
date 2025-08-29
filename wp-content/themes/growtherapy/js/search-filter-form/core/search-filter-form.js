@@ -16,6 +16,8 @@ export default class SearchFilterForm {
   constructor() {
     this.activeModals = new Set();
     this.instanceId = utils.generateId();
+
+    this.forms = document.querySelectorAll(CONFIG.ELEMENTS.form);
     
     this.searchManager = new SearchManager();
     this.modalManager = new ModalManager(this.activeModals, this.searchManager);
@@ -24,7 +26,7 @@ export default class SearchFilterForm {
       getDropdownApiKey: this.getDropdownApiKey.bind(this),
       updateDropdownLabel: this.updateDropdownLabel.bind(this)
     });
-    this.validation = new ValidationManager();
+    this.validation = new ValidationManager(this.forms);
     
     this.init();
   }
@@ -307,13 +309,13 @@ export default class SearchFilterForm {
   handleFormSubmit(e) {
     e.preventDefault();
     
-    this.validation.clearAllErrors();
+    const form = e.target;
     
-    if (!this.validation.validateRequiredFields()) {
+    this.validation.clearAllErrors(form);
+    
+    if (!this.validation.validateRequiredFields(form)) {
       return false;
     }
-    
-    const form = e.target;
     const searchParams = new URLSearchParams();
     
     const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked');

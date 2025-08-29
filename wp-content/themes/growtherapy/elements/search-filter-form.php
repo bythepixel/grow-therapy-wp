@@ -243,6 +243,7 @@ class Element_Search_Filter_Form extends \Bricks\Element {
       aria-labelledby="form-title"
       class="search-filter-form" 
       method="get" 
+      data-search-filter-form
       {$this->render_attributes('_root')}
     >
       <div class="sr-only">
