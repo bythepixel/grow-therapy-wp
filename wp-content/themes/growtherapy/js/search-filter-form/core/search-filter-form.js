@@ -5,6 +5,7 @@ import {
   dom,
   utils,
   ModalManager,
+  URLManager,
   ValidationManager,
 } from '../managers/index.js';
 
@@ -17,6 +18,11 @@ export default class SearchFilterForm {
     this.instanceId = utils.generateId();
     
     this.modalManager = new ModalManager(this.activeModals, this.searchManager);
+    this.urlManager = new URLManager({
+      processCheckboxUpdate: this.processCheckboxUpdate.bind(this),
+      getDropdownApiKey: this.getDropdownApiKey.bind(this),
+      updateDropdownLabel: this.updateDropdownLabel.bind(this)
+    });
     this.validation = new ValidationManager();
     
     this.init();
@@ -26,145 +32,14 @@ export default class SearchFilterForm {
     this.bindEvents();
     
     // Try to populate from URL params immediately
-    this.populateFromUrlParams();
+    this.urlManager.populateFromUrlParams();
     
     // If no dropdowns found, retry after a short delay (in case they're still loading)
     if (document.querySelectorAll(CONFIG.ELEMENTS.dropdown).length === 0) {
       setTimeout(() => {
-        this.populateFromUrlParams();
+        this.urlManager.populateFromUrlParams();
       }, CONFIG.CONSTANTS.RETRY_DELAY);
     }
-  }
-
-  /**
-   * Parse URL parameters and populate dropdowns accordingly
-   * Supports: state, insurance, specialty[], typeOfCare
-   */
-  populateFromUrlParams() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const hasRelevantParams = CONFIG.CONSTANTS.URL_PARAMS.some(param => urlParams.has(param));
-    if (!hasRelevantParams) return;
-    
-    const populationPromises = [];
-    for (const [param, dropdownType] of CONFIG.PARAM_MAPPINGS.URL_TO_DROPDOWN) {
-      const value = urlParams.get(param);
-      if (value) {
-        populationPromises.push(this.populateDropdownFromParam(dropdownType, value));
-      }
-    }
-    
-    // Handle specialty array parameter (needs dropdown) - try multiple formats
-    let specialties = [];
-    
-    // Try standard specialty parameter
-    specialties = urlParams.getAll('specialty');
-    
-    // If empty, try specialty[] format (array notation)
-    if (specialties.length === 0) {
-      const specialtyArrayParams = [];
-      for (const [key, value] of urlParams.entries()) {
-        if (key.startsWith('specialty[') && key.endsWith(']')) {
-          specialtyArrayParams.push(value);
-        }
-      }
-      if (specialtyArrayParams.length > 0) {
-        specialties = specialtyArrayParams;
-      }
-    }
-    
-    // If still empty, try specialty with different casing
-    if (specialties.length === 0) {
-      specialties = urlParams.getAll('Specialty') || urlParams.getAll('SPECIALTY');
-    }
-    
-    // If still empty, try to find any parameter that might be specialty-related
-    if (specialties.length === 0) {
-      for (const [key, value] of urlParams.entries()) {
-        if (key.toLowerCase().includes('specialty') || key.toLowerCase().includes('need')) {
-          specialties = [value];
-          break;
-        }
-      }
-    }
-    
-    // If still empty, try to decode the URL and look for specialty-related content
-    if (specialties.length === 0) {
-      const decodedUrl = decodeURIComponent(window.location.search);
-      
-      // Look for specialty patterns in the decoded URL
-      const specialtyMatches = decodedUrl.match(/specialty[^=&]*=([^&]+)/gi);
-      if (specialtyMatches) {
-        specialties = specialtyMatches.map(match => {
-          const value = match.split('=')[1];
-          return decodeURIComponent(value);
-        });
-      }
-    }
-    
-    if (specialties.length > 0) {
-      populationPromises.push(this.populateDropdownFromParam('needs', specialties));
-    }
-    
-    // Process all populations concurrently
-    Promise.allSettled(populationPromises).then(results => {
-      const successCount = results.filter(result => result.status === 'fulfilled').length;
-      if (successCount > 0) {
-        console.log(`SearchFilterForm: Successfully populated ${successCount} dropdowns from URL parameters`);
-      }
-    });
-  }
-
-  /**
-   * Populate a specific dropdown based on parameter value
-   * @param {string} dropdownType - The type of dropdown to populate
-   * @param {string|string[]} values - Single value or array of values
-   */
-  populateDropdownFromParam(dropdownType, values) {
-    // Cache DOM queries for better performance
-    const dropdowns = document.querySelectorAll(CONFIG.ELEMENTS.dropdown);
-    if (dropdowns.length === 0) return 0;
-    
-    const expectedApiKey = CONFIG.PARAM_MAPPINGS.DROPDOWN_TO_API.get(dropdownType) || null;
-    if (!expectedApiKey) return 0;
-    
-    // Convert single value to array for consistent processing
-    const valueArray = Array.isArray(values) ? values : [values];
-    
-    // Use Set for O(1) value lookups
-    const valueSet = new Set(valueArray);
-    let populatedCount = 0;
-    
-    // Batch DOM updates for better performance
-    const updates = [];
-    
-    for (const dropdown of dropdowns) {
-      const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
-      if (!modal) continue;
-      
-      const apiKey = this.getDropdownApiKey(dropdown);
-      
-      if (apiKey !== expectedApiKey) continue;
-      
-      // Find all checkboxes at once to avoid multiple DOM queries
-      const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]');
-      
-      for (const checkbox of checkboxes) {
-        if (valueSet.has(checkbox.value)) {
-          updates.push(() => this.processCheckboxUpdate(checkbox));
-          populatedCount++;
-        }
-      }
-    }
-    
-    // Batch process all updates for better performance
-    if (updates.length > 0) {
-      // Use requestAnimationFrame for smooth UI updates
-      requestAnimationFrame(() => {
-        updates.forEach(update => update());
-      });
-    }
-    
-    return populatedCount;
   }
 
   /**
