@@ -1,19 +1,4 @@
 export const utils = {
-  /**
-   * Generate a unique ID for form instances
-   * Uses crypto.randomUUID() when available, falls back to Math.random()
-   */
-  generateId: () => {
-    const prefix = 'search-filter-form-';
-    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
-      return prefix + crypto.randomUUID();
-    }
-    return prefix + Math.random().toString(36).substring(2, 11);
-  },
-  
-  /**
-   * Convert text to URL-friendly slug format
-   */
   slugify: (text) => {
     if (!text) return '';
     return text

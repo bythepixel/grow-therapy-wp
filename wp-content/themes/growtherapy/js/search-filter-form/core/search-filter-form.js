@@ -11,18 +11,14 @@ import {
 } from '../managers/index.js';
 
 export default class SearchFilterForm {
-  static sharedState = null;
-  
   constructor() {
     this.activeModals = new Set();
-    this.instanceId = utils.generateId();
 
     this.forms = document.querySelectorAll(CONFIG.ELEMENTS.form);
     
     this.searchManager = new SearchManager();
     this.modalManager = new ModalManager(this.activeModals, this.searchManager);
     this.urlManager = new URLManager({
-      processCheckboxUpdate: this.processCheckboxUpdate.bind(this),
       getDropdownApiKey: this.getDropdownApiKey.bind(this),
       updateDropdownLabel: this.updateDropdownLabel.bind(this)
     });
@@ -37,29 +33,7 @@ export default class SearchFilterForm {
   }
 
   /**
-   * Process a single checkbox update (extracted for better performance)
-   * @param {HTMLInputElement} checkbox - The checkbox to update
-   */
-  processCheckboxUpdate(checkbox) {
-    checkbox.checked = true;
-    
-    // Update UI state
-    const option = checkbox.closest(CONFIG.ELEMENTS.option);
-    if (option) {
-      option.classList.add(CONFIG.CSS_CLASSES.optionSelected);
-    }
-    
-    // Update dropdown label
-    this.updateDropdownLabel(checkbox);
-    
-    // Apply cross-filtering if needed
-    this.applyCrossFiltering(checkbox);
-  }
-
-  /**
-   * Get the API key for a specific dropdown
-   * @param {HTMLElement} dropdown - The dropdown element
-   * @returns {string} - The API key (states, payors, specialties, type-of-care)
+   * Get the API key for a specific dropdown (states, payors, specialties, type-of-care)
    */
   getDropdownApiKey(dropdown) {
     const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
@@ -132,28 +106,19 @@ export default class SearchFilterForm {
     }
   };
 
-  /**
-   * Clean up resources when closing modals
-   */
   cleanup() {
     this.searchManager.cleanup();
-  }
-  
-  /**
-   * Remove this instance from shared state (called when instance is destroyed)
-   */
-  destroy() {
-    const sharedState = SearchFilterForm.sharedState;
-    if (sharedState && sharedState.instances) {
-      sharedState.instances.delete(this.instanceId);
-    }
   }
 
   handleCheckboxChange(e) {
     const { target: checkbox } = e;
     
     if (!checkbox.matches(CONFIG.ELEMENTS.checkboxSingleSelect)) {
-      this.updateDropdownLabel(checkbox);
+      if (checkbox.checked) {
+        this.syncCheckboxToAllForms(checkbox);
+      } else {
+        this.syncCheckboxDeselectionToAllForms(checkbox);
+      }
       return;
     }
     
@@ -170,7 +135,7 @@ export default class SearchFilterForm {
       const otherCheckboxes = modal.querySelectorAll(selector);
       
       otherCheckboxes.forEach(otherCheckbox => {
-        this.deselectSingleSelectOption(otherCheckbox);
+        this.syncCheckboxDeselectionToAllForms(otherCheckbox);
       });
       
       const currentOption = dom.findOption(checkbox);
@@ -180,29 +145,17 @@ export default class SearchFilterForm {
       
       this.modalManager.close(modal);
       this.applyCrossFiltering(checkbox);
+      this.syncCheckboxToAllForms(checkbox);
     } else {
       const label = checkbox.closest('label');
       if (label && !e.target.closest(CONFIG.ELEMENTS.deselectButton)) {
         checkbox.checked = true;
+        this.syncCheckboxToAllForms(checkbox);
         return;
       }
       
-      this.deselectSingleSelectOption(checkbox);
+      this.syncCheckboxDeselectionToAllForms(checkbox);
     }
-    
-    this.updateDropdownLabel(checkbox);
-  }
-
-  deselectSingleSelectOption(checkbox) {
-    checkbox.checked = false;
-    
-    const option = dom.findOption(checkbox);
-    if (option) {
-      option.classList.remove(CONFIG.CSS_CLASSES.optionSelected);
-    }
-    
-    this.resetCrossFiltering(checkbox);
-    this.updateDropdownLabel(checkbox);
   }
 
   handleDeselectClick(e) {
@@ -217,7 +170,7 @@ export default class SearchFilterForm {
     const checkbox = option?.querySelector('input[type="checkbox"]');
 
     if (checkbox) {
-      this.deselectSingleSelectOption(checkbox);
+      this.syncCheckboxDeselectionToAllForms(checkbox);
     }
   }
 
@@ -377,5 +330,52 @@ export default class SearchFilterForm {
     if (checkedOptions.length > 0) {
       this.validation.validateField(dropdown);
     }
+  }
+
+  syncCheckboxToAllForms(sourceCheckbox) {
+    if (!this.forms || this.forms.length === 0) return;
+    
+    const { name, value } = sourceCheckbox;
+    
+    this.forms.forEach(form => {
+      const targetCheckbox = form.querySelector(`input[name="${name}"][value="${value}"]`);
+      if (targetCheckbox && !targetCheckbox.checked) {
+        targetCheckbox.checked = true;
+        
+        const option = targetCheckbox.closest(CONFIG.ELEMENTS.option);
+        if (option) {
+          option.classList.add(CONFIG.CSS_CLASSES.optionSelected);
+        }
+        
+        this.updateDropdownLabel(targetCheckbox);
+        this.applyCrossFiltering(targetCheckbox);
+        
+        const dropdown = targetCheckbox.closest(CONFIG.ELEMENTS.dropdown);
+        if (dropdown && dropdown.querySelector('[data-required="true"]')) {
+          this.validation.validateField(dropdown);
+        }
+      }
+    });
+  }
+
+  syncCheckboxDeselectionToAllForms(sourceCheckbox) {
+    if (!this.forms || this.forms.length === 0) return;
+    
+    const { name, value } = sourceCheckbox;
+    
+    this.forms.forEach(form => {
+      const targetCheckbox = form.querySelector(`input[name="${name}"][value="${value}"]`);
+      if (targetCheckbox && targetCheckbox.checked) {
+        targetCheckbox.checked = false;
+        
+        const option = targetCheckbox.closest(CONFIG.ELEMENTS.option);
+        if (option) {
+          option.classList.remove(CONFIG.CSS_CLASSES.optionSelected);
+        }
+        
+        this.updateDropdownLabel(targetCheckbox);
+        this.resetCrossFiltering(targetCheckbox);
+      }
+    });
   }
 }

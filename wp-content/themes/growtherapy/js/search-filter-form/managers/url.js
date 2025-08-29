@@ -138,8 +138,8 @@ export class URLManager {
       }
     }
     
-    // Update dropdown label
     this.callbacks.updateDropdownLabel(checkbox);
+    checkbox.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   handlePopulationResults(results) {
