@@ -4,7 +4,6 @@ export class URLManager {
   constructor(callbacks) {
     this.callbacks = callbacks;
     
-    this.dropdownCache = null;
     this.specialtyPatterns = [
       /specialty\[(\d+)\]/g,
       /specialty=([^&]+)/g,
@@ -92,11 +91,9 @@ export class URLManager {
   }
 
   populateDropdownFromParam(dropdownType, values) {
-    if (!this.dropdownCache) {
-      this.dropdownCache = document.querySelectorAll(CONFIG.ELEMENTS.dropdown);
-    }
+    const dropdowns = document.querySelectorAll(CONFIG.ELEMENTS.dropdown);
     
-    if (this.dropdownCache.length === 0) return 0;
+    if (dropdowns.length === 0) return 0;
     
     const expectedApiKey = CONFIG.PARAM_MAPPINGS.DROPDOWN_TO_API.get(dropdownType);
     if (!expectedApiKey) return 0;
@@ -105,7 +102,7 @@ export class URLManager {
     const updates = [];
     let populatedCount = 0;
     
-    for (const dropdown of this.dropdownCache) {
+    for (const dropdown of dropdowns) {
       const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
       if (!modal) continue;
       
@@ -150,9 +147,5 @@ export class URLManager {
     if (successCount > 0) {
       console.log(`SearchFilterForm: Successfully populated ${successCount} dropdowns from URL parameters`);
     }
-  }
-
-  clearCache() {
-    this.dropdownCache = null;
   }
 }

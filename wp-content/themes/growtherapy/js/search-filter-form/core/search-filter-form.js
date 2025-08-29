@@ -33,16 +33,7 @@ export default class SearchFilterForm {
   
   init() {
     this.bindEvents();
-    
-    // Try to populate from URL params immediately
     this.urlManager.populateFromUrlParams();
-    
-    // If no dropdowns found, retry after a short delay (in case they're still loading)
-    if (document.querySelectorAll(CONFIG.ELEMENTS.dropdown).length === 0) {
-      setTimeout(() => {
-        this.urlManager.populateFromUrlParams();
-      }, CONFIG.CONSTANTS.RETRY_DELAY);
-    }
   }
 
   /**
