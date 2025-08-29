@@ -26,7 +26,8 @@ export default class SearchFilterForm {
     });
     
     this.urlManager = new URLManager({
-      updateDropdownLabel: this.formSyncManager.updateDropdownLabel.bind(this.formSyncManager)
+      updateDropdownLabel: this.formSyncManager.updateDropdownLabel.bind(this.formSyncManager),
+      triggerCrossFiltering: this.applyCrossFiltering.bind(this)
     });
     
     this.eventsManager = new EventsManager({
