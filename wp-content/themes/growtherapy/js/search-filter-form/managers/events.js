@@ -25,12 +25,6 @@ export class EventsManager {
       input: { handler: this.handleInput.bind(this), options: { passive: true, capture: false } },
       modalCleanup: { handler: this.handleModalCleanup.bind(this), options: { passive: true, capture: false } }
     };
-    
-    this.handleGlobalClick = this.handleGlobalClick.bind(this);
-    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleInput = this.handleInput.bind(this);
-    this.handleModalCleanup = this.handleModalCleanup.bind(this);
   }
 
   bind() {
