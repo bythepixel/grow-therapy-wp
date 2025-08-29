@@ -15,6 +15,7 @@ add_action( 'wp_enqueue_scripts', function() {
 add_action( 'init', function() {
   $element_files = [
     __DIR__ . '/elements/search-filter-form.php',
+		__DIR__ . '/elements/dynamic-states-list.php',
   ];
 
   foreach ( $element_files as $file ) {

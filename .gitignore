@@ -68,3 +68,4 @@ local-*.php
 
 # NPM dependencies
 node_modules/
+/.idea/laravel-idea.xml
