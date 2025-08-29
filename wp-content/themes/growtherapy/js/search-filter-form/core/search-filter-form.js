@@ -3,7 +3,6 @@
 import { CONFIG } from './config.js';
 import {
   ModalManager,
-  StateManager,
   ValidationManager,
   utils,
 } from '../managers/index.js';
@@ -17,11 +16,6 @@ export default class SearchFilterForm {
     this.instanceId = utils.generateId();
     
     this.modalManager = new ModalManager(this.activeModals, this.searchManager);
-    this.stateManager = new StateManager(this.instanceId, {
-      updateDropdownLabel: this.updateDropdownLabel.bind(this),
-      applyCrossFiltering: this.applyCrossFiltering.bind(this),
-      resetCrossFiltering: this.resetCrossFiltering.bind(this)
-    });
     this.validation = new ValidationManager();
     
     this.init();
@@ -29,7 +23,6 @@ export default class SearchFilterForm {
   
   init() {
     this.bindEvents();
-    this.stateManager.sync();
     
     // Try to populate from URL params immediately
     this.populateFromUrlParams();
@@ -232,11 +225,6 @@ export default class SearchFilterForm {
       capture: false 
     });
     
-    document.addEventListener('searchFilterFormStateChange', this.stateManager.handleExternal.bind(this), { 
-      passive: true,
-      capture: false 
-    });
-    
     document.addEventListener('modalCleanup', this.cleanup.bind(this), { 
       passive: true,
       capture: false 
@@ -295,8 +283,6 @@ export default class SearchFilterForm {
   handleCheckboxChange(e) {
     const { target: checkbox } = e;
     
-    this.stateManager.update(checkbox.name, checkbox.value, checkbox.checked);
-    
     if (!checkbox.matches(CONFIG.ELEMENTS.checkboxSingleSelect)) {
       this.updateDropdownLabel(checkbox);
       return;
@@ -340,8 +326,6 @@ export default class SearchFilterForm {
 
   deselectSingleSelectOption(checkbox) {
     checkbox.checked = false;
-    
-    this.stateManager.update(checkbox.name, checkbox.value, false);
     
     const option = this.dom.findOption(checkbox);
     if (option) {
