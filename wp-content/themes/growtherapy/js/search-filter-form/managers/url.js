@@ -12,6 +12,19 @@ export class URLManager {
     ];
   }
 
+  getDropdownApiKey(dropdown) {
+    const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
+    if (!modal?.id) {
+      return null;
+    }
+    
+    // Use startsWith for better performance than regex
+    const apiKey = modal.id.startsWith(CONFIG.CONSTANTS.MODAL_PREFIX) ? 
+                   modal.id.slice(CONFIG.CONSTANTS.MODAL_PREFIX.length) : null;
+    
+    return apiKey;
+  }
+
   populateFromUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     
@@ -106,7 +119,7 @@ export class URLManager {
       const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
       if (!modal) continue;
       
-      const apiKey = this.callbacks.getDropdownApiKey(dropdown);
+      const apiKey = this.getDropdownApiKey(dropdown);
       if (apiKey !== expectedApiKey) continue;
       
       const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]');

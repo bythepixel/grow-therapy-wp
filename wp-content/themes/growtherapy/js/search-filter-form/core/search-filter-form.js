@@ -19,7 +19,6 @@ export default class SearchFilterForm {
     this.searchManager = new SearchManager();
     this.modalManager = new ModalManager(this.activeModals, this.searchManager);
     this.urlManager = new URLManager({
-      getDropdownApiKey: this.getDropdownApiKey.bind(this),
       updateDropdownLabel: this.updateDropdownLabel.bind(this)
     });
     this.validation = new ValidationManager(this.forms);
@@ -28,27 +27,8 @@ export default class SearchFilterForm {
   }
   
   init() {
-    this.bindEvents();
     this.urlManager.populateFromUrlParams();
-  }
 
-  /**
-   * Get the API key for a specific dropdown (states, payors, specialties, type-of-care)
-   */
-  getDropdownApiKey(dropdown) {
-    const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
-    if (!modal?.id) {
-      return null;
-    }
-    
-    // Use startsWith for better performance than regex
-    const apiKey = modal.id.startsWith(CONFIG.CONSTANTS.MODAL_PREFIX) ? 
-                   modal.id.slice(CONFIG.CONSTANTS.MODAL_PREFIX.length) : null;
-    
-    return apiKey;
-  }
-
-  bindEvents() {
     document.addEventListener('click', this.eventManager.handleGlobalClick.bind(this), { 
       passive: false,
       capture: false 
@@ -114,6 +94,7 @@ export default class SearchFilterForm {
     const { target: checkbox } = e;
     
     if (!checkbox.matches(CONFIG.ELEMENTS.checkboxSingleSelect)) {
+      this.updateDropdownLabel(checkbox);
       if (checkbox.checked) {
         this.syncCheckboxToAllForms(checkbox);
       } else {
@@ -144,16 +125,18 @@ export default class SearchFilterForm {
       }
       
       this.modalManager.close(modal);
-      this.applyCrossFiltering(checkbox);
+      this.updateDropdownLabel(checkbox);
       this.syncCheckboxToAllForms(checkbox);
     } else {
       const label = checkbox.closest('label');
       if (label && !e.target.closest(CONFIG.ELEMENTS.deselectButton)) {
         checkbox.checked = true;
+        this.updateDropdownLabel(checkbox);
         this.syncCheckboxToAllForms(checkbox);
         return;
       }
       
+      this.updateDropdownLabel(checkbox);
       this.syncCheckboxDeselectionToAllForms(checkbox);
     }
   }
@@ -170,6 +153,7 @@ export default class SearchFilterForm {
     const checkbox = option?.querySelector('input[type="checkbox"]');
 
     if (checkbox) {
+      this.updateDropdownLabel(checkbox);
       this.syncCheckboxDeselectionToAllForms(checkbox);
     }
   }
@@ -189,19 +173,26 @@ export default class SearchFilterForm {
     }
   }
 
-  applyCrossFiltering(checkbox) {
-    const form = checkbox.closest('form');
-    if (!form) return;
+  applyCrossFiltering() {
+    let globalSelectedState = null;
+    let globalSelectedInsurance = null;
 
-    const selectedState = form.querySelector('input[name="states-options"]:checked');
-    const selectedInsurance = form.querySelector('input[name="payors-options"]:checked');
-
-    if (selectedState) {
-      this.filterOptionsByRelatedData(selectedState, 'relatedInsurance', 'payors-options');
+    for (const form of this.forms) {
+      if (!globalSelectedState) {
+        globalSelectedState = form.querySelector('input[name="states-options"]:checked');
+      }
+      if (!globalSelectedInsurance) {
+        globalSelectedInsurance = form.querySelector('input[name="payors-options"]:checked');
+      }
+      if (globalSelectedState && globalSelectedInsurance) break;
     }
 
-    if (selectedInsurance) {    
-      this.filterOptionsByRelatedData(selectedInsurance, 'relatedStates', 'states-options');
+    if (globalSelectedState) {
+      this.filterOptionsByRelatedData(globalSelectedState, 'relatedInsurance', 'payors-options');
+    }
+
+    if (globalSelectedInsurance) {    
+      this.filterOptionsByRelatedData(globalSelectedInsurance, 'relatedStates', 'states-options');
     }
   }
 
@@ -213,17 +204,21 @@ export default class SearchFilterForm {
       const relatedItems = JSON.parse(relatedData);
       const itemValues = new Set(relatedItems.map(item => item.value || item.id));
 
-      const targetModal = dom.findModalByInputName(targetModalInputName);
-      if (!targetModal) return;
-
-      const options = targetModal.querySelectorAll(CONFIG.ELEMENTS.option);
+      const targetInputs = document.querySelectorAll(`input[name="${targetModalInputName}"]`);
       
-      options.forEach(option => {
-        const checkbox = option.querySelector('input[type="checkbox"]');
-        if (!checkbox) return;
+      targetInputs.forEach(input => {
+        const modal = input.closest(CONFIG.ELEMENTS.dropdownModal);
+        if (!modal) return;
 
-        const isAvailable = itemValues.has(checkbox.value);
-        option.classList.toggle(CONFIG.CSS_CLASSES.optionHidden, !isAvailable);
+        const options = modal.querySelectorAll(CONFIG.ELEMENTS.option);
+        
+        options.forEach(option => {
+          const checkbox = option.querySelector('input[type="checkbox"]');
+          if (!checkbox) return;
+
+          const isAvailable = itemValues.has(checkbox.value);
+          option.classList.toggle(CONFIG.CSS_CLASSES.optionHidden, !isAvailable);
+        });
       });
     } catch (error) {
       console.warn(`Error parsing ${dataAttribute} data:`, error);
@@ -241,13 +236,17 @@ export default class SearchFilterForm {
     const targetModalName = crossFilterMap[name];
     if (!targetModalName) return;
     
-    const targetModal = dom.findModalByInputName(targetModalName);
-    if (targetModal) {
-      const options = targetModal.querySelectorAll(CONFIG.ELEMENTS.option);
-      options.forEach(option => {
-        option.classList.remove(CONFIG.CSS_CLASSES.optionHidden);
-      });
-    }
+    const targetInputs = document.querySelectorAll(`input[name="${targetModalName}"]`);
+    
+    targetInputs.forEach(input => {
+      const modal = input.closest(CONFIG.ELEMENTS.dropdownModal);
+      if (modal) {
+        const options = modal.querySelectorAll(CONFIG.ELEMENTS.option);
+        options.forEach(option => {
+          option.classList.remove(CONFIG.CSS_CLASSES.optionHidden);
+        });
+      }
+    });
   }
 
   handleFormSubmit(e) {
@@ -300,35 +299,38 @@ export default class SearchFilterForm {
   }
 
   updateDropdownLabel(checkbox) {
-    const modal = checkbox.closest(CONFIG.ELEMENTS.dropdownModal);
-    const dropdown = modal?.closest(CONFIG.ELEMENTS.dropdown);
-    if (!dropdown) return;
-    
-    const button = dropdown.querySelector(CONFIG.ELEMENTS.modalTrigger);
-    const label = button?.querySelector(CONFIG.ELEMENTS.label);
-    if (!label) return;
-    
-    const name = checkbox.name;
-    const checkedOptions = dropdown.querySelectorAll(`input[name="${name}"]:checked`);
-    
-    if (checkedOptions.length === 0) {
-      label.textContent = button.dataset.placeholder || 'Select option';
-    } else if (checkedOptions.length === 1) {
-      const option = checkedOptions[0].closest(CONFIG.ELEMENTS.option);
-      if (option) {
-        const textContent = Array.from(option.childNodes)
-          .filter(node => node.nodeType === Node.TEXT_NODE)
-          .map(node => node.textContent.trim())
-          .join(' ');
-        label.textContent = textContent || 'Option selected';
-      }
-    } else {
-      const placeholder = button.dataset.placeholder || 'Options';
-      label.textContent = `${placeholder} (${checkedOptions.length})`;
-    }
+    try {
+      const dropdown = checkbox.closest(CONFIG.ELEMENTS.dropdown);
+      if (!dropdown) return;
 
-    if (checkedOptions.length > 0) {
-      this.validation.validateField(dropdown);
+      const searchData = JSON.parse(checkbox.dataset.searchData);
+      const checkboxLabel = searchData.label;
+      
+      const button = dropdown.querySelector(CONFIG.ELEMENTS.modalTrigger);
+      if (!button) return;
+      
+      const label = button.querySelector(CONFIG.ELEMENTS.label);
+      if (!label) return;
+      
+      const checkboxName = checkbox.name;
+      const checkedOptions = dropdown.querySelectorAll(`input[name="${checkboxName}"]:checked`);
+      const checkedCount = checkedOptions.length;
+      
+      if (checkedCount === 0) {
+        label.textContent = button.dataset.placeholder || 'Select option';
+      } else if (checkedCount === 1) {
+        label.textContent = checkboxLabel;
+      } else {
+        // Multi-select
+        const placeholder = button.dataset.placeholder || 'Options';
+        label.textContent = `${placeholder} (${checkedCount})`;
+      }
+      
+      if (checkedCount > 0) {
+        this.validation.validateField(dropdown);
+      }
+    } catch (error) {
+      console.warn('Failed to parse searchData:', error);
     }
   }
 
@@ -336,6 +338,8 @@ export default class SearchFilterForm {
     if (!this.forms || this.forms.length === 0) return;
     
     const { name, value } = sourceCheckbox;
+
+    this.applyCrossFiltering();
     
     this.forms.forEach(form => {
       const targetCheckbox = form.querySelector(`input[name="${name}"][value="${value}"]`);
@@ -343,12 +347,11 @@ export default class SearchFilterForm {
         targetCheckbox.checked = true;
         
         const option = targetCheckbox.closest(CONFIG.ELEMENTS.option);
-        if (option) {
+        if (option && targetCheckbox.matches(CONFIG.ELEMENTS.checkboxSingleSelect)) {
           option.classList.add(CONFIG.CSS_CLASSES.optionSelected);
         }
         
         this.updateDropdownLabel(targetCheckbox);
-        this.applyCrossFiltering(targetCheckbox);
         
         const dropdown = targetCheckbox.closest(CONFIG.ELEMENTS.dropdown);
         if (dropdown && dropdown.querySelector('[data-required="true"]')) {
@@ -369,7 +372,7 @@ export default class SearchFilterForm {
         targetCheckbox.checked = false;
         
         const option = targetCheckbox.closest(CONFIG.ELEMENTS.option);
-        if (option) {
+        if (option && targetCheckbox.matches(CONFIG.ELEMENTS.checkboxSingleSelect)) {
           option.classList.remove(CONFIG.CSS_CLASSES.optionSelected);
         }
         
