@@ -35,11 +35,13 @@ export class SearchManager {
       return;
     }
 
+    this.filterOptionsBySearchTerm(modal, searchTerm);
+  }
+
+  filterOptionsBySearchTerm(modal, searchTerm) {
     const options = modal.querySelectorAll(CONFIG.ELEMENTS.option);
     if (options.length === 0) return;
 
-    const updates = [];
-    
     for (const option of options) {
       const checkbox = option.querySelector('input[type="checkbox"]');
       if (!checkbox) continue;
@@ -51,17 +53,12 @@ export class SearchManager {
       const isCrossFiltered = !option.classList.contains(CONFIG.CSS_CLASSES.optionHidden);
       
       const shouldShow = isSearchMatch && isCrossFiltered;
-      if (option.style.display !== (shouldShow ? '' : 'none')) {
-        updates.push(() => {
-          option.style.display = shouldShow ? '' : 'none';
-        });
+      const currentDisplay = option.style.display;
+      const newDisplay = shouldShow ? '' : 'none';
+      
+      if (currentDisplay !== newDisplay) {
+        option.style.display = newDisplay;
       }
-    }
-
-    if (updates.length > 0) {
-      requestAnimationFrame(() => {
-        updates.forEach(update => update());
-      });
     }
   }
 
@@ -87,23 +84,15 @@ export class SearchManager {
     const options = modal.querySelectorAll(CONFIG.ELEMENTS.option);
     if (options.length === 0) return;
 
-    const updates = [];
-    
     for (const option of options) {
       const isCrossFiltered = !option.classList.contains(CONFIG.CSS_CLASSES.optionHidden);
       const shouldShow = isCrossFiltered;
+      const currentDisplay = option.style.display;
+      const newDisplay = shouldShow ? '' : 'none';
       
-      if (option.style.display !== (shouldShow ? '' : 'none')) {
-        updates.push(() => {
-          option.style.display = shouldShow ? '' : 'none';
-        });
+      if (currentDisplay !== newDisplay) {
+        option.style.display = newDisplay;
       }
-    }
-
-    if (updates.length > 0) {
-      requestAnimationFrame(() => {
-        updates.forEach(update => update());
-      });
     }
   }
 

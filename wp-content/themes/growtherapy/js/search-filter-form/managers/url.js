@@ -12,19 +12,6 @@ export class URLManager {
     ];
   }
 
-  getDropdownApiKey(dropdown) {
-    const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
-    if (!modal?.id) {
-      return null;
-    }
-    
-    // Use startsWith for better performance than regex
-    const apiKey = modal.id.startsWith(CONFIG.CONSTANTS.MODAL_PREFIX) ? 
-                   modal.id.slice(CONFIG.CONSTANTS.MODAL_PREFIX.length) : null;
-    
-    return apiKey;
-  }
-
   populateFromUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     
@@ -32,15 +19,7 @@ export class URLManager {
     
     const populationPromises = [];
     
-    for (const [param, dropdownType] of CONFIG.PARAM_MAPPINGS.URL_TO_DROPDOWN) {
-      const value = urlParams.get(param);
-      if (value) {
-        populationPromises.push(
-          this.populateDropdownFromParam(dropdownType, value)
-        );
-      }
-    }
-    
+    // Handle specialty parameters
     const specialties = this.parseSpecialtyParams(urlParams);
     if (specialties.length > 0) {
       populationPromises.push(
@@ -56,8 +35,7 @@ export class URLManager {
   }
 
   hasRelevantParams(urlParams) {
-    return CONFIG.CONSTANTS.URL_PARAMS.some(param => urlParams.has(param)) ||
-           this.hasSpecialtyParams(urlParams);
+    return this.hasSpecialtyParams(urlParams);
   }
 
   hasSpecialtyParams(urlParams) {
@@ -108,9 +86,6 @@ export class URLManager {
     
     if (dropdowns.length === 0) return 0;
     
-    const expectedApiKey = CONFIG.PARAM_MAPPINGS.DROPDOWN_TO_API.get(dropdownType);
-    if (!expectedApiKey) return 0;
-    
     const valueSet = new Set(Array.isArray(values) ? values : [values]);
     const updates = [];
     let populatedCount = 0;
@@ -118,9 +93,6 @@ export class URLManager {
     for (const dropdown of dropdowns) {
       const modal = dropdown.querySelector(CONFIG.ELEMENTS.dropdownModal);
       if (!modal) continue;
-      
-      const apiKey = this.getDropdownApiKey(dropdown);
-      if (apiKey !== expectedApiKey) continue;
       
       const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]');
       for (const checkbox of checkboxes) {

@@ -2,7 +2,6 @@
 
 import { CONFIG } from './config.js';
 import {
-  dom,
   utils,
   ModalManager,
   SearchManager,
@@ -13,7 +12,6 @@ import {
 export default class SearchFilterForm {
   constructor() {
     this.activeModals = new Set();
-
     this.forms = document.querySelectorAll(CONFIG.ELEMENTS.form);
     
     this.searchManager = new SearchManager();
@@ -28,8 +26,11 @@ export default class SearchFilterForm {
   
   init() {
     this.urlManager.populateFromUrlParams();
+    this.bindEvents();
+  }
 
-    document.addEventListener('click', this.eventManager.handleGlobalClick.bind(this), { 
+  bindEvents() {
+    document.addEventListener('click', this.handleGlobalClick.bind(this), { 
       passive: false,
       capture: false 
     });
@@ -55,36 +56,34 @@ export default class SearchFilterForm {
     });
   }
 
-  eventManager = {
-    handleGlobalClick: (e) => {
-      const modalTrigger = e.target.closest(CONFIG.ELEMENTS.modalTrigger);
-      const doneButton = e.target.closest(CONFIG.ELEMENTS.doneButton);
-      const deselectButton = e.target.closest(CONFIG.ELEMENTS.deselectButton);
-      
-      if (modalTrigger) {
-        e.preventDefault();
-        e.stopPropagation();
-        this.modalManager.handleModalOpen(modalTrigger);
-        return;
-      }
-      
-      if (doneButton) {
-        e.preventDefault();
-        e.stopPropagation();
-        this.handleDoneClick(doneButton);
-        return;
-      }
-      
-      if (deselectButton) {
-        e.preventDefault();
-        e.stopPropagation();
-        this.handleDeselectClick(e);
-        return;
-      }
-      
-      this.handleClickOutside(e);
+  handleGlobalClick(e) {
+    const modalTrigger = e.target.closest(CONFIG.ELEMENTS.modalTrigger);
+    const doneButton = e.target.closest(CONFIG.ELEMENTS.doneButton);
+    const deselectButton = e.target.closest(CONFIG.ELEMENTS.deselectButton);
+    
+    if (modalTrigger) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.modalManager.handleModalOpen(modalTrigger);
+      return;
     }
-  };
+    
+    if (doneButton) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.handleDoneClick(doneButton);
+      return;
+    }
+    
+    if (deselectButton) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.handleDeselectClick(e);
+      return;
+    }
+    
+    this.handleClickOutside(e);
+  }
 
   cleanup() {
     this.searchManager.cleanup();
@@ -112,38 +111,46 @@ export default class SearchFilterForm {
     }
     
     if (checkbox.checked) {
-      const selector = `input[name="${name}"]:not(#${checkbox.id})`;
-      const otherCheckboxes = modal.querySelectorAll(selector);
-      
-      otherCheckboxes.forEach(otherCheckbox => {
-        this.syncCheckboxDeselectionToAllForms(otherCheckbox);
-      });
-      
-      const currentOption = dom.findOption(checkbox);
-      if (currentOption) {
-        currentOption.classList.add(CONFIG.CSS_CLASSES.optionSelected);
-      }
-      
-      this.modalManager.close(modal);
+      this.handleSingleSelectCheck(checkbox, modal);
+    } else {
+      this.handleSingleSelectUncheck(checkbox, e);
+    }
+  }
+
+  handleSingleSelectCheck(checkbox, modal) {
+    const { name } = checkbox;
+    const selector = `input[name="${name}"]:not(#${checkbox.id})`;
+    const otherCheckboxes = modal.querySelectorAll(selector);
+    
+    otherCheckboxes.forEach(otherCheckbox => {
+      this.syncCheckboxDeselectionToAllForms(otherCheckbox);
+    });
+    
+    const currentOption = checkbox.closest(CONFIG.ELEMENTS.option);
+    if (currentOption) {
+      currentOption.classList.add(CONFIG.CSS_CLASSES.optionSelected);
+    }
+    
+    this.modalManager.close(modal);
+    this.updateDropdownLabel(checkbox);
+    this.syncCheckboxToAllForms(checkbox);
+  }
+
+  handleSingleSelectUncheck(checkbox, e) {
+    const label = checkbox.closest('label');
+    if (label && !e.target.closest(CONFIG.ELEMENTS.deselectButton)) {
+      checkbox.checked = true;
       this.updateDropdownLabel(checkbox);
       this.syncCheckboxToAllForms(checkbox);
-    } else {
-      const label = checkbox.closest('label');
-      if (label && !e.target.closest(CONFIG.ELEMENTS.deselectButton)) {
-        checkbox.checked = true;
-        this.updateDropdownLabel(checkbox);
-        this.syncCheckboxToAllForms(checkbox);
-        return;
-      }
-      
-      this.updateDropdownLabel(checkbox);
-      this.syncCheckboxDeselectionToAllForms(checkbox);
+      return;
     }
+    
+    this.updateDropdownLabel(checkbox);
+    this.syncCheckboxDeselectionToAllForms(checkbox);
   }
 
   handleDeselectClick(e) {
     const deselectButton = e.target.closest(CONFIG.ELEMENTS.deselectButton);
-
     if (!deselectButton) return;
     
     e.preventDefault();
@@ -253,14 +260,20 @@ export default class SearchFilterForm {
     e.preventDefault();
     
     const form = e.target;
-    
     this.validation.clearAllErrors(form);
     
     if (!this.validation.validateRequiredFields(form)) {
       return false;
     }
-    const searchParams = new URLSearchParams();
+
+    const searchParams = this.buildSearchParams(form);
+    const searchUrl = this.buildSearchUrl(searchParams);
     
+    window.location.href = searchUrl;
+  }
+
+  buildSearchParams(form) {
+    const searchParams = new URLSearchParams();
     const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked');
     
     const selections = {};
@@ -285,17 +298,19 @@ export default class SearchFilterForm {
         searchParams.append('typeOfCare', values[0]);
       }
     }
+
+    searchParams.append('setting', 'Virtual');
     
-    const stateValue = selections['states-options']?.[0];
+    return searchParams;
+  }
+
+  buildSearchUrl(searchParams) {
+    const stateValue = searchParams.get('state');
     const stateSlug = stateValue ? utils.slugify(stateValue) : '';
     
-    const baseUrl = window.location.origin + '/find/therapists';
-    const urlPath = stateSlug ? `/${stateSlug}` : '';
-    const searchUrl = baseUrl + urlPath + '?' + searchParams.toString();
+    const baseUrl = `https://growtherapy.com/find/${stateSlug}`;
     
-    console.log(searchUrl);
-    
-    // window.location.href = searchUrl;
+    return baseUrl + '?' + searchParams.toString();
   }
 
   updateDropdownLabel(checkbox) {
@@ -338,7 +353,6 @@ export default class SearchFilterForm {
     if (!this.forms || this.forms.length === 0) return;
     
     const { name, value } = sourceCheckbox;
-
     this.applyCrossFiltering();
     
     this.forms.forEach(form => {

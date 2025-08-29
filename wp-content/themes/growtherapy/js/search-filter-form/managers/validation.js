@@ -30,15 +30,8 @@ export class ValidationManager {
       const dropdownWrapper = dropdown.closest(CONFIG.ELEMENTS.dropdown);
       if (!dropdownWrapper) return;
       
-      const checkboxes = dropdownWrapper.querySelectorAll('input[type="checkbox"]:checked');
-      const hasSelection = checkboxes.length > 0;
-      
-      if (!hasSelection) {
-        const message = dropdown.dataset.validationMessage ?? 'This field is required';
-        this.setFieldState(dropdownWrapper, this.STATES.ERROR, message);
+      if (!this.validateField(dropdownWrapper)) {
         isValid = false;
-      } else {
-        this.setFieldState(dropdownWrapper, this.STATES.VALID);
       }
     });
     
@@ -79,7 +72,7 @@ export class ValidationManager {
   
   clearAllErrors(formContext = null) {
     const context = formContext || document;
-    const errorDropdowns = context.querySelectorAll(CONFIG.CSS_CLASSES.dropdownError);
+    const errorDropdowns = context.querySelectorAll(`.${CONFIG.CSS_CLASSES.dropdownError}`);
     
     if (errorDropdowns.length === 0) return;
     
@@ -87,8 +80,6 @@ export class ValidationManager {
       this.clearFieldError(dropdown);
     });
   }
-  
-  
   
   validateField(dropdown) {
     if (!dropdown) return false;
